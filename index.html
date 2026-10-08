@@ -1,0 +1,5362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-FIRE MTG Deckbuilder</title>
+  <style>
+    :root {
+      --bg-main: #121212;
+      --bg-panel: #1e1e1e;
+      --bg-input: #2a2a2a;
+      --border-color: #3d3d3d;
+      --text-main: #e0e0e0;
+      --text-muted: #888888;
+      --accent: #3a7bd5;
+      --accent-hover: #4a8be5;
+      --commander-accent: #d48806;
+      --commander-accent-hover: #e09612;
+      --seafoam-btn: #2eaf8a;
+      --seafoam-btn-hover: #38c59c;
+      --cyan-btn: #00bcd4;
+      --cyan-btn-hover: #26c6da;
+      --purple-btn: #8e44ad;
+      --purple-btn-hover: #9b59b6;
+      --red-btn: #c62828;
+      --red-btn-hover: #d32f2f;
+      --notice-green: #2ecc71;
+      --neon-green: #39ff14;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    header {
+      background-color: var(--bg-panel);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .search-mode-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .search-mode-badge {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+
+    .header-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-decklists-toggle {
+      background-color: #2e7d32;
+      border: 2px solid var(--accent);
+      color: #ffffff;
+      padding: 9px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: background-color 0.15s ease, filter 0.15s ease, border-color 0.15s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn-decklists-toggle:hover {
+      background-color: #388e3c;
+      border-color: var(--accent-hover);
+      filter: brightness(1.1);
+    }
+
+    .btn-decklists-aside {
+      display: none;
+    }
+
+    #cmdr-pool-toggle-group {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      border: 2px solid var(--notice-green);
+      background-color: rgba(46, 204, 113, 0.08);
+      border-radius: 8px;
+      padding: 3px 8px;
+      box-shadow: 0 0 10px rgba(46, 204, 113, 0.25);
+    }
+
+    .cmdr-toggle-pill-group {
+      display: inline-flex;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .cmdr-pool-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .cmdr-pool-btn.active {
+      background-color: var(--commander-accent);
+      color: #121212;
+    }
+
+    .cmdr-pool-btn:hover:not(.active) {
+      color: var(--text-main);
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .search-inputs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      min-width: 130px;
+    }
+
+    .input-group label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    input[type="text"] {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+
+    .controls-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .controls-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .color-toggles {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .color-toggle {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      font-size: 12px;
+    }
+
+    .color-toggle.active {
+      border-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .color-toggle[data-color="W"].active { background-color: #9e9779; color: #111; }
+    .color-toggle[data-color="U"].active { background-color: #0e68ab; }
+    .color-toggle[data-color="B"].active { background-color: #4a4242; }
+    .color-toggle[data-color="R"].active { background-color: #d32f2f; }
+    .color-toggle[data-color="G"].active { background-color: #2e7d32; }
+    .color-toggle[data-color="C"].active { background-color: #616161; }
+
+    .all-colors-label, .exclude-lands-label, .no-game-changers-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-main);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .all-colors-label {
+      margin-left: 4px;
+    }
+
+    .all-colors-label input[type="checkbox"],
+    .exclude-lands-label input[type="checkbox"],
+    .no-game-changers-label input[type="checkbox"] {
+      cursor: pointer;
+      width: 15px;
+      height: 15px;
+      accent-color: var(--accent);
+    }
+
+    .sort-control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .sort-left-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sort-control label:not(.exclude-lands-label):not(.no-game-changers-label) {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .sort-select {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .sort-select:focus {
+      border-color: var(--accent);
+    }
+
+    .suggestion-buttons-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-edhrec-toggle {
+      background-color: var(--cyan-btn);
+      color: #121212;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 11px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-edhrec-toggle:hover {
+      background-color: var(--cyan-btn-hover);
+    }
+
+    .btn-edhrec-toggle.open {
+      background-color: var(--red-btn);
+      color: #ffffff;
+    }
+
+    .btn-edhrec-toggle.open:hover {
+      background-color: var(--red-btn-hover);
+    }
+
+    .btn-staples-toggle {
+      background-color: var(--purple-btn);
+      color: #ffffff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 11px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-staples-toggle:hover {
+      background-color: var(--purple-btn-hover);
+    }
+
+    .btn-staples-toggle.open {
+      background-color: var(--red-btn);
+      color: #ffffff;
+    }
+
+    .btn-staples-toggle.open:hover {
+      background-color: var(--red-btn-hover);
+    }
+
+    .search-btn-wrap {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-random-cmdr {
+      background-color: var(--seafoam-btn);
+      color: #121212;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      transition: background-color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-random-cmdr:hover {
+      background-color: var(--seafoam-btn-hover);
+    }
+
+    .btn-search {
+      background-color: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-search:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn-search.commander-mode {
+      background-color: var(--commander-accent);
+    }
+
+    .btn-search.commander-mode:hover {
+      background-color: var(--commander-accent-hover);
+    }
+
+    .workspace {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    main {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .search-progress-wrap {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      max-width: 440px;
+      margin: 20px auto;
+      padding: 10px 16px;
+      background-color: #171717;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .search-progress-text {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .search-progress-track {
+      width: 100%;
+      height: 10px;
+      background-color: #262626;
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid #333333;
+    }
+
+    .search-progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: var(--neon-green);
+      box-shadow: 0 0 10px var(--neon-green), 0 0 4px #ffffff;
+      border-radius: 5px;
+      transition: width 0.15s ease;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+      width: 100%;
+    }
+
+    .edhrec-actions-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .btn-edhrec-add-all {
+      background-color: #2e7d32;
+      color: #ffffff;
+      border: 1px solid #388e3c;
+      padding: 7px 18px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      transition: background-color 0.15s ease, filter 0.15s ease;
+    }
+
+    .btn-edhrec-add-all:hover {
+      background-color: #388e3c;
+      filter: brightness(1.1);
+    }
+
+    .category-section {
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .category-header {
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--cyan-btn);
+      border-bottom: 2px solid #2a2a2a;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .category-header span.cat-count {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .load-more-wrap {
+      display: none;
+      justify-content: center;
+      padding: 24px 0 16px 0;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .btn-load-more {
+      background-color: var(--bg-input);
+      border: 1px solid var(--accent);
+      color: var(--accent-hover);
+      padding: 10px 28px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-load-more:hover:not(:disabled) {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-load-more:disabled {
+      border-color: var(--border-color);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      background-color: var(--bg-panel);
+    }
+
+    .random-commander-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 300px;
+      margin: 4px auto 20px auto;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+
+    .btn-randomize-again {
+      background-color: var(--seafoam-btn);
+      color: #121212;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(46, 175, 138, 0.35);
+      transition: background-color 0.15s ease, transform 0.1s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .btn-randomize-again:hover {
+      background-color: var(--seafoam-btn-hover);
+      transform: translateY(-1px);
+    }
+
+    .featured-random-card {
+      width: 100%;
+      max-width: 280px;
+      background-color: var(--bg-panel);
+      border: 2px solid var(--commander-accent);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100dvh - 175px);
+    }
+
+    .featured-random-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 488 / 680;
+      object-fit: contain;
+      max-height: calc(100dvh - 245px);
+      user-select: none;
+      background-color: #1a1a1a;
+    }
+
+    .featured-random-card .card-actions {
+      padding: 8px;
+      background-color: var(--bg-panel);
+      flex-shrink: 0;
+    }
+
+    .card-item {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+      position: relative;
+    }
+
+    .card-item:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .card-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 488 / 680;
+      background-color: #1a1a1a;
+      user-select: none;
+    }
+
+    .card-actions {
+      padding: 8px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn-add {
+      width: 100%;
+      background-color: #2a2a2a;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .btn-add:hover:not(:disabled) {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-add.in-deck {
+      background-color: #2e2617 !important;
+      border-color: rgba(212, 136, 6, 0.5) !important;
+      color: #cca453 !important;
+      cursor: not-allowed !important;
+      opacity: 0.9;
+    }
+
+    .btn-set-commander {
+      width: 100%;
+      background-color: #3d2b0f;
+      border: 1px solid var(--commander-accent);
+      color: #f1c40f;
+      padding: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .btn-set-commander:hover {
+      background-color: var(--commander-accent);
+      color: #121212;
+    }
+
+    .empty-state {
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 50px;
+      font-size: 14px;
+    }
+
+    .recently-removed-panel {
+      position: absolute;
+      top: 0;
+      right: 320px;
+      width: 310px;
+      height: 100%;
+      background-color: rgba(24, 24, 24, 0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-left: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      box-shadow: -6px 0 20px rgba(0, 0, 0, 0.6);
+      display: none;
+      flex-direction: column;
+      z-index: 50;
+    }
+
+    .recently-removed-panel.open {
+      display: flex;
+    }
+
+    .removed-header {
+      padding: 15px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .removed-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-clear-link {
+      background: none;
+      border: none;
+      color: #ff5252;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px;
+      transition: color 0.15s ease;
+    }
+
+    .btn-clear-link:hover {
+      color: #ff1744;
+    }
+
+    .btn-close-removed-mobile {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
+    .removed-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .btn-readd {
+      background-color: #2e7d32;
+      border: none;
+      color: #ffffff;
+      padding: 6px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .btn-readd:hover {
+      filter: brightness(1.15);
+    }
+
+    aside {
+      width: 320px;
+      background-color: var(--bg-panel);
+      border-left: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 60;
+    }
+
+    .commander-section {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--border-color);
+      background-color: #171717;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .commander-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .commander-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .commander-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .btn-choose-commander {
+      width: 100%;
+      background-color: #242424;
+      border: 1px dashed var(--commander-accent);
+      color: #f1c40f;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      text-align: center;
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-choose-commander:hover, .btn-choose-commander.active {
+      background-color: rgba(212, 136, 6, 0.15);
+    }
+
+    .btn-add-partner-shortcut {
+      background-color: #2a2215;
+      border: 1px dashed var(--commander-accent);
+      color: #f1c40f;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .btn-add-partner-shortcut:hover {
+      background-color: rgba(212, 136, 6, 0.25);
+    }
+
+    .btn-change-commander {
+      background: none;
+      border: none;
+      color: #ff5252;
+      text-decoration: underline;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 2px 4px;
+      transition: color 0.15s ease;
+    }
+
+    .btn-change-commander:hover {
+      color: #ff1744;
+    }
+
+    .commander-list-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .deck-header {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .deck-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-autobuild-trigger {
+      background-color: #d48806;
+      color: #121212;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      transition: background-color 0.15s ease, filter 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-autobuild-trigger:hover:not(:disabled) {
+      background-color: #e09612;
+      filter: brightness(1.1);
+    }
+
+    .btn-autobuild-trigger:disabled {
+      background-color: #333333;
+      color: #777777;
+      cursor: not-allowed;
+    }
+
+    #deck-count {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .btn-clear-list-link {
+      background: none;
+      border: none;
+      color: #e57373;
+      text-decoration: underline;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 2px 0;
+      transition: color 0.15s ease;
+    }
+
+    .btn-clear-list-link:hover {
+      color: #ff5252;
+    }
+
+    .deck-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .deck-removed-bar {
+      padding: 8px 15px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      background-color: #1a1a1a;
+      flex-shrink: 0;
+    }
+
+    .btn-recently-removed {
+      background-color: #f1c40f;
+      color: #121212;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-recently-removed:hover {
+      background-color: #f39c12;
+    }
+
+    .btn-recently-removed.open {
+      background-color: #c62828;
+      color: #ffffff;
+    }
+
+    .btn-recently-removed.open:hover {
+      background-color: #d32f2f;
+    }
+
+    .deck-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--bg-input);
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      font-size: 13px;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+      user-select: none;
+      gap: 8px;
+    }
+
+    .deck-entry:hover {
+      border-color: var(--accent);
+    }
+
+    .deck-entry.commander-entry {
+      border-color: rgba(212, 136, 6, 0.4);
+      background-color: #211c14;
+    }
+
+    .deck-entry.commander-entry:hover {
+      border-color: var(--commander-accent);
+    }
+
+    .deck-entry-content {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 1;
+      flex-grow: 1;
+      min-width: 0;
+    }
+
+    .deck-entry-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 0 1 auto;
+      min-width: 0;
+    }
+
+    .deck-entry-mana {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .mana-symbol {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .deck-controls {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .btn-qty {
+      background-color: #383838;
+      border: none;
+      color: var(--text-main);
+      width: 26px;
+      height: 26px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .btn-qty:hover {
+      background-color: #4a4a4a;
+    }
+
+    .deck-footer {
+      padding: 12px 15px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn-export {
+      flex: 1;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .btn-export:hover {
+      filter: brightness(1.1);
+    }
+
+    .btn-save-deck {
+      flex: 1;
+      background-color: #3a7bd5;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-save-deck:hover {
+      background-color: #4a8be5;
+    }
+
+    /* Card Preview Wrap and Elements */
+    #card-preview-wrap {
+      position: fixed;
+      display: none;
+      z-index: 1000;
+    }
+
+    #card-preview {
+      width: 240px;
+      border-radius: 11px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85);
+      border: 1px solid var(--border-color);
+      background-color: #1a1a1a;
+      display: block;
+    }
+
+    .btn-close-mobile-preview {
+      display: none;
+    }
+
+    .mobile-tab-nav {
+      display: none;
+      background-color: #151515;
+      border-top: 1px solid var(--border-color);
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px)) 12px;
+      flex-shrink: 0;
+      z-index: 80;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mobile-view-toggle-btn {
+      width: 100%;
+      max-width: 420px;
+      height: 44px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+      transition: transform 0.1s ease, filter 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-view-toggle-btn:active {
+      transform: scale(0.985);
+    }
+
+    .mobile-view-toggle-btn.to-list {
+      background-color: #f1c40f;
+      color: #121212;
+      border: 2px solid #2ecc71;
+    }
+
+    .mobile-view-toggle-btn.to-search {
+      background-color: #f1c40f;
+      color: #121212;
+      border: 2px solid #2ecc71;
+    }
+
+    .decklists-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .decklists-modal.open {
+      display: flex;
+    }
+
+    .decklists-dialog {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      width: 90%;
+      max-width: 520px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.85);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .decklists-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .decklists-header h3 {
+      font-size: 16px;
+    }
+
+    .btn-close-modal {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .btn-close-modal:hover {
+      color: #ffffff;
+    }
+
+    .decklists-body {
+      padding: 12px 18px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .saved-deck-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      border-radius: 4px;
+      gap: 10px;
+      position: relative;
+    }
+
+    .saved-deck-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .saved-deck-title {
+      font-size: 13px;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--text-main);
+    }
+
+    .saved-deck-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .saved-deck-actions {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .btn-saved-load {
+      background-color: #2e7d32;
+      border: none;
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-saved-load:hover {
+      filter: brightness(1.15);
+    }
+
+    .btn-saved-delete {
+      background-color: #444444;
+      border: none;
+      color: #ff6b6b;
+      padding: 6px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .btn-saved-delete:hover {
+      background-color: var(--red-btn);
+      color: #ffffff;
+    }
+
+    /* Auto-Build Modal Styles */
+    .autobuild-modal-dialog {
+      background-color: var(--bg-panel);
+      border: 2px solid var(--commander-accent);
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+
+    .autobuild-modal-content {
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .autobuild-preview-col {
+      width: 180px;
+      flex-shrink: 0;
+    }
+
+    .autobuild-preview-col img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      display: block;
+      background-color: #1a1a1a;
+    }
+
+    .autobuild-form-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .autobuild-select-group label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .autobuild-select {
+      width: 100%;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .autobuild-select:focus {
+      border-color: var(--commander-accent);
+    }
+
+    .btn-execute-autobuild {
+      background-color: #2e7d32;
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: background-color 0.15s ease, filter 0.15s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      margin-top: 8px;
+    }
+
+    .btn-execute-autobuild:hover:not(:disabled) {
+      background-color: #388e3c;
+      filter: brightness(1.1);
+    }
+
+    .btn-execute-autobuild:disabled {
+      background-color: #444444;
+      color: #888888;
+      cursor: not-allowed;
+    }
+
+    /* Fullscreen Auto-Deckbuilder View */
+    #autobuild-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--bg-main);
+      z-index: 1500;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #autobuild-screen.active {
+      display: flex;
+    }
+
+    .autobuild-header {
+      background-color: var(--bg-panel);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .autobuild-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-back-to-manual {
+      background-color: #242424;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-back-to-manual:hover {
+      background-color: #333333;
+      border-color: var(--accent);
+    }
+
+    .autobuild-sort-pill-group {
+      display: inline-flex;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .autobuild-sort-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .autobuild-sort-btn.active {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .autobuild-workspace {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .autobuild-cards-canvas {
+      flex: 1;
+      padding: 16px;
+      overflow-x: auto;
+      overflow-y: auto;
+      background-color: #141414;
+    }
+
+    /* Shingled Column Display */
+    .shingle-columns-container {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      min-width: max-content;
+      height: 100%;
+    }
+
+    .shingle-column {
+      width: 150px;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .shingle-col-header {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--cyan-btn);
+      padding: 4px 6px;
+      border-bottom: 2px solid #2a2a2a;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .shingle-stack {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shingle-card-item {
+      position: relative;
+      width: 145px;
+      margin-bottom: -160px;
+      transition: transform 0.15s ease, z-index 0.15s ease, margin 0.15s ease;
+      cursor: pointer;
+    }
+
+    .shingle-card-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .shingle-card-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 7px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      background-color: #1a1a1a;
+      display: block;
+    }
+
+    .shingle-card-item:hover {
+      transform: translateY(-24px) scale(1.04);
+      z-index: 500 !important;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.95);
+    }
+
+    /* Split Mode Container */
+    .split-mode-container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      gap: 16px;
+    }
+
+    .split-main-spells {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+
+    .split-section {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .split-section-header {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--commander-accent);
+      border-bottom: 2px solid #2a2a2a;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    .split-lands-sidebar {
+      width: 175px;
+      border-left: 1px solid var(--border-color);
+      padding-left: 12px;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+
+    #mobile-title-popup {
+      display: none;
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      background-color: #2c2c2c;
+      border: 1px solid var(--commander-accent);
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 10005;
+      max-width: 88vw;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      line-height: 1.35;
+      word-break: break-word;
+      pointer-events: auto;
+    }
+
+    .mobile-random-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+
+    .mobile-random-overlay.open {
+      display: flex;
+    }
+
+    .mobile-random-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 290px;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+
+    .mobile-random-card-wrap {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid var(--commander-accent);
+      background-color: #1a1a1a;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.95);
+      cursor: pointer;
+    }
+
+    .mobile-random-card-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 488 / 680;
+      object-fit: contain;
+      max-height: calc(100dvh - 220px);
+      user-select: none;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-tab-nav {
+        display: flex;
+      }
+
+      body.mobile-tab-deck header {
+        display: none !important;
+      }
+
+      body.mobile-tab-search #btn-decklists-toggle {
+        display: none !important;
+      }
+
+      body.mobile-tab-deck .btn-decklists-aside {
+        display: inline-block !important;
+        background-color: #2e7d32;
+        border: 2px solid var(--accent);
+        color: #ffffff;
+        padding: 5px 12px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        cursor: pointer;
+      }
+
+      header {
+        padding: 6px 10px;
+        max-height: 44vh;
+        overflow-y: auto;
+        gap: 6px;
+      }
+
+      .search-mode-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header-top-actions {
+        margin-left: auto;
+      }
+
+      .search-inputs {
+        gap: 6px;
+      }
+
+      .input-group {
+        min-width: calc(50% - 3px);
+        flex: 1 1 calc(50% - 3px);
+      }
+
+      input[type="text"] {
+        padding: 5px 8px;
+        font-size: 12px;
+      }
+
+      .controls-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+      }
+
+      .controls-left {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+      }
+
+      .sort-control {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: 4px;
+      }
+
+      .sort-left-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+      }
+
+      .sort-select {
+        padding: 5px 6px;
+        font-size: 11px;
+      }
+
+      .exclude-lands-label, .no-game-changers-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        line-height: 1.1;
+        gap: 3px;
+        text-align: center;
+        margin: 0;
+        flex-shrink: 0;
+      }
+
+      .exclude-lands-label input[type="checkbox"],
+      .no-game-changers-label input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+      }
+
+      .suggestion-buttons-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        align-items: stretch;
+        flex-shrink: 0;
+        min-width: 125px;
+      }
+
+      .btn-edhrec-toggle, .btn-staples-toggle {
+        padding: 4px 6px;
+        font-size: 10px;
+        text-align: center;
+        width: 100%;
+      }
+
+      .color-toggles {
+        justify-content: flex-start;
+        gap: 4px;
+      }
+
+      .color-toggle {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+      }
+
+      .all-colors-label {
+        font-size: 11px;
+      }
+
+      .search-btn-wrap {
+        width: 100%;
+      }
+
+      .btn-search, .btn-random-cmdr {
+        flex: 1;
+        text-align: center;
+        padding: 7px 10px;
+        font-size: 12px;
+      }
+
+      .workspace {
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+      }
+
+      main {
+        display: none;
+        width: 100%;
+        padding: 10px;
+      }
+
+      main.mobile-active {
+        display: flex;
+      }
+
+      aside {
+        display: none;
+        width: 100%;
+        border-left: none;
+      }
+
+      aside.mobile-active {
+        display: flex;
+        flex: 1;
+      }
+
+      .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+
+      .recently-removed-panel {
+        right: 0;
+        width: 100%;
+        z-index: 100;
+        box-shadow: none;
+      }
+
+      .btn-close-removed-mobile {
+        display: inline-block;
+      }
+
+      #card-preview-wrap {
+        display: none;
+        position: fixed;
+        top: 28px;
+        left: 50%;
+        transform: translateX(-50%) !important;
+        width: min(88vw, 360px);
+        max-height: calc(100dvh - 100px);
+        z-index: 9999;
+        pointer-events: auto;
+        overflow: visible;
+      }
+
+      #card-preview {
+        width: 100% !important;
+        height: auto !important;
+        max-height: calc(100dvh - 100px);
+        aspect-ratio: 488 / 680;
+        object-fit: contain;
+        border-radius: 14px;
+        border: 2px solid var(--border-color);
+        box-shadow: 0 16px 45px rgba(0, 0, 0, 0.98), 0 0 0 9999px rgba(0, 0, 0, 0.65);
+        background-color: #1a1a1a;
+        cursor: pointer;
+        display: block;
+      }
+
+      .btn-close-mobile-preview {
+        display: flex !important;
+        position: absolute;
+        top: -26px;
+        right: -26px;
+        width: 48px;
+        height: 48px;
+        background-color: rgba(18, 18, 18, 0.96);
+        border: 2px solid #f1c40f;
+        border-radius: 50%;
+        color: #f1c40f;
+        font-size: 26px;
+        font-weight: 900;
+        line-height: 1;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.95);
+        z-index: 10001;
+        user-select: none;
+        touch-action: manipulation;
+      }
+    }
+  </style>
+</head>
+<body class="mobile-tab-deck">
+
+  <header>
+    <div class="search-mode-bar">
+      <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+        <span>Pool:</span>
+        <strong id="search-mode-label" class="search-mode-badge" style="color: var(--accent);">Pre-FIRE (Ravnica Allegiance &amp; Prior)</strong>
+      </div>
+      <div class="header-top-actions">
+        <button type="button" class="btn-decklists-toggle" id="btn-decklists-toggle">Saved Lists</button>
+        <div id="cmdr-pool-toggle-group">
+          <span style="font-size: 11px; text-transform: uppercase; color: var(--notice-green); font-weight: 700; letter-spacing: 0.5px;">COMMANDER POOL:</span>
+          <div class="cmdr-toggle-pill-group">
+            <button type="button" class="cmdr-pool-btn active" data-pool="all">All Legal</button>
+            <button type="button" class="cmdr-pool-btn" data-pool="prefire">Pre-FIRE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-inputs">
+      <div class="input-group">
+        <label for="search-name">Card Name</label>
+        <input type="text" id="search-name" placeholder="e.g. Sol Ring">
+      </div>
+      <div class="input-group">
+        <label for="search-supertype">Supertype</label>
+        <input type="text" id="search-supertype" placeholder="e.g. Legendary">
+      </div>
+      <div class="input-group">
+        <label for="search-subtype">Subtype</label>
+        <input type="text" id="search-subtype" placeholder="e.g. Elf, Aura">
+      </div>
+      <div class="input-group">
+        <label for="search-text">Card Text</label>
+        <input type="text" id="search-text" placeholder="e.g. draw a card">
+      </div>
+    </div>
+
+    <div class="controls-row">
+      <div class="controls-left">
+        <div class="color-toggles">
+          <button type="button" class="color-toggle" data-color="W">W</button>
+          <button type="button" class="color-toggle" data-color="U">U</button>
+          <button type="button" class="color-toggle" data-color="B">B</button>
+          <button type="button" class="color-toggle" data-color="R">R</button>
+          <button type="button" class="color-toggle" data-color="G">G</button>
+          <button type="button" class="color-toggle" data-color="C">C</button>
+          <label class="all-colors-label">
+            <input type="checkbox" id="match-all-colors">
+            All colors selected
+          </label>
+        </div>
+        <div class="sort-control">
+          <div class="sort-left-group">
+            <label for="search-sort">Sort:</label>
+            <select id="search-sort" class="sort-select">
+              <option value="cmc" selected>Mana Value</option>
+              <option value="name">Name</option>
+            </select>
+          </div>
+          <label class="exclude-lands-label">
+            <input type="checkbox" id="exclude-lands">
+            <span>Exclude Lands</span>
+          </label>
+          <label class="no-game-changers-label">
+            <input type="checkbox" id="no-game-changers">
+            <span>No Game Changers</span>
+          </label>
+          <div class="suggestion-buttons-wrap">
+            <button type="button" class="btn-edhrec-toggle" id="btn-edhrec-toggle">EDHREC Suggestions</button>
+            <button type="button" class="btn-staples-toggle" id="btn-staples-toggle">Commander Staples</button>
+          </div>
+        </div>
+      </div>
+      <div class="search-btn-wrap">
+        <button type="button" class="btn-random-cmdr" id="btn-random-cmdr" style="display: none;">Random Commander?</button>
+        <button type="button" class="btn-search" id="btn-search">Search Cards</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="workspace">
+    <main id="main-results">
+      <!-- Neon Green Progress Bar -->
+      <div class="search-progress-wrap" id="search-progress-wrap">
+        <div class="search-progress-text">
+          <span id="search-progress-label">Loading cards...</span>
+          <span id="search-progress-percent">0%</span>
+        </div>
+        <div class="search-progress-track">
+          <div class="search-progress-bar" id="search-progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="results-grid" id="results-grid"></div>
+      <div class="empty-state" id="empty-state">No search performed yet. Enter terms above and click Search.</div>
+      <div class="load-more-wrap" id="load-more-wrap">
+        <button type="button" class="btn-load-more" id="btn-load-more">Load More</button>
+      </div>
+    </main>
+
+    <div class="recently-removed-panel" id="recently-removed-panel">
+      <div class="removed-header">
+        <h3>Recently Removed</h3>
+        <div class="removed-header-actions">
+          <span id="removed-count" style="color: var(--text-muted); font-size: 13px;">0/200</span>
+          <button type="button" class="btn-clear-link" id="btn-clear-removed">Clear</button>
+          <button type="button" class="btn-close-removed-mobile" id="btn-close-removed-mobile">✕</button>
+        </div>
+      </div>
+      <div class="removed-list" id="removed-list"></div>
+    </div>
+
+    <aside id="aside-deck">
+      <div class="commander-section" id="commander-section">
+        <div class="commander-section-header">
+          <div class="commander-header-left">
+            <span class="commander-label" id="commander-label-text">Commander</span>
+            <button type="button" class="btn-decklists-aside" id="btn-decklists-aside">Saved Lists</button>
+          </div>
+          <button type="button" class="btn-change-commander" id="btn-change-commander" style="display: none;">Change Commander?</button>
+        </div>
+        <div id="commander-container"></div>
+      </div>
+
+      <div class="deck-header">
+        <div class="deck-header-left">
+          <button type="button" class="btn-clear-list-link" id="btn-clear-list-link">Clear List?</button>
+          <button type="button" class="btn-autobuild-trigger" id="btn-autobuild-trigger">Auto-build deck?</button>
+        </div>
+        <span id="deck-count">0 Cards</span>
+      </div>
+      <div class="deck-list" id="deck-list"></div>
+      <div class="deck-removed-bar">
+        <button type="button" class="btn-recently-removed" id="btn-toggle-removed">Recently Removed</button>
+      </div>
+      <div class="deck-footer">
+        <button type="button" class="btn-export" id="btn-export">Copy Decklist</button>
+        <button type="button" class="btn-save-deck" id="btn-save-deck">Save List</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Auto-Build Configuration Modal -->
+  <div class="decklists-modal" id="autobuild-modal">
+    <div class="autobuild-modal-dialog">
+      <div class="decklists-header">
+        <h3>Auto-Build Deck Shell</h3>
+        <button type="button" class="btn-close-modal" id="btn-close-autobuild-modal">&times;</button>
+      </div>
+      <div class="autobuild-modal-content">
+        <div class="autobuild-preview-col">
+          <img id="autobuild-cmdr-img" src="" alt="Commander Preview">
+        </div>
+        <div class="autobuild-form-col">
+          <div class="autobuild-select-group">
+            <label for="autobuild-theme-select">Select Archetype / Theme</label>
+            <select id="autobuild-theme-select" class="autobuild-select">
+              <option value="default">Default / High Synergy</option>
+            </select>
+          </div>
+          <div id="autobuild-status-text" style="font-size: 12px; color: var(--text-muted); min-height: 18px;"></div>
+          <button type="button" class="btn-execute-autobuild" id="btn-execute-autobuild">Build Deck</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dedicated Fullscreen Auto-Deckbuilder Screen -->
+  <div id="autobuild-screen">
+    <div class="autobuild-header">
+      <div class="autobuild-header-left">
+        <button type="button" class="btn-back-to-manual" id="btn-back-to-manual">← Back to Manual Builder</button>
+        <strong id="autobuild-deck-title" style="font-size: 14px; color: var(--commander-accent);">Auto-Built Deck</strong>
+        <span id="autobuild-count-badge" style="font-size: 13px; font-weight: 700; color: var(--accent);">0 Cards</span>
+      </div>
+      <div class="autobuild-sort-pill-group">
+        <button type="button" class="autobuild-sort-btn active" data-view="cmc">CMC Shingled</button>
+        <button type="button" class="autobuild-sort-btn" data-view="type">By Card Type</button>
+        <button type="button" class="autobuild-sort-btn" data-view="split">Split (Creatures / Spells / Lands)</button>
+      </div>
+    </div>
+
+    <div class="autobuild-workspace">
+      <div class="autobuild-cards-canvas" id="autobuild-canvas"></div>
+      
+      <!-- Exact Same Deck Drawer UI as Manual Builder -->
+      <aside id="aside-deck-autobuild">
+        <div class="commander-section" id="commander-section-autobuild">
+          <div class="commander-section-header">
+            <span class="commander-label">Commander</span>
+          </div>
+          <div id="commander-container-autobuild"></div>
+        </div>
+        <div class="deck-header">
+          <button type="button" class="btn-clear-list-link" id="btn-clear-autobuild-link">Clear List?</button>
+          <span id="deck-count-autobuild">0 Cards</span>
+        </div>
+        <div class="deck-list" id="deck-list-autobuild"></div>
+        <div class="deck-removed-bar">
+          <button type="button" class="btn-recently-removed" id="btn-toggle-removed-autobuild">Recently Removed</button>
+        </div>
+        <div class="deck-footer">
+          <button type="button" class="btn-export" id="btn-export-autobuild">Copy Decklist</button>
+          <button type="button" class="btn-save-deck" id="btn-save-deck-autobuild">Save List</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <nav class="mobile-tab-nav" id="mobile-tab-nav">
+    <button type="button" class="mobile-view-toggle-btn to-search" id="btn-mobile-view-toggle">To Card Search</button>
+  </nav>
+
+  <div class="decklists-modal" id="decklists-modal">
+    <div class="decklists-dialog">
+      <div class="decklists-header">
+        <h3>Saved Decklists</h3>
+        <button type="button" class="btn-close-modal" id="btn-close-decklists-modal">&times;</button>
+      </div>
+      <div class="decklists-body" id="decklists-modal-body"></div>
+    </div>
+  </div>
+
+  <div id="mobile-title-popup"></div>
+
+  <div class="mobile-random-overlay" id="mobile-random-overlay">
+    <div class="mobile-random-container" id="mobile-random-container">
+      <button type="button" class="btn-randomize-again" id="btn-mobile-randomize-again">↺ Randomize Again?</button>
+      <div class="mobile-random-card-wrap">
+        <img id="mobile-random-card-img" src="" alt="Random Commander" title="Tap to flip card face">
+      </div>
+      <button type="button" class="btn-set-commander" id="btn-mobile-select-commander" style="width: 100%;">★ Select Commander</button>
+    </div>
+  </div>
+
+  <div id="card-preview-wrap">
+    <button type="button" class="btn-close-mobile-preview" id="btn-close-mobile-preview" aria-label="Close Preview">✕</button>
+    <img id="card-preview" src="" alt="Card Preview">
+  </div>
+
+  <script src="generator.js"></script>
+  <script>
+    function parseCmcFromManaCost(manaCost) {
+      if (!manaCost) return 0;
+      const symbols = manaCost.match(/\{([^}]+)\}/g) || [];
+      let total = 0;
+      symbols.forEach(s => {
+        const inner = s.replace(/[{}]/g, '');
+        const num = parseInt(inner, 10);
+        if (!isNaN(num)) {
+          total += num;
+        } else if (inner === 'X' || inner === 'Y' || inner === 'Z') {
+          total += 0;
+        } else if (inner.includes('/')) {
+          const parts = inner.split('/');
+          if (parts[0] === '2') total += 2;
+          else total += 1;
+        } else {
+          total += 1;
+        }
+      });
+      return total;
+    }
+
+    function getCardCmc(card) {
+      if (typeof card.cmc === 'number') return card.cmc;
+      if (card.card_faces && typeof card.card_faces[0]?.cmc === 'number') {
+        return card.card_faces[0].cmc;
+      }
+      let mc = card.mana_cost;
+      if (!mc && card.card_faces && card.card_faces.length > 0) {
+        mc = card.card_faces.map(f => f.mana_cost).filter(Boolean).join(' // ');
+      }
+      return parseCmcFromManaCost(mc);
+    }
+
+    function sortCardArray(cards, sortChoice) {
+      if (sortChoice === 'name') {
+        cards.sort((a, b) => a.name.localeCompare(b.name));
+      } else {
+        cards.sort((a, b) => {
+          const cmcA = getCardCmc(a);
+          const cmcB = getCardCmc(b);
+          if (cmcA !== cmcB) {
+            return cmcA - cmcB;
+          }
+          return a.name.localeCompare(b.name);
+        });
+      }
+    }
+
+    function clearSearchInputs() {
+      document.getElementById('search-name').value = '';
+      document.getElementById('search-supertype').value = '';
+      document.getElementById('search-subtype').value = '';
+      document.getElementById('search-text').value = '';
+    }
+
+    const gameChangerNamesSet = new Set([
+      "ad nauseam", "ancient tomb", "aura shards", "biorhythm", "bolas's citadel",
+      "braids, cabal minion", "chrome mox", "coalition victory", "consecrated sphinx",
+      "crop rotation", "cyclonic rift", "deflecting swat", "demonic tutor",
+      "drannith magistrate", "enlightened tutor", "expropriate", "farewell",
+      "field of the dead", "fierce guardianship", "food chain", "force of will",
+      "gaea's cradle", "gamble", "gifts ungiven", "glacial chasm",
+      "grand arbiter augustin iv", "grim monolith", "humility", "imperial seal",
+      "intuition", "jeska's will", "jin-gitaxias, core augur", "kinnan, bonder prodigy",
+      "lion's eye diamond", "mana vault", "mishra's workshop", "mox diamond",
+      "mystical tutor", "narset, parter of veils", "natural order", "necropotence",
+      "notion thief", "opposition agent", "orcish bowmasters", "panoptic mirror",
+      "rhystic study", "seedborn muse", "serra's sanctum", "smothering tithe",
+      "survival of the fittest", "sway of the stars", "teferi's protection",
+      "tergrid, god of fright", "tergrid, god of fright // tergrid's lantern",
+      "thassa's oracle", "the one ring", "the tabernacle at pendrell vale",
+      "underworld breach", "urza, lord high artificer", "vampiric tutor",
+      "vorinclex, voice of hunger", "winota, joiner of forces", "worldly tutor",
+      "yuriko, the tiger's shadow"
+    ]);
+
+    function isGameChangerCard(card) {
+      const full = (card.name || '').trim().toLowerCase();
+      const front = full.split('//')[0].trim();
+      return gameChangerNamesSet.has(full) || gameChangerNamesSet.has(front);
+    }
+
+    function getCardPrimaryType(card) {
+      const typeLine = (card.type_line || (card.card_faces ? card.card_faces.map(f => f.type_line).join(' ') : '')).toLowerCase();
+      if (typeLine.includes('land')) return 'Lands';
+      if (typeLine.includes('creature')) return 'Creatures';
+      if (typeLine.includes('instant')) return 'Instants';
+      if (typeLine.includes('sorcery')) return 'Sorceries';
+      if (typeLine.includes('artifact')) return 'Artifacts';
+      if (typeLine.includes('enchantment')) return 'Enchantments';
+      if (typeLine.includes('planeswalker')) return 'Planeswalkers';
+      if (typeLine.includes('battle')) return 'Battles';
+      return 'Other';
+    }
+
+    let prefireNamesSet = new Set();
+    let edhrecCache = {};
+    let partnersCache = {};
+    let isShowingEdhrec = false;
+    let isShowingStaples = false;
+
+    let edhrecRawCardsCache = {};
+    let staplesRawCardsCache = {};
+    let currentEdhrecLoadedCards = [];
+
+    let nextSearchPageUrl = null;
+
+    const loadMoreWrap = document.getElementById('load-more-wrap');
+    const btnLoadMore = document.getElementById('btn-load-more');
+    const btnStaplesToggle = document.getElementById('btn-staples-toggle');
+    const btnEdhrecToggle = document.getElementById('btn-edhrec-toggle');
+    const btnDecklistsToggle = document.getElementById('btn-decklists-toggle');
+    const btnDecklistsAside = document.getElementById('btn-decklists-aside');
+    const decklistsModal = document.getElementById('decklists-modal');
+    const btnCloseDecklistsModal = document.getElementById('btn-close-decklists-modal');
+    const decklistsModalBody = document.getElementById('decklists-modal-body');
+    const btnClearListLink = document.getElementById('btn-clear-list-link');
+    const previewWrapEl = document.getElementById('card-preview-wrap');
+    const previewEl = document.getElementById('card-preview');
+    const btnCloseMobilePreview = document.getElementById('btn-close-mobile-preview');
+    const excludeLandsCheckbox = document.getElementById('exclude-lands');
+    const noGameChangersCheckbox = document.getElementById('no-game-changers');
+    const mobileTitlePopup = document.getElementById('mobile-title-popup');
+    const btnMobileViewToggle = document.getElementById('btn-mobile-view-toggle');
+
+    const searchProgressWrap = document.getElementById('search-progress-wrap');
+    const searchProgressBar = document.getElementById('search-progress-bar');
+    const searchProgressLabel = document.getElementById('search-progress-label');
+    const searchProgressPercent = document.getElementById('search-progress-percent');
+
+    function showProgressBar(label = 'Loading cards...') {
+      searchProgressWrap.style.display = 'flex';
+      searchProgressLabel.textContent = label;
+      updateProgressBar(0);
+    }
+
+    function updateProgressBar(percentage, label = null) {
+      const pct = Math.min(100, Math.max(0, Math.round(percentage)));
+      searchProgressBar.style.width = `${pct}%`;
+      searchProgressPercent.textContent = `${pct}%`;
+      if (label) searchProgressLabel.textContent = label;
+    }
+
+    function hideProgressBar() {
+      searchProgressWrap.style.display = 'none';
+      searchProgressBar.style.width = '0%';
+      searchProgressPercent.textContent = '0%';
+    }
+
+    const mobileRandomOverlay = document.getElementById('mobile-random-overlay');
+    const mobileRandomImg = document.getElementById('mobile-random-card-img');
+    const btnMobileRandomizeAgain = document.getElementById('btn-mobile-randomize-again');
+    const btnMobileSelectCommander = document.getElementById('btn-mobile-select-commander');
+
+    btnLoadMore.addEventListener('click', () => {
+      if (nextSearchPageUrl) {
+        loadMoreScryfall();
+      }
+    });
+
+    async function loadPrefireNames() {
+      try {
+        const res = await fetch('prefire-names.json');
+        if (res.ok) {
+          const data = await res.json();
+          const names = Array.isArray(data) ? data : Object.keys(data);
+          prefireNamesSet = new Set(names.map(n => n.trim().toLowerCase()));
+          return;
+        }
+      } catch (err) {}
+
+      try {
+        const remoteRes = await fetch('https://raw.githubusercontent.com/bongeler/preFIRE-deckbuilder/main/prefire-names.json');
+        if (remoteRes.ok) {
+          const data = await remoteRes.json();
+          const names = Array.isArray(data) ? data : Object.keys(data);
+          prefireNamesSet = new Set(names.map(n => n.trim().toLowerCase()));
+        }
+      } catch (remoteErr) {
+        console.warn('Could not load prefire-names.json:', remoteErr);
+      }
+    }
+
+    async function loadCaches() {
+      const fetchCache = async (filename) => {
+        try {
+          const res = await fetch(filename);
+          if (res.ok) return await res.json();
+        } catch (e) {}
+
+        try {
+          const remoteRes = await fetch(`https://raw.githubusercontent.com/bongeler/preFIRE-deckbuilder/main/${filename}`);
+          if (remoteRes.ok) return await remoteRes.json();
+        } catch (e) {}
+        return {};
+      };
+
+      const [singleData, partnerData] = await Promise.all([
+        fetchCache('edhrec-prefire-cache.json'),
+        fetchCache('partners.json')
+      ]);
+
+      edhrecCache = singleData || {};
+      partnersCache = partnerData || {};
+    }
+
+    loadPrefireNames();
+    loadCaches();
+
+    let rawDeck = JSON.parse(localStorage.getItem('prefire_deck') || '{}');
+    let deck = {};
+
+    Object.keys(rawDeck).forEach(name => {
+      const item = rawDeck[name];
+      if (typeof item === 'number') {
+        deck[name] = { count: item, faces: [], mana_cost: '', cmc: 0, type_line: '' };
+      } else if (item.faces && Array.isArray(item.faces)) {
+        deck[name] = {
+          count: item.count || 1,
+          faces: item.faces,
+          mana_cost: item.mana_cost || '',
+          type_line: item.type_line || '',
+          cmc: typeof item.cmc === 'number' ? item.cmc : parseCmcFromManaCost(item.mana_cost)
+        };
+      } else if (item.img) {
+        deck[name] = {
+          count: item.count || 1,
+          faces: [item.img],
+          mana_cost: item.mana_cost || '',
+          type_line: item.type_line || '',
+          cmc: typeof item.cmc === 'number' ? item.cmc : parseCmcFromManaCost(item.mana_cost)
+        };
+      } else {
+        deck[name] = {
+          count: item.count || 1,
+          faces: [],
+          mana_cost: item.mana_cost || '',
+          type_line: item.type_line || '',
+          cmc: typeof item.cmc === 'number' ? item.cmc : parseCmcFromManaCost(item.mana_cost)
+        };
+      }
+    });
+
+    let rawCommanders = JSON.parse(localStorage.getItem('prefire_commanders') || 'null');
+    let commanders = [];
+    if (Array.isArray(rawCommanders)) {
+      commanders = rawCommanders;
+    } else {
+      let legacyCmdr = JSON.parse(localStorage.getItem('prefire_commander') || 'null');
+      if (legacyCmdr && legacyCmdr.name) {
+        commanders = [legacyCmdr];
+      }
+    }
+
+    let lastSavedStateSnapshot = JSON.stringify({ deck, commanders });
+
+    function hasUnsavedChanges() {
+      const currentState = JSON.stringify({ deck, commanders });
+      return currentState !== lastSavedStateSnapshot;
+    }
+
+    function markCurrentStateSaved() {
+      lastSavedStateSnapshot = JSON.stringify({ deck, commanders });
+    }
+
+    let isCommanderSearchMode = false;
+    let isPartnerSearchMode = false;
+    let activePartnerQuery = '';
+    let activePartnerType = '';
+    let commanderPoolMode = 'all';
+
+    let rawRemoved = JSON.parse(localStorage.getItem('prefire_removed') || '[]');
+    let recentlyRemoved = rawRemoved.map(item => {
+      if (item.faces && Array.isArray(item.faces)) {
+        return {
+          name: item.name,
+          faces: item.faces,
+          mana_cost: item.mana_cost || '',
+          type_line: item.type_line || '',
+          cmc: typeof item.cmc === 'number' ? item.cmc : parseCmcFromManaCost(item.mana_cost)
+        };
+      }
+      return {
+        name: item.name,
+        faces: item.img ? [item.img] : [],
+        mana_cost: item.mana_cost || '',
+        type_line: item.type_line || '',
+        cmc: typeof item.cmc === 'number' ? item.cmc : parseCmcFromManaCost(item.mana_cost)
+      };
+    });
+
+    const removedPanel = document.getElementById('recently-removed-panel');
+    const mainResults = document.getElementById('main-results');
+    const asideDeck = document.getElementById('aside-deck');
+    const btnRandomCmdr = document.getElementById('btn-random-cmdr');
+    const searchSortSelect = document.getElementById('search-sort');
+
+    let currentPreview = { name: '', faces: [], faceIndex: 0 };
+    let activeMobileTab = 'deck';
+
+    function setRecentlyRemovedOpen(isOpen) {
+      const btn = document.getElementById('btn-toggle-removed');
+      const btnAuto = document.getElementById('btn-toggle-removed-autobuild');
+      if (isOpen) {
+        removedPanel.classList.add('open');
+        btn.classList.add('open');
+        btn.textContent = 'Close';
+        if (btnAuto) {
+          btnAuto.classList.add('open');
+          btnAuto.textContent = 'Close';
+        }
+      } else {
+        removedPanel.classList.remove('open');
+        btn.classList.remove('open');
+        btn.textContent = 'Recently Removed';
+        if (btnAuto) {
+          btnAuto.classList.remove('open');
+          btnAuto.textContent = 'Recently Removed';
+        }
+      }
+    }
+
+    function getDeckCardCount() {
+      return Object.keys(deck).reduce((acc, k) => acc + (deck[k].count || 1), 0);
+    }
+
+    function updateMobileViewToggleButton() {
+      if (activeMobileTab === 'search') {
+        const total = getDeckCardCount();
+        btnMobileViewToggle.textContent = `To Card List (${total})`;
+        btnMobileViewToggle.className = 'mobile-view-toggle-btn to-list';
+      } else {
+        btnMobileViewToggle.textContent = 'To Card Search';
+        btnMobileViewToggle.className = 'mobile-view-toggle-btn to-search';
+      }
+    }
+
+    function setMobileTab(tab) {
+      activeMobileTab = tab;
+      document.body.classList.remove('mobile-tab-search', 'mobile-tab-deck');
+      document.body.classList.add(`mobile-tab-${tab}`);
+
+      if (tab === 'deck') {
+        asideDeck.classList.add('mobile-active');
+        mainResults.classList.remove('mobile-active');
+      } else {
+        mainResults.classList.add('mobile-active');
+        asideDeck.classList.remove('mobile-active');
+      }
+      setRecentlyRemovedOpen(false);
+      hidePreview();
+      updateMobileViewToggleButton();
+    }
+
+    btnMobileViewToggle.addEventListener('click', () => {
+      setMobileTab(activeMobileTab === 'deck' ? 'search' : 'deck');
+    });
+
+    if (window.innerWidth <= 768) {
+      setMobileTab('deck');
+    } else {
+      mainResults.classList.add('mobile-active');
+      asideDeck.classList.add('mobile-active');
+    }
+
+    btnCloseMobilePreview.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hidePreview();
+    });
+
+    previewEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (currentPreview.faces && currentPreview.faces.length > 1) {
+        currentPreview.faceIndex = (currentPreview.faceIndex + 1) % currentPreview.faces.length;
+        previewEl.src = currentPreview.faces[currentPreview.faceIndex];
+      } else {
+        hidePreview();
+      }
+    });
+
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    previewWrapEl.addEventListener('touchstart', (e) => {
+      if (window.innerWidth <= 768 && e.touches.length === 1) {
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    previewWrapEl.addEventListener('touchend', (e) => {
+      if (window.innerWidth <= 768 && e.changedTouches.length === 1) {
+        touchEndY = e.changedTouches[0].clientY;
+        const deltaY = touchEndY - touchStartY;
+        const swipeThreshold = 40;
+
+        if (Math.abs(deltaY) > swipeThreshold) {
+          navigatePreviewCard(deltaY < 0 ? 'next' : 'prev');
+        }
+      }
+    }, { passive: true });
+
+    function getNavigableDeckCardNames() {
+      return getSortedCardNames();
+    }
+
+    function navigatePreviewCard(direction) {
+      const cardNames = getNavigableDeckCardNames();
+      if (cardNames.length <= 1) return;
+
+      const currentIndex = cardNames.indexOf(currentPreview.name);
+      if (currentIndex === -1) return;
+
+      let nextIndex = currentIndex;
+      if (direction === 'next') {
+        if (currentIndex < cardNames.length - 1) {
+          nextIndex = currentIndex + 1;
+        } else {
+          return;
+        }
+      } else {
+        if (currentIndex > 0) {
+          nextIndex = currentIndex - 1;
+        } else {
+          return;
+        }
+      }
+
+      const targetName = cardNames[nextIndex];
+      const targetRow = document.querySelector(`.deck-entry[data-card-name="${CSS.escape(targetName)}"]`);
+      if (targetRow) {
+        showPreview(targetRow, targetName, deck[targetName].faces);
+      }
+    }
+
+    document.addEventListener('touchstart', (e) => {
+      if (!e.target.closest('#card-preview-wrap') && !e.target.closest('.deck-entry') && !e.target.closest('.card-item') && !e.target.closest('.shingle-card-item')) {
+        hidePreview();
+      }
+      if (!e.target.closest('#mobile-title-popup') && !e.target.closest('.saved-deck-info')) {
+        hideMobileTitlePopup();
+      }
+      if (removedPanel.classList.contains('open')) {
+        if (!e.target.closest('#recently-removed-panel') && !e.target.closest('#btn-toggle-removed') && !e.target.closest('#btn-toggle-removed-autobuild')) {
+          setRecentlyRemovedOpen(false);
+        }
+      }
+    }, { passive: true });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#card-preview-wrap') && !e.target.closest('.deck-entry') && !e.target.closest('.card-item') && !e.target.closest('.shingle-card-item')) {
+        hidePreview();
+      }
+      if (!e.target.closest('#mobile-title-popup') && !e.target.closest('.saved-deck-info')) {
+        hideMobileTitlePopup();
+      }
+      if (removedPanel.classList.contains('open')) {
+        if (!e.target.closest('#recently-removed-panel') && !e.target.closest('#btn-toggle-removed') && !e.target.closest('#btn-toggle-removed-autobuild')) {
+          setRecentlyRemovedOpen(false);
+        }
+      }
+    });
+
+    mobileRandomOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileRandomOverlay) {
+        mobileRandomOverlay.classList.remove('open');
+      }
+    });
+
+    document.getElementById('btn-close-removed-mobile').addEventListener('click', () => {
+      setRecentlyRemovedOpen(false);
+    });
+
+    function setEdhrecButtonState(isOpen) {
+      isShowingEdhrec = isOpen;
+      if (isOpen) {
+        btnEdhrecToggle.classList.add('open');
+        btnEdhrecToggle.textContent = 'Close EDHREC Suggestions';
+      } else {
+        btnEdhrecToggle.classList.remove('open');
+        btnEdhrecToggle.textContent = 'EDHREC Suggestions';
+      }
+    }
+
+    function setStaplesButtonState(isOpen) {
+      isShowingStaples = isOpen;
+      if (isOpen) {
+        btnStaplesToggle.classList.add('open');
+        btnStaplesToggle.textContent = 'Close Commander Staples';
+      } else {
+        btnStaplesToggle.classList.remove('open');
+        btnStaplesToggle.textContent = 'Commander Staples';
+      }
+    }
+
+    btnEdhrecToggle.addEventListener('click', () => {
+      if (isShowingEdhrec) {
+        setEdhrecButtonState(false);
+        currentEdhrecLoadedCards = [];
+        const resultsGrid = document.getElementById('results-grid');
+        const emptyState = document.getElementById('empty-state');
+        resultsGrid.innerHTML = '';
+        loadMoreWrap.style.display = 'none';
+        hideProgressBar();
+        emptyState.style.display = 'block';
+        emptyState.textContent = 'Closed EDHREC suggestions. Enter terms above and click Search.';
+      } else {
+        if (commanders.length === 0) {
+          setStaplesButtonState(false);
+          setEdhrecButtonState(true);
+          executeTopCommandersSearch();
+        } else {
+          clearSearchInputs();
+          setStaplesButtonState(false);
+          setEdhrecButtonState(true);
+          executeEdhrecSearch();
+        }
+      }
+      if (window.innerWidth <= 768) {
+        setMobileTab('search');
+      }
+    });
+
+    async function executeTopCommandersSearch() {
+      const resultsGrid = document.getElementById('results-grid');
+      const emptyState = document.getElementById('empty-state');
+
+      resultsGrid.innerHTML = '';
+      loadMoreWrap.style.display = 'none';
+      emptyState.style.display = 'none';
+      showProgressBar('Loading top EDHREC commanders...');
+
+      const excludeLands = excludeLandsCheckbox.checked;
+      let queryParts = ['(is:commander or (is:front t:legendary t:vehicle))', '-name:"Balamb Garden"', 'f:commander', 'date<=rna'];
+      if (excludeLands) queryParts.push('-t:land');
+
+      const url = `https://api.scryfall.com/cards/search?q=${encodeURIComponent(queryParts.join(' '))}&unique=cards&order=edhrec&dir=asc`;
+
+      try {
+        updateProgressBar(30, 'Querying Scryfall API...');
+        const response = await fetch(url);
+        updateProgressBar(80, 'Processing response...');
+        const data = await response.json();
+
+        if (response.status === 404 || !data.data || data.data.length === 0) {
+          hideProgressBar();
+          emptyState.style.display = 'block';
+          emptyState.textContent = 'No matching commanders found.';
+          return;
+        }
+
+        if (!response.ok) {
+          hideProgressBar();
+          emptyState.style.display = 'block';
+          emptyState.textContent = data.details || 'Error querying Scryfall API.';
+          return;
+        }
+
+        updateProgressBar(100, 'Done!');
+        const cards = data.data.slice(0, 75);
+        nextSearchPageUrl = null;
+
+        setTimeout(hideProgressBar, 200);
+        renderResults(cards, false);
+      } catch (err) {
+        hideProgressBar();
+        emptyState.style.display = 'block';
+        emptyState.textContent = `Error: ${err.message}`;
+      }
+    }
+
+    btnStaplesToggle.addEventListener('click', () => {
+      if (isShowingStaples) {
+        setStaplesButtonState(false);
+        const resultsGrid = document.getElementById('results-grid');
+        const emptyState = document.getElementById('empty-state');
+        resultsGrid.innerHTML = '';
+        loadMoreWrap.style.display = 'none';
+        hideProgressBar();
+        emptyState.style.display = 'block';
+        emptyState.textContent = 'Closed Commander Staples. Enter terms above and click Search.';
+      } else {
+        clearSearchInputs();
+        setEdhrecButtonState(false);
+        setStaplesButtonState(true);
+        executeStaplesSearch();
+      }
+      if (window.innerWidth <= 768) {
+        setMobileTab('search');
+      }
+    });
+
+    function getCommanderIdentityString() {
+      if (commanders.length === 0) return '';
+      let combinedIdentity = new Set();
+      commanders.forEach(cmdr => {
+        if (Array.isArray(cmdr.color_identity) && cmdr.color_identity.length > 0) {
+          cmdr.color_identity.forEach(c => combinedIdentity.add(c.toUpperCase()));
+        } else {
+          const mc = (cmdr.mana_cost || '').toUpperCase();
+          ['W','U','B','R','G'].forEach(col => {
+            if (mc.includes(col)) combinedIdentity.add(col);
+          });
+        }
+      });
+      return Array.from(combinedIdentity).sort().join('').toLowerCase();
+    }
+
+    async function executeStaplesSearch() {
+      const resultsGrid = document.getElementById('results-grid');
+      const emptyState = document.getElementById('empty-state');
+      const sortChoice = searchSortSelect.value || 'cmc';
+
+      resultsGrid.innerHTML = '';
+      resultsGrid.style.display = 'grid';
+      loadMoreWrap.style.display = 'none';
+      emptyState.style.display = 'none';
+
+      const identityKey = getCommanderIdentityString();
+
+      if (staplesRawCardsCache[identityKey] && staplesRawCardsCache[identityKey].length > 0) {
+        hideProgressBar();
+        let cards = filterCardListLocally(staplesRawCardsCache[identityKey]);
+        sortCardArray(cards, sortChoice);
+
+        if (cards.length === 0) {
+          emptyState.style.display = 'block';
+          emptyState.textContent = 'No Pre-FIRE staples match the specified filters.';
+          return;
+        }
+
+        emptyState.style.display = 'none';
+        renderResults(cards, false);
+        return;
+      }
+
+      showProgressBar('Downloading top 700 Pre-FIRE staples (0/700)...');
+
+      let queryParts = ['date<=rna', 'f:commander'];
+      if (commanders.length > 0) {
+        if (identityKey) {
+          queryParts.push(`id<=${identityKey}`);
+        } else {
+          queryParts.push('id:c');
+        }
+      }
+
+      let allCards = [];
+      let currentUrl = `https://api.scryfall.com/cards/search?q=${encodeURIComponent(queryParts.join(' '))}&unique=cards&order=edhrec&dir=asc`;
+      const targetPages = 4;
+
+      try {
+        for (let page = 1; page <= targetPages; page++) {
+          if (!currentUrl) break;
+
+          const progressPercent = ((page - 1) / targetPages) * 100;
+          updateProgressBar(progressPercent, `Downloading staples: page ${page} of ${targetPages} (${allCards.length}/700)...`);
+
+          let res = await fetch(currentUrl);
+
+          if (res.status === 429) {
+            await new Promise(r => setTimeout(r, 1500));
+            res = await fetch(currentUrl);
+          }
+
+          if (res.status === 404) break;
+          if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.details || `Scryfall HTTP ${res.status}`);
+          }
+
+          const data = await res.json();
+          if (data && data.data) {
+            allCards = allCards.concat(data.data);
+          }
+
+          currentUrl = data.has_more ? data.next_page : null;
+
+          if (page < targetPages && currentUrl) {
+            await new Promise(r => setTimeout(r, 125));
+          }
+        }
+
+        updateProgressBar(100, 'Filtering staples...');
+        staplesRawCardsCache[identityKey] = allCards;
+
+        let cards = filterCardListLocally(allCards);
+        sortCardArray(cards, sortChoice);
+
+        setTimeout(hideProgressBar, 200);
+
+        if (cards.length === 0) {
+          emptyState.style.display = 'block';
+          emptyState.textContent = 'No Pre-FIRE staples match the specified filters.';
+          return;
+        }
+
+        emptyState.style.display = 'none';
+        renderResults(cards, false);
+
+      } catch (err) {
+        console.error('Staples fetch error:', err);
+        hideProgressBar();
+        emptyState.style.display = 'block';
+        emptyState.textContent = `Error fetching staples: ${err.message}`;
+      }
+    }
+
+    function getSavedDecklists() {
+      try {
+        return JSON.parse(localStorage.getItem('prefire_saved_decklists') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function getActiveDeckTitle() {
+      if (commanders.length > 0) {
+        return commanders.map(c => c.name).join(' // ');
+      }
+      return 'Untitled Deck';
+    }
+
+    function saveCurrentDecklist() {
+      const list = getSavedDecklists();
+      const title = getActiveDeckTitle();
+      const deckCount = Object.keys(deck).reduce((acc, k) => acc + (deck[k].count || 1), 0);
+
+      const existingIndex = list.findIndex(d => d.title.toLowerCase() === title.toLowerCase());
+      const record = {
+        title: title,
+        commanders: JSON.parse(JSON.stringify(commanders)),
+        deck: JSON.parse(JSON.stringify(deck)),
+        cardCount: deckCount + commanders.length,
+        updatedAt: new Date().toISOString()
+      };
+
+      if (existingIndex >= 0) {
+        list[existingIndex] = record;
+      } else {
+        list.unshift(record);
+      }
+
+      localStorage.setItem('prefire_saved_decklists', JSON.stringify(list));
+      markCurrentStateSaved();
+
+      const btn = document.getElementById('btn-save-deck');
+      const btnAuto = document.getElementById('btn-save-deck-autobuild');
+      const originalText = btn.textContent;
+      btn.textContent = 'Saved!';
+      if (btnAuto) btnAuto.textContent = 'Saved!';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        if (btnAuto) btnAuto.textContent = originalText;
+      }, 1500);
+    }
+
+    function hideMobileTitlePopup() {
+      if (mobileTitlePopup) {
+        mobileTitlePopup.style.display = 'none';
+        mobileTitlePopup.textContent = '';
+      }
+    }
+
+    function showMobileTitlePopup(fullTitle) {
+      if (!mobileTitlePopup) return;
+      if (mobileTitlePopup.style.display === 'block' && mobileTitlePopup.textContent === fullTitle) {
+        hideMobileTitlePopup();
+        return;
+      }
+      mobileTitlePopup.textContent = fullTitle;
+      mobileTitlePopup.style.display = 'block';
+    }
+
+    mobileTitlePopup.addEventListener('click', hideMobileTitlePopup);
+
+    function renderDecklistsModal() {
+      const list = getSavedDecklists();
+      decklistsModalBody.innerHTML = '';
+      hideMobileTitlePopup();
+
+      if (list.length === 0) {
+        decklistsModalBody.innerHTML = '<div style="color: var(--text-muted); text-align: center; padding: 25px;">No saved lists yet. Use "Save List" to store your lists.</div>';
+        return;
+      }
+
+      list.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.className = 'saved-deck-row';
+
+        const info = document.createElement('div');
+        info.className = 'saved-deck-info';
+
+        const title = document.createElement('div');
+        title.className = 'saved-deck-title';
+        title.textContent = item.title;
+
+        const meta = document.createElement('div');
+        meta.className = 'saved-deck-meta';
+        const dateStr = item.updatedAt ? new Date(item.updatedAt).toLocaleDateString() : '';
+        meta.textContent = `${item.cardCount || 0} Cards ${dateStr ? '• ' + dateStr : ''}`;
+
+        info.appendChild(title);
+        info.appendChild(meta);
+
+        info.addEventListener('click', (e) => {
+          if (window.innerWidth <= 768) {
+            e.stopPropagation();
+            showMobileTitlePopup(item.title);
+          }
+        });
+
+        const actions = document.createElement('div');
+        actions.className = 'saved-deck-actions';
+
+        const loadBtn = document.createElement('button');
+        loadBtn.type = 'button';
+        loadBtn.className = 'btn-saved-load';
+        loadBtn.textContent = 'Load';
+        loadBtn.onclick = () => loadSavedDeckByIndex(index);
+
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'btn-saved-delete';
+        delBtn.textContent = 'Delete';
+        delBtn.onclick = () => deleteSavedDeckByIndex(index);
+
+        actions.appendChild(loadBtn);
+        actions.appendChild(delBtn);
+
+        row.appendChild(info);
+        row.appendChild(actions);
+        decklistsModalBody.appendChild(row);
+      });
+    }
+
+    function loadSavedDeckByIndex(index) {
+      const list = getSavedDecklists();
+      const target = list[index];
+      if (!target) return;
+
+      if (hasUnsavedChanges()) {
+        const wantsToSave = window.confirm(`You have unsaved changes on your active deck "${getActiveDeckTitle()}".\n\nWould you like to save it before loading "${target.title}"?`);
+        if (wantsToSave) {
+          saveCurrentDecklist();
+        }
+      }
+
+      deck = JSON.parse(JSON.stringify(target.deck || {}));
+      commanders = JSON.parse(JSON.stringify(target.commanders || []));
+
+      localStorage.setItem('prefire_deck', JSON.stringify(deck));
+      localStorage.setItem('prefire_commanders', JSON.stringify(commanders));
+
+      markCurrentStateSaved();
+      hideMobileTitlePopup();
+      decklistsModal.classList.remove('open');
+
+      staplesRawCardsCache = {};
+      edhrecRawCardsCache = {};
+
+      setCommanderSearchMode(false);
+      setEdhrecButtonState(false);
+      setStaplesButtonState(false);
+
+      renderCommander();
+      saveAndRenderDeck();
+      syncSearchDeckState();
+      renderAutobuildCanvas();
+    }
+
+    function deleteSavedDeckByIndex(index) {
+      const list = getSavedDecklists();
+      const target = list[index];
+      if (!target) return;
+
+      const confirmDel = window.confirm(`Are you sure you want to delete "${target.title}"?`);
+      if (confirmDel) {
+        list.splice(index, 1);
+        localStorage.setItem('prefire_saved_decklists', JSON.stringify(list));
+        hideMobileTitlePopup();
+        renderDecklistsModal();
+      }
+    }
+
+    btnDecklistsToggle.addEventListener('click', () => {
+      renderDecklistsModal();
+      decklistsModal.classList.add('open');
+    });
+
+    btnDecklistsAside.addEventListener('click', () => {
+      renderDecklistsModal();
+      decklistsModal.classList.add('open');
+    });
+
+    btnCloseDecklistsModal.addEventListener('click', () => {
+      hideMobileTitlePopup();
+      decklistsModal.classList.remove('open');
+    });
+
+    decklistsModal.addEventListener('click', (e) => {
+      if (e.target === decklistsModal) {
+        hideMobileTitlePopup();
+        decklistsModal.classList.remove('open');
+      }
+    });
+
+    document.getElementById('btn-save-deck').addEventListener('click', () => {
+      saveCurrentDecklist();
+    });
+
+    document.getElementById('btn-save-deck-autobuild').addEventListener('click', () => {
+      saveCurrentDecklist();
+    });
+
+    btnClearListLink.addEventListener('click', () => {
+      if (Object.keys(deck).length === 0) return;
+      const confirmClear = window.confirm('Are you sure you want to clear your current list? (Cards will still be recoverable in Recently Removed).');
+      if (confirmClear) {
+        Object.keys(deck).forEach(name => {
+          recordRecentlyRemoved(name, deck[name].faces, deck[name].mana_cost, deck[name].cmc);
+        });
+        deck = {};
+        hidePreview();
+        saveAndRenderDeck();
+        syncSearchDeckState();
+        renderAutobuildCanvas();
+      }
+    });
+
+    document.getElementById('btn-clear-autobuild-link').addEventListener('click', () => {
+      btnClearListLink.click();
+    });
+
+    document.getElementById('btn-clear-removed').addEventListener('click', (e) => {
+      e.stopPropagation();
+      recentlyRemoved = [];
+      localStorage.removeItem('prefire_removed');
+      hidePreview();
+      renderRecentlyRemoved();
+    });
+
+    function detectPartner(card) {
+      const fullText = (card.oracle_text || (card.card_faces ? card.card_faces.map(f => f.oracle_text).join('\n') : '') || '');
+      const typeLine = (card.type_line || (card.card_faces ? card.card_faces.map(f => f.type_line).join(' // ') : '') || '');
+      const keywords = card.keywords || [];
+
+      const partnerWithMatch = fullText.match(/\bPartner with\s+([^\n\r(]+)/i);
+      if (partnerWithMatch) {
+        let partnerName = partnerWithMatch[1].trim().replace(/[\.\,\"\']+$/, '').trim();
+        return {
+          type: `Partner with "${partnerName}"`,
+          query: `!"${partnerName}"`
+        };
+      }
+
+      const partnerVariantMatch = fullText.match(/\bPartner\s*[\u2014\-–]\s*([^\n\r(]+)/i);
+      if (partnerVariantMatch) {
+        let category = partnerVariantMatch[1].trim().replace(/[\.\,\"\']+$/, '').trim();
+        if (category && !/^with\b/i.test(category)) {
+          return {
+            type: `Partner - ${category}`,
+            query: `(o:"Partner—${category}" or o:"Partner - ${category}" or (o:"Partner" o:"${category}")) -o:"Partner with" (is:commander or (t:legendary t:creature))`
+          };
+        }
+      }
+
+      if (keywords.includes("Friends forever") || /\bFriends forever\b/i.test(fullText)) {
+        return {
+          type: "Friends forever",
+          query: `o:"Friends forever" (is:commander or (t:legendary t:creature))`
+        };
+      }
+
+      if (/\bChoose a Background\b/i.test(fullText)) {
+        return {
+          type: "Choose a Background",
+          query: `t:background t:legendary t:enchantment`
+        };
+      }
+
+      if (/\bBackground\b/i.test(typeLine) && /\bLegendary\b/i.test(typeLine)) {
+        return {
+          type: "Background",
+          query: `o:"Choose a Background" is:commander`
+        };
+      }
+
+      if (keywords.includes("Doctor's companion") || /\bDoctor's companion\b/i.test(fullText)) {
+        return {
+          type: "Doctor's companion",
+          query: `t:"Time Lord" t:Doctor is:commander`
+        };
+      }
+
+      if (/\bTime Lord\b/i.test(typeLine) && /\bDoctor\b/i.test(typeLine) && /\bLegendary\b/i.test(typeLine)) {
+        return {
+          type: "Time Lord Doctor",
+          query: `(o:"Doctor's companion" or name:"Clara Oswald") (is:commander or (t:legendary t:creature))`
+        };
+      }
+
+      if (keywords.includes("Partner") || /\bPartner\b/i.test(fullText)) {
+        if (!/\bPartner with\b/i.test(fullText) && !/\bPartner\s*[\u2014\-–]/i.test(fullText)) {
+          return {
+            type: "Partner",
+            query: `o:"Partner" -o:"Partner with" -o:"Friends forever" -o:"Doctor's companion" -o:"Choose a Background" -o:"Partner—" -o:"Partner -" (is:commander or (t:legendary t:creature))`
+          };
+        }
+      }
+
+      return null;
+    }
+
+    function updateModeLabel() {
+      const modeLabel = document.getElementById('search-mode-label');
+      if (isPartnerSearchMode) {
+        modeLabel.textContent = `Partner (${activePartnerType})`;
+        modeLabel.style.color = 'var(--commander-accent)';
+      } else if (isCommanderSearchMode) {
+        modeLabel.textContent = (commanderPoolMode === 'all') ? 'All Legal Commanders' : 'Pre-FIRE Commanders';
+        modeLabel.style.color = 'var(--commander-accent)';
+      } else if (isShowingStaples) {
+        modeLabel.textContent = 'Pre-FIRE Commander Staples (Top 700 by Popularity)';
+        modeLabel.style.color = 'var(--purple-btn)';
+      } else {
+        modeLabel.textContent = 'Pre-FIRE (Ravnica Allegiance & Prior)';
+        modeLabel.style.color = 'var(--accent)';
+      }
+    }
+
+    function setCommanderSearchMode(active) {
+      isCommanderSearchMode = active;
+      if (!active) {
+        isPartnerSearchMode = false;
+        activePartnerQuery = '';
+        activePartnerType = '';
+      }
+      const searchBtn = document.getElementById('btn-search');
+      const cmdrToggleGroup = document.getElementById('cmdr-pool-toggle-group');
+
+      if (isCommanderSearchMode) {
+        clearSearchInputs();
+        setStaplesButtonState(false);
+        setEdhrecButtonState(false);
+        cmdrToggleGroup.style.display = isPartnerSearchMode ? 'none' : 'flex';
+        searchBtn.textContent = isPartnerSearchMode ? 'Search Partners' : 'Search Commanders';
+        searchBtn.classList.add('commander-mode');
+        btnRandomCmdr.style.display = 'inline-block';
+        btnRandomCmdr.textContent = isPartnerSearchMode ? 'Random Partner?' : 'Random Commander?';
+        document.getElementById('empty-state').textContent = isPartnerSearchMode 
+          ? `Searching for compatible partners (${activePartnerType})...` 
+          : 'Searching for commanders... Enter terms or click Search Commanders.';
+      } else {
+        cmdrToggleGroup.style.display = 'none';
+        searchBtn.textContent = 'Search Cards';
+        searchBtn.classList.remove('commander-mode');
+        btnRandomCmdr.style.display = 'none';
+      }
+      updateModeLabel();
+      renderCommander();
+
+      if (active && window.innerWidth <= 768) {
+        setMobileTab('search');
+      }
+    }
+
+    document.querySelectorAll('.cmdr-pool-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cmdr-pool-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        commanderPoolMode = btn.dataset.pool;
+        updateModeLabel();
+        executeSearch();
+      });
+    });
+
+    document.getElementById('btn-toggle-removed').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = removedPanel.classList.contains('open');
+      setRecentlyRemovedOpen(!isOpen);
+    });
+
+    const btnToggleRemovedAutobuild = document.getElementById('btn-toggle-removed-autobuild');
+    if (btnToggleRemovedAutobuild) {
+      btnToggleRemovedAutobuild.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = removedPanel.classList.contains('open');
+        setRecentlyRemovedOpen(!isOpen);
+      });
+    }
+
+    function hasActiveSearch() {
+      const resultsGrid = document.getElementById('results-grid');
+      const emptyState = document.getElementById('empty-state');
+      if (resultsGrid && resultsGrid.children.length > 0) return true;
+      if (emptyState && emptyState.style.display !== 'none' && !emptyState.textContent.includes('No search performed yet')) {
+        return true;
+      }
+      return false;
+    }
+
+    function triggerSearchIfActive() {
+      if (!hasActiveSearch()) return;
+      if (isShowingEdhrec) {
+        executeEdhrecSearch();
+      } else if (isShowingStaples) {
+        executeStaplesSearch();
+      } else {
+        executeSearch();
+      }
+    }
+
+    document.querySelectorAll('.color-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        button.classList.toggle('active');
+        triggerSearchIfActive();
+      });
+    });
+
+    document.getElementById('match-all-colors').addEventListener('change', () => {
+      triggerSearchIfActive();
+    });
+
+    searchSortSelect.addEventListener('change', () => {
+      triggerSearchIfActive();
+    });
+
+    excludeLandsCheckbox.addEventListener('change', () => {
+      triggerSearchIfActive();
+    });
+
+    noGameChangersCheckbox.addEventListener('change', () => {
+      triggerSearchIfActive();
+    });
+
+    document.getElementById('btn-search').addEventListener('click', () => {
+      setEdhrecButtonState(false);
+      setStaplesButtonState(false);
+      executeSearch();
+      if (window.innerWidth <= 768) {
+        setMobileTab('search');
+      }
+    });
+
+    btnRandomCmdr.addEventListener('click', () => {
+      setEdhrecButtonState(false);
+      setStaplesButtonState(false);
+      executeRandomCommander();
+    });
+
+    document.querySelectorAll('.search-inputs input').forEach(input => {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          if (isShowingEdhrec) {
+            executeEdhrecSearch();
+          } else if (isShowingStaples) {
+            executeStaplesSearch();
+          } else {
+            executeSearch();
+          }
+          if (window.innerWidth <= 768) {
+            setMobileTab('search');
+          }
+        }
+      });
+    });
+
+    function createManaCostElement(manaCost) {
+      const wrap = document.createElement('span');
+      wrap.className = 'deck-entry-mana';
+      if (!manaCost) return wrap;
+
+      const tokens = manaCost.match(/\{[^}]+\}|\/\//g);
+      if (!tokens) return wrap;
+
+      tokens.forEach(tok => {
+        if (tok === '//') {
+          const sep = document.createElement('span');
+          sep.textContent = '//';
+          sep.style.fontSize = '9px';
+          sep.style.color = 'var(--text-muted)';
+          sep.style.margin = '0 1px';
+          wrap.appendChild(sep);
+        } else {
+          const clean = tok.replace(/[{}]/g, '').replace(/\//g, '').toUpperCase();
+          const img = document.createElement('img');
+          img.className = 'mana-symbol';
+          img.src = `https://svgs.scryfall.io/card-symbols/${clean}.svg`;
+          img.alt = tok;
+          img.title = tok;
+          img.loading = 'lazy';
+          wrap.appendChild(img);
+        }
+      });
+      return wrap;
+    }
+
+    function formatEdhrecSlug(name) {
+      const front = name.split('//')[0].trim();
+      return front
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/['"’]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function getCombinedPartnerRecs(cmdrA, cmdrB) {
+      const slugA = formatEdhrecSlug(cmdrA.name);
+      const slugB = formatEdhrecSlug(cmdrB.name);
+
+      const listA = edhrecCache[slugA] || [];
+      const listB = edhrecCache[slugB] || [];
+
+      const combined = [];
+      const seen = new Set();
+      const maxLen = Math.max(listA.length, listB.length);
+
+      for (let i = 0; i < maxLen; i++) {
+        if (i < listA.length && !seen.has(listA[i])) {
+          seen.add(listA[i]);
+          combined.push(listA[i]);
+        }
+        if (i < listB.length && !seen.has(listB[i])) {
+          seen.add(listB[i]);
+          combined.push(listB[i]);
+        }
+      }
+      return combined;
+    }
+
+    function getCachedRecNames() {
+      if (commanders.length === 0) return [];
+      if (commanders.length === 1) {
+        const slug = formatEdhrecSlug(commanders[0].name);
+        return edhrecCache[slug] || [];
+      }
+      if (commanders.length === 2) {
+        const c1 = commanders[0];
+        const c2 = commanders[1];
+
+        const t1 = (c1.type_line || '').toLowerCase();
+        const t2 = (c2.type_line || '').toLowerCase();
+
+        const slug1 = formatEdhrecSlug(c1.name);
+        const slug2 = formatEdhrecSlug(c2.name);
+
+        let comboKey;
+
+        if (t2.includes('background') || c2.partnerInfo?.type === 'Background') {
+          comboKey = `${slug1}-${slug2}`;
+        } else if (t1.includes('background') || c1.partnerInfo?.type === 'Background') {
+          comboKey = `${slug2}-${slug1}`;
+        } else if (t1.includes('doctor') && !t2.includes('doctor')) {
+          comboKey = `${slug1}-${slug2}`;
+        } else if (t2.includes('doctor') && !t1.includes('doctor')) {
+          comboKey = `${slug2}-${slug1}`;
+        } else {
+          comboKey = (slug1 < slug2) ? `${slug1}-${slug2}` : `${slug2}-${slug1}`;
+        }
+
+        if (partnersCache[comboKey] && partnersCache[comboKey].length > 0) {
+          return partnersCache[comboKey];
+        }
+        return getCombinedPartnerRecs(c1, c2);
+      }
+      return [];
+    }
+
+    function filterCardListLocally(cards) {
+      const filterName = document.getElementById('search-name').value.trim().toLowerCase();
+      const filterSupertype = document.getElementById('search-supertype').value.trim().toLowerCase();
+      const filterSubtype = document.getElementById('search-subtype').value.trim().toLowerCase();
+      const filterText = document.getElementById('search-text').value.trim().toLowerCase();
+      const excludeLands = excludeLandsCheckbox.checked;
+      const noGameChangers = noGameChangersCheckbox.checked;
+
+      const activeToggles = Array.from(document.querySelectorAll('.color-toggle.active')).map(btn => btn.dataset.color);
+      const colored = activeToggles.filter(c => c !== 'C');
+      const hasColorless = activeToggles.includes('C');
+      const matchAllColors = document.getElementById('match-all-colors').checked;
+
+      return cards.filter(card => {
+        const typeLine = (card.type_line || (card.card_faces ? card.card_faces.map(f => f.type_line).join(' ') : '')).toLowerCase();
+
+        if (excludeLands && typeLine.includes('land')) return false;
+        if (noGameChangers && isGameChangerCard(card)) return false;
+        if (filterName && !card.name.toLowerCase().includes(filterName)) return false;
+        if (filterSupertype && !typeLine.includes(filterSupertype)) return false;
+        if (filterSubtype && !typeLine.includes(filterSubtype)) return false;
+
+        if (filterText) {
+          const terms = filterText.match(/"[^"]+"|\S+/g) || [];
+          const fullOracle = (card.oracle_text || (card.card_faces ? card.card_faces.map(f => f.oracle_text).join(' ') : '')).toLowerCase();
+          const matchesAll = terms.every(term => {
+            const clean = term.replace(/^"|"$/g, '').toLowerCase();
+            return fullOracle.includes(clean);
+          });
+          if (!matchesAll) return false;
+        }
+
+        if (activeToggles.length > 0) {
+          const cardId = card.color_identity || [];
+          if (activeToggles.length === 1 && hasColorless) {
+            if (cardId.length > 0) return false;
+          } else if (colored.length > 0) {
+            if (matchAllColors) {
+              const hasAll = colored.every(c => cardId.includes(c));
+              const hasNoExtra = cardId.every(c => colored.includes(c));
+              if (!hasAll || !hasNoExtra) return false;
+            } else {
+              const subset = cardId.every(c => colored.includes(c));
+              if (!subset) return false;
+              if (!hasColorless && cardId.length === 0) return false;
+            }
+          }
+        }
+        return true;
+      });
+    }
+
+    function createCardElement(card) {
+      let faces = [];
+      if (card.card_faces && card.card_faces.length > 1 && card.card_faces[0].image_uris) {
+        faces = card.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
+      } else if (card.image_uris?.normal) {
+        faces = [card.image_uris.normal];
+      }
+      if (faces.length === 0) return null;
+
+      let manaCost = card.mana_cost;
+      if (!manaCost && card.card_faces && card.card_faces.length > 0) {
+        manaCost = card.card_faces.map(f => f.mana_cost).filter(Boolean).join(' // ');
+      }
+      manaCost = manaCost || '';
+
+      const cmc = (typeof card.cmc === 'number') ? card.cmc : parseCmcFromManaCost(manaCost);
+      const typeLine = card.type_line || '';
+
+      const cardItem = document.createElement('div');
+      cardItem.className = 'card-item';
+      cardItem.dataset.cardName = card.name;
+
+      const img = document.createElement('img');
+      img.src = faces[0];
+      img.alt = card.name;
+      img.loading = 'lazy';
+      img.dataset.faceIndex = "0";
+
+      if (faces.length > 1) {
+        img.style.cursor = 'pointer';
+        img.title = 'Click to flip card face';
+        img.onclick = () => {
+          let idx = parseInt(img.dataset.faceIndex, 10);
+          idx = (idx + 1) % faces.length;
+          img.dataset.faceIndex = idx;
+          img.src = faces[idx];
+        };
+      }
+
+      const actionWrap = document.createElement('div');
+      actionWrap.className = 'card-actions';
+
+      if (isPartnerSearchMode) {
+        const selectPartnerBtn = document.createElement('button');
+        selectPartnerBtn.className = 'btn-set-commander';
+        selectPartnerBtn.textContent = '★ Select Partner';
+        selectPartnerBtn.onclick = () => selectPartner(card, faces, manaCost, cmc);
+        actionWrap.appendChild(selectPartnerBtn);
+      } else if (isCommanderSearchMode) {
+        const selectCmdrBtn = document.createElement('button');
+        selectCmdrBtn.className = 'btn-set-commander';
+        selectCmdrBtn.textContent = '★ Select Commander';
+        selectCmdrBtn.onclick = () => selectCommander(card, faces, manaCost, cmc);
+        actionWrap.appendChild(selectCmdrBtn);
+      } else {
+        const addBtn = document.createElement('button');
+        addBtn.className = 'btn-add';
+        addBtn.dataset.cardName = card.name;
+        addBtn.dataset.cardFaces = JSON.stringify(faces);
+        addBtn.dataset.cardManaCost = manaCost;
+        addBtn.dataset.cardCmc = cmc;
+        addBtn.dataset.cardTypeLine = typeLine;
+
+        const isInDeck = !!deck[card.name];
+        if (isInDeck) {
+          addBtn.textContent = 'In Deck';
+          addBtn.classList.add('in-deck');
+          addBtn.disabled = true;
+        } else {
+          addBtn.textContent = '+ Add to Deck';
+          addBtn.disabled = false;
+          addBtn.onclick = () => addToDeck(card.name, faces, manaCost, cmc, typeLine);
+        }
+        actionWrap.appendChild(addBtn);
+      }
+
+      cardItem.appendChild(img);
+      cardItem.appendChild(actionWrap);
+      return cardItem;
+    }
+
+    function addAllEdhrecCardsToList() {
+      if (!currentEdhrecLoadedCards || currentEdhrecLoadedCards.length === 0) return;
+      currentEdhrecLoadedCards.forEach(card => {
+        let faces = [];
+        if (card.card_faces && card.card_faces.length > 1 && card.card_faces[0].image_uris) {
+          faces = card.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
+        } else if (card.image_uris?.normal) {
+          faces = [card.image_uris.normal];
+        }
+        let manaCost = card.mana_cost;
+        if (!manaCost && card.card_faces && card.card_faces.length > 0) {
+          manaCost = card.card_faces.map(f => f.mana_cost).filter(Boolean).join(' // ');
+        }
+        manaCost = manaCost || '';
+        const cmc = (typeof card.cmc === 'number') ? card.cmc : parseCmcFromManaCost(manaCost);
+        const typeLine = card.type_line || '';
+        addToDeck(card.name, faces, manaCost, cmc, typeLine);
+      });
+      syncSearchDeckState();
+    }
+
+    function renderEdhrecCategorized(cards) {
+      currentEdhrecLoadedCards = cards;
+      const resultsGrid = document.getElementById('results-grid');
+      resultsGrid.innerHTML = '';
+      resultsGrid.style.display = 'block';
+
+      if (!isCommanderSearchMode) {
+        const toolbar = document.createElement('div');
+        toolbar.className = 'edhrec-actions-toolbar';
+
+        const addAllBtn = document.createElement('button');
+        addAllBtn.type = 'button';
+        addAllBtn.id = 'btn-edhrec-add-all';
+        addAllBtn.className = 'btn-edhrec-add-all';
+        addAllBtn.textContent = `+ Add All Cards to List (${cards.length})`;
+        addAllBtn.onclick = () => addAllEdhrecCardsToList();
+
+        toolbar.appendChild(addAllBtn);
+        resultsGrid.appendChild(toolbar);
+      }
+
+      const sortChoice = searchSortSelect.value || 'cmc';
+
+      const typeOrder = [
+        'Creatures',
+        'Instants',
+        'Sorceries',
+        'Artifacts',
+        'Enchantments',
+        'Planeswalkers',
+        'Battles',
+        'Lands'
+      ];
+
+      const buckets = {
+        'Creatures': [],
+        'Instants': [],
+        'Sorceries': [],
+        'Artifacts': [],
+        'Enchantments': [],
+        'Planeswalkers': [],
+        'Battles': [],
+        'Lands': [],
+        'Other': []
+      };
+
+      cards.forEach(card => {
+        const cat = getCardPrimaryType(card);
+        if (buckets[cat]) {
+          buckets[cat].push(card);
+        } else {
+          buckets['Other'].push(card);
+        }
+      });
+
+      typeOrder.forEach(category => {
+        const list = buckets[category];
+        if (!list || list.length === 0) return;
+
+        sortCardArray(list, sortChoice);
+
+        const sec = document.createElement('div');
+        sec.className = 'category-section';
+
+        const head = document.createElement('div');
+        head.className = 'category-header';
+        head.innerHTML = `<span>${category}</span> <span class="cat-count">(${list.length})</span>`;
+
+        const subGrid = document.createElement('div');
+        subGrid.className = 'results-grid';
+
+        list.forEach(c => {
+          const el = createCardElement(c);
+          if (el) subGrid.appendChild(el);
+        });
+
+        sec.appendChild(head);
+        sec.appendChild(subGrid);
+        resultsGrid.appendChild(sec);
+      });
+
+      if (buckets['Other'].length > 0) {
+        const otherList = buckets['Other'];
+        sortCardArray(otherList, sortChoice);
+
+        const sec = document.createElement('div');
+        sec.className = 'category-section';
+
+        const head = document.createElement('div');
+        head.className = 'category-header';
+        head.innerHTML = `<span>Other</span> <span class="cat-count">(${otherList.length})</span>`;
+
+        const subGrid = document.createElement('div');
+        subGrid.className = 'results-grid';
+
+        otherList.forEach(c => {
+          const el = createCardElement(c);
+          if (el) subGrid.appendChild(el);
+        });
+
+        sec.appendChild(head);
+        sec.appendChild(subGrid);
+        resultsGrid.appendChild(sec);
+      }
+    }
+
+    async function executeEdhrecSearch() {
+      const resultsGrid = document.getElementById('results-grid');
+      const emptyState = document.getElementById('empty-state');
+
+      resultsGrid.innerHTML = '';
+      loadMoreWrap.style.display = 'none';
+      emptyState.style.display = 'none';
+
+      if (commanders.length === 0) {
+        hideProgressBar();
+        emptyState.style.display = 'block';
+        emptyState.textContent = 'Please choose a commander first to load EDHREC recommendations.';
+        return;
+      }
+
+      if (Object.keys(edhrecCache).length === 0 && Object.keys(partnersCache).length === 0) {
+        showProgressBar('Loading EDHREC recommendation index...');
+        await loadCaches();
+      }
+
+      const legalNames = getCachedRecNames();
+
+      if (!legalNames || legalNames.length === 0) {
+        hideProgressBar();
+        emptyState.style.display = 'block';
+        emptyState.textContent = `No Pre-FIRE recommendations found in the cache for ${commanders.map(c => c.name).join(' & ')}.`;
+        return;
+      }
+
+      const cacheKey = commanders.map(c => c.name).sort().join('___');
+
+      if (edhrecRawCardsCache[cacheKey] && edhrecRawCardsCache[cacheKey].length > 0) {
+        hideProgressBar();
+        const filteredCards = filterCardListLocally(edhrecRawCardsCache[cacheKey]);
+        if (filteredCards.length === 0) {
+          emptyState.style.display = 'block';
+          emptyState.textContent = 'No EDHREC Pre-FIRE recommendations match the specified search filters.';
+          return;
+        }
+        emptyState.style.display = 'none';
+        renderEdhrecCategorized(filteredCards);
+        return;
+      }
+
+      showProgressBar(`Loading EDHREC cards (0/${legalNames.length})...`);
+
+      try {
+        const chunks = [];
+        for (let i = 0; i < legalNames.length; i += 75) {
+          chunks.push(legalNames.slice(i, i + 75));
+        }
+
+        let rawCards = [];
+        for (let idx = 0; idx < chunks.length; idx++) {
+          const chunk = chunks[idx];
+          const pct = Math.round((rawCards.length / legalNames.length) * 100);
+          updateProgressBar(pct, `Loading EDHREC cards (${rawCards.length}/${legalNames.length})...`);
+
+          let res = await fetch('https://api.scryfall.com/cards/collection', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              identifiers: chunk.map(n => ({ name: n }))
+            })
+          });
+
+          if (res.status === 429) {
+            await new Promise(r => setTimeout(r, 1600));
+            res = await fetch('https://api.scryfall.com/cards/collection', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({
+                identifiers: chunk.map(n => ({ name: n }))
+              })
+            });
+          }
+
+          if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.details || `Scryfall responded with HTTP ${res.status}`);
+          }
+
+          const data = await res.json();
+          if (data && data.data) {
+            rawCards = rawCards.concat(data.data);
+          }
+
+          if (idx < chunks.length - 1) {
+            await new Promise(r => setTimeout(r, 550));
+          }
+        }
+
+        updateProgressBar(100, 'Processing cards...');
+        edhrecRawCardsCache[cacheKey] = rawCards;
+
+        const filteredCards = filterCardListLocally(rawCards);
+
+        setTimeout(hideProgressBar, 200);
+
+        if (filteredCards.length === 0) {
+          emptyState.style.display = 'block';
+          emptyState.textContent = 'No EDHREC Pre-FIRE recommendations match the specified search filters.';
+          return;
+        }
+
+        emptyState.style.display = 'none';
+        renderEdhrecCategorized(filteredCards);
+      } catch (err) {
+        console.error('EDHREC load error:', err);
+        hideProgressBar();
+        emptyState.style.display = 'block';
+        emptyState.textContent = `Error loading recommendations: ${err.message}`;
+      }
+    }
+
+    async function executeSearch() {
+      const sortChoice = searchSortSelect.value || 'cmc';
+
+      const name = document.getElementById('search-name').value.trim();
+      const supertype = document.getElementById('search-supertype').value.trim();
+      const subtype = document.getElementById('search-subtype').value.trim();
+      const text = document.getElementById('search-text').value.trim();
+      const excludeLands = excludeLandsCheckbox.checked;
+      const noGameChangers = noGameChangersCheckbox.checked;
+
+      const activeToggles = Array.from(document.querySelectorAll('.color-toggle.active')).map(btn => btn.dataset.color);
+      const colored = activeToggles.filter(c => c !== 'C');
+      const hasColorless = activeToggles.includes('C');
+      const matchAllColors = document.getElementById('match-all-colors').checked;
+
+      let queryParts = [];
+
+      if (isPartnerSearchMode) {
+        queryParts.push(activePartnerQuery, 'f:commander');
+        if (commanderPoolMode === 'prefire' && !activePartnerQuery.startsWith('!')) {
+          queryParts.push('date<=rna');
+        }
+      } else if (isCommanderSearchMode) {
+        queryParts.push('(is:commander or (is:front t:legendary t:vehicle))', '-name:"Balamb Garden"', 'f:commander');
+        if (commanderPoolMode === 'prefire') {
+          queryParts.push('date<=rna');
+        }
+      } else {
+        queryParts.push('date<=rna', 'f:commander');
+      }
+
+      if (excludeLands) {
+        queryParts.push('-t:land');
+      }
+
+      if (!isCommanderSearchMode && !isPartnerSearchMode && commanders.length > 0 && activeToggles.length === 0) {
+        const idKey = getCommanderIdentityString();
+        if (idKey) {
+          queryParts.push(`id<=${idKey}`);
+        } else {
+          queryParts.push('id:c');
+        }
+      }
+
+      if (name) queryParts.push(`name:"${name}"`);
+      if (supertype) queryParts.push(`t:"${supertype}"`);
+      if (subtype) queryParts.push(`t:"${subtype}"`);
+
+      if (text) {
+        const terms = text.match(/"[^"]+"|\S+/g) || [];
+        terms.forEach(term => {
+          const cleanTerm = term.replace(/^"|"$/g, '').trim();
+          if (cleanTerm) {
+            queryParts.push(`o:"${cleanTerm}"`);
+          }
+        });
+      }
+
+      if (activeToggles.length > 0) {
+        if (activeToggles.length === 1 && hasColorless) {
+          queryParts.push('id:c');
+        } else if (colored.length > 0) {
+          const colStr = colored.join('').toLowerCase();
+          if (matchAllColors) {
+            queryParts.push(`id>=${colStr} id<=${colStr}`);
+          } else {
+            if (!hasColorless) {
+              queryParts.push(`id<=${colStr} -id:c`);
+            } else {
+              queryParts.push(`id<=${colStr}`);
+            }
+          }
+        }
+      }
+
+      const resultsGrid = document.getElementById('results-grid');
+      const emptyState = document.getElementById('empty-state');
+
+      resultsGrid.innerHTML = '';
+      resultsGrid.style.display = 'grid';
+      loadMoreWrap.style.display = 'none';
+      emptyState.style.display = 'none';
+
+      showProgressBar('Searching Scryfall...');
+
+      const sortParam = isShowingStaples ? 'edhrec' : sortChoice;
+      const url = `https://api.scryfall.com/cards/search?q=${encodeURIComponent(queryParts.join(' '))}&unique=cards&order=${sortParam}&dir=asc`;
+
+      try {
+        updateProgressBar(40, 'Fetching cards...');
+        const response = await fetch(url);
+        updateProgressBar(80, 'Processing response...');
+        const data = await response.json();
+
+        if (response.status === 404 || !data.data || data.data.length === 0) {
+          hideProgressBar();
+          emptyState.style.display = 'block';
+          emptyState.textContent = isPartnerSearchMode
+            ? 'No matching partner pairings found.'
+            : (isCommanderSearchMode ? 'No matching commanders found.' : 'No matching pre-FIRE cards found.');
+          return;
+        }
+
+        if (!response.ok) {
+          hideProgressBar();
+          emptyState.style.display = 'block';
+          emptyState.textContent = data.details || `Error: ${response.statusText}`;
+          return;
+        }
+
+        let cards = data.data;
+
+        if (noGameChangers && !isCommanderSearchMode) {
+          cards = cards.filter(card => !isGameChangerCard(card));
+        }
+
+        if (!isShowingStaples) {
+          sortCardArray(cards, sortChoice);
+        }
+
+        nextSearchPageUrl = data.has_more ? data.next_page : null;
+
+        updateProgressBar(100, 'Done!');
+        setTimeout(hideProgressBar, 200);
+
+        if (cards.length === 0) {
+          emptyState.style.display = 'block';
+          emptyState.textContent = 'No cards matched the specified filters.';
+          return;
+        }
+
+        emptyState.style.display = 'none';
+        renderResults(cards, false);
+
+        if (nextSearchPageUrl) {
+          loadMoreWrap.style.display = 'flex';
+          btnLoadMore.disabled = false;
+          btnLoadMore.textContent = 'Load More';
+        }
+      } catch (err) {
+        console.error('Fetch error:', err);
+        hideProgressBar();
+        emptyState.style.display = 'block';
+        emptyState.textContent = `Error: ${err.message}. If using a privacy browser or VPN, check that api.scryfall.com is allowed.`;
+      }
+    }
+
+    async function loadMoreScryfall() {
+      if (!nextSearchPageUrl) return;
+      btnLoadMore.disabled = true;
+      btnLoadMore.textContent = 'Loading...';
+      showProgressBar('Loading next page...');
+
+      try {
+        updateProgressBar(45);
+        const response = await fetch(nextSearchPageUrl);
+        updateProgressBar(85);
+        const data = await response.json();
+
+        if (data.data && data.data.length > 0) {
+          let cards = data.data;
+          const noGameChangers = noGameChangersCheckbox.checked;
+
+          if (noGameChangers && !isCommanderSearchMode) {
+            cards = cards.filter(card => !isGameChangerCard(card));
+          }
+
+          const sortChoice = searchSortSelect.value || 'cmc';
+          if (!isShowingStaples) {
+            sortCardArray(cards, sortChoice);
+          }
+
+          nextSearchPageUrl = data.has_more ? data.next_page : null;
+          updateProgressBar(100);
+          setTimeout(hideProgressBar, 200);
+          renderResults(cards, true);
+
+          if (nextSearchPageUrl) {
+            loadMoreWrap.style.display = 'flex';
+            btnLoadMore.disabled = false;
+            btnLoadMore.textContent = 'Load More';
+          } else {
+            loadMoreWrap.style.display = 'none';
+          }
+        } else {
+          hideProgressBar();
+          loadMoreWrap.style.display = 'none';
+        }
+      } catch (e) {
+        console.error('Failed to load next page', e);
+        hideProgressBar();
+      } finally {
+        btnLoadMore.disabled = false;
+        btnLoadMore.textContent = 'Load More';
+      }
+    }
+
+    async function executeRandomCommander() {
+      const activeToggles = Array.from(document.querySelectorAll('.color-toggle.active')).map(btn => btn.dataset.color);
+      const colored = activeToggles.filter(c => c !== 'C');
+      const hasColorless = activeToggles.includes('C');
+      const matchAllColors = document.getElementById('match-all-colors').checked;
+
+      let queryParts = [];
+
+      if (isPartnerSearchMode) {
+        queryParts.push(activePartnerQuery, 'f:commander');
+        if (commanderPoolMode === 'prefire' && !activePartnerQuery.startsWith('!')) {
+          queryParts.push('date<=rna');
+        }
+      } else if (isCommanderSearchMode) {
+        queryParts.push('(is:commander or (is:front t:legendary t:vehicle))', '-name:"Balamb Garden"', 'f:commander');
+        if (commanderPoolMode === 'prefire') {
+          queryParts.push('date<=rna');
+        }
+      }
+
+      if (activeToggles.length > 0) {
+        if (activeToggles.length === 1 && hasColorless) {
+          queryParts.push('id:c');
+        } else if (colored.length > 0) {
+          const colStr = colored.join('').toLowerCase();
+          if (matchAllColors) {
+            queryParts.push(`id>=${colStr} id<=${colStr}`);
+          } else {
+            if (!hasColorless) {
+              queryParts.push(`id<=${colStr} -id:c`);
+            } else {
+              queryParts.push(`id<=${colStr}`);
+            }
+          }
+        }
+      }
+
+      const resultsGrid = document.getElementById('results-grid');
+      const emptyState = document.getElementById('empty-state');
+      const isMobile = window.innerWidth <= 768;
+
+      if (!isMobile) {
+        resultsGrid.innerHTML = '';
+        resultsGrid.style.display = 'grid';
+        loadMoreWrap.style.display = 'none';
+        emptyState.style.display = 'none';
+        showProgressBar('Rolling random commander...');
+      }
+
+      const randomUrl = `https://api.scryfall.com/cards/random?q=${encodeURIComponent(queryParts.join(' '))}`;
+
+      try {
+        if (!isMobile) updateProgressBar(50);
+        const response = await fetch(randomUrl);
+        if (!isMobile) updateProgressBar(85);
+        const card = await response.json();
+
+        if (response.status === 404 || !card || card.object !== 'card') {
+          if (!isMobile) {
+            hideProgressBar();
+            emptyState.style.display = 'block';
+            emptyState.textContent = 'No matching commanders found for current filters.';
+          }
+          return;
+        }
+
+        if (!response.ok) {
+          if (!isMobile) {
+            hideProgressBar();
+            emptyState.style.display = 'block';
+            emptyState.textContent = card.details || 'Error querying Scryfall API.';
+          }
+          return;
+        }
+
+        if (isMobile) {
+          renderMobileRandomCommander(card);
+        } else {
+          updateProgressBar(100);
+          setTimeout(hideProgressBar, 200);
+          emptyState.style.display = 'none';
+          renderSingleRandomCommander(card);
+        }
+      } catch (err) {
+        if (!isMobile) {
+          hideProgressBar();
+          emptyState.style.display = 'block';
+          emptyState.textContent = `Error: ${err.message}`;
+        }
+      }
+    }
+
+    function renderMobileRandomCommander(card) {
+      let faces = [];
+      if (card.card_faces && card.card_faces.length > 1 && card.card_faces[0].image_uris) {
+        faces = card.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
+      } else if (card.image_uris?.normal) {
+        faces = [card.image_uris.normal];
+      }
+      if (faces.length === 0) return;
+
+      let manaCost = card.mana_cost;
+      if (!manaCost && card.card_faces && card.card_faces.length > 0) {
+        manaCost = card.card_faces.map(f => f.mana_cost).filter(Boolean).join(' // ');
+      }
+      manaCost = manaCost || '';
+      const cmc = (typeof card.cmc === 'number') ? card.cmc : parseCmcFromManaCost(manaCost);
+
+      mobileRandomImg.src = faces[0];
+      mobileRandomImg.dataset.faceIndex = "0";
+
+      if (faces.length > 1) {
+        mobileRandomImg.onclick = () => {
+          let idx = parseInt(mobileRandomImg.dataset.faceIndex, 10);
+          idx = (idx + 1) % faces.length;
+          mobileRandomImg.dataset.faceIndex = idx;
+          mobileRandomImg.src = faces[idx];
+        };
+      } else {
+        mobileRandomImg.onclick = null;
+      }
+
+      btnMobileRandomizeAgain.onclick = () => executeRandomCommander();
+
+      if (isPartnerSearchMode) {
+        btnMobileSelectCommander.textContent = '★ Select Partner';
+        btnMobileSelectCommander.onclick = () => {
+          mobileRandomOverlay.classList.remove('open');
+          selectPartner(card, faces, manaCost, cmc);
+        };
+      } else {
+        btnMobileSelectCommander.textContent = '★ Select Commander';
+        btnMobileSelectCommander.onclick = () => {
+          mobileRandomOverlay.classList.remove('open');
+          selectCommander(card, faces, manaCost, cmc);
+        };
+      }
+
+      mobileRandomOverlay.classList.add('open');
+    }
+
+    function renderSingleRandomCommander(card) {
+      const resultsGrid = document.getElementById('results-grid');
+      resultsGrid.innerHTML = '';
+      resultsGrid.style.display = 'block';
+      loadMoreWrap.style.display = 'none';
+
+      let faces = [];
+      if (card.card_faces && card.card_faces.length > 1 && card.card_faces[0].image_uris) {
+        faces = card.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
+      } else if (card.image_uris?.normal) {
+        faces = [card.image_uris.normal];
+      }
+      if (faces.length === 0) return;
+
+      let manaCost = card.mana_cost;
+      if (!manaCost && card.card_faces && card.card_faces.length > 0) {
+        manaCost = card.card_faces.map(f => f.mana_cost).filter(Boolean).join(' // ');
+      }
+      manaCost = manaCost || '';
+
+      const cmc = (typeof card.cmc === 'number') ? card.cmc : parseCmcFromManaCost(manaCost);
+
+      const stage = document.createElement('div');
+      stage.className = 'random-commander-stage';
+
+      const randomizeAgainBtn = document.createElement('button');
+      randomizeAgainBtn.type = 'button';
+      randomizeAgainBtn.className = 'btn-randomize-again';
+      randomizeAgainBtn.textContent = '↺ Randomize Again?';
+      randomizeAgainBtn.onclick = () => executeRandomCommander();
+
+      const cardItem = document.createElement('div');
+      cardItem.className = 'featured-random-card';
+
+      const img = document.createElement('img');
+      img.src = faces[0];
+      img.alt = card.name;
+      img.loading = 'lazy';
+      img.dataset.faceIndex = "0";
+
+      if (faces.length > 1) {
+        img.style.cursor = 'pointer';
+        img.title = 'Click to flip card face';
+        img.onclick = () => {
+          let idx = parseInt(img.dataset.faceIndex, 10);
+          idx = (idx + 1) % faces.length;
+          img.dataset.faceIndex = idx;
+          img.src = faces[idx];
+        };
+      }
+
+      const actionWrap = document.createElement('div');
+      actionWrap.className = 'card-actions';
+
+      if (isPartnerSearchMode) {
+        const selectPartnerBtn = document.createElement('button');
+        selectPartnerBtn.className = 'btn-set-commander';
+        selectPartnerBtn.textContent = '★ Select Partner';
+        selectPartnerBtn.onclick = () => selectPartner(card, faces, manaCost, cmc);
+        actionWrap.appendChild(selectPartnerBtn);
+      } else {
+        const selectCmdrBtn = document.createElement('button');
+        selectCmdrBtn.className = 'btn-set-commander';
+        selectCmdrBtn.textContent = '★ Select Commander';
+        selectCmdrBtn.onclick = () => selectCommander(card, faces, manaCost, cmc);
+        actionWrap.appendChild(selectCmdrBtn);
+      }
+
+      cardItem.appendChild(img);
+      cardItem.appendChild(actionWrap);
+
+      stage.appendChild(randomizeAgainBtn);
+      stage.appendChild(cardItem);
+
+      resultsGrid.appendChild(stage);
+    }
+
+    function renderResults(cards, append = false) {
+      const resultsGrid = document.getElementById('results-grid');
+      resultsGrid.style.display = 'grid';
+      if (!append) {
+        resultsGrid.innerHTML = '';
+      }
+
+      cards.forEach(card => {
+        const el = createCardElement(card);
+        if (el) resultsGrid.appendChild(el);
+      });
+    }
+
+    function syncSearchDeckState() {
+      document.querySelectorAll('.btn-add').forEach(addBtn => {
+        const cardName = addBtn.dataset.cardName;
+        if (!cardName) return;
+
+        if (deck[cardName]) {
+          addBtn.textContent = 'In Deck';
+          addBtn.classList.add('in-deck');
+          addBtn.disabled = true;
+          addBtn.onclick = null;
+        } else {
+          addBtn.textContent = '+ Add to Deck';
+          addBtn.classList.remove('in-deck');
+          addBtn.disabled = false;
+
+          let faces = [];
+          try {
+            faces = JSON.parse(addBtn.dataset.cardFaces || '[]');
+          } catch (e) {}
+
+          const manaCost = addBtn.dataset.cardManaCost || '';
+          const cmc = parseFloat(addBtn.dataset.cardCmc || '0');
+          const typeLine = addBtn.dataset.cardTypeLine || '';
+
+          addBtn.onclick = () => addToDeck(cardName, faces, manaCost, cmc, typeLine);
+        }
+      });
+    }
+
+    function selectCommander(card, faces, manaCost, cmc) {
+      const partnerInfo = detectPartner(card);
+
+      const primaryCmdr = {
+        name: card.name,
+        faces: faces || [],
+        mana_cost: manaCost || '',
+        color_identity: card.color_identity || [],
+        type_line: card.type_line || '',
+        cmc: (typeof cmc === 'number') ? cmc : parseCmcFromManaCost(manaCost),
+        partnerInfo: partnerInfo
+      };
+
+      if (partnerInfo) {
+        const wantPartner = window.confirm(`"${card.name}" has ${partnerInfo.type}.\n\nWould you like to search for and select its partner commander?`);
+        if (wantPartner) {
+          clearSearchInputs();
+          commanders = [primaryCmdr];
+          localStorage.setItem('prefire_commanders', JSON.stringify(commanders));
+
+          staplesRawCardsCache = {};
+          edhrecRawCardsCache = {};
+
+          isPartnerSearchMode = true;
+          isCommanderSearchMode = true;
+          activePartnerQuery = `${partnerInfo.query} -!"${primaryCmdr.name}"`;
+          activePartnerType = partnerInfo.type;
+
+          updateModeLabel();
+          renderCommander();
+          executeSearch();
+          if (window.innerWidth <= 768) {
+            setMobileTab('search');
+          }
+          return;
+        }
+      }
+
+      commanders = [primaryCmdr];
+      localStorage.setItem('prefire_commanders', JSON.stringify(commanders));
+
+      staplesRawCardsCache = {};
+      edhrecRawCardsCache = {};
+
+      setCommanderSearchMode(false);
+      setEdhrecButtonState(false);
+      setStaplesButtonState(false);
+
+      const resultsGrid = document.getElementById('results-grid');
+      const emptyState = document.getElementById('empty-state');
+      resultsGrid.style.display = 'grid';
+      resultsGrid.innerHTML = '';
+      loadMoreWrap.style.display = 'none';
+      hideProgressBar();
+      emptyState.style.display = 'block';
+      emptyState.textContent = `Commander set to "${card.name}". Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).`;
+
+      renderCommander();
+      saveAndRenderDeck();
+    }
+
+    function selectPartner(card, faces, manaCost, cmc) {
+      const partnerCmdr = {
+        name: card.name,
+        faces: faces || [],
+        mana_cost: manaCost || '',
+        color_identity: card.color_identity || [],
+        type_line: card.type_line || '',
+        cmc: (typeof cmc === 'number') ? cmc : parseCmcFromManaCost(manaCost)
+      };
+
+      commanders.push(partnerCmdr);
+      localStorage.setItem('prefire_commanders', JSON.stringify(commanders));
+
+      staplesRawCardsCache = {};
+      edhrecRawCardsCache = {};
+
+      setCommanderSearchMode(false);
+      setEdhrecButtonState(false);
+      setStaplesButtonState(false);
+
+      const resultsGrid = document.getElementById('results-grid');
+      const emptyState = document.getElementById('empty-state');
+      resultsGrid.style.display = 'grid';
+      resultsGrid.innerHTML = '';
+      loadMoreWrap.style.display = 'none';
+      hideProgressBar();
+      emptyState.style.display = 'block';
+      emptyState.textContent = `Partner set to "${card.name}". Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).`;
+
+      renderCommander();
+      saveAndRenderDeck();
+    }
+
+    function triggerPartnerSearchForExisting() {
+      if (commanders.length !== 1 || !commanders[0].partnerInfo) return;
+      clearSearchInputs();
+      setEdhrecButtonState(false);
+      setStaplesButtonState(false);
+      const partnerInfo = commanders[0].partnerInfo;
+      isPartnerSearchMode = true;
+      isCommanderSearchMode = true;
+      activePartnerQuery = `${partnerInfo.query} -!"${commanders[0].name}"`;
+      activePartnerType = partnerInfo.type;
+
+      updateModeLabel();
+      renderCommander();
+      executeSearch();
+      if (window.innerWidth <= 768) {
+        setMobileTab('search');
+      }
+    }
+
+    function handleCardEntryClick(name, targetEl, faces) {
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        showPreview(targetEl, name, faces);
+      } else {
+        flipCard(name, targetEl);
+      }
+    }
+
+    function renderCommander() {
+      const container = document.getElementById('commander-container');
+      const containerAuto = document.getElementById('commander-container-autobuild');
+      const changeBtn = document.getElementById('btn-change-commander');
+      const labelText = document.getElementById('commander-label-text');
+      const autoBuildBtn = document.getElementById('btn-autobuild-trigger');
+      
+      container.innerHTML = '';
+      if (containerAuto) containerAuto.innerHTML = '';
+
+      labelText.textContent = commanders.length > 1 ? 'Commanders' : 'Commander';
+
+      if (commanders.length === 0) {
+        changeBtn.style.display = 'none';
+        if (autoBuildBtn) autoBuildBtn.disabled = true;
+
+        const chooseBtn = document.createElement('button');
+        chooseBtn.type = 'button';
+        chooseBtn.className = 'btn-choose-commander' + (isCommanderSearchMode ? ' active' : '');
+        chooseBtn.textContent = isCommanderSearchMode ? 'Cancel Commander Search' : 'Choose a Commander';
+        chooseBtn.onclick = () => {
+          if (isCommanderSearchMode) {
+            setCommanderSearchMode(false);
+            const resultsGrid = document.getElementById('results-grid');
+            const emptyState = document.getElementById('empty-state');
+            resultsGrid.style.display = 'grid';
+            resultsGrid.innerHTML = '';
+            loadMoreWrap.style.display = 'none';
+            hideProgressBar();
+            emptyState.style.display = 'block';
+            emptyState.textContent = 'Commander search canceled. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
+          } else {
+            clearSearchInputs();
+            setCommanderSearchMode(true);
+            executeSearch();
+            if (window.innerWidth <= 768) {
+              setMobileTab('search');
+            }
+          }
+        };
+        container.appendChild(chooseBtn);
+        return;
+      }
+
+      if (autoBuildBtn) autoBuildBtn.disabled = false;
+      changeBtn.style.display = 'inline-block';
+      changeBtn.textContent = (isCommanderSearchMode || isPartnerSearchMode) ? 'Cancel' : 'Change Commander?';
+      changeBtn.onclick = () => {
+        if (isCommanderSearchMode || isPartnerSearchMode) {
+          setCommanderSearchMode(false);
+          const resultsGrid = document.getElementById('results-grid');
+          const emptyState = document.getElementById('empty-state');
+          resultsGrid.style.display = 'grid';
+          resultsGrid.innerHTML = '';
+          loadMoreWrap.style.display = 'none';
+          hideProgressBar();
+          emptyState.style.display = 'block';
+          emptyState.textContent = 'Search closed. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
+        } else {
+          clearSearchInputs();
+          commanders = [];
+          localStorage.removeItem('prefire_commanders');
+          staplesRawCardsCache = {};
+          edhrecRawCardsCache = {};
+          setEdhrecButtonState(false);
+          setStaplesButtonState(false);
+          setCommanderSearchMode(true);
+          executeSearch();
+          if (window.innerWidth <= 768) {
+            setMobileTab('search');
+          }
+        }
+      };
+
+      const wrap = document.createElement('div');
+      wrap.className = 'commander-list-wrap';
+
+      commanders.forEach(cmdr => {
+        const row = document.createElement('div');
+        row.className = 'deck-entry commander-entry';
+        row.dataset.cardName = cmdr.name;
+
+        row.addEventListener('mouseenter', () => {
+          if (window.innerWidth > 768) showPreview(row, cmdr.name, cmdr.faces);
+        });
+        row.addEventListener('mouseleave', () => {
+          if (window.innerWidth > 768) hidePreview();
+        });
+
+        row.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (isCommanderSearchMode || isPartnerSearchMode) {
+            setCommanderSearchMode(false);
+            const resultsGrid = document.getElementById('results-grid');
+            const emptyState = document.getElementById('empty-state');
+            resultsGrid.style.display = 'grid';
+            resultsGrid.innerHTML = '';
+            loadMoreWrap.style.display = 'none';
+            hideProgressBar();
+            emptyState.style.display = 'block';
+            emptyState.textContent = 'Search closed. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
+            return;
+          }
+          handleCardEntryClick(cmdr.name, row, cmdr.faces);
+        });
+
+        const contentWrap = document.createElement('div');
+        contentWrap.className = 'deck-entry-content';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'deck-entry-name';
+        nameSpan.textContent = cmdr.name;
+        nameSpan.title = (isCommanderSearchMode || isPartnerSearchMode) ? `${cmdr.name} (Click to close search)` : cmdr.name;
+
+        const manaSpan = createManaCostElement(cmdr.mana_cost);
+
+        contentWrap.appendChild(nameSpan);
+        contentWrap.appendChild(manaSpan);
+        row.appendChild(contentWrap);
+        wrap.appendChild(row);
+      });
+
+      if (commanders.length === 1 && commanders[0].partnerInfo && !isPartnerSearchMode) {
+        const addPartnerBtn = document.createElement('button');
+        addPartnerBtn.type = 'button';
+        addPartnerBtn.className = 'btn-add-partner-shortcut';
+        addPartnerBtn.textContent = `+ Add Partner (${commanders[0].partnerInfo.type})`;
+        addPartnerBtn.onclick = triggerPartnerSearchForExisting;
+        wrap.appendChild(addPartnerBtn);
+      }
+
+      container.appendChild(wrap);
+      if (containerAuto) containerAuto.appendChild(wrap.cloneNode(true));
+    }
+
+    function addToDeck(name, faces, manaCost, cmc, typeLine = '') {
+      const cardCmc = (typeof cmc === 'number') ? cmc : parseCmcFromManaCost(manaCost);
+      if (!deck[name]) {
+        deck[name] = { 
+          count: 1, 
+          faces: faces || [], 
+          mana_cost: manaCost || '', 
+          cmc: cardCmc,
+          type_line: typeLine || ''
+        };
+      }
+      saveAndRenderDeck();
+      syncSearchDeckState();
+      renderAutobuildCanvas();
+    }
+
+    function recordRecentlyRemoved(name, faces, manaCost, cmc, typeLine = '') {
+      const cardCmc = (typeof cmc === 'number') ? cmc : parseCmcFromManaCost(manaCost);
+      recentlyRemoved = [{ name, faces: faces || [], mana_cost: manaCost || '', cmc: cardCmc, type_line: typeLine || '' }, ...recentlyRemoved.filter(c => c.name !== name)].slice(0, 200);
+      localStorage.setItem('prefire_removed', JSON.stringify(recentlyRemoved));
+      renderRecentlyRemoved();
+    }
+
+    function restoreFromRemoved(name, faces, manaCost, cmc, typeLine = '') {
+      addToDeck(name, faces, manaCost, cmc, typeLine);
+      recentlyRemoved = recentlyRemoved.filter(c => c.name !== name);
+      localStorage.setItem('prefire_removed', JSON.stringify(recentlyRemoved));
+      renderRecentlyRemoved();
+    }
+
+    function updateQuantity(name, change) {
+      if (!deck[name]) return;
+      const currentFaces = deck[name].faces;
+      const currentMana = deck[name].mana_cost || '';
+      const currentCmc = deck[name].cmc;
+      const currentType = deck[name].type_line || '';
+      deck[name].count += change;
+      if (deck[name].count <= 0) {
+        recordRecentlyRemoved(name, currentFaces, currentMana, currentCmc, currentType);
+        delete deck[name];
+        hidePreview();
+      }
+      saveAndRenderDeck();
+      syncSearchDeckState();
+      renderAutobuildCanvas();
+    }
+
+    function positionPreview(targetElement) {
+      if (window.innerWidth <= 768) {
+        previewWrapEl.style.transform = 'translateX(-50%)';
+        previewWrapEl.style.left = '50%';
+        previewWrapEl.style.top = '28px';
+        return;
+      }
+
+      previewWrapEl.style.transform = 'none';
+      const rowRect = targetElement.getBoundingClientRect();
+      const previewWidth = 240;
+      const previewHeight = 335;
+
+      let leftPos = rowRect.left - previewWidth - 12;
+      if (leftPos < 10) {
+        leftPos = rowRect.right + 12;
+      }
+
+      let topPos = rowRect.top - 40;
+      if (topPos + previewHeight > window.innerHeight - 10) {
+        topPos = window.innerHeight - previewHeight - 10;
+      }
+      if (topPos < 10) topPos = 10;
+
+      previewWrapEl.style.left = `${leftPos}px`;
+      previewWrapEl.style.top = `${topPos}px`;
+    }
+
+    function getDirectScryfallImageUrl(name) {
+      const frontName = name.split('//')[0].trim();
+      return `https://api.scryfall.com/cards/named?exact=${encodeURIComponent(frontName)}&format=image&version=normal`;
+    }
+
+    async function ensureCardData(name, cardRef) {
+      const needsFaces = !cardRef || !cardRef.faces || cardRef.faces.length <= 1;
+      const needsMana = !cardRef || !cardRef.mana_cost;
+      const needsCmc = !cardRef || typeof cardRef.cmc !== 'number';
+      const needsPartner = !cardRef || !cardRef.partnerInfo;
+      const needsId = !cardRef || !cardRef.color_identity;
+      const needsType = !cardRef || !cardRef.type_line;
+
+      if (!needsFaces && !needsMana && !needsCmc && !needsPartner && !needsId && !needsType) return cardRef.faces;
+
+      try {
+        const res = await fetch(`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(name)}`);
+        if (res.ok) {
+          const data = await res.json();
+          let updated = false;
+
+          let mc = data.mana_cost;
+          if (!mc && data.card_faces && data.card_faces.length > 0) {
+            mc = data.card_faces.map(f => f.mana_cost).filter(Boolean).join(' // ');
+          }
+          if (mc && cardRef && !cardRef.mana_cost) {
+            cardRef.mana_cost = mc;
+            updated = true;
+          }
+
+          if (data.color_identity && cardRef && !cardRef.color_identity) {
+            cardRef.color_identity = data.color_identity;
+            updated = true;
+          }
+
+          if (data.type_line && cardRef && !cardRef.type_line) {
+            cardRef.type_line = data.type_line;
+            updated = true;
+          }
+
+          if (typeof data.cmc === 'number' && cardRef && cardRef.cmc !== data.cmc) {
+            cardRef.cmc = data.cmc;
+            updated = true;
+          }
+
+          if (!cardRef.partnerInfo) {
+            const pInfo = detectPartner(data);
+            if (pInfo) {
+              cardRef.partnerInfo = pInfo;
+              updated = true;
+            }
+          }
+
+          if (data.card_faces && data.card_faces.length > 1 && data.card_faces[0].image_uris) {
+            const fetchedFaces = data.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
+            if (fetchedFaces.length > 1 && cardRef) {
+              cardRef.faces = fetchedFaces;
+              updated = true;
+            }
+          }
+
+          if (updated) {
+            if (commanders.some(c => c.name === name)) {
+              localStorage.setItem('prefire_commanders', JSON.stringify(commanders));
+              renderCommander();
+            }
+            if (deck[name]) {
+              saveAndRenderDeck();
+            }
+            if (recentlyRemoved.some(c => c.name === name)) {
+              localStorage.setItem('prefire_removed', JSON.stringify(recentlyRemoved));
+            }
+          }
+
+          if (cardRef && cardRef.faces && cardRef.faces.length > 1) {
+            return cardRef.faces;
+          }
+        }
+      } catch (err) {}
+
+      return (cardRef && cardRef.faces && cardRef.faces.length > 0)
+        ? cardRef.faces
+        : [getDirectScryfallImageUrl(name)];
+    }
+
+    function showPreview(targetEl, name, faces) {
+      const cmdrMatch = commanders.find(c => c.name === name);
+      let cardFaces = (faces && faces.length > 0)
+        ? faces
+        : (deck[name]?.faces?.length > 0 ? deck[name].faces : (cmdrMatch?.faces?.length > 0 ? cmdrMatch.faces : []));
+
+      const resolvedFaces = (cardFaces && cardFaces.length > 0)
+        ? cardFaces
+        : [getDirectScryfallImageUrl(name)];
+
+      currentPreview = {
+        name: name,
+        faces: resolvedFaces,
+        faceIndex: 0
+      };
+
+      previewEl.src = resolvedFaces[0];
+      positionPreview(targetEl);
+      previewWrapEl.style.display = 'block';
+
+      if (resolvedFaces.length <= 1) {
+        const ref = cmdrMatch || (deck[name] || recentlyRemoved.find(c => c.name === name));
+        ensureCardData(name, ref).then(updated => {
+          if (currentPreview.name === name && updated && updated.length > 1) {
+            currentPreview.faces = updated;
+            previewEl.src = updated[currentPreview.faceIndex || 0];
+          }
+        });
+      }
+    }
+
+    async function flipCard(name, targetEl) {
+      const cmdrMatch = commanders.find(c => c.name === name);
+      let cardRef = cmdrMatch || (deck[name] || recentlyRemoved.find(c => c.name === name));
+      let cardFaces = (cardRef && cardRef.faces && cardRef.faces.length > 0) ? cardRef.faces : currentPreview.faces;
+
+      if (!cardFaces || cardFaces.length <= 1) {
+        cardFaces = await ensureCardData(name, cardRef);
+      }
+
+      if (currentPreview.name !== name || previewWrapEl.style.display === 'none') {
+        currentPreview = {
+          name: name,
+          faces: cardFaces,
+          faceIndex: 0
+        };
+      } else {
+        currentPreview.faces = cardFaces;
+      }
+
+      if (currentPreview.faces.length > 1) {
+        currentPreview.faceIndex = (currentPreview.faceIndex + 1) % currentPreview.faces.length;
+        previewEl.src = currentPreview.faces[currentPreview.faceIndex];
+      }
+
+      positionPreview(targetEl);
+      previewWrapEl.style.display = 'block';
+    }
+
+    function hidePreview() {
+      previewWrapEl.style.display = 'none';
+      previewEl.src = '';
+      currentPreview = { name: '', faces: [], faceIndex: 0 };
+    }
+
+    function renderRecentlyRemoved() {
+      const removedListEl = document.getElementById('removed-list');
+      const removedCountEl = document.getElementById('removed-count');
+
+      removedListEl.innerHTML = '';
+      removedCountEl.textContent = `${recentlyRemoved.length}/200`;
+
+      if (recentlyRemoved.length === 0) {
+        removedListEl.innerHTML = '<div style="color: var(--text-muted); font-size: 13px; text-align: center; margin-top: 30px;">No removed cards</div>';
+        return;
+      }
+
+      recentlyRemoved.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'deck-entry';
+        row.dataset.cardName = item.name;
+
+        row.addEventListener('mouseenter', () => {
+          if (window.innerWidth > 768) showPreview(row, item.name, item.faces);
+        });
+        row.addEventListener('mouseleave', () => {
+          if (window.innerWidth > 768) hidePreview();
+        });
+
+        row.addEventListener('click', (e) => {
+          if (e.target.closest('.btn-readd')) return;
+          e.stopPropagation();
+          handleCardEntryClick(item.name, row, item.faces);
+        });
+
+        const contentWrap = document.createElement('div');
+        contentWrap.className = 'deck-entry-content';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'deck-entry-name';
+        nameSpan.textContent = item.name;
+        nameSpan.title = item.name;
+
+        const manaSpan = createManaCostElement(item.mana_cost);
+
+        contentWrap.appendChild(nameSpan);
+        contentWrap.appendChild(manaSpan);
+
+        const readdBtn = document.createElement('button');
+        readdBtn.className = 'btn-readd';
+        readdBtn.textContent = '+ Re-add';
+        readdBtn.onclick = (e) => {
+          e.stopPropagation();
+          restoreFromRemoved(item.name, item.faces, item.mana_cost, item.cmc, item.type_line);
+        };
+
+        row.appendChild(contentWrap);
+        row.appendChild(readdBtn);
+        removedListEl.appendChild(row);
+      });
+    }
+
+    function getSortedCardNames() {
+      return Object.keys(deck).sort((a, b) => {
+        const itemA = deck[a];
+        const itemB = deck[b];
+        const cmcA = (itemA && typeof itemA.cmc === 'number') ? itemA.cmc : parseCmcFromManaCost(itemA?.mana_cost);
+        const cmcB = (itemB && typeof itemB.cmc === 'number') ? itemB.cmc : parseCmcFromManaCost(itemB?.mana_cost);
+
+        if (cmcA !== cmcB) {
+          return cmcA - cmcB;
+        }
+        return a.localeCompare(b);
+      });
+    }
+
+    function renderDeckListToContainer(containerEl) {
+      containerEl.innerHTML = '';
+      const cardNames = getSortedCardNames();
+
+      if (cardNames.length === 0) {
+        containerEl.innerHTML = '<div style="color: var(--text-muted); font-size: 13px; text-align: center; margin-top: 30px;">Deck is empty</div>';
+        return 0;
+      }
+
+      let totalCards = 0;
+      cardNames.forEach(name => {
+        const item = deck[name];
+        totalCards += item.count;
+
+        const row = document.createElement('div');
+        row.className = 'deck-entry';
+        row.dataset.cardName = name;
+
+        row.addEventListener('mouseenter', () => {
+          if (window.innerWidth > 768) showPreview(row, name, item.faces);
+        });
+        row.addEventListener('mouseleave', () => {
+          if (window.innerWidth > 768) hidePreview();
+        });
+
+        row.addEventListener('click', (e) => {
+          if (e.target.closest('.deck-controls')) return;
+          e.stopPropagation();
+          handleCardEntryClick(name, row, item.faces);
+        });
+
+        const contentWrap = document.createElement('div');
+        contentWrap.className = 'deck-entry-content';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'deck-entry-name';
+        nameSpan.textContent = `${item.count}x ${name}`;
+        nameSpan.title = `${item.count}x ${name}`;
+
+        const manaSpan = createManaCostElement(item.mana_cost);
+
+        contentWrap.appendChild(nameSpan);
+        contentWrap.appendChild(manaSpan);
+
+        const controls = document.createElement('div');
+        controls.className = 'deck-controls';
+
+        const decBtn = document.createElement('button');
+        decBtn.className = 'btn-qty';
+        decBtn.textContent = '-';
+        decBtn.onclick = (e) => {
+          e.stopPropagation();
+          updateQuantity(name, -1);
+        };
+
+        const incBtn = document.createElement('button');
+        incBtn.className = 'btn-qty';
+        incBtn.textContent = '+';
+        incBtn.onclick = (e) => {
+          e.stopPropagation();
+          updateQuantity(name, 1);
+        };
+
+        controls.appendChild(decBtn);
+        controls.appendChild(incBtn);
+
+        row.appendChild(contentWrap);
+        row.appendChild(controls);
+        containerEl.appendChild(row);
+      });
+
+      return totalCards;
+    }
+
+    function saveAndRenderDeck() {
+      localStorage.setItem('prefire_deck', JSON.stringify(deck));
+      const deckListEl = document.getElementById('deck-list');
+      const countEl = document.getElementById('deck-count');
+      const deckListAuto = document.getElementById('deck-list-autobuild');
+      const countElAuto = document.getElementById('deck-count-autobuild');
+      const autobuildCountBadge = document.getElementById('autobuild-count-badge');
+
+      const totalCards = renderDeckListToContainer(deckListEl);
+      if (deckListAuto) renderDeckListToContainer(deckListAuto);
+
+      const cmdrLabel = commanders.length > 0 ? ` (+${commanders.length} Commander${commanders.length === 1 ? '' : 's'})` : '';
+      countEl.textContent = `${totalCards} Cards${cmdrLabel}`;
+      if (countElAuto) countElAuto.textContent = `${totalCards} Cards${cmdrLabel}`;
+      if (autobuildCountBadge) autobuildCountBadge.textContent = `${totalCards + commanders.length} Cards`;
+      
+      updateMobileViewToggleButton();
+    }
+
+    document.getElementById('btn-export').addEventListener('click', () => {
+      exportDeckToClipboard(document.getElementById('btn-export'));
+    });
+
+    document.getElementById('btn-export-autobuild').addEventListener('click', () => {
+      exportDeckToClipboard(document.getElementById('btn-export-autobuild'));
+    });
+
+    function exportDeckToClipboard(btnElement) {
+      const cardNames = getSortedCardNames();
+      if (commanders.length === 0 && cardNames.length === 0) return;
+
+      let exportLines = [];
+      if (commanders.length > 0) {
+        exportLines.push(`// Commander${commanders.length > 1 ? 's' : ''}`);
+        commanders.forEach(cmdr => {
+          exportLines.push(`1 ${cmdr.name}`);
+        });
+        exportLines.push('');
+        exportLines.push('// Deck');
+      }
+
+      cardNames.forEach(name => {
+        exportLines.push(`${deck[name].count} ${name}`);
+      });
+
+      const exportText = exportLines.join('\n');
+      navigator.clipboard.writeText(exportText).then(() => {
+        const originalText = btnElement.textContent;
+        btnElement.textContent = 'Copied to Clipboard!';
+        setTimeout(() => {
+          btnElement.textContent = originalText;
+        }, 1500);
+      });
+    }
+
+    /* -------------------------------------------------------------------------
+       AUTO-BUILD DECK INTEGRATION & SHINGLED CANVAS RENDERING
+    -------------------------------------------------------------------------- */
+    let generatorInstance = null;
+    let activeAutobuildView = 'cmc';
+    let loadedCommanderThemesData = null;
+
+    const autobuildModal = document.getElementById('autobuild-modal');
+    const btnCloseAutobuildModal = document.getElementById('btn-close-autobuild-modal');
+    const autobuildThemeSelect = document.getElementById('autobuild-theme-select');
+    const autobuildCmdrImg = document.getElementById('autobuild-cmdr-img');
+    const btnExecuteAutobuild = document.getElementById('btn-execute-autobuild');
+    const autobuildStatusText = document.getElementById('autobuild-status-text');
+    const autobuildScreen = document.getElementById('autobuild-screen');
+    const btnBackToManual = document.getElementById('btn-back-to-manual');
+
+    function getDeckGenerator() {
+      if (!generatorInstance && window.PrefireDeckGenerator) {
+        generatorInstance = new window.PrefireDeckGenerator();
+      }
+      return generatorInstance;
+    }
+
+    document.getElementById('btn-autobuild-trigger').addEventListener('click', async () => {
+      if (commanders.length === 0) return;
+      const gen = getDeckGenerator();
+      if (!gen) {
+        alert("Generator script not loaded yet.");
+        return;
+      }
+
+      const primary = commanders[0];
+      const secondary = commanders[1] || null;
+      const slug = gen.getCommanderSlug(primary.name, secondary ? secondary.name : null);
+
+      autobuildCmdrImg.src = (primary.faces && primary.faces[0]) || getDirectScryfallImageUrl(primary.name);
+      autobuildThemeSelect.innerHTML = '<option value="">Loading available themes...</option>';
+      autobuildStatusText.textContent = '';
+      btnExecuteAutobuild.disabled = true;
+
+      autobuildModal.classList.add('open');
+
+      try {
+        loadedCommanderThemesData = await gen.loadCommanderThemes(slug);
+        autobuildThemeSelect.innerHTML = '';
+
+        const defaultOption = document.createElement('option');
+        defaultOption.value = 'default';
+        defaultOption.textContent = 'Default / High Synergy';
+        autobuildThemeSelect.appendChild(defaultOption);
+
+        if (loadedCommanderThemesData.themes) {
+          Object.keys(loadedCommanderThemesData.themes).forEach(tSlug => {
+            const tObj = loadedCommanderThemesData.themes[tSlug];
+            const opt = document.createElement('option');
+            opt.value = tSlug;
+            opt.textContent = `${tObj.label || tSlug} (${tObj.count || 0} decks)`;
+            autobuildThemeSelect.appendChild(opt);
+          });
+        }
+
+        btnExecuteAutobuild.disabled = false;
+      } catch (err) {
+        console.error("Theme fetch failed:", err);
+        autobuildThemeSelect.innerHTML = '<option value="default">Default / High Synergy</option>';
+        autobuildStatusText.textContent = 'Using baseline synergy data.';
+        btnExecuteAutobuild.disabled = false;
+      }
+    });
+
+    btnCloseAutobuildModal.addEventListener('click', () => {
+      autobuildModal.classList.remove('open');
+    });
+
+    btnBackToManual.addEventListener('click', () => {
+      autobuildScreen.classList.remove('active');
+    });
+
+    btnExecuteAutobuild.addEventListener('click', async () => {
+      const gen = getDeckGenerator();
+      if (!gen) return;
+
+      btnExecuteAutobuild.disabled = true;
+      autobuildStatusText.textContent = 'Assembling 99-card Pre-FIRE shell...';
+
+      const selectedTheme = autobuildThemeSelect.value;
+      const primary = commanders[0];
+      const secondary = commanders[1] || null;
+
+      try {
+        // Collect catalog metadata from current deck and staples caches
+        const catalog = {};
+        commanders.forEach(c => {
+          catalog[c.name] = { color_identity: c.color_identity, mana_cost: c.mana_cost, cmc: c.cmc, type_line: c.type_line };
+        });
+        Object.keys(deck).forEach(name => {
+          catalog[name] = { mana_cost: deck[name].mana_cost, cmc: deck[name].cmc, type_line: deck[name].type_line };
+        });
+
+        const generatedCards = await gen.generate(primary.name, secondary ? secondary.name : null, selectedTheme, catalog);
+        
+        // Populate deck
+        deck = {};
+        for (const cName of generatedCards) {
+          if (!deck[cName]) {
+            deck[cName] = { count: 1, faces: [getDirectScryfallImageUrl(cName)], mana_cost: '', cmc: 0, type_line: '' };
+          } else {
+            deck[cName].count += 1;
+          }
+        }
+
+        saveAndRenderDeck();
+        syncSearchDeckState();
+
+        autobuildModal.classList.remove('open');
+        document.getElementById('autobuild-deck-title').textContent = `${getActiveDeckTitle()} — ${selectedTheme.toUpperCase()}`;
+        autobuildScreen.classList.add('active');
+
+        // Fetch card metadata in background to ensure accurate CMC/types on shingled view
+        resolveMissingCardData().then(() => {
+          renderAutobuildCanvas();
+        });
+
+        renderAutobuildCanvas();
+
+      } catch (err) {
+        console.error("Auto-build assembly failed:", err);
+        autobuildStatusText.textContent = `Error building deck: ${err.message}`;
+      } finally {
+        btnExecuteAutobuild.disabled = false;
+      }
+    });
+
+    async function resolveMissingCardData() {
+      const names = Object.keys(deck).filter(name => !deck[name].type_line || typeof deck[name].cmc !== 'number');
+      if (names.length === 0) return;
+
+      const chunks = [];
+      for (let i = 0; i < names.length; i += 75) {
+        chunks.push(names.slice(i, i + 75));
+      }
+
+      for (const chunk of chunks) {
+        try {
+          const res = await fetch('https://api.scryfall.com/cards/collection', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ identifiers: chunk.map(n => ({ name: n })) })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            (data.data || []).forEach(card => {
+              if (deck[card.name]) {
+                deck[card.name].cmc = getCardCmc(card);
+                deck[card.name].type_line = card.type_line || '';
+                deck[card.name].mana_cost = card.mana_cost || '';
+                if (card.image_uris?.normal) deck[card.name].faces = [card.image_uris.normal];
+              }
+            });
+          }
+        } catch (e) {}
+      }
+      saveAndRenderDeck();
+    }
+
+    document.querySelectorAll('.autobuild-sort-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.autobuild-sort-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeAutobuildView = btn.dataset.view;
+        renderAutobuildCanvas();
+      });
+    });
+
+    function createShingleCardElement(cardName, zIndex) {
+      const item = deck[cardName] || { faces: [getDirectScryfallImageUrl(cardName)] };
+      const el = document.createElement('div');
+      el.className = 'shingle-card-item';
+      el.style.zIndex = zIndex;
+
+      const img = document.createElement('img');
+      img.src = (item.faces && item.faces[0]) ? item.faces[0] : getDirectScryfallImageUrl(cardName);
+      img.alt = cardName;
+      img.loading = 'lazy';
+
+      el.appendChild(img);
+
+      el.addEventListener('mouseenter', () => {
+        showPreview(el, cardName, item.faces);
+      });
+      el.addEventListener('mouseleave', () => {
+        hidePreview();
+      });
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        handleCardEntryClick(cardName, el, item.faces);
+      });
+
+      return el;
+    }
+
+    function renderAutobuildCanvas() {
+      const canvas = document.getElementById('autobuild-canvas');
+      canvas.innerHTML = '';
+
+      const cardNames = getSortedCardNames();
+      if (cardNames.length === 0) {
+        canvas.innerHTML = '<div style="color: var(--text-muted); text-align: center; margin-top: 50px;">No cards in deck.</div>';
+        return;
+      }
+
+      if (activeAutobuildView === 'cmc') {
+        renderCanvasByCmc(canvas, cardNames);
+      } else if (activeAutobuildView === 'type') {
+        renderCanvasByType(canvas, cardNames);
+      } else if (activeAutobuildView === 'split') {
+        renderCanvasSplit(canvas, cardNames);
+      }
+    }
+
+    function renderCanvasByCmc(canvas, cardNames) {
+      const container = document.createElement('div');
+      container.className = 'shingle-columns-container';
+
+      const cmcBuckets = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
+
+      cardNames.forEach(name => {
+        const item = deck[name];
+        const cmc = Math.min(Math.floor(item.cmc || 0), 6);
+        for (let i = 0; i < (item.count || 1); i++) {
+          cmcBuckets[cmc].push(name);
+        }
+      });
+
+      Object.keys(cmcBuckets).forEach(cmc => {
+        const list = cmcBuckets[cmc];
+        const col = document.createElement('div');
+        col.className = 'shingle-column';
+
+        const header = document.createElement('div');
+        header.className = 'shingle-col-header';
+        header.innerHTML = `<span>CMC ${cmc === '6' ? '6+' : cmc}</span> <span>${list.length}</span>`;
+        col.appendChild(header);
+
+        const stack = document.createElement('div');
+        stack.className = 'shingle-stack';
+
+        list.forEach((name, idx) => {
+          stack.appendChild(createShingleCardElement(name, idx + 1));
+        });
+
+        col.appendChild(stack);
+        container.appendChild(col);
+      });
+
+      canvas.appendChild(container);
+    }
+
+    function renderCanvasByType(canvas, cardNames) {
+      const container = document.createElement('div');
+      container.className = 'shingle-columns-container';
+
+      const typeBuckets = {
+        'Creatures': [],
+        'Instants': [],
+        'Sorceries': [],
+        'Artifacts': [],
+        'Enchantments': [],
+        'Planeswalkers': [],
+        'Lands': []
+      };
+
+      cardNames.forEach(name => {
+        const item = deck[name];
+        const cat = getCardPrimaryType(item);
+        const targetList = typeBuckets[cat] || typeBuckets['Artifacts'];
+        for (let i = 0; i < (item.count || 1); i++) {
+          targetList.push(name);
+        }
+      });
+
+      Object.keys(typeBuckets).forEach(typeKey => {
+        const list = typeBuckets[typeKey];
+        if (list.length === 0) return;
+
+        // Sort internal stack in CMC order
+        list.sort((a, b) => (deck[a].cmc || 0) - (deck[b].cmc || 0));
+
+        const col = document.createElement('div');
+        col.className = 'shingle-column';
+
+        const header = document.createElement('div');
+        header.className = 'shingle-col-header';
+        header.innerHTML = `<span>${typeKey}</span> <span>${list.length}</span>`;
+        col.appendChild(header);
+
+        const stack = document.createElement('div');
+        stack.className = 'shingle-stack';
+
+        list.forEach((name, idx) => {
+          stack.appendChild(createShingleCardElement(name, idx + 1));
+        });
+
+        col.appendChild(stack);
+        container.appendChild(col);
+      });
+
+      canvas.appendChild(container);
+    }
+
+    function renderCanvasSplit(canvas, cardNames) {
+      const splitWrap = document.createElement('div');
+      splitWrap.className = 'split-mode-container';
+
+      const spellsMain = document.createElement('div');
+      spellsMain.className = 'split-main-spells';
+
+      const creaturesSec = document.createElement('div');
+      creaturesSec.className = 'split-section';
+      creaturesSec.innerHTML = '<div class="split-section-header">Creatures</div>';
+
+      const noncreaturesSec = document.createElement('div');
+      noncreaturesSec.className = 'split-section';
+      noncreaturesSec.innerHTML = '<div class="split-section-header">Noncreature Spells</div>';
+
+      const landsSidebar = document.createElement('div');
+      landsSidebar.className = 'split-lands-sidebar';
+      landsSidebar.innerHTML = '<div class="split-section-header">Lands</div>';
+
+      const creatureBuckets = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
+      const noncreatureBuckets = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
+      const landsList = [];
+
+      cardNames.forEach(name => {
+        const item = deck[name];
+        const cat = getCardPrimaryType(item);
+        const cmc = Math.min(Math.floor(item.cmc || 0), 6);
+        const count = item.count || 1;
+
+        for (let i = 0; i < count; i++) {
+          if (cat === 'Lands') {
+            landsList.push(name);
+          } else if (cat === 'Creatures') {
+            creatureBuckets[cmc].push(name);
+          } else {
+            noncreatureBuckets[cmc].push(name);
+          }
+        }
+      });
+
+      // Build creature row
+      const creatureRow = document.createElement('div');
+      creatureRow.className = 'shingle-columns-container';
+      Object.keys(creatureBuckets).forEach(cmc => {
+        const list = creatureBuckets[cmc];
+        const col = document.createElement('div');
+        col.className = 'shingle-column';
+        col.innerHTML = `<div class="shingle-col-header"><span>CMC ${cmc === '6' ? '6+' : cmc}</span><span>${list.length}</span></div>`;
+        const stack = document.createElement('div');
+        stack.className = 'shingle-stack';
+        list.forEach((n, idx) => stack.appendChild(createShingleCardElement(n, idx + 1)));
+        col.appendChild(stack);
+        creatureRow.appendChild(col);
+      });
+      creaturesSec.appendChild(creatureRow);
+
+      // Build noncreature row
+      const noncreatureRow = document.createElement('div');
+      noncreatureRow.className = 'shingle-columns-container';
+      Object.keys(noncreatureBuckets).forEach(cmc => {
+        const list = noncreatureBuckets[cmc];
+        const col = document.createElement('div');
+        col.className = 'shingle-column';
+        col.innerHTML = `<div class="shingle-col-header"><span>CMC ${cmc === '6' ? '6+' : cmc}</span><span>${list.length}</span></div>`;
+        const stack = document.createElement('div');
+        stack.className = 'shingle-stack';
+        list.forEach((n, idx) => stack.appendChild(createShingleCardElement(n, idx + 1)));
+        col.appendChild(stack);
+        noncreatureRow.appendChild(col);
+      });
+      noncreaturesSec.appendChild(noncreatureRow);
+
+      spellsMain.appendChild(creaturesSec);
+      spellsMain.appendChild(noncreaturesSec);
+
+      // Build lands column
+      const landStack = document.createElement('div');
+      landStack.className = 'shingle-stack';
+      landsList.forEach((n, idx) => landStack.appendChild(createShingleCardElement(n, idx + 1)));
+      landsSidebar.appendChild(landStack);
+
+      splitWrap.appendChild(spellsMain);
+      splitWrap.appendChild(landsSidebar);
+      canvas.appendChild(splitWrap);
+    }
+
+    renderCommander();
+    saveAndRenderDeck();
+    renderRecentlyRemoved();
+  </script>
+</body>
+</html>

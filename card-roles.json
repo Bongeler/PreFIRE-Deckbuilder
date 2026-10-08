@@ -1,0 +1,10368 @@
+{
+  "Nantuko Elder": [
+    "ramp"
+  ],
+  "Vedalken Heretic": [
+    "draw"
+  ],
+  "Waterknot": [
+    "removal_creature"
+  ],
+  "Ruthless Knave": [
+    "draw",
+    "ramp"
+  ],
+  "Kalitas, Bloodchief of Ghet": [
+    "removal_creature"
+  ],
+  "Instill Infection": [
+    "draw"
+  ],
+  "Keldon Raider": [
+    "draw"
+  ],
+  "Kindred Discovery": [
+    "draw"
+  ],
+  "Trapjaw Tyrant": [
+    "removal_creature"
+  ],
+  "Thunderherd Migration": [
+    "ramp"
+  ],
+  "Theft of Dreams": [
+    "draw"
+  ],
+  "Deem Worthy": [
+    "draw"
+  ],
+  "Coalition Relic": [
+    "ramp"
+  ],
+  "Solemn Simulacrum": [
+    "draw",
+    "ramp"
+  ],
+  "Talisman of Progress": [
+    "ramp"
+  ],
+  "Krovikan Sorcerer": [
+    "draw"
+  ],
+  "Dakmor Lancer": [
+    "removal_creature"
+  ],
+  "Waste Not": [
+    "draw",
+    "ramp"
+  ],
+  "Spell Contortion": [
+    "draw"
+  ],
+  "Refocus": [
+    "draw"
+  ],
+  "Fracturing Gust": [
+    "removal_noncreature"
+  ],
+  "Divergent Growth": [
+    "ramp"
+  ],
+  "Cruel Ultimatum": [
+    "draw",
+    "removal_creature"
+  ],
+  "Heal": [
+    "draw"
+  ],
+  "Grip of Amnesia": [
+    "draw"
+  ],
+  "Sunbeam Spellbomb": [
+    "draw"
+  ],
+  "Bedlam Reveler": [
+    "draw"
+  ],
+  "Lich's Caress": [
+    "removal_creature"
+  ],
+  "Misfortune's Gain": [
+    "removal_creature"
+  ],
+  "Pir's Whim": [
+    "ramp"
+  ],
+  "Master of the Feast": [
+    "draw"
+  ],
+  "Sphinx's Insight": [
+    "draw"
+  ],
+  "Flooded Shoreline": [
+    "removal_creature"
+  ],
+  "Messenger Falcons": [
+    "draw"
+  ],
+  "Ponder": [
+    "draw"
+  ],
+  "Drag Under": [
+    "draw",
+    "removal_creature"
+  ],
+  "Saltcrusted Steppe": [
+    "ramp"
+  ],
+  "Supreme Verdict": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Moss Diamond": [
+    "ramp"
+  ],
+  "Blighted Woodland": [
+    "ramp"
+  ],
+  "Ulvenwald Captive // Ulvenwald Abomination": [
+    "ramp"
+  ],
+  "Goblin Trashmaster": [
+    "removal_noncreature"
+  ],
+  "Mindblade Render": [
+    "draw"
+  ],
+  "Hixus, Prison Warden": [
+    "removal_creature"
+  ],
+  "Shoreline Salvager": [
+    "draw"
+  ],
+  "Midnight Entourage": [
+    "draw"
+  ],
+  "Catapult Master": [
+    "removal_creature"
+  ],
+  "Chief Engineer": [
+    "ramp"
+  ],
+  "Obelisk of Naya": [
+    "ramp"
+  ],
+  "Research the Deep": [
+    "draw"
+  ],
+  "Engulfing Slagwurm": [
+    "removal_creature"
+  ],
+  "Moonring Mirror": [
+    "draw"
+  ],
+  "Reaver Ambush": [
+    "removal_creature"
+  ],
+  "Inundate": [
+    "removal_creature"
+  ],
+  "Polymorph": [
+    "removal_creature"
+  ],
+  "Sol Grail": [
+    "ramp"
+  ],
+  "Disappear": [
+    "removal_creature"
+  ],
+  "Rakdos, the Showstopper": [
+    "removal_creature"
+  ],
+  "Baffling End": [
+    "removal_creature"
+  ],
+  "Bonds of Quicksilver": [
+    "removal_creature"
+  ],
+  "Hero's Downfall": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Statute of Denial": [
+    "draw"
+  ],
+  "Soratami Mirror-Mage": [
+    "removal_creature"
+  ],
+  "Consuming Sinkhole": [
+    "removal_creature"
+  ],
+  "Lore Weaver": [
+    "draw"
+  ],
+  "Zegana, Utopian Speaker": [
+    "draw"
+  ],
+  "Magister of Worth": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "City of Shadows": [
+    "ramp"
+  ],
+  "Cryptolith Rite": [
+    "ramp"
+  ],
+  "Oran-Rief Recluse": [
+    "removal_creature"
+  ],
+  "Illuminated Folio": [
+    "draw"
+  ],
+  "Saltwater Stalwart": [
+    "draw"
+  ],
+  "Spurnmage Advocate": [
+    "removal_creature"
+  ],
+  "Curator of Mysteries": [
+    "draw"
+  ],
+  "Unexpected Results": [
+    "ramp"
+  ],
+  "Deadly Visit": [
+    "removal_creature"
+  ],
+  "Muse Drake": [
+    "draw"
+  ],
+  "Lay Waste": [
+    "draw"
+  ],
+  "Lotus Bloom": [
+    "ramp"
+  ],
+  "Live Fast": [
+    "draw"
+  ],
+  "Seizan, Perverter of Truth": [
+    "draw"
+  ],
+  "Peace and Quiet": [
+    "removal_noncreature"
+  ],
+  "Devastation": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Stingerfling Spider": [
+    "removal_creature"
+  ],
+  "Bounty Agent": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Carom": [
+    "draw"
+  ],
+  "Pongify": [
+    "removal_creature"
+  ],
+  "Shackles": [
+    "removal_creature"
+  ],
+  "Chart a Course": [
+    "draw"
+  ],
+  "Diabolic Edict": [
+    "removal_creature"
+  ],
+  "River Hoopoe": [
+    "draw"
+  ],
+  "Clear a Path": [
+    "removal_creature"
+  ],
+  "Darksteel Mutation": [
+    "removal_creature"
+  ],
+  "Angelic Shield": [
+    "removal_creature"
+  ],
+  "Silent Assassin": [
+    "removal_creature"
+  ],
+  "Bring Down": [
+    "removal_creature"
+  ],
+  "Elspeth, Sun's Champion": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Tawnos's Coffin": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Unstable Obelisk": [
+    "ramp"
+  ],
+  "Axebane Guardian": [
+    "ramp"
+  ],
+  "Nefarox, Overlord of Grixis": [
+    "removal_creature"
+  ],
+  "Soldevi Machinist": [
+    "ramp"
+  ],
+  "Rapid Hybridization": [
+    "removal_creature"
+  ],
+  "Cabal Stronghold": [
+    "ramp"
+  ],
+  "Urborg Panther": [
+    "removal_creature"
+  ],
+  "Avacyn's Pilgrim": [
+    "ramp"
+  ],
+  "Into Thin Air": [
+    "removal_noncreature"
+  ],
+  "Thought Courier": [
+    "draw"
+  ],
+  "Corpse Augur": [
+    "draw"
+  ],
+  "Youthful Scholar": [
+    "draw"
+  ],
+  "Overload": [
+    "removal_noncreature"
+  ],
+  "Tatyova, Benthic Druid": [
+    "draw"
+  ],
+  "Peppersmoke": [
+    "draw"
+  ],
+  "Slave of Bolas": [
+    "removal_creature"
+  ],
+  "Yoked Plowbeast": [
+    "draw"
+  ],
+  "Sarkhan, Fireblood": [
+    "draw",
+    "ramp"
+  ],
+  "Rain of Rust": [
+    "removal_noncreature"
+  ],
+  "Scholar of Stars": [
+    "draw"
+  ],
+  "Fathom Feeder": [
+    "draw"
+  ],
+  "Cemetery Recruitment": [
+    "draw"
+  ],
+  "Fountain of Cho": [
+    "ramp"
+  ],
+  "Rend Flesh": [
+    "removal_creature"
+  ],
+  "Electrolyze": [
+    "draw"
+  ],
+  "Starke of Rath": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Lace with Moonglove": [
+    "draw"
+  ],
+  "Gaze of Justice": [
+    "removal_creature"
+  ],
+  "Teferi, Temporal Archmage": [
+    "ramp"
+  ],
+  "Blinkmoth Urn": [
+    "ramp"
+  ],
+  "Incubator Drone": [
+    "ramp"
+  ],
+  "Stensia Banquet": [
+    "draw"
+  ],
+  "Goblin Clearcutter": [
+    "ramp"
+  ],
+  "League Guildmage": [
+    "draw"
+  ],
+  "Demolish": [
+    "removal_noncreature"
+  ],
+  "Undead Slayer": [
+    "removal_creature"
+  ],
+  "Mogg Salvage": [
+    "removal_noncreature"
+  ],
+  "Angrath, the Flame-Chained": [
+    "removal_creature"
+  ],
+  "Rune of Protection: Blue": [
+    "draw"
+  ],
+  "Krark-Clan Engineers": [
+    "removal_noncreature"
+  ],
+  "Orzhov Cluestone": [
+    "draw",
+    "ramp"
+  ],
+  "Owl Familiar": [
+    "draw"
+  ],
+  "Apathy": [
+    "removal_creature"
+  ],
+  "Chime of Night": [
+    "removal_creature"
+  ],
+  "Austere Command": [
+    "board_wipe",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Phage the Untouchable": [
+    "removal_creature"
+  ],
+  "Benalish Heralds": [
+    "draw"
+  ],
+  "Dead Drop": [
+    "removal_creature"
+  ],
+  "Sunder from Within": [
+    "removal_noncreature"
+  ],
+  "Wrecking Ball": [
+    "removal_creature"
+  ],
+  "Footbottom Feast": [
+    "draw"
+  ],
+  "Rustmouth Ogre": [
+    "removal_noncreature"
+  ],
+  "Everflowing Chalice": [
+    "ramp"
+  ],
+  "Fungal Plots": [
+    "draw"
+  ],
+  "Keldon Vandals": [
+    "removal_noncreature"
+  ],
+  "Centaur Rootcaster": [
+    "ramp"
+  ],
+  "Razaketh's Rite": [
+    "draw"
+  ],
+  "Parallax Wave": [
+    "removal_creature"
+  ],
+  "Mindstorm Crown": [
+    "draw"
+  ],
+  "Scrap": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Ritual of Steel": [
+    "draw"
+  ],
+  "Goblin Tinkerer": [
+    "removal_noncreature"
+  ],
+  "Pillage": [
+    "removal_noncreature"
+  ],
+  "Treasure Map // Treasure Cove": [
+    "ramp"
+  ],
+  "Simic Cluestone": [
+    "draw",
+    "ramp"
+  ],
+  "Commander's Sphere": [
+    "draw",
+    "ramp"
+  ],
+  "Heritage Druid": [
+    "ramp"
+  ],
+  "Kiora, Master of the Depths": [
+    "ramp"
+  ],
+  "Silumgar Monument": [
+    "ramp"
+  ],
+  "Ogre Gatecrasher": [
+    "removal_creature"
+  ],
+  "Soulquake": [
+    "removal_creature"
+  ],
+  "Hedron Crawler": [
+    "ramp"
+  ],
+  "Implement of Examination": [
+    "draw"
+  ],
+  "Grisly Transformation": [
+    "draw"
+  ],
+  "Subterranean Hangar": [
+    "ramp"
+  ],
+  "Wasteland Scorpion": [
+    "draw"
+  ],
+  "Gilt-Leaf Archdruid": [
+    "draw"
+  ],
+  "Oath of Liliana": [
+    "removal_creature"
+  ],
+  "Life's Finale": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Anowon, the Ruin Sage": [
+    "removal_creature"
+  ],
+  "Bloom Tender": [
+    "ramp"
+  ],
+  "Exploration": [
+    "ramp"
+  ],
+  "Sakura-Tribe Scout": [
+    "ramp"
+  ],
+  "Slithery Stalker": [
+    "removal_creature"
+  ],
+  "Rile": [
+    "draw"
+  ],
+  "Counterintelligence": [
+    "removal_creature"
+  ],
+  "Esper Sojourners": [
+    "draw"
+  ],
+  "Goblin Replica": [
+    "removal_noncreature"
+  ],
+  "Padeem, Consul of Innovation": [
+    "draw"
+  ],
+  "Gomazoa": [
+    "removal_creature"
+  ],
+  "Bone Splinters": [
+    "removal_creature"
+  ],
+  "Bone Harvest": [
+    "draw"
+  ],
+  "Dragon Mantle": [
+    "draw"
+  ],
+  "Stroke of Genius": [
+    "draw"
+  ],
+  "Gravebind": [
+    "draw"
+  ],
+  "Icefall Regent": [
+    "removal_creature"
+  ],
+  "Slum Reaper": [
+    "removal_creature"
+  ],
+  "Alaborn Zealot": [
+    "removal_creature"
+  ],
+  "Fasting": [
+    "draw"
+  ],
+  "Sachi, Daughter of Seshiro": [
+    "ramp"
+  ],
+  "Gallows at Willow Hill": [
+    "removal_creature"
+  ],
+  "Lyzolda, the Blood Witch": [
+    "draw"
+  ],
+  "Brass Secretary": [
+    "draw"
+  ],
+  "Custodi Lich": [
+    "removal_creature"
+  ],
+  "Grasp of Phantoms": [
+    "removal_creature"
+  ],
+  "Marshaling Cry": [
+    "draw"
+  ],
+  "Patrician's Scorn": [
+    "removal_noncreature"
+  ],
+  "Roots": [
+    "removal_creature"
+  ],
+  "Limestone Golem": [
+    "draw"
+  ],
+  "Dark Banishing": [
+    "removal_creature"
+  ],
+  "Chambered Nautilus": [
+    "draw"
+  ],
+  "Tunnel Vision": [
+    "draw"
+  ],
+  "Dreamstone Hedron": [
+    "draw"
+  ],
+  "Savage Hunger": [
+    "draw"
+  ],
+  "Steel Sabotage": [
+    "removal_noncreature"
+  ],
+  "Telim'Tor's Edict": [
+    "draw"
+  ],
+  "Cephalid Scout": [
+    "draw"
+  ],
+  "Xantcha, Sleeper Agent": [
+    "draw"
+  ],
+  "Mind Unbound": [
+    "draw"
+  ],
+  "Cathartic Reunion": [
+    "draw"
+  ],
+  "Geth's Verdict": [
+    "removal_creature"
+  ],
+  "Amass the Components": [
+    "draw"
+  ],
+  "Llanowar Empath": [
+    "draw"
+  ],
+  "Deathgazer": [
+    "removal_creature"
+  ],
+  "Verdant Confluence": [
+    "ramp"
+  ],
+  "Solar Tide": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Azami, Lady of Scrolls": [
+    "draw"
+  ],
+  "Grand Warlord Radha": [
+    "ramp"
+  ],
+  "Triton Cavalry": [
+    "removal_noncreature"
+  ],
+  "Arcum Dagsson": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Oxidize": [
+    "removal_noncreature"
+  ],
+  "Mnemonic Sliver": [
+    "draw"
+  ],
+  "Dark Offering": [
+    "removal_creature"
+  ],
+  "Truth or Tale": [
+    "draw"
+  ],
+  "Overwhelming Splendor": [
+    "removal_creature"
+  ],
+  "Riptide Survivor": [
+    "draw"
+  ],
+  "Bankrupt in Blood": [
+    "draw"
+  ],
+  "Cruel Edict": [
+    "removal_creature"
+  ],
+  "Nettlevine Blight": [
+    "removal_creature"
+  ],
+  "Phyrexian Scriptures": [
+    "removal_creature"
+  ],
+  "Take Possession": [
+    "ramp"
+  ],
+  "Winged Coatl": [
+    "removal_creature"
+  ],
+  "Obsessive Search": [
+    "draw"
+  ],
+  "Djeru's Renunciation": [
+    "draw"
+  ],
+  "Browbeat": [
+    "draw"
+  ],
+  "Argothian Enchantress": [
+    "draw"
+  ],
+  "Unmoored Ego": [
+    "draw"
+  ],
+  "Horizon Spellbomb": [
+    "draw"
+  ],
+  "Trade Routes": [
+    "draw"
+  ],
+  "Stalking Assassin": [
+    "removal_creature"
+  ],
+  "Illusionist's Stratagem": [
+    "draw"
+  ],
+  "Arena of the Ancients": [
+    "removal_creature"
+  ],
+  "Deal Broker": [
+    "draw"
+  ],
+  "Ingot Chewer": [
+    "removal_noncreature"
+  ],
+  "Aura Flux": [
+    "removal_noncreature"
+  ],
+  "Consulate Crackdown": [
+    "removal_noncreature"
+  ],
+  "Azorius Aethermage": [
+    "draw"
+  ],
+  "Resupply": [
+    "draw"
+  ],
+  "Distant Memories": [
+    "draw"
+  ],
+  "Chandra, Torch of Defiance": [
+    "ramp"
+  ],
+  "Dreadship Reef": [
+    "ramp"
+  ],
+  "Vraska, Golgari Queen": [
+    "draw"
+  ],
+  "Desecration Plague": [
+    "removal_noncreature"
+  ],
+  "Garruk's Packleader": [
+    "draw"
+  ],
+  "Dispatch": [
+    "removal_creature"
+  ],
+  "Prophetic Prism": [
+    "draw",
+    "ramp"
+  ],
+  "Sensei's Divining Top": [
+    "draw"
+  ],
+  "Mage-Ring Network": [
+    "ramp"
+  ],
+  "Charcoal Diamond": [
+    "ramp"
+  ],
+  "Pistus Strike": [
+    "removal_creature"
+  ],
+  "Joiner Adept": [
+    "ramp"
+  ],
+  "Sylvan Caryatid": [
+    "ramp"
+  ],
+  "Furnace Dragon": [
+    "removal_noncreature"
+  ],
+  "Brazen Freebooter": [
+    "ramp"
+  ],
+  "Jolt": [
+    "draw"
+  ],
+  "Ground Seal": [
+    "draw"
+  ],
+  "Wasitora, Nekoru Queen": [
+    "removal_creature"
+  ],
+  "Duneblast": [
+    "removal_creature"
+  ],
+  "Clear the Mind": [
+    "draw"
+  ],
+  "Loam Dryad": [
+    "ramp"
+  ],
+  "Spread the Sickness": [
+    "removal_creature"
+  ],
+  "Selesnya Signet": [
+    "ramp"
+  ],
+  "Lotus Guardian": [
+    "ramp"
+  ],
+  "Mistvein Borderpost": [
+    "ramp"
+  ],
+  "Root Cage": [
+    "removal_creature"
+  ],
+  "Leonin Iconoclast": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Vampirism": [
+    "draw"
+  ],
+  "Evermind": [
+    "draw"
+  ],
+  "Shefet Monitor": [
+    "draw",
+    "ramp"
+  ],
+  "Slow Motion": [
+    "removal_creature"
+  ],
+  "Bargaining Table": [
+    "draw"
+  ],
+  "Smothering Tithe": [
+    "draw",
+    "ramp"
+  ],
+  "Blood Sun": [
+    "draw"
+  ],
+  "Immobilizing Ink": [
+    "removal_creature"
+  ],
+  "Sunscour": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Tandem Lookout": [
+    "draw"
+  ],
+  "Humble Defector": [
+    "draw"
+  ],
+  "Sphinx's Tutelage": [
+    "draw"
+  ],
+  "Kodama's Reach": [
+    "ramp"
+  ],
+  "Shapers' Sanctuary": [
+    "draw"
+  ],
+  "Spiritualize": [
+    "draw"
+  ],
+  "Lawbringer": [
+    "removal_creature"
+  ],
+  "Divine Reckoning": [
+    "removal_creature"
+  ],
+  "Torch Fiend": [
+    "removal_noncreature"
+  ],
+  "Smash": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Convalescent Care": [
+    "draw"
+  ],
+  "Noggle Ransacker": [
+    "draw"
+  ],
+  "Fatal Push": [
+    "removal_creature"
+  ],
+  "Lifespring Druid": [
+    "ramp"
+  ],
+  "Fatal Blow": [
+    "removal_creature"
+  ],
+  "Mistblade Shinobi": [
+    "removal_creature"
+  ],
+  "Implement of Malice": [
+    "draw"
+  ],
+  "Perilous Predicament": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Wall of Corpses": [
+    "removal_creature"
+  ],
+  "Gush": [
+    "draw"
+  ],
+  "Frantic Search": [
+    "draw"
+  ],
+  "Cryptbreaker": [
+    "draw"
+  ],
+  "Hystrodon": [
+    "draw"
+  ],
+  "Altar of the Lost": [
+    "ramp"
+  ],
+  "Krosan Wayfarer": [
+    "ramp"
+  ],
+  "Pygmy Kavu": [
+    "draw"
+  ],
+  "Hoofprints of the Stag": [
+    "draw"
+  ],
+  "Skulltap": [
+    "draw"
+  ],
+  "Reckless Reveler": [
+    "removal_noncreature"
+  ],
+  "Urza's Bauble": [
+    "draw"
+  ],
+  "Ogre Leadfoot": [
+    "removal_creature"
+  ],
+  "Palace Jailer": [
+    "removal_creature"
+  ],
+  "Sunken Hope": [
+    "removal_creature"
+  ],
+  "Phyrexian Tower": [
+    "ramp"
+  ],
+  "Garruk Wildspeaker": [
+    "ramp"
+  ],
+  "Viashino Racketeer": [
+    "draw"
+  ],
+  "Cephalid Broker": [
+    "draw"
+  ],
+  "Havenwood Battleground": [
+    "ramp"
+  ],
+  "Unexplained Disappearance": [
+    "removal_creature"
+  ],
+  "Basal Sliver": [
+    "ramp"
+  ],
+  "Plague Wind": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Warrant // Warden": [
+    "removal_creature"
+  ],
+  "Desert of the Glorified": [
+    "draw"
+  ],
+  "Atarka's Command": [
+    "ramp"
+  ],
+  "Pedantic Learning": [
+    "draw"
+  ],
+  "Demonic Pact": [
+    "draw"
+  ],
+  "Aura Mutation": [
+    "removal_noncreature"
+  ],
+  "Mine Bearer": [
+    "removal_creature"
+  ],
+  "Exploding Borders": [
+    "ramp"
+  ],
+  "Refresh": [
+    "draw"
+  ],
+  "Armament of Nyx": [
+    "removal_creature"
+  ],
+  "Possessed Aven": [
+    "removal_creature"
+  ],
+  "Acrobatic Maneuver": [
+    "draw"
+  ],
+  "Assassin's Strike": [
+    "removal_creature"
+  ],
+  "Burden of Guilt": [
+    "removal_creature"
+  ],
+  "Tidal Force": [
+    "ramp"
+  ],
+  "Wooden Stake": [
+    "removal_creature"
+  ],
+  "Winnow": [
+    "draw"
+  ],
+  "Pristine Talisman": [
+    "ramp"
+  ],
+  "Dimir Guildmage": [
+    "draw"
+  ],
+  "Dissenter's Deliverance": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Verity Circle": [
+    "draw"
+  ],
+  "Three Visits": [
+    "ramp"
+  ],
+  "Shivan Emissary": [
+    "removal_creature"
+  ],
+  "Stream of Acid": [
+    "removal_creature"
+  ],
+  "Thalakos Seer": [
+    "draw"
+  ],
+  "Astral Cornucopia": [
+    "ramp"
+  ],
+  "Balduvian Rage": [
+    "draw"
+  ],
+  "Whiplash Trap": [
+    "removal_creature"
+  ],
+  "Psychotic Fury": [
+    "draw"
+  ],
+  "Mana Cache": [
+    "ramp"
+  ],
+  "Voyage's End": [
+    "removal_creature"
+  ],
+  "Dusk Urchins": [
+    "draw"
+  ],
+  "Asphyxiate": [
+    "removal_creature"
+  ],
+  "Virtus's Maneuver": [
+    "removal_creature"
+  ],
+  "Due Respect": [
+    "draw"
+  ],
+  "Skycloud Egg": [
+    "draw"
+  ],
+  "Conduit of Storms // Conduit of Emrakul": [
+    "ramp"
+  ],
+  "Dromoka Monument": [
+    "ramp"
+  ],
+  "Amber Prison": [
+    "removal_creature"
+  ],
+  "Nemesis Trap": [
+    "removal_creature"
+  ],
+  "Sphinx of Magosi": [
+    "draw"
+  ],
+  "Accumulated Knowledge": [
+    "draw"
+  ],
+  "Ghastly Discovery": [
+    "draw"
+  ],
+  "Chandra, Bold Pyromancer": [
+    "ramp"
+  ],
+  "Bloodstone Cameo": [
+    "ramp"
+  ],
+  "Golgari Signet": [
+    "ramp"
+  ],
+  "Erebos, God of the Dead": [
+    "draw"
+  ],
+  "Vengeance": [
+    "removal_creature"
+  ],
+  "Vodalian Arcanist": [
+    "ramp"
+  ],
+  "Elvish Aberration": [
+    "ramp"
+  ],
+  "Dread Cacodemon": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Sarkhan Unbroken": [
+    "draw",
+    "ramp"
+  ],
+  "Warriors' Lesson": [
+    "draw"
+  ],
+  "Certain Death": [
+    "removal_creature"
+  ],
+  "Gitaxian Probe": [
+    "draw"
+  ],
+  "Selvala, Heart of the Wilds": [
+    "draw",
+    "ramp"
+  ],
+  "Second Wind": [
+    "removal_creature"
+  ],
+  "Talisman of Indulgence": [
+    "ramp"
+  ],
+  "Disinformation Campaign": [
+    "draw"
+  ],
+  "Bright Reprisal": [
+    "draw",
+    "removal_creature"
+  ],
+  "Aether Burst": [
+    "removal_creature"
+  ],
+  "Vow of Duty": [
+    "removal_creature"
+  ],
+  "Mathas, Fiend Seeker": [
+    "draw"
+  ],
+  "Rathi Assassin": [
+    "removal_creature"
+  ],
+  "Petals of Insight": [
+    "draw"
+  ],
+  "Gleaming Barrier": [
+    "ramp"
+  ],
+  "King Macar, the Gold-Cursed": [
+    "ramp",
+    "removal_creature"
+  ],
+  "Well of Ideas": [
+    "draw"
+  ],
+  "Talas Researcher": [
+    "draw"
+  ],
+  "Emrakul's Hatcher": [
+    "ramp"
+  ],
+  "Enchanter's Bane": [
+    "removal_noncreature"
+  ],
+  "Ceta Disciple": [
+    "ramp"
+  ],
+  "Chaotic Strike": [
+    "draw"
+  ],
+  "Sorin, Solemn Visitor": [
+    "removal_creature"
+  ],
+  "Ember Shot": [
+    "draw"
+  ],
+  "Ninja of the Deep Hours": [
+    "draw"
+  ],
+  "Avenging Druid": [
+    "ramp"
+  ],
+  "Elemental Resonance": [
+    "ramp"
+  ],
+  "Soldevi Sage": [
+    "draw"
+  ],
+  "Fell the Mighty": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Bottled Cloister": [
+    "draw"
+  ],
+  "Greed": [
+    "draw"
+  ],
+  "Hour of Need": [
+    "removal_creature"
+  ],
+  "In Bolas's Clutches": [
+    "ramp"
+  ],
+  "Canyon Slough": [
+    "draw"
+  ],
+  "Calciform Pools": [
+    "ramp"
+  ],
+  "Elves of Deep Shadow": [
+    "ramp"
+  ],
+  "Sorcerous Sight": [
+    "draw"
+  ],
+  "Invoke the Firemind": [
+    "draw"
+  ],
+  "Rummaging Goblin": [
+    "draw"
+  ],
+  "Tamiyo's Journal": [
+    "draw"
+  ],
+  "Treasure Nabber": [
+    "ramp"
+  ],
+  "Coral Net": [
+    "removal_creature"
+  ],
+  "Krovikan Fetish": [
+    "draw"
+  ],
+  "Ragamuffyn": [
+    "draw"
+  ],
+  "Will Kenrith": [
+    "draw"
+  ],
+  "Consecrate // Consume": [
+    "draw",
+    "removal_creature"
+  ],
+  "Black Market": [
+    "ramp"
+  ],
+  "Ancient Spring": [
+    "ramp"
+  ],
+  "Kestia, the Cultivator": [
+    "draw"
+  ],
+  "Watchful Naga": [
+    "draw"
+  ],
+  "Sky Hussar": [
+    "draw"
+  ],
+  "Shape Anew": [
+    "removal_noncreature"
+  ],
+  "Coldsteel Heart": [
+    "ramp"
+  ],
+  "Woebringer Demon": [
+    "removal_creature"
+  ],
+  "Fertilid": [
+    "ramp"
+  ],
+  "Grixis Sojourners": [
+    "draw"
+  ],
+  "Runeboggle": [
+    "draw"
+  ],
+  "Confront the Unknown": [
+    "draw"
+  ],
+  "Sky Diamond": [
+    "ramp"
+  ],
+  "Death Pulse": [
+    "draw"
+  ],
+  "Curiosity": [
+    "draw"
+  ],
+  "Entrapment Maneuver": [
+    "removal_creature"
+  ],
+  "Dark Intimations": [
+    "draw",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Grim Monolith": [
+    "ramp"
+  ],
+  "Curious Obsession": [
+    "draw"
+  ],
+  "Ribbons of the Reikai": [
+    "draw"
+  ],
+  "Kiora's Follower": [
+    "ramp"
+  ],
+  "Deathrite Shaman": [
+    "ramp"
+  ],
+  "Mephitic Ooze": [
+    "removal_creature"
+  ],
+  "Void Stalker": [
+    "removal_creature"
+  ],
+  "Angel of Condemnation": [
+    "removal_creature"
+  ],
+  "Divine Offering": [
+    "removal_noncreature"
+  ],
+  "Ancient Tomb": [
+    "ramp"
+  ],
+  "Wave of Terror": [
+    "removal_creature"
+  ],
+  "Merfolk Seer": [
+    "draw"
+  ],
+  "Magus of the Coffers": [
+    "ramp"
+  ],
+  "Hapless Researcher": [
+    "draw"
+  ],
+  "Carrionette": [
+    "removal_creature"
+  ],
+  "Horobi's Whisper": [
+    "removal_creature"
+  ],
+  "Vendilion Clique": [
+    "draw"
+  ],
+  "Chronatog Totem": [
+    "ramp"
+  ],
+  "Phyrexian Reaper": [
+    "removal_creature"
+  ],
+  "Mercenary Informer": [
+    "removal_creature"
+  ],
+  "Hearth Kami": [
+    "removal_noncreature"
+  ],
+  "King Crab": [
+    "removal_creature"
+  ],
+  "Remote Isle": [
+    "draw"
+  ],
+  "Mulldrifter": [
+    "draw"
+  ],
+  "Execute": [
+    "draw",
+    "removal_creature"
+  ],
+  "Ley Weaver": [
+    "ramp"
+  ],
+  "Slip Through Space": [
+    "draw"
+  ],
+  "Metamorphic Alteration": [
+    "removal_creature"
+  ],
+  "Myriad Landscape": [
+    "ramp"
+  ],
+  "Hit // Run": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Sphinx of Lost Truths": [
+    "draw"
+  ],
+  "Vaultbreaker": [
+    "draw"
+  ],
+  "Oboro Breezecaller": [
+    "ramp"
+  ],
+  "Word of Undoing": [
+    "removal_creature"
+  ],
+  "Spiteful Blow": [
+    "removal_creature"
+  ],
+  "Sixth Sense": [
+    "draw"
+  ],
+  "Severed Strands": [
+    "removal_creature"
+  ],
+  "Cranial Archive": [
+    "draw"
+  ],
+  "Just Fate": [
+    "removal_creature"
+  ],
+  "Hickory Woodlot": [
+    "ramp"
+  ],
+  "Horizon Canopy": [
+    "draw"
+  ],
+  "Desert of the True": [
+    "draw"
+  ],
+  "Cowardice": [
+    "removal_creature"
+  ],
+  "Siren's Call": [
+    "removal_creature"
+  ],
+  "The Flame of Keld": [
+    "draw"
+  ],
+  "Fatal Mutation": [
+    "removal_creature"
+  ],
+  "Eliminate the Competition": [
+    "removal_creature"
+  ],
+  "Deathcap Cultivator": [
+    "ramp"
+  ],
+  "Pitfall Trap": [
+    "removal_creature"
+  ],
+  "Wargate": [
+    "ramp"
+  ],
+  "Orzhov Charm": [
+    "removal_creature"
+  ],
+  "Reprocess": [
+    "draw"
+  ],
+  "Angrath, Minotaur Pirate": [
+    "board_wipe"
+  ],
+  "Divination": [
+    "draw"
+  ],
+  "Riven Turnbull": [
+    "ramp"
+  ],
+  "Beneath the Sands": [
+    "draw",
+    "ramp"
+  ],
+  "Precognitive Perception": [
+    "draw"
+  ],
+  "Nature's Resurgence": [
+    "draw"
+  ],
+  "Urban Burgeoning": [
+    "ramp"
+  ],
+  "Unstable Mutation": [
+    "removal_creature"
+  ],
+  "Alms Collector": [
+    "draw"
+  ],
+  "Azorius Cluestone": [
+    "draw",
+    "ramp"
+  ],
+  "Gyre Engineer": [
+    "ramp"
+  ],
+  "Kataki, War's Wage": [
+    "removal_noncreature"
+  ],
+  "Lord of Tresserhorn": [
+    "draw"
+  ],
+  "Psychosis Crawler": [
+    "draw"
+  ],
+  "Adarkar Unicorn": [
+    "ramp"
+  ],
+  "Resounding Scream": [
+    "draw"
+  ],
+  "Self-Inflicted Wound": [
+    "removal_creature"
+  ],
+  "Primoc Escapee": [
+    "draw"
+  ],
+  "Loreseeker's Stone": [
+    "draw"
+  ],
+  "Fated Retribution": [
+    "board_wipe",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Damnable Pact": [
+    "draw"
+  ],
+  "Elvish Harbinger": [
+    "ramp"
+  ],
+  "Excise": [
+    "removal_creature"
+  ],
+  "Fascination": [
+    "draw"
+  ],
+  "Annihilate": [
+    "draw",
+    "removal_creature"
+  ],
+  "Cephalid Sage": [
+    "draw"
+  ],
+  "Halo Hunter": [
+    "removal_creature"
+  ],
+  "Deadly Designs": [
+    "removal_creature"
+  ],
+  "Crib Swap": [
+    "removal_creature"
+  ],
+  "Final-Sting Faerie": [
+    "removal_creature"
+  ],
+  "Ray of Erasure": [
+    "draw"
+  ],
+  "Ritual of Soot": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Exorcist": [
+    "removal_creature"
+  ],
+  "Settle the Wreckage": [
+    "removal_creature"
+  ],
+  "Chancellor of the Tangle": [
+    "ramp"
+  ],
+  "Domri, Chaos Bringer": [
+    "ramp"
+  ],
+  "Blisterpod": [
+    "ramp"
+  ],
+  "Kingfisher": [
+    "draw"
+  ],
+  "Ranging Raptors": [
+    "ramp"
+  ],
+  "Bequeathal": [
+    "draw"
+  ],
+  "Jeskai Charm": [
+    "removal_creature"
+  ],
+  "Gloomlance": [
+    "removal_creature"
+  ],
+  "Aladdin's Lamp": [
+    "draw"
+  ],
+  "Farm // Market": [
+    "removal_creature"
+  ],
+  "Priest of Forgotten Gods": [
+    "draw",
+    "ramp",
+    "removal_creature"
+  ],
+  "Peregrination": [
+    "ramp"
+  ],
+  "Faith's Fetters": [
+    "removal_noncreature"
+  ],
+  "Drowner of Hope": [
+    "ramp"
+  ],
+  "Martial Coup": [
+    "removal_creature"
+  ],
+  "Ice Cauldron": [
+    "ramp"
+  ],
+  "Bind": [
+    "draw"
+  ],
+  "Searing Light": [
+    "removal_creature"
+  ],
+  "Dormant Sliver": [
+    "draw"
+  ],
+  "Keranos, God of Storms": [
+    "draw"
+  ],
+  "Kor Spiritdancer": [
+    "draw"
+  ],
+  "Journey to Nowhere": [
+    "removal_creature"
+  ],
+  "Gemhide Sliver": [
+    "ramp"
+  ],
+  "Pyrite Spellbomb": [
+    "draw"
+  ],
+  "Remote Farm": [
+    "ramp"
+  ],
+  "Bloodfire Mentor": [
+    "draw"
+  ],
+  "Countervailing Winds": [
+    "draw"
+  ],
+  "Clutch of Currents": [
+    "removal_creature"
+  ],
+  "Rapid Decay": [
+    "draw"
+  ],
+  "Giant Trap Door Spider": [
+    "removal_creature"
+  ],
+  "Sword of Fire and Ice": [
+    "draw"
+  ],
+  "Paradoxical Outcome": [
+    "draw"
+  ],
+  "Scavenged Weaponry": [
+    "draw"
+  ],
+  "Carrier Pigeons": [
+    "draw"
+  ],
+  "Avatar of Woe": [
+    "removal_creature"
+  ],
+  "Parallel Thoughts": [
+    "draw"
+  ],
+  "Capture Sphere": [
+    "removal_creature"
+  ],
+  "Elf Replica": [
+    "removal_noncreature"
+  ],
+  "Chromatic Sphere": [
+    "draw"
+  ],
+  "Encrust": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Monstrous Carabid": [
+    "draw"
+  ],
+  "Cruel Reality": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Plaguecrafter": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "War Priest of Thune": [
+    "removal_noncreature"
+  ],
+  "Sapphire Charm": [
+    "draw"
+  ],
+  "Demon of Wailing Agonies": [
+    "removal_creature"
+  ],
+  "Etrata, the Silencer": [
+    "removal_creature"
+  ],
+  "Flesh to Dust": [
+    "removal_creature"
+  ],
+  "Thieving Magpie": [
+    "draw"
+  ],
+  "Settle the Score": [
+    "removal_creature"
+  ],
+  "Macetail Hystrodon": [
+    "draw"
+  ],
+  "Tranquil Grove": [
+    "removal_noncreature"
+  ],
+  "Plague Myr": [
+    "ramp"
+  ],
+  "Latulla's Orders": [
+    "removal_noncreature"
+  ],
+  "Urgent Exorcism": [
+    "removal_noncreature"
+  ],
+  "Aether Tide": [
+    "removal_creature"
+  ],
+  "Boreal Druid": [
+    "ramp"
+  ],
+  "Possessed Centaur": [
+    "removal_creature"
+  ],
+  "Bounty Hunter": [
+    "removal_creature"
+  ],
+  "Izzet Signet": [
+    "ramp"
+  ],
+  "Carpet of Flowers": [
+    "ramp"
+  ],
+  "Viridescent Wisps": [
+    "draw"
+  ],
+  "Galestrike": [
+    "draw",
+    "removal_creature"
+  ],
+  "Dismantling Blow": [
+    "draw"
+  ],
+  "Research Assistant": [
+    "draw"
+  ],
+  "Eater of Hope": [
+    "removal_creature"
+  ],
+  "Ancient Grudge": [
+    "removal_noncreature"
+  ],
+  "Divine Verdict": [
+    "removal_creature"
+  ],
+  "Season of the Witch": [
+    "removal_creature"
+  ],
+  "Rogue's Gloves": [
+    "draw"
+  ],
+  "Nimble Innovator": [
+    "draw"
+  ],
+  "Into the North": [
+    "ramp"
+  ],
+  "Icefall": [
+    "removal_noncreature"
+  ],
+  "Blind Zealot": [
+    "removal_creature"
+  ],
+  "Time Ebb": [
+    "removal_creature"
+  ],
+  "Soul Nova": [
+    "removal_creature"
+  ],
+  "Magus of the Candelabra": [
+    "ramp"
+  ],
+  "Sandbar Serpent": [
+    "draw"
+  ],
+  "Consecrated Sphinx": [
+    "draw"
+  ],
+  "Desert of the Fervent": [
+    "draw"
+  ],
+  "Hydrolash": [
+    "draw"
+  ],
+  "Firewild Borderpost": [
+    "ramp"
+  ],
+  "Blight Herder": [
+    "ramp"
+  ],
+  "Deathmark Prelate": [
+    "removal_creature"
+  ],
+  "Krav, the Unredeemed": [
+    "draw"
+  ],
+  "Essence Fracture": [
+    "draw",
+    "removal_creature"
+  ],
+  "From Beyond": [
+    "ramp"
+  ],
+  "Bone to Ash": [
+    "draw"
+  ],
+  "Runner's Bane": [
+    "removal_creature"
+  ],
+  "Nissa, Vital Force": [
+    "draw",
+    "ramp"
+  ],
+  "Wayfarer's Bauble": [
+    "ramp"
+  ],
+  "Early Harvest": [
+    "ramp"
+  ],
+  "Twitch": [
+    "draw"
+  ],
+  "Hedron Archive": [
+    "draw"
+  ],
+  "Snuff Out": [
+    "removal_creature"
+  ],
+  "Bant Charm": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Barren Moor": [
+    "draw"
+  ],
+  "Skeleton Key": [
+    "draw"
+  ],
+  "Psychic Corrosion": [
+    "draw"
+  ],
+  "Infernal Reckoning": [
+    "removal_creature"
+  ],
+  "Fetid Pools": [
+    "draw"
+  ],
+  "Jalum Tome": [
+    "draw"
+  ],
+  "Lotus Petal": [
+    "ramp"
+  ],
+  "Lotus Blossom": [
+    "ramp"
+  ],
+  "Careful Study": [
+    "draw"
+  ],
+  "Urza's Tower": [
+    "ramp"
+  ],
+  "Possessed Portal": [
+    "draw"
+  ],
+  "Hollow Trees": [
+    "ramp"
+  ],
+  "Molten Slagheap": [
+    "ramp"
+  ],
+  "Niv-Mizzet, Parun": [
+    "draw"
+  ],
+  "Play of the Game": [
+    "board_wipe"
+  ],
+  "Kozilek's Channeler": [
+    "ramp"
+  ],
+  "Birthing Hulk": [
+    "ramp"
+  ],
+  "Imprisoned in the Moon": [
+    "ramp",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Epiphany at the Drownyard": [
+    "draw"
+  ],
+  "Urza's Mine": [
+    "ramp"
+  ],
+  "Creeping Corrosion": [
+    "removal_noncreature"
+  ],
+  "Mana Chains": [
+    "removal_creature"
+  ],
+  "Serra's Sanctum": [
+    "ramp"
+  ],
+  "Golgari Brownscale": [
+    "draw"
+  ],
+  "Mind Spring": [
+    "draw"
+  ],
+  "Dark Dabbling": [
+    "draw"
+  ],
+  "Blade Juggler": [
+    "draw"
+  ],
+  "Incubation Druid": [
+    "ramp"
+  ],
+  "Psychic Symbiont": [
+    "draw"
+  ],
+  "Wrath of God": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Infernal Offering": [
+    "draw",
+    "removal_creature"
+  ],
+  "Defiler of Souls": [
+    "removal_creature"
+  ],
+  "Brittle Effigy": [
+    "removal_creature"
+  ],
+  "Combustible Gearhulk": [
+    "draw"
+  ],
+  "Aura Fracture": [
+    "removal_noncreature"
+  ],
+  "Necrogen Spellbomb": [
+    "draw"
+  ],
+  "Growth Spiral": [
+    "draw",
+    "ramp"
+  ],
+  "Starstorm": [
+    "draw"
+  ],
+  "Hunter of Eyeblights": [
+    "removal_creature"
+  ],
+  "Mu Yanling": [
+    "draw"
+  ],
+  "Echo Tracer": [
+    "removal_creature"
+  ],
+  "Void Attendant": [
+    "ramp"
+  ],
+  "Expedite": [
+    "draw"
+  ],
+  "Rejuvenate": [
+    "draw"
+  ],
+  "Blightsoil Druid": [
+    "ramp"
+  ],
+  "Sunseed Nurturer": [
+    "ramp"
+  ],
+  "Era of Innovation": [
+    "draw"
+  ],
+  "Vandalblast": [
+    "removal_noncreature"
+  ],
+  "Nissa, Vastwood Seer // Nissa, Sage Animist": [
+    "ramp"
+  ],
+  "Stronghold Assassin": [
+    "removal_creature"
+  ],
+  "Braids, Conjurer Adept": [
+    "ramp"
+  ],
+  "Dromar, the Banisher": [
+    "removal_creature"
+  ],
+  "Untaidake, the Cloud Keeper": [
+    "ramp"
+  ],
+  "Incubation // Incongruity": [
+    "removal_creature"
+  ],
+  "Mossfire Egg": [
+    "draw"
+  ],
+  "Dark Hatchling": [
+    "removal_creature"
+  ],
+  "Smite": [
+    "removal_creature"
+  ],
+  "Scarscale Ritual": [
+    "draw"
+  ],
+  "Oracle en-Vec": [
+    "removal_creature"
+  ],
+  "Viashino Heretic": [
+    "removal_noncreature"
+  ],
+  "Mana Echoes": [
+    "ramp"
+  ],
+  "Mogg Assassin": [
+    "removal_creature"
+  ],
+  "Deconstruct": [
+    "removal_noncreature"
+  ],
+  "Brainstorm": [
+    "draw"
+  ],
+  "Angelic Edict": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Mysteries of the Deep": [
+    "draw"
+  ],
+  "Rhythmic Water Vortex": [
+    "removal_creature"
+  ],
+  "Sage's Dousing": [
+    "draw"
+  ],
+  "Zoetic Cavern": [
+    "ramp"
+  ],
+  "Cromat": [
+    "removal_creature"
+  ],
+  "Baleful Strix": [
+    "draw"
+  ],
+  "Condemn": [
+    "removal_creature"
+  ],
+  "Volcanic Submersion": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Slaughter": [
+    "removal_creature"
+  ],
+  "Retaliate": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Oona's Grace": [
+    "draw"
+  ],
+  "Orcish Lumberjack": [
+    "ramp"
+  ],
+  "Drop of Honey": [
+    "removal_creature"
+  ],
+  "Seashell Cameo": [
+    "ramp"
+  ],
+  "Psychotrope Thallid": [
+    "draw"
+  ],
+  "Matter Reshaper": [
+    "ramp"
+  ],
+  "Nantuko Shaman": [
+    "draw"
+  ],
+  "Wayward Swordtooth": [
+    "ramp"
+  ],
+  "Fairgrounds Warden": [
+    "removal_creature"
+  ],
+  "Isolated Watchtower": [
+    "ramp"
+  ],
+  "Sisters of the Flame": [
+    "ramp"
+  ],
+  "Razorfin Abolisher": [
+    "removal_creature"
+  ],
+  "Guild Summit": [
+    "draw"
+  ],
+  "Lord Windgrace": [
+    "draw"
+  ],
+  "Collective Unconscious": [
+    "draw"
+  ],
+  "Vraska's Contempt": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Mistmeadow Witch": [
+    "removal_creature"
+  ],
+  "Sisters of Stone Death": [
+    "removal_creature"
+  ],
+  "Ordeal of Thassa": [
+    "draw"
+  ],
+  "Skirsdag Flayer": [
+    "removal_creature"
+  ],
+  "Stormscape Battlemage": [
+    "removal_creature"
+  ],
+  "Deface": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Kjeldoran Frostbeast": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Living End": [
+    "removal_creature"
+  ],
+  "Knight of the Reliquary": [
+    "ramp"
+  ],
+  "Forgotten Cave": [
+    "draw"
+  ],
+  "Enhanced Awareness": [
+    "draw"
+  ],
+  "Rakdos Keyrune": [
+    "ramp"
+  ],
+  "Deadshot Minotaur": [
+    "draw"
+  ],
+  "Magus of the Disk": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Underworld Connections": [
+    "draw"
+  ],
+  "Wicked Pact": [
+    "removal_creature"
+  ],
+  "Jayemdae Tome": [
+    "draw"
+  ],
+  "Priest of Titania": [
+    "ramp"
+  ],
+  "Wall of Roots": [
+    "ramp"
+  ],
+  "Repopulate": [
+    "draw"
+  ],
+  "Aminatou, the Fateshifter": [
+    "draw"
+  ],
+  "Temporal Eddy": [
+    "removal_creature"
+  ],
+  "Censor": [
+    "draw"
+  ],
+  "Llanowar Dead": [
+    "ramp"
+  ],
+  "Sisay's Ingenuity": [
+    "draw"
+  ],
+  "Nimbus Champion": [
+    "removal_creature"
+  ],
+  "Shadowmage Infiltrator": [
+    "draw"
+  ],
+  "Keepsake Gorgon": [
+    "removal_creature"
+  ],
+  "Drumhunter": [
+    "draw",
+    "ramp"
+  ],
+  "Mass Calcify": [
+    "removal_creature"
+  ],
+  "Flamespeaker's Will": [
+    "removal_noncreature"
+  ],
+  "Citywide Bust": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Rakdos Signet": [
+    "ramp"
+  ],
+  "Dimir Locket": [
+    "draw",
+    "ramp"
+  ],
+  "Fraying Omnipotence": [
+    "removal_creature"
+  ],
+  "Silhana Starfletcher": [
+    "ramp"
+  ],
+  "Release the Gremlins": [
+    "removal_noncreature"
+  ],
+  "Brain Gorgers": [
+    "removal_creature"
+  ],
+  "Horn of Ramos": [
+    "ramp"
+  ],
+  "Ludevic, Necro-Alchemist": [
+    "draw"
+  ],
+  "Arch of Orazca": [
+    "draw"
+  ],
+  "Hour of Reckoning": [
+    "removal_creature"
+  ],
+  "Serpent Assassin": [
+    "removal_creature"
+  ],
+  "Gryff Vanguard": [
+    "draw"
+  ],
+  "Dromoka's Command": [
+    "removal_noncreature"
+  ],
+  "Llanowar Scout": [
+    "ramp"
+  ],
+  "Vraska, Relic Seeker": [
+    "ramp",
+    "removal_creature"
+  ],
+  "Wakening Sun's Avatar": [
+    "removal_creature"
+  ],
+  "Silence the Believers": [
+    "removal_creature"
+  ],
+  "Treasure Trove": [
+    "draw"
+  ],
+  "Ronom Unicorn": [
+    "removal_noncreature"
+  ],
+  "Izzet Cluestone": [
+    "draw",
+    "ramp"
+  ],
+  "Tome of the Guildpact": [
+    "draw"
+  ],
+  "Scattered Groves": [
+    "draw"
+  ],
+  "Merciless Eviction": [
+    "board_wipe",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Squee's Revenge": [
+    "draw"
+  ],
+  "Intuition": [
+    "draw"
+  ],
+  "Reparations": [
+    "draw"
+  ],
+  "Healing Hands": [
+    "draw"
+  ],
+  "Orzhov Euthanist": [
+    "removal_creature"
+  ],
+  "Gloomwidow's Feast": [
+    "removal_creature"
+  ],
+  "Silkweaver Elite": [
+    "draw"
+  ],
+  "Rowdy Crew": [
+    "draw"
+  ],
+  "Floating-Dream Zubera": [
+    "draw"
+  ],
+  "Corrosion": [
+    "removal_noncreature"
+  ],
+  "Unquestioned Authority": [
+    "draw"
+  ],
+  "Vodalian Merchant": [
+    "draw"
+  ],
+  "Sunastian Falconer": [
+    "ramp"
+  ],
+  "Faithless Looting": [
+    "draw"
+  ],
+  "Vile Manifestation": [
+    "draw"
+  ],
+  "Thrasios, Triton Hero": [
+    "draw",
+    "ramp"
+  ],
+  "Abomination of Gudul": [
+    "draw"
+  ],
+  "Narcolepsy": [
+    "removal_creature"
+  ],
+  "Terminus": [
+    "removal_creature"
+  ],
+  "Origin Spellbomb": [
+    "draw"
+  ],
+  "Anchor to the Aether": [
+    "removal_creature"
+  ],
+  "Reign of the Pit": [
+    "removal_creature"
+  ],
+  "Booby Trap": [
+    "draw"
+  ],
+  "Myr Moonvessel": [
+    "ramp"
+  ],
+  "Nezumi Shadow-Watcher": [
+    "removal_creature"
+  ],
+  "Ramos, Dragon Engine": [
+    "ramp"
+  ],
+  "Quiet Purity": [
+    "removal_noncreature"
+  ],
+  "Oracle's Insight": [
+    "draw"
+  ],
+  "Lifespark Spellbomb": [
+    "draw"
+  ],
+  "Elvish Mystic": [
+    "ramp"
+  ],
+  "Rescind": [
+    "draw"
+  ],
+  "Alexi, Zephyr Mage": [
+    "removal_creature"
+  ],
+  "Veinfire Borderpost": [
+    "ramp"
+  ],
+  "Rimescale Dragon": [
+    "removal_creature"
+  ],
+  "Obelisk of Bant": [
+    "ramp"
+  ],
+  "Chandra Ablaze": [
+    "draw"
+  ],
+  "Compulsion": [
+    "draw"
+  ],
+  "Infernal Scarring": [
+    "draw"
+  ],
+  "Words of Waste": [
+    "draw"
+  ],
+  "Harmonic Convergence": [
+    "removal_noncreature"
+  ],
+  "Sand Squid": [
+    "removal_creature"
+  ],
+  "Irrigated Farmland": [
+    "draw"
+  ],
+  "Resounding Roar": [
+    "draw"
+  ],
+  "Ulvenwald Hydra": [
+    "ramp"
+  ],
+  "Renowned Weaponsmith": [
+    "ramp"
+  ],
+  "Cephalid Looter": [
+    "draw"
+  ],
+  "Baleful Stare": [
+    "draw"
+  ],
+  "Abzan Charm": [
+    "draw",
+    "removal_creature"
+  ],
+  "Agonizing Demise": [
+    "removal_creature"
+  ],
+  "Second Thoughts": [
+    "draw",
+    "removal_creature"
+  ],
+  "Crash Through": [
+    "draw"
+  ],
+  "Boros Signet": [
+    "ramp"
+  ],
+  "Toothy, Imaginary Friend": [
+    "draw"
+  ],
+  "Storm Fleet Spy": [
+    "draw"
+  ],
+  "Upwelling": [
+    "ramp"
+  ],
+  "Mercurial Chemister": [
+    "draw"
+  ],
+  "Scatter Arc": [
+    "draw"
+  ],
+  "Conjured Currency": [
+    "ramp"
+  ],
+  "Marauding Looter": [
+    "draw"
+  ],
+  "Culling Dais": [
+    "draw"
+  ],
+  "Sandstone Deadfall": [
+    "removal_creature"
+  ],
+  "Edge of Autumn": [
+    "draw",
+    "ramp"
+  ],
+  "Spirit Mirror": [
+    "removal_creature"
+  ],
+  "Remorseless Punishment": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Norritt": [
+    "removal_creature"
+  ],
+  "Witch's Mist": [
+    "removal_creature"
+  ],
+  "Grave Consequences": [
+    "draw"
+  ],
+  "Reign of Chaos": [
+    "removal_creature"
+  ],
+  "Voldaren Pariah // Abolisher of Bloodlines": [
+    "removal_creature"
+  ],
+  "Gift of Paradise": [
+    "ramp"
+  ],
+  "Betrayal of Flesh": [
+    "removal_creature"
+  ],
+  "Urgoros, the Empty One": [
+    "draw"
+  ],
+  "Aggressive Urge": [
+    "draw"
+  ],
+  "Foresee": [
+    "draw"
+  ],
+  "Panic Spellbomb": [
+    "draw"
+  ],
+  "Simic Signet": [
+    "ramp"
+  ],
+  "Crippling Chill": [
+    "draw"
+  ],
+  "Aura Finesse": [
+    "draw"
+  ],
+  "Uktabi Faerie": [
+    "removal_noncreature"
+  ],
+  "Warden of Geometries": [
+    "ramp"
+  ],
+  "Surveilling Sprite": [
+    "draw"
+  ],
+  "Simian Spirit Guide": [
+    "ramp"
+  ],
+  "Horobi, Death's Wail": [
+    "removal_creature"
+  ],
+  "The Eldest Reborn": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Wistful Selkie": [
+    "draw"
+  ],
+  "Psychic Vortex": [
+    "draw"
+  ],
+  "Kozilek's Predator": [
+    "ramp"
+  ],
+  "Scrabbling Claws": [
+    "draw"
+  ],
+  "Keeper of the Mind": [
+    "draw"
+  ],
+  "Notorious Assassin": [
+    "removal_creature"
+  ],
+  "Wirewood Savage": [
+    "draw"
+  ],
+  "Arbor Elf": [
+    "ramp"
+  ],
+  "Azra Oddsmaker": [
+    "draw"
+  ],
+  "Forced March": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Ring of Renewal": [
+    "draw"
+  ],
+  "Honden of Seeing Winds": [
+    "draw"
+  ],
+  "Skyward Eye Prophets": [
+    "ramp"
+  ],
+  "Ceta Sanctuary": [
+    "draw"
+  ],
+  "Price of Fame": [
+    "removal_creature"
+  ],
+  "Agent of the Fates": [
+    "removal_creature"
+  ],
+  "Raiders' Spoils": [
+    "draw"
+  ],
+  "Ray of Revelation": [
+    "removal_noncreature"
+  ],
+  "Slice and Dice": [
+    "draw"
+  ],
+  "Unified Strike": [
+    "removal_creature"
+  ],
+  "Military Intelligence": [
+    "draw"
+  ],
+  "Abzan Banner": [
+    "draw",
+    "ramp"
+  ],
+  "Arenson's Aura": [
+    "removal_noncreature"
+  ],
+  "Gempalm Incinerator": [
+    "draw"
+  ],
+  "Compost": [
+    "draw"
+  ],
+  "Force Void": [
+    "draw"
+  ],
+  "Rune of Protection: Artifacts": [
+    "draw"
+  ],
+  "Misery Charm": [
+    "removal_creature"
+  ],
+  "Sultai Charm": [
+    "draw",
+    "removal_creature"
+  ],
+  "Vivisection": [
+    "draw"
+  ],
+  "Afflict": [
+    "draw"
+  ],
+  "Urza's Tome": [
+    "draw"
+  ],
+  "Wax // Wane": [
+    "removal_noncreature"
+  ],
+  "Obliterate": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Force Away": [
+    "draw",
+    "removal_creature"
+  ],
+  "Cloudchaser Kestrel": [
+    "removal_noncreature"
+  ],
+  "Tishana, Voice of Thunder": [
+    "draw"
+  ],
+  "Enduring Renewal": [
+    "draw"
+  ],
+  "Dispersal Technician": [
+    "removal_noncreature"
+  ],
+  "Aethersquall Ancient": [
+    "removal_creature"
+  ],
+  "Mana Cylix": [
+    "ramp"
+  ],
+  "Repel the Darkness": [
+    "draw"
+  ],
+  "Aetherspouts": [
+    "removal_creature"
+  ],
+  "Feast or Famine": [
+    "removal_creature"
+  ],
+  "Gempalm Strider": [
+    "draw"
+  ],
+  "Cartouche of Knowledge": [
+    "draw"
+  ],
+  "Neurok Commando": [
+    "draw"
+  ],
+  "Sand Silos": [
+    "ramp"
+  ],
+  "Dwindle": [
+    "removal_creature"
+  ],
+  "Witch Engine": [
+    "ramp"
+  ],
+  "Blessed Alliance": [
+    "removal_creature"
+  ],
+  "Orazca Relic": [
+    "draw",
+    "ramp"
+  ],
+  "Aven Cloudchaser": [
+    "removal_noncreature"
+  ],
+  "Seton, Krosan Protector": [
+    "ramp"
+  ],
+  "Staff of Nin": [
+    "draw"
+  ],
+  "Hythonia the Cruel": [
+    "removal_creature"
+  ],
+  "Runic Armasaur": [
+    "draw"
+  ],
+  "Smuggler's Copter": [
+    "draw"
+  ],
+  "Utopia Mycon": [
+    "ramp"
+  ],
+  "Shauku, Endbringer": [
+    "removal_creature"
+  ],
+  "Abyssal Gatekeeper": [
+    "removal_creature"
+  ],
+  "Declaration in Stone": [
+    "removal_creature"
+  ],
+  "Farseek": [
+    "ramp"
+  ],
+  "Press for Answers": [
+    "draw"
+  ],
+  "Rebuild": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Kaleidostone": [
+    "draw"
+  ],
+  "Bane Alley Broker": [
+    "draw"
+  ],
+  "Primordial Sage": [
+    "draw"
+  ],
+  "Coerced Confession": [
+    "draw"
+  ],
+  "Thopter Spy Network": [
+    "draw"
+  ],
+  "Crooked Scales": [
+    "removal_creature"
+  ],
+  "Tezzeret the Schemer": [
+    "ramp"
+  ],
+  "Spawning Bed": [
+    "ramp"
+  ],
+  "Vanquish the Weak": [
+    "removal_creature"
+  ],
+  "Twisted Image": [
+    "draw"
+  ],
+  "Spin into Myth": [
+    "removal_creature"
+  ],
+  "Jace, Memory Adept": [
+    "draw"
+  ],
+  "Dwarven Hold": [
+    "ramp"
+  ],
+  "Xira Arien": [
+    "draw"
+  ],
+  "Erratic Portal": [
+    "removal_creature"
+  ],
+  "Wirewood Elf": [
+    "ramp"
+  ],
+  "Phyrexian Furnace": [
+    "draw"
+  ],
+  "Vortex Elemental": [
+    "removal_creature"
+  ],
+  "Seaside Haven": [
+    "draw"
+  ],
+  "Start // Finish": [
+    "removal_creature"
+  ],
+  "Font of Fortunes": [
+    "draw"
+  ],
+  "Tezzeret the Seeker": [
+    "ramp"
+  ],
+  "Rashida Scalebane": [
+    "removal_creature"
+  ],
+  "Enter the Unknown": [
+    "ramp"
+  ],
+  "Aether Spellbomb": [
+    "draw",
+    "removal_creature"
+  ],
+  "Marker Beetles": [
+    "draw"
+  ],
+  "Fleshbag Marauder": [
+    "removal_creature"
+  ],
+  "Expunge": [
+    "draw",
+    "removal_creature"
+  ],
+  "Altar of Shadows": [
+    "removal_creature"
+  ],
+  "Seer's Lantern": [
+    "ramp"
+  ],
+  "Sphinx of Uthuun": [
+    "draw"
+  ],
+  "Talisman of Dominance": [
+    "ramp"
+  ],
+  "Afterlife": [
+    "removal_creature"
+  ],
+  "Catacomb Sifter": [
+    "ramp"
+  ],
+  "Crashing Tide": [
+    "draw",
+    "removal_creature"
+  ],
+  "Messenger Drake": [
+    "draw"
+  ],
+  "Avarice Amulet": [
+    "draw"
+  ],
+  "Silkwing Scout": [
+    "ramp"
+  ],
+  "Heart of Ramos": [
+    "ramp"
+  ],
+  "Foreshadow": [
+    "draw"
+  ],
+  "Jori En, Ruin Diver": [
+    "draw"
+  ],
+  "Farhaven Elf": [
+    "ramp"
+  ],
+  "Hearth Charm": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Firebrand Ranger": [
+    "ramp"
+  ],
+  "Spinal Embrace": [
+    "removal_creature"
+  ],
+  "Frontier Siege": [
+    "ramp"
+  ],
+  "Tsabo's Assassin": [
+    "removal_creature"
+  ],
+  "Ashnod's Altar": [
+    "ramp"
+  ],
+  "Last Stand": [
+    "draw"
+  ],
+  "Ebon Stronghold": [
+    "ramp"
+  ],
+  "Into the Void": [
+    "removal_creature"
+  ],
+  "Blighted Cataract": [
+    "draw"
+  ],
+  "Mercy Killing": [
+    "removal_creature"
+  ],
+  "Funeral March": [
+    "removal_creature"
+  ],
+  "Undead Gladiator": [
+    "draw"
+  ],
+  "Kavu Lair": [
+    "draw"
+  ],
+  "Unearth": [
+    "draw"
+  ],
+  "Tsabo's Decree": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Aura Blast": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "King's Assassin": [
+    "removal_creature"
+  ],
+  "Runed Servitor": [
+    "draw"
+  ],
+  "Courier's Capsule": [
+    "draw"
+  ],
+  "Serum Powder": [
+    "ramp"
+  ],
+  "Suncrusher": [
+    "removal_creature"
+  ],
+  "Whip Vine": [
+    "removal_creature"
+  ],
+  "Yennett, Cryptic Sovereign": [
+    "draw"
+  ],
+  "Claws of Wirewood": [
+    "draw"
+  ],
+  "Sylvan Basilisk": [
+    "removal_creature"
+  ],
+  "Sift Through Sands": [
+    "draw"
+  ],
+  "Kirtar's Wrath": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Shaman of the Great Hunt": [
+    "draw"
+  ],
+  "Liar's Pendulum": [
+    "draw"
+  ],
+  "See Beyond": [
+    "draw"
+  ],
+  "Guardian Project": [
+    "draw"
+  ],
+  "Reset": [
+    "ramp"
+  ],
+  "Parasitic Implant": [
+    "removal_creature"
+  ],
+  "Wall of Vipers": [
+    "removal_creature"
+  ],
+  "Conjurer's Bauble": [
+    "draw"
+  ],
+  "Crypt of Agadeem": [
+    "ramp"
+  ],
+  "Shoulder to Shoulder": [
+    "draw"
+  ],
+  "Zndrsplt, Eye of Wisdom": [
+    "draw"
+  ],
+  "Reality Ripple": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Fyndhorn Elder": [
+    "ramp"
+  ],
+  "Desert of the Mindful": [
+    "draw"
+  ],
+  "Ray of Dissolution": [
+    "removal_noncreature"
+  ],
+  "Vendetta": [
+    "removal_creature"
+  ],
+  "Earthcraft": [
+    "ramp"
+  ],
+  "Goblin Vandal": [
+    "removal_noncreature"
+  ],
+  "Inferno Jet": [
+    "draw"
+  ],
+  "Keeper of the Dead": [
+    "removal_creature"
+  ],
+  "Cleansing Ray": [
+    "removal_noncreature"
+  ],
+  "Tin Street Market": [
+    "draw"
+  ],
+  "Spectral Searchlight": [
+    "ramp"
+  ],
+  "Stern Proctor": [
+    "removal_noncreature"
+  ],
+  "Zedruu the Greathearted": [
+    "draw"
+  ],
+  "Shielded Aether Thief": [
+    "draw"
+  ],
+  "Tragic Lesson": [
+    "draw"
+  ],
+  "Insist": [
+    "draw"
+  ],
+  "To the Slaughter": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Elfhame Druid": [
+    "ramp"
+  ],
+  "Blink of an Eye": [
+    "draw"
+  ],
+  "Sigil of Sleep": [
+    "removal_creature"
+  ],
+  "Tomorrow, Azami's Familiar": [
+    "draw"
+  ],
+  "Entangling Vines": [
+    "removal_creature"
+  ],
+  "Nine-Tail White Fox": [
+    "draw"
+  ],
+  "Bane of Progress": [
+    "removal_noncreature"
+  ],
+  "Sicken": [
+    "draw"
+  ],
+  "Chandler": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Sai, Master Thopterist": [
+    "draw"
+  ],
+  "Faceless Butcher": [
+    "removal_creature"
+  ],
+  "Words of Wind": [
+    "draw"
+  ],
+  "Traveler's Cloak": [
+    "draw"
+  ],
+  "Nicol Bolas, the Deceiver": [
+    "draw"
+  ],
+  "Fevered Strength": [
+    "draw"
+  ],
+  "Sweltering Suns": [
+    "draw"
+  ],
+  "Hierophant's Chalice": [
+    "ramp"
+  ],
+  "Scorned Villager // Moonscarred Werewolf": [
+    "ramp"
+  ],
+  "Crux of Fate": [
+    "removal_creature"
+  ],
+  "Touch of Death": [
+    "draw"
+  ],
+  "Afflicted Deserter // Werewolf Ransacker": [
+    "removal_noncreature"
+  ],
+  "Soul Snare": [
+    "removal_creature"
+  ],
+  "Kill-Suit Cultist": [
+    "removal_creature"
+  ],
+  "Malfegor": [
+    "removal_creature"
+  ],
+  "Stir the Sands": [
+    "draw"
+  ],
+  "Phthisis": [
+    "removal_creature"
+  ],
+  "Rhystic Study": [
+    "draw"
+  ],
+  "Lost Legacy": [
+    "draw"
+  ],
+  "Devouring Light": [
+    "removal_creature"
+  ],
+  "Lingering Death": [
+    "removal_creature"
+  ],
+  "Archfiend of Ifnir": [
+    "draw"
+  ],
+  "Blossom Dryad": [
+    "ramp"
+  ],
+  "Pox": [
+    "removal_creature"
+  ],
+  "Chromatic Lantern": [
+    "ramp"
+  ],
+  "Gilt-Leaf Winnower": [
+    "removal_creature"
+  ],
+  "Whiptongue Hydra": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Kynaios and Tiro of Meletis": [
+    "draw",
+    "ramp"
+  ],
+  "Mwonvuli Acid-Moss": [
+    "ramp"
+  ],
+  "Bazaar of Baghdad": [
+    "draw"
+  ],
+  "Manipulate Fate": [
+    "draw"
+  ],
+  "Quicksmith Spy": [
+    "draw"
+  ],
+  "Sphinx's Disciple": [
+    "draw"
+  ],
+  "Boggart Arsonists": [
+    "removal_creature"
+  ],
+  "Sosuke, Son of Seshiro": [
+    "removal_creature"
+  ],
+  "Wandering Champion": [
+    "draw"
+  ],
+  "Loyal Sentry": [
+    "removal_creature"
+  ],
+  "Seshiro the Anointed": [
+    "draw"
+  ],
+  "Phyrexian Tyranny": [
+    "draw"
+  ],
+  "Plumes of Peace": [
+    "removal_creature"
+  ],
+  "Awakening": [
+    "ramp"
+  ],
+  "Fatestitcher": [
+    "ramp"
+  ],
+  "Svyelunite Temple": [
+    "ramp"
+  ],
+  "Darkwatch Elves": [
+    "draw"
+  ],
+  "Dream Thief": [
+    "draw"
+  ],
+  "Vengeful Dreams": [
+    "removal_creature"
+  ],
+  "Pore Over the Pages": [
+    "draw"
+  ],
+  "Quagmire Druid": [
+    "removal_noncreature"
+  ],
+  "Zap": [
+    "draw"
+  ],
+  "Skeletal Scrying": [
+    "draw"
+  ],
+  "Ridge Rannet": [
+    "draw"
+  ],
+  "Crash": [
+    "removal_noncreature"
+  ],
+  "Shifting Shadow": [
+    "removal_creature"
+  ],
+  "Scuttlemutt": [
+    "ramp"
+  ],
+  "Curse of the Swine": [
+    "removal_creature"
+  ],
+  "Stupefying Touch": [
+    "draw"
+  ],
+  "Banishment Decree": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Energy Storm": [
+    "removal_creature"
+  ],
+  "Vedalken Archmage": [
+    "draw"
+  ],
+  "Serum Visions": [
+    "draw"
+  ],
+  "Vow of Wildness": [
+    "removal_creature"
+  ],
+  "Dimir Cutpurse": [
+    "draw"
+  ],
+  "Throat Slitter": [
+    "removal_creature"
+  ],
+  "Valleymaker": [
+    "ramp"
+  ],
+  "Generous Stray": [
+    "draw"
+  ],
+  "Instill Furor": [
+    "removal_creature"
+  ],
+  "Trip Wire": [
+    "removal_creature"
+  ],
+  "Sever Soul": [
+    "removal_creature"
+  ],
+  "Deep Analysis": [
+    "draw"
+  ],
+  "Suffocation": [
+    "draw"
+  ],
+  "Get the Point": [
+    "removal_creature"
+  ],
+  "Vine Trellis": [
+    "ramp"
+  ],
+  "Urza's Miter": [
+    "draw"
+  ],
+  "Parting Thoughts": [
+    "draw",
+    "removal_creature"
+  ],
+  "Wall of Tears": [
+    "removal_creature"
+  ],
+  "Power Taint": [
+    "draw"
+  ],
+  "Overgrown Battlement": [
+    "ramp"
+  ],
+  "Koth of the Hammer": [
+    "ramp"
+  ],
+  "Painful Truths": [
+    "draw"
+  ],
+  "Siren's Ruse": [
+    "draw"
+  ],
+  "Golden Guardian // Gold-Forge Garrison": [
+    "ramp"
+  ],
+  "Mystifying Maze": [
+    "removal_creature"
+  ],
+  "Slippery Karst": [
+    "draw"
+  ],
+  "Kiora, the Crashing Wave": [
+    "draw",
+    "ramp"
+  ],
+  "Melancholy": [
+    "removal_creature"
+  ],
+  "Omnibian": [
+    "removal_creature"
+  ],
+  "Lu Su, Wu Advisor": [
+    "draw"
+  ],
+  "Archmage Ascension": [
+    "draw"
+  ],
+  "Ephara, God of the Polis": [
+    "draw"
+  ],
+  "Sunset Pyramid": [
+    "draw"
+  ],
+  "Zhur-Taa Druid": [
+    "ramp"
+  ],
+  "Deadeye Plunderers": [
+    "ramp"
+  ],
+  "Harvester of Souls": [
+    "draw"
+  ],
+  "Dosan's Oldest Chant": [
+    "draw"
+  ],
+  "Comparative Analysis": [
+    "draw"
+  ],
+  "Izoni, Thousand-Eyed": [
+    "draw"
+  ],
+  "Psychic Membrane": [
+    "draw"
+  ],
+  "Aligned Hedron Network": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Storm Cauldron": [
+    "ramp"
+  ],
+  "Gate to the Afterlife": [
+    "draw"
+  ],
+  "Griptide": [
+    "removal_creature"
+  ],
+  "Defang": [
+    "removal_creature"
+  ],
+  "Corpsehatch": [
+    "ramp",
+    "removal_creature"
+  ],
+  "Casting of Bones": [
+    "draw"
+  ],
+  "Sleep Paralysis": [
+    "removal_creature"
+  ],
+  "Restrain": [
+    "draw"
+  ],
+  "Viridian Shaman": [
+    "removal_noncreature"
+  ],
+  "Huatli, Radiant Champion": [
+    "draw"
+  ],
+  "Illusion // Reality": [
+    "removal_noncreature"
+  ],
+  "Voracious Cobra": [
+    "removal_creature"
+  ],
+  "Dovin Baan": [
+    "draw"
+  ],
+  "Avacynian Missionaries // Lunarch Inquisitors": [
+    "removal_creature"
+  ],
+  "Garza Zol, Plague Queen": [
+    "draw"
+  ],
+  "Ichor Wellspring": [
+    "draw"
+  ],
+  "Treasure Cruise": [
+    "draw"
+  ],
+  "Undercity's Embrace": [
+    "removal_creature"
+  ],
+  "Beck // Call": [
+    "draw"
+  ],
+  "Wave of Vitriol": [
+    "removal_noncreature"
+  ],
+  "Meekstone": [
+    "removal_creature"
+  ],
+  "Mercadian Atlas": [
+    "draw"
+  ],
+  "Jungle Patrol": [
+    "ramp"
+  ],
+  "Feral Prowler": [
+    "draw"
+  ],
+  "Burning-Tree Vandal": [
+    "draw"
+  ],
+  "Read the Bones": [
+    "draw"
+  ],
+  "Eternal of Harsh Truths": [
+    "draw"
+  ],
+  "Magnetic Mountain": [
+    "removal_creature"
+  ],
+  "Dinosaur Hunter": [
+    "removal_creature"
+  ],
+  "Quicksilver Dagger": [
+    "draw"
+  ],
+  "Sorin, Lord of Innistrad": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Dismiss": [
+    "draw"
+  ],
+  "Food Chain": [
+    "ramp"
+  ],
+  "Soaring Show-Off": [
+    "draw"
+  ],
+  "Tivadar's Crusade": [
+    "removal_creature"
+  ],
+  "Knotvine Mystic": [
+    "ramp"
+  ],
+  "Drake Familiar": [
+    "removal_noncreature"
+  ],
+  "Weatherseed Totem": [
+    "ramp"
+  ],
+  "Warden of the Wall": [
+    "ramp"
+  ],
+  "Beast Whisperer": [
+    "draw"
+  ],
+  "Rampage of the Clans": [
+    "removal_noncreature"
+  ],
+  "Bloated Toad": [
+    "draw"
+  ],
+  "Windreader Sphinx": [
+    "draw"
+  ],
+  "Saruli Caretaker": [
+    "ramp"
+  ],
+  "Greenweaver Druid": [
+    "ramp"
+  ],
+  "Kaya, Ghost Assassin": [
+    "draw"
+  ],
+  "Rakdos Charm": [
+    "removal_noncreature"
+  ],
+  "Conjurer's Ban": [
+    "draw"
+  ],
+  "Vance's Blasting Cannons // Spitfire Bastion": [
+    "ramp"
+  ],
+  "Crystalline Crawler": [
+    "ramp"
+  ],
+  "Attunement": [
+    "draw"
+  ],
+  "Aether Membrane": [
+    "removal_creature"
+  ],
+  "Grim Backwoods": [
+    "draw"
+  ],
+  "Scarab of the Unseen": [
+    "draw"
+  ],
+  "Annex": [
+    "ramp"
+  ],
+  "Lifecrafter's Bestiary": [
+    "draw"
+  ],
+  "Elvish Pioneer": [
+    "ramp"
+  ],
+  "Dismantle": [
+    "removal_noncreature"
+  ],
+  "Unquenchable Thirst": [
+    "removal_creature"
+  ],
+  "Wall of Omens": [
+    "draw"
+  ],
+  "Frontier Guide": [
+    "ramp"
+  ],
+  "Kraum, Ludevic's Opus": [
+    "draw"
+  ],
+  "Diligent Farmhand": [
+    "ramp"
+  ],
+  "Thalakos Dreamsower": [
+    "removal_creature"
+  ],
+  "Champion of Dusk": [
+    "draw"
+  ],
+  "Nissa's Defeat": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Glimpse of Nature": [
+    "draw"
+  ],
+  "Survival Cache": [
+    "draw"
+  ],
+  "Clarion Ultimatum": [
+    "ramp"
+  ],
+  "Witch Hunter": [
+    "removal_creature"
+  ],
+  "Kydele, Chosen of Kruphix": [
+    "ramp"
+  ],
+  "Viscerid Drone": [
+    "removal_creature"
+  ],
+  "Dauthi Cutthroat": [
+    "removal_creature"
+  ],
+  "Hoarder's Greed": [
+    "draw"
+  ],
+  "Infuse": [
+    "draw"
+  ],
+  "Shrine of Boundless Growth": [
+    "ramp"
+  ],
+  "Lodestone Bauble": [
+    "draw"
+  ],
+  "Reckless Scholar": [
+    "draw"
+  ],
+  "Solfatara": [
+    "draw"
+  ],
+  "Rune of Protection: Lands": [
+    "draw"
+  ],
+  "Krovikan Plague": [
+    "draw"
+  ],
+  "Gorilla War Cry": [
+    "draw"
+  ],
+  "Hieroglyphic Illumination": [
+    "draw"
+  ],
+  "Elsewhere Flask": [
+    "draw"
+  ],
+  "Public Execution": [
+    "removal_creature"
+  ],
+  "Leaf Gilder": [
+    "ramp"
+  ],
+  "Blue Sun's Zenith": [
+    "draw"
+  ],
+  "Dreamcatcher": [
+    "draw"
+  ],
+  "Trial of Knowledge": [
+    "draw"
+  ],
+  "Crystal Vein": [
+    "ramp"
+  ],
+  "Crushing Canopy": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Thirst": [
+    "removal_creature"
+  ],
+  "Wing Snare": [
+    "removal_creature"
+  ],
+  "Sunfire Balm": [
+    "draw"
+  ],
+  "Radha, Heir to Keld": [
+    "ramp"
+  ],
+  "Retribution of the Meek": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Angrath's Fury": [
+    "removal_creature"
+  ],
+  "Avenger en-Dal": [
+    "removal_creature"
+  ],
+  "Last Caress": [
+    "draw"
+  ],
+  "Squandered Resources": [
+    "ramp"
+  ],
+  "Oloro, Ageless Ascetic": [
+    "draw"
+  ],
+  "Portcullis": [
+    "removal_creature"
+  ],
+  "Inside Out": [
+    "draw",
+    "removal_creature"
+  ],
+  "Terminate": [
+    "removal_creature"
+  ],
+  "Marble Titan": [
+    "removal_creature"
+  ],
+  "Withdraw": [
+    "removal_creature"
+  ],
+  "Moriok Replica": [
+    "draw"
+  ],
+  "Decomposition": [
+    "removal_creature"
+  ],
+  "Serum Tank": [
+    "draw"
+  ],
+  "Claustrophobia": [
+    "removal_creature"
+  ],
+  "Scrap Mastery": [
+    "removal_noncreature"
+  ],
+  "Counsel of the Soratami": [
+    "draw"
+  ],
+  "Pernicious Deed": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Drowned Rusalka": [
+    "draw"
+  ],
+  "Dimir Cluestone": [
+    "draw",
+    "ramp"
+  ],
+  "Abeyance": [
+    "draw"
+  ],
+  "Lignify": [
+    "removal_creature"
+  ],
+  "Touch of Brilliance": [
+    "draw"
+  ],
+  "Trading Post": [
+    "draw"
+  ],
+  "Scroll Thief": [
+    "draw"
+  ],
+  "Mishra's Bauble": [
+    "draw"
+  ],
+  "Brass's Bounty": [
+    "ramp"
+  ],
+  "Intrepid Hero": [
+    "removal_creature"
+  ],
+  "Disciple of Malice": [
+    "draw"
+  ],
+  "Dakra Mystic": [
+    "draw"
+  ],
+  "Mind's Eye": [
+    "draw"
+  ],
+  "Synthetic Destiny": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Savra, Queen of the Golgari": [
+    "removal_creature"
+  ],
+  "Linessa, Zephyr Mage": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Pillar of Light": [
+    "removal_creature"
+  ],
+  "Slay": [
+    "draw",
+    "removal_creature"
+  ],
+  "Darkblast": [
+    "draw"
+  ],
+  "Predator, Flagship": [
+    "removal_creature"
+  ],
+  "Karlov of the Ghost Council": [
+    "removal_creature"
+  ],
+  "Din of the Fireherd": [
+    "removal_creature"
+  ],
+  "Smite the Monstrous": [
+    "removal_creature"
+  ],
+  "Last Thoughts": [
+    "draw"
+  ],
+  "Rending Vines": [
+    "draw"
+  ],
+  "Oath of Lim-D\u00fbl": [
+    "draw"
+  ],
+  "Argent Mutation": [
+    "draw"
+  ],
+  "Grim Flowering": [
+    "draw"
+  ],
+  "Ob Nixilis Reignited": [
+    "draw",
+    "removal_creature"
+  ],
+  "Fool's Tome": [
+    "draw"
+  ],
+  "Mind Over Matter": [
+    "ramp"
+  ],
+  "Ulvenwald Mysteries": [
+    "draw"
+  ],
+  "Cleansing Meditation": [
+    "removal_noncreature"
+  ],
+  "Skullclamp": [
+    "draw"
+  ],
+  "Freyalise, Llanowar's Fury": [
+    "draw",
+    "ramp"
+  ],
+  "Phyrexian Totem": [
+    "ramp"
+  ],
+  "Peel from Reality": [
+    "removal_creature"
+  ],
+  "Vampiric Rites": [
+    "draw"
+  ],
+  "Turntimber Basilisk": [
+    "removal_creature"
+  ],
+  "Kalemne's Captain": [
+    "removal_noncreature"
+  ],
+  "Befuddle": [
+    "draw"
+  ],
+  "Allay": [
+    "removal_noncreature"
+  ],
+  "Decree of Annihilation": [
+    "draw",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Birchlore Rangers": [
+    "ramp"
+  ],
+  "Shadow Rift": [
+    "draw"
+  ],
+  "Magus of the Abyss": [
+    "removal_creature"
+  ],
+  "Gateway Sneak": [
+    "draw"
+  ],
+  "Skullmulcher": [
+    "draw"
+  ],
+  "Slingbow Trap": [
+    "removal_creature"
+  ],
+  "Silver Myr": [
+    "ramp"
+  ],
+  "Scourgemark": [
+    "draw"
+  ],
+  "Helm of the Ghastlord": [
+    "draw"
+  ],
+  "Pit Trap": [
+    "removal_creature"
+  ],
+  "Merfolk Looter": [
+    "draw"
+  ],
+  "Sakura-Tribe Springcaller": [
+    "ramp"
+  ],
+  "Kozilek's Translator": [
+    "ramp"
+  ],
+  "Gatekeeper of Malakir": [
+    "removal_creature"
+  ],
+  "Innocent Blood": [
+    "removal_creature"
+  ],
+  "Decree of Justice": [
+    "draw"
+  ],
+  "Slaughter Pact": [
+    "removal_creature"
+  ],
+  "Bant Sojourners": [
+    "draw"
+  ],
+  "Reign of Terror": [
+    "removal_creature"
+  ],
+  "Library of Lat-Nam": [
+    "draw"
+  ],
+  "Defiant Vanguard": [
+    "removal_creature"
+  ],
+  "Death Cloud": [
+    "removal_creature"
+  ],
+  "Drogskol Reaver": [
+    "draw"
+  ],
+  "Ongoing Investigation": [
+    "draw"
+  ],
+  "Vanquish": [
+    "removal_creature"
+  ],
+  "Rude Awakening": [
+    "ramp"
+  ],
+  "Compelling Argument": [
+    "draw"
+  ],
+  "Golgari Grave-Troll": [
+    "draw"
+  ],
+  "Sifter of Skulls": [
+    "ramp"
+  ],
+  "Llanowar Elves": [
+    "ramp"
+  ],
+  "Ruin in Their Wake": [
+    "ramp"
+  ],
+  "Barrin's Spite": [
+    "removal_creature"
+  ],
+  "Krark-Clan Ironworks": [
+    "ramp"
+  ],
+  "Sire of the Storm": [
+    "draw"
+  ],
+  "Laquatus's Disdain": [
+    "draw"
+  ],
+  "Magus of the Library": [
+    "draw",
+    "ramp"
+  ],
+  "Thought Reflection": [
+    "draw"
+  ],
+  "Rayne, Academy Chancellor": [
+    "draw"
+  ],
+  "Wild Celebrants": [
+    "removal_noncreature"
+  ],
+  "Goblin Pyromancer": [
+    "removal_creature"
+  ],
+  "Scroll of Origins": [
+    "draw"
+  ],
+  "Blizzard": [
+    "removal_creature"
+  ],
+  "Vanquish the Foul": [
+    "removal_creature"
+  ],
+  "Vizier of Tumbling Sands": [
+    "draw",
+    "ramp"
+  ],
+  "Aven Fisher": [
+    "draw"
+  ],
+  "Bone Shredder": [
+    "removal_creature"
+  ],
+  "Prophetic Ravings": [
+    "draw"
+  ],
+  "The Tabernacle at Pendrell Vale": [
+    "removal_creature"
+  ],
+  "Ruthless Deathfang": [
+    "removal_creature"
+  ],
+  "Mitotic Manipulation": [
+    "ramp"
+  ],
+  "Killing Wave": [
+    "removal_creature"
+  ],
+  "Final Judgment": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Chasm Skulker": [
+    "draw"
+  ],
+  "Coiling Oracle": [
+    "draw",
+    "ramp"
+  ],
+  "Altar's Reap": [
+    "draw"
+  ],
+  "Stasis Snare": [
+    "removal_creature"
+  ],
+  "Tuvasa the Sunlit": [
+    "draw"
+  ],
+  "Magmatic Insight": [
+    "draw"
+  ],
+  "Relic of Progenitus": [
+    "draw"
+  ],
+  "Daredevil Dragster": [
+    "draw"
+  ],
+  "Desert Cerodon": [
+    "draw"
+  ],
+  "Sol Ring": [
+    "ramp"
+  ],
+  "Elvish Spirit Guide": [
+    "ramp"
+  ],
+  "Ideas Unbound": [
+    "draw"
+  ],
+  "Lightning Blow": [
+    "draw"
+  ],
+  "Basalt Monolith": [
+    "ramp"
+  ],
+  "Soul of the Harvest": [
+    "draw"
+  ],
+  "Aerial Predation": [
+    "removal_creature"
+  ],
+  "Prophet of Distortion": [
+    "draw"
+  ],
+  "Painful Lesson": [
+    "draw"
+  ],
+  "Growth Spasm": [
+    "ramp"
+  ],
+  "Spreading Plague": [
+    "removal_creature"
+  ],
+  "Foxfire": [
+    "draw"
+  ],
+  "Avenging Arrow": [
+    "removal_creature"
+  ],
+  "Excommunicate": [
+    "removal_creature"
+  ],
+  "Thran Turbine": [
+    "ramp"
+  ],
+  "Devour Flesh": [
+    "removal_creature"
+  ],
+  "Oracle of Mul Daya": [
+    "ramp"
+  ],
+  "Teferi's Care": [
+    "removal_noncreature"
+  ],
+  "Iron Myr": [
+    "ramp"
+  ],
+  "Tel-Jilad Justice": [
+    "removal_noncreature"
+  ],
+  "Savage Gorilla": [
+    "draw"
+  ],
+  "Ramses Overdark": [
+    "removal_creature"
+  ],
+  "Strangling Soot": [
+    "removal_creature"
+  ],
+  "Uktabi Orangutan": [
+    "removal_noncreature"
+  ],
+  "Serene Offering": [
+    "removal_noncreature"
+  ],
+  "Sylvan Echoes": [
+    "draw"
+  ],
+  "Yavimaya Dryad": [
+    "ramp"
+  ],
+  "Vision Skeins": [
+    "draw"
+  ],
+  "Novijen Sages": [
+    "draw"
+  ],
+  "Poison Arrow": [
+    "removal_creature"
+  ],
+  "Backslide": [
+    "draw"
+  ],
+  "Dovin's Dismissal": [
+    "removal_creature"
+  ],
+  "Vindictive Lich": [
+    "removal_creature"
+  ],
+  "Spring // Mind": [
+    "ramp"
+  ],
+  "Horror of the Broken Lands": [
+    "draw"
+  ],
+  "Pirate's Prize": [
+    "draw",
+    "ramp"
+  ],
+  "Drover of the Mighty": [
+    "ramp"
+  ],
+  "Sift": [
+    "draw"
+  ],
+  "Repel": [
+    "removal_creature"
+  ],
+  "Elvish Archdruid": [
+    "ramp"
+  ],
+  "Teferi's Curse": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Slith Strider": [
+    "draw"
+  ],
+  "Oracle of Dust": [
+    "draw"
+  ],
+  "Cultivator Drone": [
+    "ramp"
+  ],
+  "Rock Basilisk": [
+    "removal_creature"
+  ],
+  "Malakir Soothsayer": [
+    "draw"
+  ],
+  "Parallax Dementia": [
+    "removal_creature"
+  ],
+  "Stalking Leonin": [
+    "removal_creature"
+  ],
+  "Scorched Ruins": [
+    "ramp"
+  ],
+  "Sea Gate Loremaster": [
+    "draw"
+  ],
+  "Resounding Silence": [
+    "draw",
+    "removal_creature"
+  ],
+  "Phyrexian Rebirth": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Run Aground": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Fungal Reaches": [
+    "ramp"
+  ],
+  "Rune of Protection: White": [
+    "draw"
+  ],
+  "Skull Storm": [
+    "removal_creature"
+  ],
+  "Hope Tender": [
+    "ramp"
+  ],
+  "Grave Pact": [
+    "removal_creature"
+  ],
+  "Inaction Injunction": [
+    "draw"
+  ],
+  "Death Mutation": [
+    "removal_creature"
+  ],
+  "Repulse": [
+    "draw",
+    "removal_creature"
+  ],
+  "Kiora's Dismissal": [
+    "removal_noncreature"
+  ],
+  "Renegade Rallier": [
+    "ramp"
+  ],
+  "Curfew": [
+    "removal_creature"
+  ],
+  "Gruul Locket": [
+    "draw",
+    "ramp"
+  ],
+  "Angel of the God-Pharaoh": [
+    "draw"
+  ],
+  "Naya Sojourners": [
+    "draw"
+  ],
+  "Harrow": [
+    "ramp"
+  ],
+  "Priest of Iroas": [
+    "removal_noncreature"
+  ],
+  "Fevered Visions": [
+    "draw"
+  ],
+  "Null Profusion": [
+    "draw"
+  ],
+  "Rites of Flourishing": [
+    "ramp"
+  ],
+  "Spinal Graft": [
+    "removal_creature"
+  ],
+  "Pentarch Ward": [
+    "draw"
+  ],
+  "Into the Wilds": [
+    "ramp"
+  ],
+  "Child of Alara": [
+    "board_wipe"
+  ],
+  "Reality Shift": [
+    "removal_creature"
+  ],
+  "Snake Umbra": [
+    "draw"
+  ],
+  "Harrowing Journey": [
+    "draw"
+  ],
+  "Swirling Torrent": [
+    "removal_creature"
+  ],
+  "Frozen Solid": [
+    "removal_creature"
+  ],
+  "Wild Dogs": [
+    "draw"
+  ],
+  "Opt": [
+    "draw"
+  ],
+  "Hornswoggle": [
+    "ramp"
+  ],
+  "Deathbringer Regent": [
+    "removal_creature"
+  ],
+  "Elvish Rejuvenator": [
+    "ramp"
+  ],
+  "Seal of Doom": [
+    "removal_creature"
+  ],
+  "Sphinx's Revelation": [
+    "draw"
+  ],
+  "Storm the Vault // Vault of Catlacan": [
+    "ramp"
+  ],
+  "Return to the Earth": [
+    "removal_creature"
+  ],
+  "Striped Riverwinder": [
+    "draw"
+  ],
+  "Azorius Keyrune": [
+    "ramp"
+  ],
+  "Predict": [
+    "draw"
+  ],
+  "Grim Haruspex": [
+    "draw"
+  ],
+  "Stormsurge Kraken": [
+    "draw"
+  ],
+  "Horn of Plenty": [
+    "draw"
+  ],
+  "Infiltration Lens": [
+    "draw"
+  ],
+  "Ob Nixilis, Unshackled": [
+    "removal_creature"
+  ],
+  "Provoke": [
+    "draw"
+  ],
+  "Call the Scions": [
+    "ramp"
+  ],
+  "Warlord's Fury": [
+    "draw"
+  ],
+  "Gideon Jura": [
+    "removal_creature"
+  ],
+  "Cabal Coffers": [
+    "ramp"
+  ],
+  "Quillmane Baku": [
+    "removal_creature"
+  ],
+  "Mana Vault": [
+    "ramp"
+  ],
+  "Jandor's Ring": [
+    "draw"
+  ],
+  "Utopia Tree": [
+    "ramp"
+  ],
+  "Ghostly Visit": [
+    "removal_creature"
+  ],
+  "Tel-Jilad Defiance": [
+    "draw"
+  ],
+  "Giant's Ire": [
+    "draw"
+  ],
+  "Pulse of the Grid": [
+    "draw"
+  ],
+  "Roilmage's Trick": [
+    "draw"
+  ],
+  "Intellectual Offering": [
+    "draw"
+  ],
+  "Rot Wolf": [
+    "draw"
+  ],
+  "Wrath of Marit Lage": [
+    "removal_creature"
+  ],
+  "Yawgmoth's Vile Offering": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Lammastide Weave": [
+    "draw"
+  ],
+  "Inheritance": [
+    "draw"
+  ],
+  "Read the Runes": [
+    "draw"
+  ],
+  "Shapers of Nature": [
+    "draw"
+  ],
+  "Puresteel Paladin": [
+    "draw"
+  ],
+  "Slipstream Eel": [
+    "draw"
+  ],
+  "Scavenger Folk": [
+    "removal_noncreature"
+  ],
+  "Nimble Obstructionist": [
+    "draw"
+  ],
+  "Academy Raider": [
+    "draw"
+  ],
+  "Howling Golem": [
+    "draw"
+  ],
+  "Evil Eye of Urborg": [
+    "removal_creature"
+  ],
+  "Bala Ged Scorpion": [
+    "removal_creature"
+  ],
+  "Dire Undercurrents": [
+    "draw"
+  ],
+  "Capashen Standard": [
+    "draw"
+  ],
+  "Tetzimoc, Primal Death": [
+    "removal_creature"
+  ],
+  "Krark-Clan Stoker": [
+    "ramp"
+  ],
+  "Planar Guide": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Kindly Stranger // Demon-Possessed Witch": [
+    "removal_creature"
+  ],
+  "Druidic Satchel": [
+    "ramp"
+  ],
+  "Topple": [
+    "removal_creature"
+  ],
+  "Ral Zarek": [
+    "ramp"
+  ],
+  "Obelisk of Alara": [
+    "draw"
+  ],
+  "Rishkar, Peema Renegade": [
+    "ramp"
+  ],
+  "Vraska, Regal Gorgon": [
+    "removal_creature"
+  ],
+  "Teferi, Timebender": [
+    "draw"
+  ],
+  "Just the Wind": [
+    "removal_creature"
+  ],
+  "Disrupt": [
+    "draw"
+  ],
+  "Lonely Sandbar": [
+    "draw"
+  ],
+  "Uba Mask": [
+    "draw"
+  ],
+  "Quirion Explorer": [
+    "ramp"
+  ],
+  "Dimir Keyrune": [
+    "ramp"
+  ],
+  "Torchling": [
+    "removal_creature"
+  ],
+  "Powerstone Shard": [
+    "ramp"
+  ],
+  "Snakeform": [
+    "draw"
+  ],
+  "Surge of Thoughtweft": [
+    "draw"
+  ],
+  "Words of War": [
+    "draw"
+  ],
+  "Senate Guildmage": [
+    "draw"
+  ],
+  "Lurching Rotbeast": [
+    "draw"
+  ],
+  "Churning Eddy": [
+    "removal_creature"
+  ],
+  "Viscera Dragger": [
+    "draw"
+  ],
+  "Waterwhirl": [
+    "removal_creature"
+  ],
+  "Shattering Pulse": [
+    "removal_noncreature"
+  ],
+  "Kiss of the Amesha": [
+    "draw"
+  ],
+  "Urban Utopia": [
+    "draw",
+    "ramp"
+  ],
+  "Unifying Theory": [
+    "draw"
+  ],
+  "Eidolon of Blossoms": [
+    "draw"
+  ],
+  "Quickchange": [
+    "draw"
+  ],
+  "Roiling Waters": [
+    "draw",
+    "removal_creature"
+  ],
+  "Draconic Disciple": [
+    "ramp"
+  ],
+  "Eradicate": [
+    "removal_creature"
+  ],
+  "Fiery Gambit": [
+    "ramp"
+  ],
+  "Briarbridge Patrol": [
+    "draw"
+  ],
+  "Scourglass": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Ancient Craving": [
+    "draw"
+  ],
+  "Nature's Lore": [
+    "ramp"
+  ],
+  "Thran Tome": [
+    "draw"
+  ],
+  "Vithian Renegades": [
+    "removal_noncreature"
+  ],
+  "Accelerate": [
+    "draw"
+  ],
+  "Touch of Invisibility": [
+    "draw"
+  ],
+  "Selesnya Cluestone": [
+    "draw",
+    "ramp"
+  ],
+  "Enchantress's Presence": [
+    "draw"
+  ],
+  "Braid of Fire": [
+    "ramp"
+  ],
+  "Soltari Visionary": [
+    "removal_noncreature"
+  ],
+  "Chainer's Edict": [
+    "removal_creature"
+  ],
+  "Visara the Dreadful": [
+    "removal_creature"
+  ],
+  "Bloodletter Quill": [
+    "draw"
+  ],
+  "Architects of Will": [
+    "draw"
+  ],
+  "Bonded Fetch": [
+    "draw"
+  ],
+  "Blue Mana Battery": [
+    "ramp"
+  ],
+  "Rhystic Scrying": [
+    "draw"
+  ],
+  "Illuminated Wings": [
+    "draw"
+  ],
+  "Pirate's Pillage": [
+    "draw",
+    "ramp"
+  ],
+  "Slaughter the Strong": [
+    "removal_creature"
+  ],
+  "Ichor Slick": [
+    "draw"
+  ],
+  "Mox Amber": [
+    "ramp"
+  ],
+  "Adverse Conditions": [
+    "ramp"
+  ],
+  "Lure": [
+    "removal_creature"
+  ],
+  "Energy Flux": [
+    "removal_noncreature"
+  ],
+  "Zndrsplt's Judgment": [
+    "removal_creature"
+  ],
+  "Perilous Vault": [
+    "board_wipe"
+  ],
+  "Grand Architect": [
+    "ramp"
+  ],
+  "Palladium Myr": [
+    "ramp"
+  ],
+  "Legion's Initiative": [
+    "board_wipe"
+  ],
+  "End Hostilities": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Ravenous Chupacabra": [
+    "removal_creature"
+  ],
+  "Killing Glare": [
+    "removal_creature"
+  ],
+  "Ruinous Path": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Vivify": [
+    "draw"
+  ],
+  "Geier Reach Sanitarium": [
+    "draw"
+  ],
+  "Gwafa Hazid, Profiteer": [
+    "draw"
+  ],
+  "Swat": [
+    "draw",
+    "removal_creature"
+  ],
+  "Leave in the Dust": [
+    "draw"
+  ],
+  "Dusk // Dawn": [
+    "removal_creature"
+  ],
+  "Latchkey Faerie": [
+    "draw"
+  ],
+  "Nosy Goblin": [
+    "removal_creature"
+  ],
+  "Smallpox": [
+    "removal_creature"
+  ],
+  "Jokulhaups": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Ouphe Vandals": [
+    "removal_noncreature"
+  ],
+  "Moaning Wall": [
+    "draw"
+  ],
+  "Isolation Zone": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Sheer Drop": [
+    "removal_creature"
+  ],
+  "Gaea's Cradle": [
+    "ramp"
+  ],
+  "Mana Bloom": [
+    "ramp"
+  ],
+  "Molten Frame": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Dictate of Erebos": [
+    "removal_creature"
+  ],
+  "Aetherize": [
+    "removal_creature"
+  ],
+  "Liliana's Defeat": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Fade from Memory": [
+    "draw"
+  ],
+  "Ritual of Rejuvenation": [
+    "draw"
+  ],
+  "Bewilder": [
+    "draw"
+  ],
+  "Fleshpulper Giant": [
+    "removal_creature"
+  ],
+  "Time to Reflect": [
+    "removal_creature"
+  ],
+  "By Force": [
+    "removal_noncreature"
+  ],
+  "Estrid, the Masked": [
+    "ramp"
+  ],
+  "Porphyry Nodes": [
+    "removal_creature"
+  ],
+  "Secret Plans": [
+    "draw"
+  ],
+  "Knight of the White Orchid": [
+    "ramp"
+  ],
+  "Island Sanctuary": [
+    "draw"
+  ],
+  "Bringer of the Blue Dawn": [
+    "draw"
+  ],
+  "Dire Fleet Hoarder": [
+    "ramp"
+  ],
+  "Controlled Instincts": [
+    "removal_creature"
+  ],
+  "Goblin Archaeologist": [
+    "removal_noncreature"
+  ],
+  "Fate Unraveler": [
+    "draw"
+  ],
+  "Journey to Eternity // Atzal, Cave of Eternity": [
+    "ramp"
+  ],
+  "Sandbar Merfolk": [
+    "draw"
+  ],
+  "Dimir Signet": [
+    "ramp"
+  ],
+  "Zombie Assassin": [
+    "removal_creature"
+  ],
+  "Stream of Unconsciousness": [
+    "draw"
+  ],
+  "Shadowborn Demon": [
+    "removal_creature"
+  ],
+  "Arcane Artisan": [
+    "draw"
+  ],
+  "Reiver Demon": [
+    "removal_creature"
+  ],
+  "Sram, Senior Edificer": [
+    "draw"
+  ],
+  "Dangerous Wager": [
+    "draw"
+  ],
+  "Vengeful Pharaoh": [
+    "removal_creature"
+  ],
+  "Lashknife Barrier": [
+    "draw"
+  ],
+  "Resounding Wave": [
+    "draw"
+  ],
+  "Selvala's Charge": [
+    "draw"
+  ],
+  "Daru Sanctifier": [
+    "removal_noncreature"
+  ],
+  "Soulbright Flamekin": [
+    "ramp"
+  ],
+  "Etched Oracle": [
+    "draw"
+  ],
+  "Merfolk Assassin": [
+    "removal_creature"
+  ],
+  "Izzet Locket": [
+    "draw",
+    "ramp"
+  ],
+  "Harmonize": [
+    "draw"
+  ],
+  "Nature's Chosen": [
+    "ramp"
+  ],
+  "Disciple of Grace": [
+    "draw"
+  ],
+  "Pursuit of Knowledge": [
+    "draw"
+  ],
+  "Whirlpool Whelm": [
+    "removal_creature"
+  ],
+  "Risk Factor": [
+    "draw"
+  ],
+  "Airborne Aid": [
+    "draw"
+  ],
+  "Jace, the Mind Sculptor": [
+    "draw",
+    "removal_creature"
+  ],
+  "Fight to the Death": [
+    "removal_creature"
+  ],
+  "Eldrazi Temple": [
+    "ramp"
+  ],
+  "Shattergang Brothers": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Font of Fertility": [
+    "ramp"
+  ],
+  "Renegade Tactics": [
+    "draw"
+  ],
+  "Liliana, Death's Majesty": [
+    "removal_creature"
+  ],
+  "Yavimaya Elder": [
+    "draw"
+  ],
+  "Stinging Shot": [
+    "draw"
+  ],
+  "Night's Whisper": [
+    "draw"
+  ],
+  "Vessel of Endless Rest": [
+    "ramp"
+  ],
+  "Silent Gravestone": [
+    "draw"
+  ],
+  "Tolarian Emissary": [
+    "removal_noncreature"
+  ],
+  "Tunnel": [
+    "removal_creature"
+  ],
+  "Blessed Wine": [
+    "draw"
+  ],
+  "Gruul Cluestone": [
+    "draw",
+    "ramp"
+  ],
+  "Sungrass Egg": [
+    "draw"
+  ],
+  "Tidewater Minion": [
+    "ramp"
+  ],
+  "Ripjaw Raptor": [
+    "draw"
+  ],
+  "Soul Rend": [
+    "draw"
+  ],
+  "Ice Over": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Ghostly Possession": [
+    "removal_creature"
+  ],
+  "Contempt": [
+    "removal_creature"
+  ],
+  "Dregs of Sorrow": [
+    "draw",
+    "removal_creature"
+  ],
+  "Dream Cache": [
+    "draw"
+  ],
+  "Builder's Bane": [
+    "removal_noncreature"
+  ],
+  "Rise // Fall": [
+    "removal_creature"
+  ],
+  "Memorial to Genius": [
+    "draw"
+  ],
+  "Huddle Up": [
+    "draw"
+  ],
+  "Teysa, Orzhov Scion": [
+    "removal_creature"
+  ],
+  "Elvish Scrapper": [
+    "removal_noncreature"
+  ],
+  "Thousand Winds": [
+    "removal_creature"
+  ],
+  "Multani's Harmony": [
+    "ramp"
+  ],
+  "Spell Swindle": [
+    "ramp"
+  ],
+  "Vow of Flight": [
+    "removal_creature"
+  ],
+  "Krosan Tusker": [
+    "draw"
+  ],
+  "Zombie Apocalypse": [
+    "removal_creature"
+  ],
+  "Caress of Phyrexia": [
+    "draw"
+  ],
+  "Total War": [
+    "removal_creature"
+  ],
+  "Golden Hind": [
+    "ramp"
+  ],
+  "Cleanfall": [
+    "removal_noncreature"
+  ],
+  "Weight of Memory": [
+    "draw"
+  ],
+  "Treasonous Ogre": [
+    "ramp"
+  ],
+  "Slinking Skirge": [
+    "draw"
+  ],
+  "Odds // Ends": [
+    "removal_creature"
+  ],
+  "Guardian Idol": [
+    "ramp"
+  ],
+  "Myr Reservoir": [
+    "ramp"
+  ],
+  "Planar Collapse": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Spawning Breath": [
+    "ramp"
+  ],
+  "Heartwood Storyteller": [
+    "draw"
+  ],
+  "Vraska, Scheming Gorgon": [
+    "removal_creature"
+  ],
+  "Thought Scour": [
+    "draw"
+  ],
+  "Rhox Meditant": [
+    "draw"
+  ],
+  "Epiphany Storm": [
+    "draw"
+  ],
+  "Surge Mare": [
+    "draw"
+  ],
+  "Cruel Revival": [
+    "removal_creature"
+  ],
+  "Unsummon": [
+    "removal_creature"
+  ],
+  "Vulturous Aven": [
+    "draw"
+  ],
+  "Wretched Gryff": [
+    "draw"
+  ],
+  "Myth Unbound": [
+    "draw"
+  ],
+  "Geothermal Crevice": [
+    "ramp"
+  ],
+  "Goblin Digging Team": [
+    "removal_creature"
+  ],
+  "Aura Extraction": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Viridian Joiner": [
+    "ramp"
+  ],
+  "Keep Watch": [
+    "draw"
+  ],
+  "Barkhide Mauler": [
+    "draw"
+  ],
+  "Jund Sojourners": [
+    "draw"
+  ],
+  "Skyshroud Elf": [
+    "ramp"
+  ],
+  "Rattleclaw Mystic": [
+    "ramp"
+  ],
+  "Shatter": [
+    "removal_noncreature"
+  ],
+  "Nykthos, Shrine to Nyx": [
+    "ramp"
+  ],
+  "Ambition's Cost": [
+    "draw"
+  ],
+  "Touch of Vitae": [
+    "draw"
+  ],
+  "Mystic Melting": [
+    "draw"
+  ],
+  "Benefactor's Draught": [
+    "draw"
+  ],
+  "Clairvoyance": [
+    "draw"
+  ],
+  "Dragon Wings": [
+    "draw"
+  ],
+  "Spoils of Victory": [
+    "ramp"
+  ],
+  "Desert of the Indomitable": [
+    "draw"
+  ],
+  "Rampant Growth": [
+    "ramp"
+  ],
+  "Planar Bridge": [
+    "ramp"
+  ],
+  "Simplify": [
+    "removal_noncreature"
+  ],
+  "Selective Snare": [
+    "removal_creature"
+  ],
+  "Bog Witch": [
+    "ramp"
+  ],
+  "Walking Atlas": [
+    "ramp"
+  ],
+  "Jace's Scrutiny": [
+    "draw"
+  ],
+  "Pyknite": [
+    "draw"
+  ],
+  "Broken Bond": [
+    "ramp"
+  ],
+  "Boompile": [
+    "board_wipe"
+  ],
+  "Reduce to Dreams": [
+    "removal_noncreature"
+  ],
+  "Tuktuk Scrapper": [
+    "removal_noncreature"
+  ],
+  "Kothophed, Soul Hoarder": [
+    "draw"
+  ],
+  "Rebel Informer": [
+    "removal_creature"
+  ],
+  "Radiant's Judgment": [
+    "draw",
+    "removal_creature"
+  ],
+  "Oblation": [
+    "draw"
+  ],
+  "Sip of Hemlock": [
+    "removal_creature"
+  ],
+  "Frog Tongue": [
+    "draw"
+  ],
+  "Needle Drop": [
+    "draw"
+  ],
+  "Hidden Dragonslayer": [
+    "removal_creature"
+  ],
+  "Consuming Vortex": [
+    "removal_creature"
+  ],
+  "Wellspring": [
+    "ramp"
+  ],
+  "Silverstrike": [
+    "removal_creature"
+  ],
+  "Somnophore": [
+    "removal_creature"
+  ],
+  "Lightbringer": [
+    "removal_creature"
+  ],
+  "Saprazzan Heir": [
+    "draw"
+  ],
+  "Keeneye Aven": [
+    "draw"
+  ],
+  "Spellbound Dragon": [
+    "draw"
+  ],
+  "Underhanded Designs": [
+    "removal_creature"
+  ],
+  "Oath of Lieges": [
+    "ramp"
+  ],
+  "Asylum Visitor": [
+    "draw"
+  ],
+  "Peek": [
+    "draw"
+  ],
+  "Tranquil Domain": [
+    "removal_noncreature"
+  ],
+  "Ohran Viper": [
+    "draw",
+    "removal_creature"
+  ],
+  "Icatian Store": [
+    "ramp"
+  ],
+  "The Ur-Dragon": [
+    "ramp"
+  ],
+  "False Prophet": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Myojin of Seeing Winds": [
+    "draw"
+  ],
+  "Urborg Uprising": [
+    "draw"
+  ],
+  "New Horizons": [
+    "ramp"
+  ],
+  "Dauthi Jackal": [
+    "removal_creature"
+  ],
+  "Words of Wilding": [
+    "draw"
+  ],
+  "Conqueror's Galleon // Conqueror's Foothold": [
+    "ramp"
+  ],
+  "Blinding Spray": [
+    "draw"
+  ],
+  "Brilliant Spectrum": [
+    "draw"
+  ],
+  "Sacellum Godspeaker": [
+    "ramp"
+  ],
+  "Rosheen Meanderer": [
+    "ramp"
+  ],
+  "Hex": [
+    "removal_creature"
+  ],
+  "Bash to Bits": [
+    "removal_noncreature"
+  ],
+  "Vow of Malice": [
+    "removal_creature"
+  ],
+  "Thunder Totem": [
+    "ramp"
+  ],
+  "Wood Elves": [
+    "ramp"
+  ],
+  "Azor, the Lawbringer": [
+    "draw"
+  ],
+  "Grixis Battlemage": [
+    "draw"
+  ],
+  "Dovin's Acuity": [
+    "draw"
+  ],
+  "Niv-Mizzet, Dracogenius": [
+    "draw"
+  ],
+  "Twisted Justice": [
+    "removal_creature"
+  ],
+  "Manamorphose": [
+    "draw"
+  ],
+  "Coastal Piracy": [
+    "draw"
+  ],
+  "Trigon of Thought": [
+    "draw"
+  ],
+  "Temur Banner": [
+    "draw",
+    "ramp"
+  ],
+  "Plunder": [
+    "removal_noncreature"
+  ],
+  "Mystic Remora": [
+    "draw"
+  ],
+  "Nekusar, the Mindrazer": [
+    "draw"
+  ],
+  "Sinking Feeling": [
+    "removal_creature"
+  ],
+  "Ajani Unyielding": [
+    "removal_creature"
+  ],
+  "Arcanis the Omnipotent": [
+    "draw"
+  ],
+  "Reki, the History of Kamigawa": [
+    "draw"
+  ],
+  "Flame Jet": [
+    "draw"
+  ],
+  "Orzhov Locket": [
+    "draw",
+    "ramp"
+  ],
+  "Magus of the Tabernacle": [
+    "removal_creature"
+  ],
+  "Sea God's Revenge": [
+    "removal_creature"
+  ],
+  "Lotus Cobra": [
+    "ramp"
+  ],
+  "Riptide Crab": [
+    "draw"
+  ],
+  "Minion of Leshrac": [
+    "removal_creature"
+  ],
+  "Merfolk Traders": [
+    "draw"
+  ],
+  "Angel of the Dire Hour": [
+    "removal_creature"
+  ],
+  "Indulgent Tormentor": [
+    "draw"
+  ],
+  "Stasis Cell": [
+    "removal_creature"
+  ],
+  "Forbidden Crypt": [
+    "draw"
+  ],
+  "Sunblast Angel": [
+    "removal_creature"
+  ],
+  "Word of Blasting": [
+    "removal_creature"
+  ],
+  "Shinewend": [
+    "removal_noncreature"
+  ],
+  "Alpine Moon": [
+    "ramp"
+  ],
+  "Glimmerdust Nap": [
+    "removal_creature"
+  ],
+  "Copper Myr": [
+    "ramp"
+  ],
+  "Giant Albatross": [
+    "removal_creature"
+  ],
+  "Berserk": [
+    "removal_creature"
+  ],
+  "Cultivate": [
+    "ramp"
+  ],
+  "Plea for Power": [
+    "draw"
+  ],
+  "Izzet Keyrune": [
+    "draw",
+    "ramp"
+  ],
+  "Scarab Feast": [
+    "draw"
+  ],
+  "Desperate Ravings": [
+    "draw"
+  ],
+  "Femeref Enchantress": [
+    "draw"
+  ],
+  "Fa'adiyah Seer": [
+    "draw"
+  ],
+  "Viridian Corrupter": [
+    "removal_noncreature"
+  ],
+  "Wirewood Channeler": [
+    "ramp"
+  ],
+  "Barrin, Master Wizard": [
+    "removal_creature"
+  ],
+  "Vandalize": [
+    "removal_noncreature"
+  ],
+  "Grisly Spectacle": [
+    "removal_creature"
+  ],
+  "Daring Demolition": [
+    "removal_creature"
+  ],
+  "Exile": [
+    "removal_creature"
+  ],
+  "Mind Ravel": [
+    "draw"
+  ],
+  "Costly Plunder": [
+    "draw"
+  ],
+  "Red Mana Battery": [
+    "ramp"
+  ],
+  "Recycle": [
+    "draw"
+  ],
+  "Vanquisher's Banner": [
+    "draw"
+  ],
+  "Dragon's Hoard": [
+    "draw",
+    "ramp"
+  ],
+  "Phyrexian Altar": [
+    "ramp"
+  ],
+  "Blood Frenzy": [
+    "removal_creature"
+  ],
+  "Keen Sense": [
+    "draw"
+  ],
+  "Thornscape Battlemage": [
+    "removal_noncreature"
+  ],
+  "Helionaut": [
+    "ramp"
+  ],
+  "Fruit of the First Tree": [
+    "draw"
+  ],
+  "Crumble": [
+    "removal_noncreature"
+  ],
+  "Etherium Astrolabe": [
+    "draw"
+  ],
+  "Druid of the Anima": [
+    "ramp"
+  ],
+  "Pendrell Drake": [
+    "draw"
+  ],
+  "Otherworld Atlas": [
+    "draw"
+  ],
+  "Patron of the Vein": [
+    "removal_creature"
+  ],
+  "Turf Wound": [
+    "draw"
+  ],
+  "Prophecy": [
+    "draw"
+  ],
+  "Secluded Steppe": [
+    "draw"
+  ],
+  "Champion's Victory": [
+    "removal_creature"
+  ],
+  "Renewal": [
+    "draw",
+    "ramp"
+  ],
+  "Sudden Strength": [
+    "draw"
+  ],
+  "Monk Realist": [
+    "removal_noncreature"
+  ],
+  "Broken Visage": [
+    "removal_creature"
+  ],
+  "Venomous Dragonfly": [
+    "removal_creature"
+  ],
+  "Primal Amulet // Primal Wellspring": [
+    "ramp"
+  ],
+  "Heartless Pillage": [
+    "ramp"
+  ],
+  "Stone Haven Outfitter": [
+    "draw"
+  ],
+  "Shrine of the Forsaken Gods": [
+    "ramp"
+  ],
+  "Selvala's Enforcer": [
+    "draw"
+  ],
+  "Call to Heel": [
+    "draw",
+    "removal_creature"
+  ],
+  "Consuming Ferocity": [
+    "removal_creature"
+  ],
+  "Ventifact Bottle": [
+    "ramp"
+  ],
+  "Discovery // Dispersal": [
+    "draw"
+  ],
+  "Disciple of Bolas": [
+    "draw"
+  ],
+  "Inspiration": [
+    "draw"
+  ],
+  "Skyshroud Ranger": [
+    "ramp"
+  ],
+  "Mesa Enchantress": [
+    "draw"
+  ],
+  "Sisay's Ring": [
+    "ramp"
+  ],
+  "Yuki-Onna": [
+    "removal_noncreature"
+  ],
+  "Stealer of Secrets": [
+    "draw"
+  ],
+  "Trade Caravan": [
+    "ramp"
+  ],
+  "Drake-Skull Cameo": [
+    "ramp"
+  ],
+  "Meltdown": [
+    "removal_noncreature"
+  ],
+  "Enlightened Ascetic": [
+    "removal_noncreature"
+  ],
+  "Morselhoarder": [
+    "ramp"
+  ],
+  "Primal Boost": [
+    "draw"
+  ],
+  "Emerald Charm": [
+    "removal_noncreature"
+  ],
+  "Miscalculation": [
+    "draw"
+  ],
+  "Burnout": [
+    "draw"
+  ],
+  "Devour in Shadow": [
+    "removal_creature"
+  ],
+  "Eightfold Maze": [
+    "removal_creature"
+  ],
+  "Master the Way": [
+    "draw"
+  ],
+  "Silkwrap": [
+    "removal_creature"
+  ],
+  "Train of Thought": [
+    "draw"
+  ],
+  "To Arms!": [
+    "draw"
+  ],
+  "Splinter": [
+    "removal_noncreature"
+  ],
+  "Thermal Flux": [
+    "draw"
+  ],
+  "Marble Diamond": [
+    "ramp"
+  ],
+  "Mad Prophet": [
+    "draw"
+  ],
+  "Emergency Powers": [
+    "ramp"
+  ],
+  "Gemstone Array": [
+    "ramp"
+  ],
+  "Kavu Climber": [
+    "draw"
+  ],
+  "Tezzeret's Ambition": [
+    "draw"
+  ],
+  "Seize the Soul": [
+    "removal_creature"
+  ],
+  "Basalt Golem": [
+    "removal_creature"
+  ],
+  "Verduran Emissary": [
+    "removal_noncreature"
+  ],
+  "Barter in Blood": [
+    "removal_creature"
+  ],
+  "Utopia Vow": [
+    "ramp"
+  ],
+  "Blessed Light": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Lava Flow": [
+    "removal_creature"
+  ],
+  "Sea Gate Wreckage": [
+    "draw"
+  ],
+  "Sigil of the Nayan Gods": [
+    "draw"
+  ],
+  "Prowling Pangolin": [
+    "removal_creature"
+  ],
+  "Decree of Silence": [
+    "draw"
+  ],
+  "Hour of Revelation": [
+    "board_wipe"
+  ],
+  "Transmogrifying Wand": [
+    "removal_creature"
+  ],
+  "Sheoldred, Whispering One": [
+    "removal_creature"
+  ],
+  "Withering Gaze": [
+    "draw"
+  ],
+  "Spiteful Visions": [
+    "draw"
+  ],
+  "Liliana of the Dark Realms": [
+    "ramp"
+  ],
+  "Perilous Research": [
+    "draw"
+  ],
+  "Tapestry of the Ages": [
+    "draw"
+  ],
+  "Caravan Vigil": [
+    "ramp"
+  ],
+  "Take Inventory": [
+    "draw"
+  ],
+  "Necrologia": [
+    "draw"
+  ],
+  "Emrakul's Influence": [
+    "draw"
+  ],
+  "Decree of Pain": [
+    "board_wipe",
+    "draw"
+  ],
+  "Wasp of the Bitter End": [
+    "removal_creature"
+  ],
+  "Interdict": [
+    "draw"
+  ],
+  "Murder": [
+    "removal_creature"
+  ],
+  "Tempest of Light": [
+    "removal_noncreature"
+  ],
+  "Thirst for Knowledge": [
+    "draw"
+  ],
+  "Sultai Banner": [
+    "draw",
+    "ramp"
+  ],
+  "Hadana's Climb // Winged Temple of Orazca": [
+    "ramp"
+  ],
+  "Fathom Mage": [
+    "draw"
+  ],
+  "Glyph of Reincarnation": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Time of Ice": [
+    "removal_creature"
+  ],
+  "Applied Biomancy": [
+    "removal_creature"
+  ],
+  "Nylea's Presence": [
+    "draw"
+  ],
+  "Xenagos, the Reveler": [
+    "ramp"
+  ],
+  "Juniper Order Druid": [
+    "ramp"
+  ],
+  "Ashes to Ashes": [
+    "removal_creature"
+  ],
+  "Hindering Light": [
+    "draw"
+  ],
+  "Amulet of Unmaking": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Shimmering Barrier": [
+    "draw"
+  ],
+  "Abundant Growth": [
+    "draw",
+    "ramp"
+  ],
+  "Aphetto Runecaster": [
+    "draw"
+  ],
+  "Brain Pry": [
+    "draw"
+  ],
+  "Resourceful Return": [
+    "draw"
+  ],
+  "Ophidian": [
+    "draw"
+  ],
+  "Fellwar Stone": [
+    "ramp"
+  ],
+  "Mindculling": [
+    "draw"
+  ],
+  "Enduring Victory": [
+    "removal_creature"
+  ],
+  "Aid from the Cowl": [
+    "ramp"
+  ],
+  "Niv-Mizzet, the Firemind": [
+    "draw"
+  ],
+  "Deadeye Harpooner": [
+    "removal_creature"
+  ],
+  "Carnival of Souls": [
+    "ramp"
+  ],
+  "Hubris": [
+    "removal_creature"
+  ],
+  "Nevinyrral's Disk": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Shore Keeper": [
+    "draw"
+  ],
+  "Catalog": [
+    "draw"
+  ],
+  "Lunar Mystic": [
+    "draw"
+  ],
+  "Garza's Assassin": [
+    "removal_creature"
+  ],
+  "Underworld Dreams": [
+    "draw"
+  ],
+  "Bring to Trial": [
+    "removal_creature"
+  ],
+  "Tsabo's Web": [
+    "draw"
+  ],
+  "Decree of Savagery": [
+    "draw"
+  ],
+  "Shatterstorm": [
+    "removal_noncreature"
+  ],
+  "Werebear": [
+    "ramp"
+  ],
+  "Dark Impostor": [
+    "removal_creature"
+  ],
+  "Proteus Staff": [
+    "removal_creature"
+  ],
+  "Ancestral Vision": [
+    "draw"
+  ],
+  "Skyscanner": [
+    "draw"
+  ],
+  "Urza's Ruinous Blast": [
+    "board_wipe"
+  ],
+  "Sibilant Spirit": [
+    "draw"
+  ],
+  "Sage-Eye Avengers": [
+    "removal_creature"
+  ],
+  "Unburden": [
+    "draw"
+  ],
+  "Fire Diamond": [
+    "ramp"
+  ],
+  "Barbed Sextant": [
+    "draw"
+  ],
+  "Trostani's Judgment": [
+    "removal_creature"
+  ],
+  "Maddening Imp": [
+    "removal_creature"
+  ],
+  "Questing Phelddagrif": [
+    "draw"
+  ],
+  "King Suleiman": [
+    "removal_creature"
+  ],
+  "Ovinomancer": [
+    "removal_creature"
+  ],
+  "Mardu Banner": [
+    "draw",
+    "ramp"
+  ],
+  "Orzhov Keyrune": [
+    "ramp"
+  ],
+  "Polluted Mire": [
+    "draw"
+  ],
+  "Pinion Feast": [
+    "removal_creature"
+  ],
+  "Zameck Guildmage": [
+    "draw"
+  ],
+  "Scour the Laboratory": [
+    "draw"
+  ],
+  "Coveted Jewel": [
+    "draw"
+  ],
+  "Karametra, God of Harvests": [
+    "ramp"
+  ],
+  "Teferi's Realm": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Suleiman's Legacy": [
+    "removal_creature"
+  ],
+  "Noble Hierarch": [
+    "ramp"
+  ],
+  "Gruul Keyrune": [
+    "ramp"
+  ],
+  "Troll-Horn Cameo": [
+    "ramp"
+  ],
+  "Braingeyser": [
+    "draw"
+  ],
+  "Spinal Villain": [
+    "removal_creature"
+  ],
+  "Boros Keyrune": [
+    "ramp"
+  ],
+  "Pendulum of Patterns": [
+    "draw"
+  ],
+  "Seer's Sundial": [
+    "draw"
+  ],
+  "Submerge": [
+    "removal_creature"
+  ],
+  "Floral Spuzzem": [
+    "removal_noncreature"
+  ],
+  "Aryel, Knight of Windgrace": [
+    "removal_creature"
+  ],
+  "Thought Vessel": [
+    "ramp"
+  ],
+  "Reroute": [
+    "draw"
+  ],
+  "Fungal Shambler": [
+    "draw"
+  ],
+  "Well of Knowledge": [
+    "draw"
+  ],
+  "Shake the Foundations": [
+    "draw"
+  ],
+  "Gilded Lotus": [
+    "ramp"
+  ],
+  "Brood Monitor": [
+    "ramp"
+  ],
+  "Edric, Spymaster of Trest": [
+    "draw"
+  ],
+  "Su-Chi": [
+    "ramp"
+  ],
+  "Darkblade Agent": [
+    "draw"
+  ],
+  "Nightmare Void": [
+    "draw"
+  ],
+  "Sway of Illusion": [
+    "draw"
+  ],
+  "Thunderscape Battlemage": [
+    "removal_noncreature"
+  ],
+  "Camaraderie": [
+    "draw"
+  ],
+  "Weaver of Currents": [
+    "ramp"
+  ],
+  "Cut the Tethers": [
+    "removal_creature"
+  ],
+  "Salvage Drone": [
+    "draw"
+  ],
+  "Pus Kami": [
+    "removal_creature"
+  ],
+  "Putrefy": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Spring Cleaning": [
+    "removal_noncreature"
+  ],
+  "Rune of Protection: Red": [
+    "draw"
+  ],
+  "Shadowblood Egg": [
+    "draw"
+  ],
+  "Emmessi Tome": [
+    "draw"
+  ],
+  "Crookclaw Elder": [
+    "draw"
+  ],
+  "Omen": [
+    "draw"
+  ],
+  "Inspiring Call": [
+    "draw"
+  ],
+  "Thopter Arrest": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Overwhelming Instinct": [
+    "draw"
+  ],
+  "Pawn of Ulamog": [
+    "ramp"
+  ],
+  "Possessed Nomad": [
+    "removal_creature"
+  ],
+  "Spellgorger Barbarian": [
+    "draw"
+  ],
+  "Manic Vandal": [
+    "removal_noncreature"
+  ],
+  "Urborg Elf": [
+    "ramp"
+  ],
+  "Shrike Harpy": [
+    "removal_creature"
+  ],
+  "Betrayal": [
+    "draw"
+  ],
+  "Shambling Shell": [
+    "draw"
+  ],
+  "Skyshooter": [
+    "removal_creature"
+  ],
+  "Blasted Landscape": [
+    "draw"
+  ],
+  "Descend upon the Sinful": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Search for Tomorrow": [
+    "ramp"
+  ],
+  "Weirding Wood": [
+    "draw",
+    "ramp"
+  ],
+  "Naga Vitalist": [
+    "ramp"
+  ],
+  "Ignorant Bliss": [
+    "draw"
+  ],
+  "Wild Evocation": [
+    "ramp"
+  ],
+  "Tamiyo, Field Researcher": [
+    "draw"
+  ],
+  "Predatory Nightstalker": [
+    "removal_creature"
+  ],
+  "Selvala's Stampede": [
+    "ramp"
+  ],
+  "Frantic Salvage": [
+    "draw"
+  ],
+  "Dack Fayden": [
+    "draw"
+  ],
+  "Necrotic Plague": [
+    "removal_creature"
+  ],
+  "Grave-Shell Scarab": [
+    "draw"
+  ],
+  "Phantom Wings": [
+    "removal_creature"
+  ],
+  "Omnath, Locus of Mana": [
+    "ramp"
+  ],
+  "Obelisk of Esper": [
+    "ramp"
+  ],
+  "Viridian Acolyte": [
+    "ramp"
+  ],
+  "Castaway's Despair": [
+    "removal_creature"
+  ],
+  "Prosperous Pirates": [
+    "ramp"
+  ],
+  "Sublime Exhalation": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Thraximundar": [
+    "removal_creature"
+  ],
+  "Deranged Assistant": [
+    "ramp"
+  ],
+  "Constricting Tendrils": [
+    "draw"
+  ],
+  "Cease-Fire": [
+    "draw"
+  ],
+  "Dawning Purist": [
+    "removal_noncreature"
+  ],
+  "Pillar of Origins": [
+    "ramp"
+  ],
+  "Living Death": [
+    "removal_creature"
+  ],
+  "Simic Keyrune": [
+    "ramp"
+  ],
+  "Joven": [
+    "removal_noncreature"
+  ],
+  "Terrarion": [
+    "draw"
+  ],
+  "Heartseeker": [
+    "removal_creature"
+  ],
+  "Selesnya Locket": [
+    "draw",
+    "ramp"
+  ],
+  "Royal Assassin": [
+    "removal_creature"
+  ],
+  "Metalworker": [
+    "ramp"
+  ],
+  "Holy Justiciar": [
+    "removal_creature"
+  ],
+  "Marchesa's Infiltrator": [
+    "draw"
+  ],
+  "Eyeblight's Ending": [
+    "removal_creature"
+  ],
+  "Gorilla Shaman": [
+    "removal_noncreature"
+  ],
+  "Banisher Priest": [
+    "removal_creature"
+  ],
+  "Flight Spellbomb": [
+    "draw"
+  ],
+  "Excavation": [
+    "draw"
+  ],
+  "Tranquil Thicket": [
+    "draw"
+  ],
+  "Icefeather Aven": [
+    "removal_creature"
+  ],
+  "Goblin Welder": [
+    "removal_noncreature"
+  ],
+  "Song of Freyalise": [
+    "ramp"
+  ],
+  "Lethal Vapors": [
+    "removal_creature"
+  ],
+  "Joraga Treespeaker": [
+    "ramp"
+  ],
+  "Cunning Strike": [
+    "draw"
+  ],
+  "The Abyss": [
+    "removal_creature"
+  ],
+  "Gate to the Aether": [
+    "ramp"
+  ],
+  "Wild Guess": [
+    "draw"
+  ],
+  "Slate of Ancestry": [
+    "draw"
+  ],
+  "Izzet Charm": [
+    "draw"
+  ],
+  "Deepfathom Skulker": [
+    "draw"
+  ],
+  "Zendikar Resurgent": [
+    "draw"
+  ],
+  "Seeker of Insight": [
+    "draw"
+  ],
+  "Bargain": [
+    "draw"
+  ],
+  "Grasping Current": [
+    "removal_creature"
+  ],
+  "Consuming Vapors": [
+    "removal_creature"
+  ],
+  "Candles of Leng": [
+    "draw"
+  ],
+  "Glassdust Hulk": [
+    "draw"
+  ],
+  "Aeon Chronicler": [
+    "draw"
+  ],
+  "Vapor Snag": [
+    "removal_creature"
+  ],
+  "Peat Bog": [
+    "ramp"
+  ],
+  "Zephyr Scribe": [
+    "draw"
+  ],
+  "Selesnya Charm": [
+    "removal_creature"
+  ],
+  "Hunting Kavu": [
+    "removal_creature"
+  ],
+  "Guan Yu's 1,000-Li March": [
+    "removal_creature"
+  ],
+  "Eye of Ramos": [
+    "ramp"
+  ],
+  "Baral's Expertise": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Neko-Te": [
+    "removal_creature"
+  ],
+  "Remove": [
+    "removal_creature"
+  ],
+  "Horizon Chimera": [
+    "draw"
+  ],
+  "Brood Butcher": [
+    "ramp"
+  ],
+  "Guided Strike": [
+    "draw"
+  ],
+  "Portcullis Vine": [
+    "draw"
+  ],
+  "Limits of Solidarity": [
+    "draw"
+  ],
+  "Kithkin Mourncaller": [
+    "draw"
+  ],
+  "Abu Ja'far": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Curse of Chaos": [
+    "draw"
+  ],
+  "Key to the City": [
+    "draw"
+  ],
+  "Darksteel Ingot": [
+    "ramp"
+  ],
+  "Quirion Trailblazer": [
+    "ramp"
+  ],
+  "Fieldmist Borderpost": [
+    "ramp"
+  ],
+  "Idle Thoughts": [
+    "draw"
+  ],
+  "Grimgrin, Corpse-Born": [
+    "removal_creature"
+  ],
+  "Ether Well": [
+    "removal_creature"
+  ],
+  "Chemister's Insight": [
+    "draw"
+  ],
+  "Hoodwink": [
+    "removal_noncreature"
+  ],
+  "Murderous Betrayal": [
+    "removal_creature"
+  ],
+  "Confirm Suspicions": [
+    "draw"
+  ],
+  "Gone Missing": [
+    "draw"
+  ],
+  "Tin Street Hooligan": [
+    "removal_noncreature"
+  ],
+  "Dovin, Architect of Law": [
+    "draw"
+  ],
+  "Drown in Shapelessness": [
+    "removal_creature"
+  ],
+  "Phyrexian Gargantua": [
+    "draw"
+  ],
+  "Glyph of Doom": [
+    "board_wipe"
+  ],
+  "Wispmare": [
+    "removal_noncreature"
+  ],
+  "Concentrate": [
+    "draw"
+  ],
+  "Engulf the Shore": [
+    "removal_creature"
+  ],
+  "Cryptic Command": [
+    "draw"
+  ],
+  "Borrowing 100,000 Arrows": [
+    "draw"
+  ],
+  "Hooded Assassin": [
+    "removal_creature"
+  ],
+  "Akroma's Blessing": [
+    "draw"
+  ],
+  "Trial // Error": [
+    "removal_creature"
+  ],
+  "Golgari Thug": [
+    "draw"
+  ],
+  "Elder Druid": [
+    "ramp"
+  ],
+  "Citanul Woodreaders": [
+    "draw"
+  ],
+  "Mikokoro, Center of the Sea": [
+    "draw"
+  ],
+  "Sage of Ancient Lore // Werewolf of Ancient Hunger": [
+    "draw"
+  ],
+  "Disciple of Law": [
+    "draw"
+  ],
+  "Dispense Justice": [
+    "removal_creature"
+  ],
+  "Bygone Bishop": [
+    "draw"
+  ],
+  "Contradict": [
+    "draw"
+  ],
+  "Whispers of the Muse": [
+    "draw"
+  ],
+  "Ley Druid": [
+    "ramp"
+  ],
+  "Decimate": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Mask of Riddles": [
+    "draw"
+  ],
+  "Opal Lake Gatekeepers": [
+    "draw"
+  ],
+  "Dramatic Rescue": [
+    "removal_creature"
+  ],
+  "Gild": [
+    "ramp",
+    "removal_creature"
+  ],
+  "Explorer's Scope": [
+    "ramp"
+  ],
+  "Jaya Ballard": [
+    "ramp"
+  ],
+  "Chandra's Defeat": [
+    "draw"
+  ],
+  "Faith Unbroken": [
+    "removal_creature"
+  ],
+  "Unfulfilled Desires": [
+    "draw"
+  ],
+  "Jungle Weaver": [
+    "draw"
+  ],
+  "Allied Strategies": [
+    "draw"
+  ],
+  "Repentant Vampire": [
+    "removal_creature"
+  ],
+  "Book of Rass": [
+    "draw"
+  ],
+  "The Gitrog Monster": [
+    "draw",
+    "ramp"
+  ],
+  "Kor Cartographer": [
+    "ramp"
+  ],
+  "Halt Order": [
+    "draw"
+  ],
+  "Choking Tethers": [
+    "draw"
+  ],
+  "Encase in Ice": [
+    "removal_creature"
+  ],
+  "Tainted Aether": [
+    "removal_creature"
+  ],
+  "Loam Dweller": [
+    "ramp"
+  ],
+  "Greenside Watcher": [
+    "ramp"
+  ],
+  "Breaking Point": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Profane Procession // Tomb of the Dusk Rose": [
+    "ramp",
+    "removal_creature"
+  ],
+  "Cerulean Wisps": [
+    "draw"
+  ],
+  "Tezzeret's Betrayal": [
+    "removal_creature"
+  ],
+  "Reckless Spite": [
+    "removal_creature"
+  ],
+  "Symbiotic Deployment": [
+    "draw"
+  ],
+  "Banishing Stroke": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "In Garruk's Wake": [
+    "board_wipe",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Expropriate": [
+    "ramp"
+  ],
+  "Hammerheim Deadeye": [
+    "removal_creature"
+  ],
+  "Thran Dynamo": [
+    "ramp"
+  ],
+  "Silverglade Elemental": [
+    "ramp"
+  ],
+  "Molderhulk": [
+    "ramp"
+  ],
+  "Winds of Rath": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Implement of Improvement": [
+    "draw"
+  ],
+  "Vile Requiem": [
+    "removal_creature"
+  ],
+  "Nihilistic Glee": [
+    "draw"
+  ],
+  "Nest Invader": [
+    "ramp"
+  ],
+  "Noxious Gearhulk": [
+    "removal_creature"
+  ],
+  "Pitiless Plunderer": [
+    "ramp"
+  ],
+  "Contract Killing": [
+    "ramp",
+    "removal_creature"
+  ],
+  "Vile Redeemer": [
+    "ramp"
+  ],
+  "Reality Anchor": [
+    "draw"
+  ],
+  "Deadeye Brawler": [
+    "draw"
+  ],
+  "Chronostutter": [
+    "removal_creature"
+  ],
+  "Wheel and Deal": [
+    "draw"
+  ],
+  "Grip of Desolation": [
+    "removal_creature"
+  ],
+  "Plague Dogs": [
+    "draw"
+  ],
+  "Catch // Release": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Heat Stroke": [
+    "removal_creature"
+  ],
+  "Ral's Dispersal": [
+    "removal_creature"
+  ],
+  "Broodbirth Viper": [
+    "draw"
+  ],
+  "Butcher of Malakir": [
+    "removal_creature"
+  ],
+  "Attrition": [
+    "removal_creature"
+  ],
+  "Ixidron": [
+    "removal_creature"
+  ],
+  "Opaline Sliver": [
+    "draw"
+  ],
+  "Lamplighter of Selhoff": [
+    "draw"
+  ],
+  "Curator's Ward": [
+    "draw"
+  ],
+  "Infernal Tribute": [
+    "draw"
+  ],
+  "Exclude": [
+    "draw"
+  ],
+  "Absolver Thrull": [
+    "removal_noncreature"
+  ],
+  "Leave No Trace": [
+    "removal_noncreature"
+  ],
+  "Wistful Thinking": [
+    "draw"
+  ],
+  "Terrain Generator": [
+    "ramp"
+  ],
+  "Avid Reclaimer": [
+    "ramp"
+  ],
+  "Tranquil Path": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Slice in Twain": [
+    "draw"
+  ],
+  "Collective Effort": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Retraced Image": [
+    "ramp"
+  ],
+  "Planar Cleansing": [
+    "board_wipe"
+  ],
+  "Channeler Initiate": [
+    "ramp"
+  ],
+  "Insolent Neonate": [
+    "draw"
+  ],
+  "Excoriate": [
+    "removal_creature"
+  ],
+  "Fumarole": [
+    "removal_creature"
+  ],
+  "Carnage Altar": [
+    "draw"
+  ],
+  "Necroplasm": [
+    "draw",
+    "removal_creature"
+  ],
+  "Laboratory Maniac": [
+    "draw"
+  ],
+  "Satyr Enchanter": [
+    "draw"
+  ],
+  "Renewed Faith": [
+    "draw"
+  ],
+  "Desolate Lighthouse": [
+    "draw"
+  ],
+  "Deserter's Quarters": [
+    "removal_creature"
+  ],
+  "Abzan Beastmaster": [
+    "draw"
+  ],
+  "Equipoise": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Liturgy of Blood": [
+    "removal_creature"
+  ],
+  "Death's Caress": [
+    "removal_creature"
+  ],
+  "Arcane Denial": [
+    "draw"
+  ],
+  "Font of Agonies": [
+    "removal_creature"
+  ],
+  "Big Game Hunter": [
+    "removal_creature"
+  ],
+  "Dungeon Geists": [
+    "removal_creature"
+  ],
+  "Rakdos Locket": [
+    "draw",
+    "ramp"
+  ],
+  "Iona's Judgment": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Syphon Mind": [
+    "draw"
+  ],
+  "Silverglade Pathfinder": [
+    "ramp"
+  ],
+  "Whisk Away": [
+    "removal_creature"
+  ],
+  "Mudslide": [
+    "removal_creature"
+  ],
+  "Dark Withering": [
+    "removal_creature"
+  ],
+  "Jace, Unraveler of Secrets": [
+    "draw",
+    "removal_creature"
+  ],
+  "Imperial Edict": [
+    "removal_creature"
+  ],
+  "Azra Bladeseeker": [
+    "draw"
+  ],
+  "Cursebreak": [
+    "removal_noncreature"
+  ],
+  "Preordain": [
+    "draw"
+  ],
+  "Distant Melody": [
+    "draw"
+  ],
+  "Striped Bears": [
+    "draw"
+  ],
+  "Wharf Infiltrator": [
+    "draw"
+  ],
+  "Life from the Loam": [
+    "draw"
+  ],
+  "Snap": [
+    "removal_creature"
+  ],
+  "Improvised Armor": [
+    "draw"
+  ],
+  "Overmaster": [
+    "draw"
+  ],
+  "Into the Core": [
+    "removal_noncreature"
+  ],
+  "Mark for Death": [
+    "removal_creature"
+  ],
+  "Oblivion Strike": [
+    "removal_creature"
+  ],
+  "Lieutenant Kirtar": [
+    "removal_creature"
+  ],
+  "Jhoira of the Ghitu": [
+    "ramp"
+  ],
+  "Reviving Dose": [
+    "draw"
+  ],
+  "Crush": [
+    "removal_noncreature"
+  ],
+  "Formation": [
+    "draw"
+  ],
+  "Quarry Colossus": [
+    "removal_creature"
+  ],
+  "Urza's Blueprints": [
+    "draw"
+  ],
+  "Ruins of Trokair": [
+    "ramp"
+  ],
+  "Ugin's Insight": [
+    "draw"
+  ],
+  "Multani's Presence": [
+    "draw"
+  ],
+  "Collar the Culprit": [
+    "removal_creature"
+  ],
+  "Cloud of Faeries": [
+    "draw"
+  ],
+  "Daretti, Ingenious Iconoclast": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Cloudchaser Eagle": [
+    "removal_noncreature"
+  ],
+  "Hundroog": [
+    "draw"
+  ],
+  "Odric, Master Tactician": [
+    "removal_creature"
+  ],
+  "Brink of Disaster": [
+    "removal_creature"
+  ],
+  "Akroma's Vengeance": [
+    "draw",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Death Rattle": [
+    "removal_creature"
+  ],
+  "Honored Hierarch": [
+    "ramp"
+  ],
+  "Winter's Chill": [
+    "removal_creature"
+  ],
+  "Fire // Ice": [
+    "draw"
+  ],
+  "Elven Warhounds": [
+    "removal_creature"
+  ],
+  "Death Pits of Rath": [
+    "removal_creature"
+  ],
+  "Fatal Lore": [
+    "draw",
+    "removal_creature"
+  ],
+  "Noetic Scales": [
+    "removal_creature"
+  ],
+  "Crushing Vines": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Restore the Peace": [
+    "removal_creature"
+  ],
+  "Greater Mossdog": [
+    "draw"
+  ],
+  "Mass Appeal": [
+    "draw"
+  ],
+  "Yoke of the Damned": [
+    "removal_creature"
+  ],
+  "Tinder Farm": [
+    "ramp"
+  ],
+  "Orcish Cannonade": [
+    "draw"
+  ],
+  "Archfiend of Depravity": [
+    "removal_creature"
+  ],
+  "Spreading Seas": [
+    "draw"
+  ],
+  "Cockatrice": [
+    "removal_creature"
+  ],
+  "Fractured Powerstone": [
+    "ramp"
+  ],
+  "Sanguine Praetor": [
+    "removal_creature"
+  ],
+  "Weed Strangle": [
+    "removal_creature"
+  ],
+  "Blood Scrivener": [
+    "draw"
+  ],
+  "Hand of Justice": [
+    "removal_creature"
+  ],
+  "Disruption Aura": [
+    "removal_noncreature"
+  ],
+  "Burning Inquiry": [
+    "draw"
+  ],
+  "Chained to the Rocks": [
+    "removal_creature"
+  ],
+  "Grenzo's Rebuttal": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Wall of Mulch": [
+    "draw"
+  ],
+  "The Scorpion God": [
+    "draw"
+  ],
+  "Cleansing Nova": [
+    "board_wipe",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Atzocan Seer": [
+    "ramp"
+  ],
+  "Titan's Presence": [
+    "removal_creature"
+  ],
+  "Last One Standing": [
+    "removal_creature"
+  ],
+  "Conch Horn": [
+    "draw"
+  ],
+  "Rune of Protection: Black": [
+    "draw"
+  ],
+  "Mercadian Bazaar": [
+    "ramp"
+  ],
+  "Well of Lost Dreams": [
+    "draw"
+  ],
+  "Boros Locket": [
+    "draw",
+    "ramp"
+  ],
+  "Ghostly Wings": [
+    "removal_creature"
+  ],
+  "Urza's Guilt": [
+    "draw"
+  ],
+  "Complete Disregard": [
+    "removal_creature"
+  ],
+  "Consign to the Pit": [
+    "removal_creature"
+  ],
+  "Neheb, the Eternal": [
+    "ramp"
+  ],
+  "Resounding Thunder": [
+    "draw"
+  ],
+  "Nissa, Voice of Zendikar": [
+    "draw"
+  ],
+  "Frontline Sage": [
+    "draw"
+  ],
+  "Soramaro, First to Dream": [
+    "draw"
+  ],
+  "Mass Polymorph": [
+    "board_wipe"
+  ],
+  "Revitalize": [
+    "draw"
+  ],
+  "Swords to Plowshares": [
+    "removal_creature"
+  ],
+  "Worn Powerstone": [
+    "ramp"
+  ],
+  "Druid of the Cowl": [
+    "ramp"
+  ],
+  "Fumigate": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Dust to Dust": [
+    "removal_noncreature"
+  ],
+  "Verdant Crescendo": [
+    "ramp"
+  ],
+  "Pendrell Mists": [
+    "removal_creature"
+  ],
+  "Pull from Tomorrow": [
+    "draw"
+  ],
+  "Imaginary Threats": [
+    "draw"
+  ],
+  "Wreak Havoc": [
+    "removal_noncreature"
+  ],
+  "Shaman of Spring": [
+    "draw"
+  ],
+  "Repeal": [
+    "draw"
+  ],
+  "Mental Discipline": [
+    "draw"
+  ],
+  "Multani's Decree": [
+    "removal_noncreature"
+  ],
+  "Grave Birthing": [
+    "draw",
+    "ramp"
+  ],
+  "Minds Aglow": [
+    "draw"
+  ],
+  "Angelic Purge": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Woodvine Elemental": [
+    "draw"
+  ],
+  "Deathreap Ritual": [
+    "draw"
+  ],
+  "Kruphix, God of Horizons": [
+    "ramp"
+  ],
+  "Sun Titan": [
+    "ramp"
+  ],
+  "Rogue Refiner": [
+    "draw"
+  ],
+  "Code of Constraint": [
+    "draw"
+  ],
+  "Teferi's Response": [
+    "draw"
+  ],
+  "Wing Shards": [
+    "removal_creature"
+  ],
+  "Sturmgeist": [
+    "draw"
+  ],
+  "Druid Lyrist": [
+    "removal_noncreature"
+  ],
+  "Tezzeret's Gambit": [
+    "draw"
+  ],
+  "Tainted Well": [
+    "draw"
+  ],
+  "Fleeting Distraction": [
+    "draw"
+  ],
+  "Vedalken Engineer": [
+    "ramp"
+  ],
+  "Untamed Wilds": [
+    "ramp"
+  ],
+  "Carrier Thrall": [
+    "ramp"
+  ],
+  "Frenzied Fugue": [
+    "ramp"
+  ],
+  "Frantic Purification": [
+    "removal_noncreature"
+  ],
+  "Primeval Light": [
+    "removal_noncreature"
+  ],
+  "Eastern Paladin": [
+    "removal_creature"
+  ],
+  "Undo": [
+    "removal_creature"
+  ],
+  "Necromantic Selection": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Shadow of Doubt": [
+    "draw"
+  ],
+  "Rakdos Cluestone": [
+    "draw",
+    "ramp"
+  ],
+  "Waterfront Bouncer": [
+    "removal_creature"
+  ],
+  "Filigree Familiar": [
+    "draw"
+  ],
+  "Expose Evil": [
+    "draw"
+  ],
+  "Deadly Tempest": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Eldrazi Skyspawner": [
+    "ramp"
+  ],
+  "Argothian Elder": [
+    "ramp"
+  ],
+  "Morsel Theft": [
+    "draw"
+  ],
+  "Spectral Prison": [
+    "removal_creature"
+  ],
+  "Skyshroud Troopers": [
+    "ramp"
+  ],
+  "Skull of Ramos": [
+    "ramp"
+  ],
+  "Star Compass": [
+    "ramp"
+  ],
+  "Vivien Reid": [
+    "removal_creature"
+  ],
+  "Smelt": [
+    "removal_noncreature"
+  ],
+  "Radiant Purge": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Phyrexian Vault": [
+    "draw"
+  ],
+  "Selvala, Explorer Returned": [
+    "draw",
+    "ramp"
+  ],
+  "Martyr's Cry": [
+    "draw",
+    "removal_creature"
+  ],
+  "Manglehorn": [
+    "removal_noncreature"
+  ],
+  "Dread Drone": [
+    "ramp"
+  ],
+  "Vile Consumption": [
+    "removal_creature"
+  ],
+  "Aggression": [
+    "removal_creature"
+  ],
+  "Steam Catapult": [
+    "removal_creature"
+  ],
+  "Nihil Spellbomb": [
+    "draw"
+  ],
+  "Pilfered Plans": [
+    "draw"
+  ],
+  "Chastise": [
+    "removal_creature"
+  ],
+  "Skymark Roc": [
+    "removal_creature"
+  ],
+  "Path of Peace": [
+    "removal_creature"
+  ],
+  "Dismiss into Dream": [
+    "removal_creature"
+  ],
+  "Synapse Sliver": [
+    "draw"
+  ],
+  "Mystic Archaeologist": [
+    "draw"
+  ],
+  "Cabal Executioner": [
+    "removal_creature"
+  ],
+  "Jeskai Sage": [
+    "draw"
+  ],
+  "Dream Leash": [
+    "ramp"
+  ],
+  "Wildfield Borderpost": [
+    "ramp"
+  ],
+  "Horn of Greed": [
+    "draw"
+  ],
+  "Spite // Malice": [
+    "removal_creature"
+  ],
+  "Show and Tell": [
+    "ramp"
+  ],
+  "Map the Wastes": [
+    "ramp"
+  ],
+  "Fury Charm": [
+    "removal_noncreature"
+  ],
+  "Ruinous Gremlin": [
+    "removal_noncreature"
+  ],
+  "Neck Snap": [
+    "removal_creature"
+  ],
+  "Llanowar Druid": [
+    "ramp"
+  ],
+  "Pillar Tombs of Aku": [
+    "removal_creature"
+  ],
+  "Flux": [
+    "draw"
+  ],
+  "Blazing Hope": [
+    "removal_creature"
+  ],
+  "Back to Nature": [
+    "removal_noncreature"
+  ],
+  "Blighted Fen": [
+    "removal_creature"
+  ],
+  "Explore": [
+    "draw",
+    "ramp"
+  ],
+  "Squelch": [
+    "draw"
+  ],
+  "Benthic Biomancer": [
+    "draw"
+  ],
+  "Sever the Bloodline": [
+    "removal_creature"
+  ],
+  "Spawnsire of Ulamog": [
+    "ramp"
+  ],
+  "Jhessian Thief": [
+    "draw"
+  ],
+  "Sawtooth Loon": [
+    "draw"
+  ],
+  "Keening Apparition": [
+    "removal_noncreature"
+  ],
+  "Implement of Ferocity": [
+    "draw"
+  ],
+  "Tangleroot": [
+    "ramp"
+  ],
+  "Green Mana Battery": [
+    "ramp"
+  ],
+  "Secrets of the Dead": [
+    "draw"
+  ],
+  "Curse of Vengeance": [
+    "draw"
+  ],
+  "Eternity Snare": [
+    "draw",
+    "removal_creature"
+  ],
+  "Glimmer of Genius": [
+    "draw"
+  ],
+  "Bladebrand": [
+    "draw"
+  ],
+  "Fallowsage": [
+    "draw"
+  ],
+  "Batterhorn": [
+    "removal_noncreature"
+  ],
+  "Hollow One": [
+    "draw"
+  ],
+  "Tangle Asp": [
+    "removal_creature"
+  ],
+  "Mentor of the Meek": [
+    "draw"
+  ],
+  "Essence Filter": [
+    "removal_noncreature"
+  ],
+  "Eyeless Watcher": [
+    "ramp"
+  ],
+  "Curse of Opulence": [
+    "ramp"
+  ],
+  "Mishra's Workshop": [
+    "ramp"
+  ],
+  "Doomfall": [
+    "removal_creature"
+  ],
+  "Plagiarize": [
+    "draw"
+  ],
+  "Academy Elite": [
+    "draw"
+  ],
+  "Skirge Familiar": [
+    "ramp"
+  ],
+  "Murder of Crows": [
+    "draw"
+  ],
+  "Heart Warden": [
+    "draw",
+    "ramp"
+  ],
+  "Honor-Worn Shaku": [
+    "ramp"
+  ],
+  "Rix Maadi Reveler": [
+    "draw"
+  ],
+  "Baral, Chief of Compliance": [
+    "draw"
+  ],
+  "Suspension Field": [
+    "removal_creature"
+  ],
+  "Workhorse": [
+    "ramp"
+  ],
+  "Jace's Erasure": [
+    "draw"
+  ],
+  "Gate to Phyrexia": [
+    "removal_noncreature"
+  ],
+  "Azure Mage": [
+    "draw"
+  ],
+  "Benthic Explorers": [
+    "ramp"
+  ],
+  "Enclave Cryptologist": [
+    "draw"
+  ],
+  "Sulfur Vent": [
+    "ramp"
+  ],
+  "Order // Chaos": [
+    "removal_creature"
+  ],
+  "Llanowar Mentor": [
+    "ramp"
+  ],
+  "Syphon Flesh": [
+    "removal_creature"
+  ],
+  "Kaya's Wrath": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Quicksmith Genius": [
+    "draw"
+  ],
+  "March of Souls": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Chill to the Bone": [
+    "removal_creature"
+  ],
+  "Voyaging Satyr": [
+    "ramp"
+  ],
+  "Bedevil": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Flesh Allergy": [
+    "removal_creature"
+  ],
+  "Manaweft Sliver": [
+    "ramp"
+  ],
+  "Gempalm Polluter": [
+    "draw"
+  ],
+  "Gaea's Blessing": [
+    "draw"
+  ],
+  "Gold Myr": [
+    "ramp"
+  ],
+  "Street Wraith": [
+    "draw"
+  ],
+  "Sage's Reverie": [
+    "draw"
+  ],
+  "Scion of Darkness": [
+    "draw"
+  ],
+  "Human Frailty": [
+    "removal_creature"
+  ],
+  "Manalith": [
+    "ramp"
+  ],
+  "Volition Reins": [
+    "ramp"
+  ],
+  "Overwhelming Forces": [
+    "board_wipe",
+    "draw",
+    "removal_creature"
+  ],
+  "Carven Caryatid": [
+    "draw"
+  ],
+  "Springleaf Drum": [
+    "ramp"
+  ],
+  "Lake of the Dead": [
+    "ramp"
+  ],
+  "Smoldering Crater": [
+    "draw"
+  ],
+  "Conquer": [
+    "ramp"
+  ],
+  "Faceless Devourer": [
+    "removal_creature"
+  ],
+  "Arguel's Blood Fast // Temple of Aclazotz": [
+    "ramp"
+  ],
+  "Dirge of Dread": [
+    "draw"
+  ],
+  "Goblin Grenadiers": [
+    "removal_creature"
+  ],
+  "Curse of Chains": [
+    "removal_creature"
+  ],
+  "Humble the Brute": [
+    "draw",
+    "removal_creature"
+  ],
+  "Root Out": [
+    "draw"
+  ],
+  "Arbor Colossus": [
+    "removal_creature"
+  ],
+  "Equal Treatment": [
+    "draw"
+  ],
+  "Acidic Dagger": [
+    "removal_creature"
+  ],
+  "Cannibalize": [
+    "removal_creature"
+  ],
+  "Structural Distortion": [
+    "removal_noncreature"
+  ],
+  "Serpentine Basilisk": [
+    "removal_creature"
+  ],
+  "Diaochan, Artful Beauty": [
+    "removal_creature"
+  ],
+  "Never // Return": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Glissa Sunseeker": [
+    "removal_noncreature"
+  ],
+  "Trial of Ambition": [
+    "removal_creature"
+  ],
+  "Violet Pall": [
+    "removal_creature"
+  ],
+  "Exile into Darkness": [
+    "removal_creature"
+  ],
+  "Implode": [
+    "draw"
+  ],
+  "Vow of Lightning": [
+    "removal_creature"
+  ],
+  "Nighthaze": [
+    "draw"
+  ],
+  "Bontu's Last Reckoning": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Coma Veil": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Phyrexian Tribute": [
+    "removal_noncreature"
+  ],
+  "Oashra Cultivator": [
+    "ramp"
+  ],
+  "Diviner's Wand": [
+    "draw"
+  ],
+  "Gemstone Caverns": [
+    "ramp"
+  ],
+  "Azor's Gateway // Sanctum of the Sun": [
+    "ramp"
+  ],
+  "Murderous Cut": [
+    "removal_creature"
+  ],
+  "Secrets of the Golden City": [
+    "draw"
+  ],
+  "Paradise Mantle": [
+    "ramp"
+  ],
+  "Paralyzing Grasp": [
+    "removal_creature"
+  ],
+  "Skirk Prospector": [
+    "ramp"
+  ],
+  "Shelter": [
+    "draw"
+  ],
+  "Metalspinner's Puzzleknot": [
+    "draw"
+  ],
+  "Luminate Primordial": [
+    "removal_creature"
+  ],
+  "Blood Divination": [
+    "draw"
+  ],
+  "Whisperer of the Wilds": [
+    "ramp"
+  ],
+  "Cultivator's Caravan": [
+    "ramp"
+  ],
+  "Drownyard Explorers": [
+    "draw"
+  ],
+  "Overseer of the Damned": [
+    "removal_creature"
+  ],
+  "Ojutai's Command": [
+    "draw"
+  ],
+  "Hobble": [
+    "draw"
+  ],
+  "Desolation Giant": [
+    "removal_creature"
+  ],
+  "Viridian Revel": [
+    "draw"
+  ],
+  "Drelnoch": [
+    "draw"
+  ],
+  "Dreamscape Artist": [
+    "ramp"
+  ],
+  "Consume the Meek": [
+    "removal_creature"
+  ],
+  "Into the Roil": [
+    "draw"
+  ],
+  "Capital Punishment": [
+    "removal_creature"
+  ],
+  "Essence Feed": [
+    "ramp"
+  ],
+  "Vexing Sphinx": [
+    "draw"
+  ],
+  "Harvester Druid": [
+    "ramp"
+  ],
+  "Tivadar of Thorn": [
+    "removal_creature"
+  ],
+  "Erase": [
+    "removal_noncreature"
+  ],
+  "Giant Ambush Beetle": [
+    "removal_creature"
+  ],
+  "Bishop of Binding": [
+    "removal_creature"
+  ],
+  "Arcane Spyglass": [
+    "draw"
+  ],
+  "Biomantic Mastery": [
+    "draw"
+  ],
+  "Drownyard Temple": [
+    "ramp"
+  ],
+  "Gempalm Sorcerer": [
+    "draw"
+  ],
+  "Skyscribing": [
+    "draw"
+  ],
+  "Verdant Rebirth": [
+    "draw"
+  ],
+  "Inspired Sprite": [
+    "draw"
+  ],
+  "Chronicler of Heroes": [
+    "draw"
+  ],
+  "Spark Spray": [
+    "draw"
+  ],
+  "Unsubstantiate": [
+    "removal_creature"
+  ],
+  "Curious Homunculus // Voracious Reader": [
+    "ramp"
+  ],
+  "Stone-Tongue Basilisk": [
+    "removal_creature"
+  ],
+  "Vraska's Stoneglare": [
+    "removal_creature"
+  ],
+  "Eviscerate": [
+    "removal_creature"
+  ],
+  "Novablast Wurm": [
+    "removal_creature"
+  ],
+  "Merciless Executioner": [
+    "removal_creature"
+  ],
+  "Jeskai Ascendancy": [
+    "draw"
+  ],
+  "Grip of the Roil": [
+    "draw"
+  ],
+  "Smothering Abomination": [
+    "draw"
+  ],
+  "Crime // Punishment": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Stone Catapult": [
+    "removal_creature"
+  ],
+  "Lim-D\u00fbl's Paladin": [
+    "draw"
+  ],
+  "Silent Departure": [
+    "removal_creature"
+  ],
+  "Thassa's Bounty": [
+    "draw"
+  ],
+  "Symbol of Unsummoning": [
+    "draw",
+    "removal_creature"
+  ],
+  "Vesper Ghoul": [
+    "ramp"
+  ],
+  "Nezahal, Primal Tide": [
+    "draw"
+  ],
+  "Isperia, Supreme Judge": [
+    "draw"
+  ],
+  "Bomat Bazaar Barge": [
+    "draw"
+  ],
+  "Thicket Basilisk": [
+    "removal_creature"
+  ],
+  "Darkwater Egg": [
+    "draw"
+  ],
+  "Djeru's Resolve": [
+    "draw"
+  ],
+  "Zombie Boa": [
+    "removal_creature"
+  ],
+  "Shizuko, Caller of Autumn": [
+    "ramp"
+  ],
+  "Skinthinner": [
+    "removal_creature"
+  ],
+  "Day of the Dragons": [
+    "board_wipe"
+  ],
+  "Sailor of Means": [
+    "ramp"
+  ],
+  "Sorcerer's Strongbox": [
+    "draw"
+  ],
+  "Depose // Deploy": [
+    "draw"
+  ],
+  "Unmake": [
+    "removal_creature"
+  ],
+  "Simic Locket": [
+    "draw",
+    "ramp"
+  ],
+  "Vision Charm": [
+    "removal_noncreature"
+  ],
+  "Befoul": [
+    "removal_creature"
+  ],
+  "Dream Fracture": [
+    "draw"
+  ],
+  "Prosperity": [
+    "draw"
+  ],
+  "Nettling Imp": [
+    "removal_creature"
+  ],
+  "Tahngarth, Talruum Hero": [
+    "removal_creature"
+  ],
+  "Hostage Taker": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Sign in Blood": [
+    "draw"
+  ],
+  "Ever-Watching Threshold": [
+    "draw"
+  ],
+  "Bandage": [
+    "draw"
+  ],
+  "Visions of Beyond": [
+    "draw"
+  ],
+  "Cerebral Vortex": [
+    "draw"
+  ],
+  "Sweep Away": [
+    "removal_creature"
+  ],
+  "Cremate": [
+    "draw"
+  ],
+  "Elvish Visionary": [
+    "draw"
+  ],
+  "Angel of Glory's Rise": [
+    "removal_creature"
+  ],
+  "Frenzied Tilling": [
+    "ramp"
+  ],
+  "Ghirapur Orrery": [
+    "draw",
+    "ramp"
+  ],
+  "Zur's Weirding": [
+    "draw"
+  ],
+  "Drifting Meadow": [
+    "draw"
+  ],
+  "Curse of Verbosity": [
+    "draw"
+  ],
+  "Calming Verse": [
+    "removal_noncreature"
+  ],
+  "Lay Claim": [
+    "draw",
+    "ramp"
+  ],
+  "Urban Evolution": [
+    "draw",
+    "ramp"
+  ],
+  "Cephalid Coliseum": [
+    "draw"
+  ],
+  "Oubliette": [
+    "removal_creature"
+  ],
+  "Simic Charm": [
+    "removal_creature"
+  ],
+  "Insight": [
+    "draw"
+  ],
+  "Ring of Ma'r\u00fbf": [
+    "draw"
+  ],
+  "Dawn to Dusk": [
+    "removal_noncreature"
+  ],
+  "Myojin of Cleansing Fire": [
+    "removal_creature"
+  ],
+  "Candelabra of Tawnos": [
+    "ramp"
+  ],
+  "Extinguish All Hope": [
+    "removal_creature"
+  ],
+  "Rune of Protection: Green": [
+    "draw"
+  ],
+  "Jhoira, Weatherlight Captain": [
+    "draw"
+  ],
+  "Deepfire Elemental": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Gravestorm": [
+    "draw"
+  ],
+  "Reach Through Mists": [
+    "draw"
+  ],
+  "Farsight Mask": [
+    "draw"
+  ],
+  "Immortal Coil": [
+    "draw"
+  ],
+  "Lorescale Coatl": [
+    "draw"
+  ],
+  "Looter il-Kor": [
+    "draw"
+  ],
+  "Keldon Twilight": [
+    "removal_creature"
+  ],
+  "Thermopod": [
+    "ramp"
+  ],
+  "Seal Away": [
+    "removal_creature"
+  ],
+  "Fissure": [
+    "removal_creature"
+  ],
+  "Crackling Drake": [
+    "draw"
+  ],
+  "Warping Wail": [
+    "ramp",
+    "removal_creature"
+  ],
+  "Sandstone Needle": [
+    "ramp"
+  ],
+  "Succumb to Temptation": [
+    "draw"
+  ],
+  "Demanding Dragon": [
+    "removal_creature"
+  ],
+  "Sleeping Potion": [
+    "removal_creature"
+  ],
+  "Sunscape Battlemage": [
+    "draw",
+    "removal_creature"
+  ],
+  "Sky-Eel School": [
+    "draw"
+  ],
+  "Aminatou's Augury": [
+    "ramp"
+  ],
+  "Viridian Emissary": [
+    "ramp"
+  ],
+  "Foresight": [
+    "draw"
+  ],
+  "Mind Stone": [
+    "draw",
+    "ramp"
+  ],
+  "Breathstealer's Crypt": [
+    "draw"
+  ],
+  "Executioner's Capsule": [
+    "removal_creature"
+  ],
+  "Arctic Wolves": [
+    "draw"
+  ],
+  "Consult the Necrosages": [
+    "draw"
+  ],
+  "Powder Keg": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Azorius Locket": [
+    "draw",
+    "ramp"
+  ],
+  "Scrying Glass": [
+    "draw"
+  ],
+  "Blessed Reincarnation": [
+    "removal_creature"
+  ],
+  "Ethersworn Adjudicator": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Shaman of Forgotten Ways": [
+    "ramp"
+  ],
+  "Cyclops Gladiator": [
+    "removal_creature"
+  ],
+  "Opaline Unicorn": [
+    "ramp"
+  ],
+  "Steward of Valeron": [
+    "ramp"
+  ],
+  "Restore Balance": [
+    "removal_creature"
+  ],
+  "Confound": [
+    "draw"
+  ],
+  "Thraben Inspector": [
+    "draw"
+  ],
+  "Depths of Desire": [
+    "ramp",
+    "removal_creature"
+  ],
+  "Colossal Majesty": [
+    "draw"
+  ],
+  "Felidar Cub": [
+    "removal_noncreature"
+  ],
+  "Arixmethes, Slumbering Isle": [
+    "ramp"
+  ],
+  "Dwarven Demolition Team": [
+    "removal_creature"
+  ],
+  "Kefnet the Mindful": [
+    "draw"
+  ],
+  "Deathbringer Liege": [
+    "removal_creature"
+  ],
+  "Irresistible Prey": [
+    "draw"
+  ],
+  "Tide of War": [
+    "removal_creature"
+  ],
+  "Unhinge": [
+    "draw"
+  ],
+  "Cloak of Feathers": [
+    "draw"
+  ],
+  "Vizier of the Anointed": [
+    "draw"
+  ],
+  "Priest of Yawgmoth": [
+    "ramp"
+  ],
+  "Silvergill Adept": [
+    "draw"
+  ],
+  "Devoted Druid": [
+    "ramp"
+  ],
+  "Sun Clasp": [
+    "removal_creature"
+  ],
+  "Endless Atlas": [
+    "draw"
+  ],
+  "Budoka Gardener // Dokai, Weaver of Life": [
+    "ramp"
+  ],
+  "Fiend Hunter": [
+    "removal_creature"
+  ],
+  "Gempalm Avenger": [
+    "draw"
+  ],
+  "Druids' Repository": [
+    "ramp"
+  ],
+  "Equilibrium": [
+    "removal_creature"
+  ],
+  "Dwarven Ruins": [
+    "ramp"
+  ],
+  "Fumble": [
+    "removal_creature"
+  ],
+  "Headstone": [
+    "draw"
+  ],
+  "Jace Beleren": [
+    "draw"
+  ],
+  "Runewing": [
+    "draw"
+  ],
+  "Revel in Riches": [
+    "ramp"
+  ],
+  "Grave Exchange": [
+    "removal_creature"
+  ],
+  "Gravepurge": [
+    "draw"
+  ],
+  "Rend Spirit": [
+    "removal_creature"
+  ],
+  "Kindred Dominance": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Stone-Seeder Hierophant": [
+    "ramp"
+  ],
+  "Rushwood Grove": [
+    "ramp"
+  ],
+  "Lingering Mirage": [
+    "draw"
+  ],
+  "Thoughtcast": [
+    "draw"
+  ],
+  "Forced Retreat": [
+    "removal_creature"
+  ],
+  "Arrester's Admonition": [
+    "draw",
+    "removal_creature"
+  ],
+  "Colossal Whale": [
+    "removal_creature"
+  ],
+  "Wall of Nets": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Mystic Confluence": [
+    "draw",
+    "removal_creature"
+  ],
+  "Mageta the Lion": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Knight of Dusk": [
+    "removal_creature"
+  ],
+  "Flight of Fancy": [
+    "draw"
+  ],
+  "Vanishing": [
+    "removal_creature"
+  ],
+  "Sygg, River Cutthroat": [
+    "draw"
+  ],
+  "Boiling Blood": [
+    "draw"
+  ],
+  "Kaijin of the Vanishing Touch": [
+    "removal_creature"
+  ],
+  "Crystal Shard": [
+    "removal_creature"
+  ],
+  "Verduran Enchantress": [
+    "draw"
+  ],
+  "Dakmor Salvage": [
+    "draw"
+  ],
+  "Jace's Ingenuity": [
+    "draw"
+  ],
+  "Orcish Squatters": [
+    "ramp"
+  ],
+  "Assassinate": [
+    "removal_creature"
+  ],
+  "Hatching Plans": [
+    "draw"
+  ],
+  "Darkslick Drake": [
+    "draw"
+  ],
+  "Oxidda Scrapmelter": [
+    "removal_noncreature"
+  ],
+  "Thought-Knot Seer": [
+    "draw"
+  ],
+  "Clip Wings": [
+    "removal_creature"
+  ],
+  "Deathmark": [
+    "removal_creature"
+  ],
+  "Quicken": [
+    "draw"
+  ],
+  "Restore": [
+    "ramp"
+  ],
+  "Rebuke": [
+    "removal_creature"
+  ],
+  "Primitive Justice": [
+    "removal_noncreature"
+  ],
+  "White Mana Battery": [
+    "ramp"
+  ],
+  "Dogged Hunter": [
+    "removal_creature"
+  ],
+  "Boros Battleshaper": [
+    "removal_creature"
+  ],
+  "Sylvok Explorer": [
+    "ramp"
+  ],
+  "Skittering Invasion": [
+    "ramp"
+  ],
+  "Phyrexian Etchings": [
+    "draw"
+  ],
+  "Hoard-Smelter Dragon": [
+    "removal_noncreature"
+  ],
+  "Ice Floe": [
+    "removal_creature"
+  ],
+  "Curtains' Call": [
+    "removal_creature"
+  ],
+  "Ob Nixilis of the Black Oath": [
+    "draw"
+  ],
+  "Purify": [
+    "removal_noncreature"
+  ],
+  "Mogg Infestation": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Spell Snip": [
+    "draw"
+  ],
+  "Temple of the False God": [
+    "ramp"
+  ],
+  "Blast of Genius": [
+    "draw"
+  ],
+  "Goblin Masons": [
+    "removal_creature"
+  ],
+  "Select for Inspection": [
+    "removal_creature"
+  ],
+  "Words of Wisdom": [
+    "draw"
+  ],
+  "Iceberg": [
+    "ramp"
+  ],
+  "Aquitect's Will": [
+    "draw"
+  ],
+  "Primal Druid": [
+    "ramp"
+  ],
+  "Nivix Guildmage": [
+    "draw"
+  ],
+  "Foriysian Totem": [
+    "ramp"
+  ],
+  "Day of Judgment": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Woodripper": [
+    "removal_noncreature"
+  ],
+  "Purge": [
+    "removal_noncreature"
+  ],
+  "Clear": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Multani's Acolyte": [
+    "draw"
+  ],
+  "Titania, Protector of Argoth": [
+    "ramp"
+  ],
+  "Echoing Calm": [
+    "removal_noncreature"
+  ],
+  "Life and Limb": [
+    "ramp"
+  ],
+  "Rite of Ruin": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Etched Monstrosity": [
+    "draw"
+  ],
+  "Phelddagrif": [
+    "draw"
+  ],
+  "Nature's Ruin": [
+    "removal_creature"
+  ],
+  "Valeron Wardens": [
+    "draw"
+  ],
+  "Archivist": [
+    "draw"
+  ],
+  "Artificer's Hex": [
+    "removal_creature"
+  ],
+  "Tymna the Weaver": [
+    "draw"
+  ],
+  "Apprentice Wizard": [
+    "ramp"
+  ],
+  "Shimmering Mirage": [
+    "draw"
+  ],
+  "Astrolabe": [
+    "draw"
+  ],
+  "Mesmeric Trance": [
+    "draw"
+  ],
+  "Shamanic Revelation": [
+    "draw"
+  ],
+  "Greater Sandwurm": [
+    "draw"
+  ],
+  "Steady Progress": [
+    "draw"
+  ],
+  "Jace, Cunning Castaway": [
+    "draw"
+  ],
+  "Manakin": [
+    "ramp"
+  ],
+  "No Quarter": [
+    "removal_creature"
+  ],
+  "Psychic Possession": [
+    "draw"
+  ],
+  "Rhox Oracle": [
+    "draw"
+  ],
+  "Wily Goblin": [
+    "ramp"
+  ],
+  "Coastal Wizard": [
+    "removal_creature"
+  ],
+  "Soldevi Sentry": [
+    "draw"
+  ],
+  "Graveborn Muse": [
+    "draw"
+  ],
+  "Tigereye Cameo": [
+    "ramp"
+  ],
+  "Break Asunder": [
+    "draw"
+  ],
+  "Western Paladin": [
+    "removal_creature"
+  ],
+  "Phyrexian Lens": [
+    "ramp"
+  ],
+  "Malfunction": [
+    "removal_creature"
+  ],
+  "Orochi Sustainer": [
+    "ramp"
+  ],
+  "Descent of the Dragons": [
+    "removal_creature"
+  ],
+  "Stun": [
+    "draw"
+  ],
+  "Pelakka Wurm": [
+    "draw"
+  ],
+  "Gruul Signet": [
+    "ramp"
+  ],
+  "Daring Saboteur": [
+    "draw"
+  ],
+  "Unnatural Hunger": [
+    "removal_creature"
+  ],
+  "Whirlwind": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Granitic Titan": [
+    "draw"
+  ],
+  "Birds of Paradise": [
+    "ramp"
+  ],
+  "Reaper from the Abyss": [
+    "removal_creature"
+  ],
+  "Dragon Appeasement": [
+    "draw"
+  ],
+  "Gnarlroot Trapper": [
+    "ramp"
+  ],
+  "Mul Daya Channelers": [
+    "ramp"
+  ],
+  "Dark Betrayal": [
+    "removal_creature"
+  ],
+  "Pulverize": [
+    "removal_noncreature"
+  ],
+  "Nekrataal": [
+    "removal_creature"
+  ],
+  "Esper Charm": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Coastal Drake": [
+    "removal_creature"
+  ],
+  "Nantuko Calmer": [
+    "removal_noncreature"
+  ],
+  "Violent Impact": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Nahiri, the Harbinger": [
+    "draw",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Pressure Point": [
+    "draw"
+  ],
+  "Leaden Fists": [
+    "removal_creature"
+  ],
+  "Eaten by Spiders": [
+    "removal_creature"
+  ],
+  "Icy Prison": [
+    "removal_creature"
+  ],
+  "Selesnya Keyrune": [
+    "ramp"
+  ],
+  "Fleetfeather Cockatrice": [
+    "removal_creature"
+  ],
+  "Lull": [
+    "draw"
+  ],
+  "Lumengrid Augur": [
+    "draw"
+  ],
+  "Fate Foretold": [
+    "draw"
+  ],
+  "Damnation": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Hunting Drake": [
+    "removal_creature"
+  ],
+  "Confiscate": [
+    "ramp"
+  ],
+  "Alhammarret's Archive": [
+    "draw"
+  ],
+  "Spire Phantasm": [
+    "draw"
+  ],
+  "Well of Discovery": [
+    "draw"
+  ],
+  "Uncomfortable Chill": [
+    "draw"
+  ],
+  "Path to Exile": [
+    "ramp",
+    "removal_creature"
+  ],
+  "Dreadbore": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Rout": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Bearer of Silence": [
+    "removal_creature"
+  ],
+  "Mask of Memory": [
+    "draw"
+  ],
+  "Ojutai Monument": [
+    "ramp"
+  ],
+  "Sages of the Anima": [
+    "draw"
+  ],
+  "Rootgrapple": [
+    "draw"
+  ],
+  "Curtain of Light": [
+    "draw"
+  ],
+  "River Serpent": [
+    "draw"
+  ],
+  "Nova Cleric": [
+    "removal_noncreature"
+  ],
+  "Remand": [
+    "draw"
+  ],
+  "Harbor Guardian": [
+    "draw"
+  ],
+  "Tidy Conclusion": [
+    "removal_creature"
+  ],
+  "Unbridled Growth": [
+    "draw",
+    "ramp"
+  ],
+  "Soulscour": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Staff of Domination": [
+    "draw"
+  ],
+  "Sword of the Animist": [
+    "ramp"
+  ],
+  "Dawn of Hope": [
+    "draw"
+  ],
+  "Ral, Caller of Storms": [
+    "draw"
+  ],
+  "Swift Maneuver": [
+    "draw"
+  ],
+  "Mystic Meditation": [
+    "draw"
+  ],
+  "Molder Slug": [
+    "removal_noncreature"
+  ],
+  "Armorcraft Judge": [
+    "draw"
+  ],
+  "Sleeper's Robe": [
+    "draw"
+  ],
+  "Brilliant Plan": [
+    "draw"
+  ],
+  "Braids, Cabal Minion": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Kolaghan Monument": [
+    "ramp"
+  ],
+  "Urborg Justice": [
+    "removal_creature"
+  ],
+  "Mark of Eviction": [
+    "removal_creature"
+  ],
+  "Arcane Encyclopedia": [
+    "draw"
+  ],
+  "Slayer of the Wicked": [
+    "removal_creature"
+  ],
+  "Bonds of Mortality": [
+    "draw"
+  ],
+  "Dream Tides": [
+    "removal_creature"
+  ],
+  "Open into Wonder": [
+    "draw"
+  ],
+  "Hour of Glory": [
+    "removal_creature"
+  ],
+  "Rushing-Tide Zubera": [
+    "draw"
+  ],
+  "Reckless Racer": [
+    "draw"
+  ],
+  "Krosan Verge": [
+    "ramp"
+  ],
+  "Elemental Bond": [
+    "draw"
+  ],
+  "Warren Weirding": [
+    "removal_creature"
+  ],
+  "Gideon's Defeat": [
+    "removal_creature"
+  ],
+  "Ogre Marauder": [
+    "removal_creature"
+  ],
+  "Armistice": [
+    "draw"
+  ],
+  "Evil Twin": [
+    "removal_creature"
+  ],
+  "Dread Specter": [
+    "removal_creature"
+  ],
+  "Screeching Drake": [
+    "draw"
+  ],
+  "Spiritual Focus": [
+    "draw"
+  ],
+  "Oath of Scholars": [
+    "draw"
+  ],
+  "Aleatory": [
+    "draw"
+  ],
+  "Vona's Hunger": [
+    "removal_creature"
+  ],
+  "Phyrexian Slayer": [
+    "removal_creature"
+  ],
+  "Daraja Griffin": [
+    "removal_creature"
+  ],
+  "Kaervek's Purge": [
+    "removal_creature"
+  ],
+  "Detonate": [
+    "removal_noncreature"
+  ],
+  "Palace Familiar": [
+    "draw"
+  ],
+  "Singing Bell Strike": [
+    "removal_creature"
+  ],
+  "Loyal Drake": [
+    "draw"
+  ],
+  "Wretched Banquet": [
+    "removal_creature"
+  ],
+  "Endbringer": [
+    "draw"
+  ],
+  "Dehydration": [
+    "removal_creature"
+  ],
+  "Call to the Grave": [
+    "removal_creature"
+  ],
+  "Defiant Ogre": [
+    "removal_noncreature"
+  ],
+  "Sheltered Thicket": [
+    "draw"
+  ],
+  "Regicide": [
+    "removal_creature"
+  ],
+  "Aphotic Wisps": [
+    "draw"
+  ],
+  "Endemic Plague": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Impaler Shrike": [
+    "draw"
+  ],
+  "Path of Mettle // Metzali, Tower of Triumph": [
+    "ramp"
+  ],
+  "Golgari Locket": [
+    "draw",
+    "ramp"
+  ],
+  "Sudden Disappearance": [
+    "board_wipe"
+  ],
+  "Omen Machine": [
+    "ramp"
+  ],
+  "Iron Will": [
+    "draw"
+  ],
+  "Black Mana Battery": [
+    "ramp"
+  ],
+  "Hand of Death": [
+    "removal_creature"
+  ],
+  "Necromancer's Stockpile": [
+    "draw"
+  ],
+  "Tribute to Hunger": [
+    "removal_creature"
+  ],
+  "Sindbad": [
+    "draw"
+  ],
+  "Natural Connection": [
+    "ramp"
+  ],
+  "Oath of Jace": [
+    "draw"
+  ],
+  "Shattering Blow": [
+    "removal_noncreature"
+  ],
+  "Hallowed Burial": [
+    "removal_creature"
+  ],
+  "Lady Sun": [
+    "removal_creature"
+  ],
+  "Harsh Mercy": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Blastfire Bolt": [
+    "removal_noncreature"
+  ],
+  "Impale": [
+    "removal_creature"
+  ],
+  "Legion's Judgment": [
+    "removal_creature"
+  ],
+  "Jungle Barrier": [
+    "draw"
+  ],
+  "Aethertow": [
+    "removal_creature"
+  ],
+  "Moldervine Cloak": [
+    "draw"
+  ],
+  "Princess Lucrezia": [
+    "ramp"
+  ],
+  "Faerie Miscreant": [
+    "draw"
+  ],
+  "Master of the Wild Hunt": [
+    "removal_creature"
+  ],
+  "Flow of Ideas": [
+    "draw"
+  ],
+  "Brainspoil": [
+    "removal_creature"
+  ],
+  "Perish": [
+    "removal_creature"
+  ],
+  "Shared Discovery": [
+    "draw"
+  ],
+  "Godsend": [
+    "removal_creature"
+  ],
+  "Shipbreaker Kraken": [
+    "removal_creature"
+  ],
+  "Tattoo Ward": [
+    "removal_noncreature"
+  ],
+  "Krosan Vorine": [
+    "removal_creature"
+  ],
+  "Gaea's Touch": [
+    "ramp"
+  ],
+  "Rebuking Ceremony": [
+    "removal_noncreature"
+  ],
+  "Primitive Etchings": [
+    "draw"
+  ],
+  "Alchemist's Apprentice": [
+    "draw"
+  ],
+  "Mox Opal": [
+    "ramp"
+  ],
+  "Orzhov Signet": [
+    "ramp"
+  ],
+  "Customs Depot": [
+    "draw"
+  ],
+  "Arcum's Whistle": [
+    "removal_creature"
+  ],
+  "Dawntreader Elk": [
+    "ramp"
+  ],
+  "Oasis Ritualist": [
+    "ramp"
+  ],
+  "Kithkin Spellduster": [
+    "removal_noncreature"
+  ],
+  "Neurok Replica": [
+    "removal_creature"
+  ],
+  "Dazzling Beauty": [
+    "draw"
+  ],
+  "Structural Collapse": [
+    "removal_noncreature"
+  ],
+  "Gang Up": [
+    "removal_creature"
+  ],
+  "Fountain of Renewal": [
+    "draw"
+  ],
+  "Phyrexian Purge": [
+    "removal_creature"
+  ],
+  "Servant of the Conduit": [
+    "ramp"
+  ],
+  "Fyndhorn Elves": [
+    "ramp"
+  ],
+  "Dowsing Dagger // Lost Vale": [
+    "ramp"
+  ],
+  "Bound // Determined": [
+    "draw"
+  ],
+  "Purple-Crystal Crab": [
+    "draw"
+  ],
+  "The First Eruption": [
+    "ramp"
+  ],
+  "Status // Statue": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Patient Rebuilding": [
+    "draw"
+  ],
+  "Jeskai Elder": [
+    "draw"
+  ],
+  "Bestial Fury": [
+    "draw"
+  ],
+  "Martial Law": [
+    "removal_creature"
+  ],
+  "Phyrexian Bloodstock": [
+    "removal_creature"
+  ],
+  "Messenger Jays": [
+    "draw"
+  ],
+  "Ulvenwald Observer": [
+    "draw"
+  ],
+  "Stinkweed Imp": [
+    "draw"
+  ],
+  "Reach of Shadows": [
+    "removal_creature"
+  ],
+  "Azorius Signet": [
+    "ramp"
+  ],
+  "Cruel Deceiver": [
+    "removal_creature"
+  ],
+  "The Locust God": [
+    "draw"
+  ],
+  "Ghastly Demise": [
+    "removal_creature"
+  ],
+  "Rack and Ruin": [
+    "removal_noncreature"
+  ],
+  "Echoing Ruin": [
+    "removal_noncreature"
+  ],
+  "Smash to Smithereens": [
+    "removal_noncreature"
+  ],
+  "Fugitive Druid": [
+    "draw"
+  ],
+  "Puppet's Verdict": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Magus of the Bazaar": [
+    "draw"
+  ],
+  "Mina and Denn, Wildborn": [
+    "ramp"
+  ],
+  "Irrigation Ditch": [
+    "ramp"
+  ],
+  "Freyalise's Charm": [
+    "draw"
+  ],
+  "Elvish Lyrist": [
+    "removal_noncreature"
+  ],
+  "Trail of Evidence": [
+    "draw"
+  ],
+  "Urza's Power Plant": [
+    "ramp"
+  ],
+  "Qarsi Deceiver": [
+    "ramp"
+  ],
+  "Embodiment of Spring": [
+    "ramp"
+  ],
+  "Paraselene": [
+    "removal_noncreature"
+  ],
+  "Byway Courier": [
+    "draw"
+  ],
+  "Winged Shepherd": [
+    "draw"
+  ],
+  "Obelisk of Grixis": [
+    "ramp"
+  ],
+  "Bident of Thassa": [
+    "draw"
+  ],
+  "New Perspectives": [
+    "draw"
+  ],
+  "Underrealm Lich": [
+    "draw"
+  ],
+  "Looming Hoverguard": [
+    "removal_noncreature"
+  ],
+  "Kill Shot": [
+    "removal_creature"
+  ],
+  "Dead-Iron Sledge": [
+    "removal_creature"
+  ],
+  "Wildsize": [
+    "draw"
+  ],
+  "Rain of Daggers": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Indomitable Creativity": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Tezzeret, Artifice Master": [
+    "draw"
+  ],
+  "Filigree Fracture": [
+    "draw"
+  ],
+  "Shared Fate": [
+    "draw"
+  ],
+  "Cold Storage": [
+    "removal_creature"
+  ],
+  "Patron of the Orochi": [
+    "ramp"
+  ],
+  "Regal Force": [
+    "draw"
+  ],
+  "Scepter of Insight": [
+    "draw"
+  ],
+  "Beastcaller Savant": [
+    "ramp"
+  ],
+  "Giltspire Avenger": [
+    "removal_creature"
+  ],
+  "Quirion Elves": [
+    "ramp"
+  ],
+  "Walking Archive": [
+    "draw"
+  ],
+  "Jeweled Amulet": [
+    "ramp"
+  ],
+  "Prismatic Lens": [
+    "ramp"
+  ],
+  "Soldevi Adnate": [
+    "ramp"
+  ],
+  "Death Bomb": [
+    "removal_creature"
+  ],
+  "Gyre Sage": [
+    "ramp"
+  ],
+  "Illusion of Choice": [
+    "draw"
+  ],
+  "Sakura-Tribe Elder": [
+    "ramp"
+  ],
+  "Riddlesmith": [
+    "draw"
+  ],
+  "Sunscape Master": [
+    "removal_creature"
+  ],
+  "Containment Membrane": [
+    "removal_creature"
+  ],
+  "Phyrexian Rager": [
+    "draw"
+  ],
+  "Culling Sun": [
+    "removal_creature"
+  ],
+  "Deicide": [
+    "removal_noncreature"
+  ],
+  "Numbing Dose": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Bottomless Vault": [
+    "ramp"
+  ],
+  "Root Greevil": [
+    "removal_noncreature"
+  ],
+  "Final Payment": [
+    "removal_creature"
+  ],
+  "Swell of Growth": [
+    "ramp"
+  ],
+  "Teferi's Imp": [
+    "draw"
+  ],
+  "Rampaging Hippo": [
+    "draw"
+  ],
+  "One with Nature": [
+    "ramp"
+  ],
+  "Far // Away": [
+    "removal_creature"
+  ],
+  "Hypothesizzle": [
+    "draw"
+  ],
+  "Saprazzan Skerry": [
+    "ramp"
+  ],
+  "Niveous Wisps": [
+    "draw"
+  ],
+  "Failed Inspection": [
+    "draw"
+  ],
+  "Whelming Wave": [
+    "removal_creature"
+  ],
+  "Overlaid Terrain": [
+    "ramp"
+  ],
+  "Mogis, God of Slaughter": [
+    "removal_creature"
+  ],
+  "Tezzeret, Cruel Machinist": [
+    "draw"
+  ],
+  "Blaster Mage": [
+    "removal_creature"
+  ],
+  "Angelic Gift": [
+    "draw"
+  ],
+  "Rousing of Souls": [
+    "draw"
+  ],
+  "Scarblade Elite": [
+    "removal_creature"
+  ],
+  "Talisman of Unity": [
+    "ramp"
+  ],
+  "Lore Broker": [
+    "draw"
+  ],
+  "Arm with Aether": [
+    "removal_creature"
+  ],
+  "Ocular Halo": [
+    "draw"
+  ],
+  "Bloodgift Demon": [
+    "draw"
+  ],
+  "Final Reward": [
+    "removal_creature"
+  ],
+  "Tireless Tracker": [
+    "draw"
+  ],
+  "Reverent Silence": [
+    "removal_noncreature"
+  ],
+  "Magus of the Vineyard": [
+    "ramp"
+  ],
+  "Aven Augur": [
+    "removal_creature"
+  ],
+  "Temur Ascendancy": [
+    "draw"
+  ],
+  "Crimson Wisps": [
+    "draw"
+  ],
+  "Necrite": [
+    "removal_creature"
+  ],
+  "Destructive Tampering": [
+    "removal_noncreature"
+  ],
+  "Bounty of the Luxa": [
+    "draw",
+    "ramp"
+  ],
+  "Aftershock": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Gorgon Recluse": [
+    "removal_creature"
+  ],
+  "Jinx": [
+    "draw"
+  ],
+  "Vedalken Dismisser": [
+    "removal_creature"
+  ],
+  "Last Breath": [
+    "removal_creature"
+  ],
+  "Sarkhan the Mad": [
+    "removal_creature"
+  ],
+  "Kumena, Tyrant of Orazca": [
+    "draw"
+  ],
+  "Mindless Automaton": [
+    "draw"
+  ],
+  "Portent": [
+    "draw"
+  ],
+  "Azorius Charm": [
+    "draw",
+    "removal_creature"
+  ],
+  "Artifact Mutation": [
+    "removal_noncreature"
+  ],
+  "Sarcomite Myr": [
+    "draw"
+  ],
+  "Oculus": [
+    "draw"
+  ],
+  "Hellfire": [
+    "removal_creature"
+  ],
+  "Abzan Advantage": [
+    "removal_noncreature"
+  ],
+  "Battering Ram": [
+    "removal_creature"
+  ],
+  "Brood Birthing": [
+    "ramp"
+  ],
+  "Arcades, the Strategist": [
+    "draw"
+  ],
+  "Exultant Cultist": [
+    "draw"
+  ],
+  "Nissa's Pilgrimage": [
+    "ramp"
+  ],
+  "Ophidian Eye": [
+    "draw"
+  ],
+  "Suppression Bonds": [
+    "removal_noncreature"
+  ],
+  "Private Research": [
+    "draw"
+  ],
+  "Stingmoggie": [
+    "removal_noncreature"
+  ],
+  "Feast of Dreams": [
+    "removal_noncreature"
+  ],
+  "Surrakar Spellblade": [
+    "draw"
+  ],
+  "Wei Assassins": [
+    "removal_creature"
+  ],
+  "Snapback": [
+    "removal_creature"
+  ],
+  "Leap": [
+    "draw"
+  ],
+  "Floodwaters": [
+    "draw",
+    "removal_creature"
+  ],
+  "Ashling, the Extinguisher": [
+    "removal_creature"
+  ],
+  "Midnight Reaper": [
+    "draw"
+  ],
+  "Gallantry": [
+    "draw"
+  ],
+  "Karametra's Acolyte": [
+    "ramp"
+  ],
+  "Mental Note": [
+    "draw"
+  ],
+  "Abstruse Interference": [
+    "ramp"
+  ],
+  "Survive the Night": [
+    "draw"
+  ],
+  "Fathom Fleet Cutthroat": [
+    "removal_creature"
+  ],
+  "Murderous Spoils": [
+    "removal_creature"
+  ],
+  "Golgari Cluestone": [
+    "draw",
+    "ramp"
+  ],
+  "Kami of Ancient Law": [
+    "removal_noncreature"
+  ],
+  "Hallowed Moonlight": [
+    "draw"
+  ],
+  "Tariff": [
+    "removal_creature"
+  ],
+  "Smokebraider": [
+    "ramp"
+  ],
+  "Treva's Charm": [
+    "draw",
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Panic": [
+    "draw"
+  ],
+  "Knight of the Mists": [
+    "removal_creature"
+  ],
+  "Paralyze": [
+    "removal_creature"
+  ],
+  "Shielding Plax": [
+    "draw"
+  ],
+  "Merciless Resolve": [
+    "draw"
+  ],
+  "Vengeant Vampire": [
+    "removal_creature"
+  ],
+  "Mortal Obstinacy": [
+    "removal_noncreature"
+  ],
+  "Dusk Legion Zealot": [
+    "draw"
+  ],
+  "Glint-Sleeve Siphoner": [
+    "draw"
+  ],
+  "Essence Vortex": [
+    "removal_creature"
+  ],
+  "Lu Xun, Scholar General": [
+    "draw"
+  ],
+  "Krosan Restorer": [
+    "ramp"
+  ],
+  "Duplicant": [
+    "removal_creature"
+  ],
+  "Survivor of the Unseen": [
+    "draw"
+  ],
+  "Masked Admirers": [
+    "draw"
+  ],
+  "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun": [
+    "ramp"
+  ],
+  "Hush": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Unlicensed Disintegration": [
+    "removal_creature"
+  ],
+  "Triumph of Ferocity": [
+    "draw"
+  ],
+  "Riverwise Augur": [
+    "draw"
+  ],
+  "Shipwreck Looter": [
+    "draw"
+  ],
+  "Harabaz Druid": [
+    "ramp"
+  ],
+  "Chains of Mephistopheles": [
+    "draw"
+  ],
+  "Soul of Ravnica": [
+    "draw"
+  ],
+  "Obelisk of Jund": [
+    "ramp"
+  ],
+  "Celestial Prism": [
+    "ramp"
+  ],
+  "Atarka Monument": [
+    "ramp"
+  ],
+  "Runaway Steam-Kin": [
+    "ramp"
+  ],
+  "Vacuumelt": [
+    "removal_creature"
+  ],
+  "Rowen": [
+    "draw"
+  ],
+  "Roil Spout": [
+    "removal_creature"
+  ],
+  "Reciprocate": [
+    "removal_creature"
+  ],
+  "Withstand": [
+    "draw"
+  ],
+  "Chrome Mox": [
+    "ramp"
+  ],
+  "Nin, the Pain Artist": [
+    "draw"
+  ],
+  "Swift Silence": [
+    "draw"
+  ],
+  "Thought Gorger": [
+    "draw"
+  ],
+  "Gaze of the Gorgon": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Soratami Cloudskater": [
+    "draw"
+  ],
+  "Goblin Artisans": [
+    "draw"
+  ],
+  "Golgari Keyrune": [
+    "ramp"
+  ],
+  "Phyrexian Ingester": [
+    "removal_creature"
+  ],
+  "Grinning Ignus": [
+    "ramp"
+  ],
+  "Abundance": [
+    "draw"
+  ],
+  "Solar Blast": [
+    "draw"
+  ],
+  "Crucible of the Spirit Dragon": [
+    "ramp"
+  ],
+  "Artificer's Epiphany": [
+    "draw"
+  ],
+  "Hurkyl's Recall": [
+    "removal_noncreature"
+  ],
+  "Sire of Stagnation": [
+    "draw"
+  ],
+  "Catastrophe": [
+    "removal_creature"
+  ],
+  "Humility": [
+    "removal_creature"
+  ],
+  "Ondu Giant": [
+    "ramp"
+  ],
+  "Unholy Hunger": [
+    "removal_creature"
+  ],
+  "Stratus Walk": [
+    "draw"
+  ],
+  "Firemind's Research": [
+    "draw"
+  ],
+  "Eternal Dominion": [
+    "ramp"
+  ],
+  "Fathom Seer": [
+    "draw"
+  ],
+  "Righteous Confluence": [
+    "removal_noncreature"
+  ],
+  "Marwyn, the Nurturer": [
+    "ramp"
+  ],
+  "Possessed Barbarian": [
+    "removal_creature"
+  ],
+  "Venom": [
+    "removal_creature"
+  ],
+  "Phyrexian Arena": [
+    "draw"
+  ],
+  "Lion's Eye Diamond": [
+    "ramp"
+  ],
+  "Flash Foliage": [
+    "draw"
+  ],
+  "Tyrant's Choice": [
+    "removal_creature"
+  ],
+  "Crackling Doom": [
+    "removal_creature"
+  ],
+  "Tibalt, the Fiend-Blooded": [
+    "draw"
+  ],
+  "Coercive Portal": [
+    "board_wipe",
+    "draw"
+  ],
+  "Brand": [
+    "draw"
+  ],
+  "Soldevi Heretic": [
+    "draw"
+  ],
+  "Grotesque Demise": [
+    "removal_creature"
+  ],
+  "Thallid Soothsayer": [
+    "draw"
+  ],
+  "Wall of Blossoms": [
+    "draw"
+  ],
+  "River Kelpie": [
+    "draw"
+  ],
+  "Geth's Grimoire": [
+    "draw"
+  ],
+  "Necra Disciple": [
+    "ramp"
+  ],
+  "Garruk, Apex Predator": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Akoum Flameseeker": [
+    "draw"
+  ],
+  "Alloy Myr": [
+    "ramp"
+  ],
+  "Mystic Restraints": [
+    "removal_creature"
+  ],
+  "Angelheart Vial": [
+    "draw"
+  ],
+  "Oust": [
+    "removal_creature"
+  ],
+  "Pyramid of the Pantheon": [
+    "ramp"
+  ],
+  "Dredge": [
+    "draw"
+  ],
+  "Reap and Sow": [
+    "ramp"
+  ],
+  "Juntu Stakes": [
+    "removal_creature"
+  ],
+  "False Dawn": [
+    "draw"
+  ],
+  "Celestial Flare": [
+    "removal_creature"
+  ],
+  "Rite of the Serpent": [
+    "removal_creature"
+  ],
+  "Paroxysm": [
+    "removal_creature"
+  ],
+  "Haze of Pollen": [
+    "draw"
+  ],
+  "Hazoret's Monument": [
+    "draw"
+  ],
+  "Dismissive Pyromancer": [
+    "draw"
+  ],
+  "Ribbons of Night": [
+    "draw"
+  ],
+  "Seal of Removal": [
+    "removal_creature"
+  ],
+  "Curse Artifact": [
+    "removal_noncreature"
+  ],
+  "Divergent Transformations": [
+    "removal_creature"
+  ],
+  "Sanguimancy": [
+    "draw"
+  ],
+  "Golgari Charm": [
+    "removal_noncreature"
+  ],
+  "Temporal Machinations": [
+    "draw",
+    "removal_creature"
+  ],
+  "Righteous Fury": [
+    "removal_creature"
+  ],
+  "City of Traitors": [
+    "ramp"
+  ],
+  "Sea Scryer": [
+    "ramp"
+  ],
+  "Scour": [
+    "removal_noncreature"
+  ],
+  "Kyren Toy": [
+    "ramp"
+  ],
+  "Kuon, Ogre Ascendant // Kuon's Essence": [
+    "removal_creature"
+  ],
+  "Hideous End": [
+    "removal_creature"
+  ],
+  "Words of Worship": [
+    "draw"
+  ],
+  "Somberwald Sage": [
+    "ramp"
+  ],
+  "Do or Die": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Wander in Death": [
+    "draw"
+  ],
+  "Baleful Force": [
+    "draw"
+  ],
+  "Silverchase Fox": [
+    "removal_noncreature"
+  ],
+  "Ral, Izzet Viceroy": [
+    "draw"
+  ],
+  "Thing in the Ice // Awoken Horror": [
+    "removal_creature"
+  ],
+  "Sheltered Aerie": [
+    "ramp"
+  ],
+  "Talisman of Impulse": [
+    "ramp"
+  ],
+  "Magnifying Glass": [
+    "draw",
+    "ramp"
+  ],
+  "Bomb Squad": [
+    "removal_creature"
+  ],
+  "Teferi, Hero of Dominaria": [
+    "draw",
+    "ramp"
+  ],
+  "Tormenting Voice": [
+    "draw"
+  ],
+  "Glissa's Scorn": [
+    "removal_noncreature"
+  ],
+  "Learn from the Past": [
+    "draw"
+  ],
+  "Sage of Lat-Nam": [
+    "draw"
+  ],
+  "Mage's Guile": [
+    "draw"
+  ],
+  "Liliana, the Necromancer": [
+    "removal_creature"
+  ],
+  "Shimmerscale Drake": [
+    "draw"
+  ],
+  "Obzedat's Aid": [
+    "ramp"
+  ],
+  "Mox Diamond": [
+    "ramp"
+  ],
+  "Skywhaler's Shot": [
+    "removal_creature"
+  ],
+  "Extinction": [
+    "board_wipe",
+    "removal_creature"
+  ],
+  "Recover": [
+    "draw"
+  ],
+  "Scarecrone": [
+    "draw"
+  ],
+  "Mana Prism": [
+    "ramp"
+  ],
+  "Dark Prophecy": [
+    "draw"
+  ],
+  "Silumgar Assassin": [
+    "removal_creature"
+  ],
+  "Soul Ransom": [
+    "draw"
+  ],
+  "Implement of Combustion": [
+    "draw"
+  ],
+  "Angel of Serenity": [
+    "removal_creature"
+  ],
+  "Serenity": [
+    "removal_noncreature"
+  ],
+  "Mangara's Tome": [
+    "draw"
+  ],
+  "Sage of Fables": [
+    "draw"
+  ],
+  "Elvish Skysweeper": [
+    "removal_creature"
+  ],
+  "Reverse Engineer": [
+    "draw"
+  ],
+  "Alchemist's Vial": [
+    "draw"
+  ],
+  "Grave Peril": [
+    "removal_creature"
+  ],
+  "Fissure Vent": [
+    "removal_noncreature"
+  ],
+  "Wipe Clean": [
+    "draw",
+    "removal_noncreature"
+  ],
+  "Nikko-Onna": [
+    "removal_noncreature"
+  ],
+  "Dominus of Fealty": [
+    "ramp"
+  ],
+  "Seeds of Innocence": [
+    "removal_noncreature"
+  ],
+  "Forsake the Worldly": [
+    "draw"
+  ],
+  "Predatory Urge": [
+    "removal_creature"
+  ],
+  "Trove of Temptation": [
+    "ramp"
+  ],
+  "Leaden Myr": [
+    "ramp"
+  ],
+  "Hammer Mage": [
+    "removal_noncreature"
+  ],
+  "Chosen by Heliod": [
+    "draw"
+  ],
+  "Cinder Cloud": [
+    "removal_creature"
+  ],
+  "Scout's Warning": [
+    "draw"
+  ],
+  "River's Grasp": [
+    "removal_creature"
+  ],
+  "Tranquility": [
+    "removal_noncreature"
+  ],
+  "Citanul Hierophants": [
+    "ramp"
+  ],
+  "Thelon's Curse": [
+    "removal_creature"
+  ],
+  "Vessel of Paramnesia": [
+    "draw"
+  ],
+  "Merchant of Secrets": [
+    "draw"
+  ],
+  "Boros Cluestone": [
+    "draw",
+    "ramp"
+  ],
+  "Boreas Charger": [
+    "ramp"
+  ],
+  "Cloudpost": [
+    "ramp"
+  ],
+  "Launch Party": [
+    "removal_creature"
+  ],
+  "Circle of Elders": [
+    "ramp"
+  ],
+  "Scroll of Avacyn": [
+    "draw"
+  ],
+  "Petalmane Baku": [
+    "ramp"
+  ],
+  "Search for Azcanta // Azcanta, the Sunken Ruin": [
+    "ramp"
+  ],
+  "Enervate": [
+    "draw"
+  ],
+  "Grotag Siege-Runner": [
+    "removal_creature"
+  ],
+  "Plague Spores": [
+    "removal_creature"
+  ],
+  "Kumena's Awakening": [
+    "draw"
+  ],
+  "Riptide Director": [
+    "draw"
+  ],
+  "Mortal Wound": [
+    "removal_creature"
+  ],
+  "Barrin's Codex": [
+    "draw"
+  ],
+  "Coastal Discovery": [
+    "draw"
+  ],
+  "Legion's Landing // Adanto, the First Fort": [
+    "ramp"
+  ],
+  "Saprazzan Cove": [
+    "ramp"
+  ],
+  "Gilded Light": [
+    "draw"
+  ],
+  "An-Zerrin Ruins": [
+    "removal_creature"
+  ],
+  "Triton Fortune Hunter": [
+    "draw"
+  ],
+  "Cloudblazer": [
+    "draw"
+  ],
+  "Pursue Glory": [
+    "draw"
+  ],
+  "Tidebinder Mage": [
+    "removal_creature"
+  ],
+  "Lat-Nam's Legacy": [
+    "draw"
+  ],
+  "Angel of Deliverance": [
+    "removal_creature"
+  ],
+  "Battlefield Scavenger": [
+    "draw"
+  ],
+  "Tamiyo, the Moon Sage": [
+    "draw"
+  ],
+  "Exuberant Firestoker": [
+    "ramp"
+  ],
+  "Defiant Strike": [
+    "draw"
+  ],
+  "Plaguebearer": [
+    "removal_creature"
+  ],
+  "Festival of the Guildpact": [
+    "draw"
+  ],
+  "Probe": [
+    "draw"
+  ],
+  "Notion Thief": [
+    "draw"
+  ],
+  "Feral Instinct": [
+    "draw"
+  ],
+  "Elvish Hexhunter": [
+    "removal_noncreature"
+  ],
+  "Boggart Loggers": [
+    "removal_creature"
+  ],
+  "Heartstabber Mosquito": [
+    "removal_creature"
+  ],
+  "Dread Wight": [
+    "removal_creature"
+  ],
+  "Thaumatic Compass // Spires of Orazca": [
+    "ramp"
+  ],
+  "Cast Out": [
+    "draw"
+  ],
+  "Notion Rain": [
+    "draw"
+  ],
+  "Illuminate": [
+    "draw"
+  ],
+  "Compulsive Research": [
+    "draw"
+  ],
+  "Awakening Zone": [
+    "ramp"
+  ],
+  "Tsabo Tavoc": [
+    "removal_creature"
+  ],
+  "Krovikan Rot": [
+    "removal_creature"
+  ],
+  "Creepy Doll": [
+    "removal_creature"
+  ],
+  "Deadly Allure": [
+    "removal_creature"
+  ],
+  "Seafloor Oracle": [
+    "draw"
+  ],
+  "Helvault": [
+    "removal_creature"
+  ],
+  "Tooth of Ramos": [
+    "ramp"
+  ],
+  "Millikin": [
+    "ramp"
+  ],
+  "Crackdown": [
+    "removal_creature"
+  ],
+  "Victorious Destruction": [
+    "removal_noncreature"
+  ],
+  "Scion Summoner": [
+    "ramp"
+  ],
+  "Think Twice": [
+    "draw"
+  ],
+  "Remove Enchantments": [
+    "removal_noncreature"
+  ],
+  "Fend Off": [
+    "draw"
+  ],
+  "Mortify": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Eladamri's Vineyard": [
+    "ramp"
+  ],
+  "Yavimaya Granger": [
+    "ramp"
+  ],
+  "Goblin Assassin": [
+    "removal_creature"
+  ],
+  "Generous Patron": [
+    "draw"
+  ],
+  "Winter Sky": [
+    "draw"
+  ],
+  "Dead Ringers": [
+    "removal_creature"
+  ],
+  "Ur-Golem's Eye": [
+    "ramp"
+  ],
+  "Verdigris": [
+    "removal_noncreature"
+  ],
+  "Wretched Confluence": [
+    "draw"
+  ],
+  "Major Teroh": [
+    "removal_creature"
+  ],
+  "Natural Obsolescence": [
+    "removal_noncreature"
+  ],
+  "Fleeting Memories": [
+    "draw"
+  ],
+  "Cadaverous Bloom": [
+    "ramp"
+  ],
+  "Orator of Ojutai": [
+    "draw"
+  ],
+  "Foul-Tongue Invocation": [
+    "removal_creature"
+  ],
+  "Obstinate Familiar": [
+    "draw"
+  ],
+  "Virtue's Ruin": [
+    "removal_creature"
+  ],
+  "Complicate": [
+    "draw"
+  ],
+  "Ior Ruin Expedition": [
+    "draw"
+  ],
+  "Karametra's Favor": [
+    "draw",
+    "ramp"
+  ],
+  "Fire Sprites": [
+    "ramp"
+  ],
+  "Venomous Breath": [
+    "board_wipe"
+  ],
+  "Kederekt Parasite": [
+    "draw"
+  ],
+  "Bred for the Hunt": [
+    "draw"
+  ],
+  "Temple Bell": [
+    "draw"
+  ],
+  "Vampire Hexmage": [
+    "removal_noncreature"
+  ],
+  "Thassa's Emissary": [
+    "draw"
+  ],
+  "Cathodion": [
+    "ramp"
+  ],
+  "Bloodtracker": [
+    "draw"
+  ],
+  "Mire Blight": [
+    "removal_creature"
+  ],
+  "Triad of Fates": [
+    "draw",
+    "removal_creature"
+  ],
+  "Constricting Sliver": [
+    "removal_creature"
+  ],
+  "Radical Idea": [
+    "draw"
+  ],
+  "Command of Unsummoning": [
+    "removal_creature"
+  ],
+  "Demystify": [
+    "removal_noncreature"
+  ],
+  "Spear of Heliod": [
+    "removal_creature"
+  ],
+  "Vex": [
+    "draw"
+  ],
+  "Minions' Murmurs": [
+    "draw"
+  ],
+  "Jeskai Banner": [
+    "draw",
+    "ramp"
+  ],
+  "Void": [
+    "removal_creature",
+    "removal_noncreature"
+  ],
+  "Nissa, Steward of Elements": [
+    "ramp"
+  ],
+  "Granulate": [
+    "removal_noncreature"
+  ],
+  "Evacuation": [
+    "removal_creature"
+  ],
+  "Drifting Djinn": [
+    "draw"
+  ],
+  "Jace, Ingenious Mind-Mage": [
+    "draw"
+  ],
+  "Crystal Spray": [
+    "draw"
+  ],
+  "Shattering Spree": [
+    "removal_noncreature"
+  ],
+  "Noxious Dragon": [
+    "removal_creature"
+  ],
+  "Angelsong": [
+    "draw"
+  ],
+  "Pendrell Flux": [
+    "removal_creature"
+  ],
+  "Standstill": [
+    "draw"
+  ],
+  "Caustic Wasps": [
+    "removal_noncreature"
+  ],
+  "Haru-Onna": [
+    "draw"
+  ],
+  "Feast of Blood": [
+    "removal_creature"
+  ],
+  "Chromatic Star": [
+    "draw"
+  ],
+  "Pure Reflection": [
+    "removal_creature"
+  ],
+  "Rasputin Dreamweaver": [
+    "ramp"
+  ],
+  "Plague Boiler": [
+    "board_wipe"
+  ],
+  "Brainbite": [
+    "draw"
+  ],
+  "Planar Outburst": [
+    "removal_creature"
+  ],
+  "Updraft": [
+    "draw"
+  ],
+  "Tetsuo Umezawa": [
+    "removal_creature"
+  ],
+  "Wild Wanderer": [
+    "ramp"
+  ],
+  "Aggressive Mining": [
+    "draw"
+  ],
+  "Council of Advisors": [
+    "draw"
+  ],
+  "Weave Fate": [
+    "draw"
+  ],
+  "Veiled Serpent": [
+    "draw"
+  ],
+  "Flare": [
+    "draw"
+  ],
+  "Disempower": [
+    "removal_noncreature"
+  ],
+  "Fecundity": [
+    "draw"
+  ],
+  "Sinister Concoction": [
+    "removal_creature"
+  ],
+  "Skyshroud Blessing": [
+    "draw"
+  ],
+  "Polis Crusher": [
+    "removal_noncreature"
+  ],
+  "Quarry Beetle": [
+    "ramp"
+  ],
+  "Without Weakness": [
+    "draw"
+  ]
+}

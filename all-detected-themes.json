@@ -1,0 +1,702 @@
+{
+  "combo": {
+    "label": "Combo",
+    "commander_count": 139
+  },
+  "tokens": {
+    "label": "Tokens",
+    "commander_count": 90
+  },
+  "control": {
+    "label": "Control",
+    "commander_count": 77
+  },
+  "plus-1-plus-1-counters": {
+    "label": "+1/+1 Counters",
+    "commander_count": 71
+  },
+  "aggro": {
+    "label": "Aggro",
+    "commander_count": 70
+  },
+  "ramp": {
+    "label": "Ramp",
+    "commander_count": 56
+  },
+  "reanimator": {
+    "label": "Reanimator",
+    "commander_count": 55
+  },
+  "lifegain": {
+    "label": "Lifegain",
+    "commander_count": 45
+  },
+  "artifacts": {
+    "label": "Artifacts",
+    "commander_count": 44
+  },
+  "voltron": {
+    "label": "Voltron",
+    "commander_count": 44
+  },
+  "aristocrats": {
+    "label": "Aristocrats",
+    "commander_count": 44
+  },
+  "midrange": {
+    "label": "Midrange",
+    "commander_count": 38
+  },
+  "spellslinger": {
+    "label": "Spellslinger",
+    "commander_count": 32
+  },
+  "sacrifice": {
+    "label": "Sacrifice",
+    "commander_count": 32
+  },
+  "burn": {
+    "label": "Burn",
+    "commander_count": 32
+  },
+  "lands-matter": {
+    "label": "Lands Matter",
+    "commander_count": 27
+  },
+  "graveyard": {
+    "label": "Graveyard",
+    "commander_count": 26
+  },
+  "equipment": {
+    "label": "Equipment",
+    "commander_count": 25
+  },
+  "card-draw": {
+    "label": "Card Draw",
+    "commander_count": 23
+  },
+  "stax": {
+    "label": "Stax",
+    "commander_count": 23
+  },
+  "flying": {
+    "label": "Flying",
+    "commander_count": 20
+  },
+  "mill": {
+    "label": "Mill",
+    "commander_count": 20
+  },
+  "big-mana": {
+    "label": "Big Mana",
+    "commander_count": 18
+  },
+  "enchantress": {
+    "label": "Enchantress",
+    "commander_count": 18
+  },
+  "chaos": {
+    "label": "Chaos",
+    "commander_count": 18
+  },
+  "auras": {
+    "label": "Auras",
+    "commander_count": 17
+  },
+  "group-slug": {
+    "label": "Group Slug",
+    "commander_count": 17
+  },
+  "wheels": {
+    "label": "Wheels",
+    "commander_count": 16
+  },
+  "theft": {
+    "label": "Theft",
+    "commander_count": 16
+  },
+  "blink": {
+    "label": "Blink",
+    "commander_count": 16
+  },
+  "pillow-fort": {
+    "label": "Pillow Fort",
+    "commander_count": 15
+  },
+  "discard": {
+    "label": "Discard",
+    "commander_count": 15
+  },
+  "birthing-pod": {
+    "label": "Birthing Pod",
+    "commander_count": 14
+  },
+  "dragons": {
+    "label": "Dragons",
+    "commander_count": 13
+  },
+  "self-mill": {
+    "label": "Self-Mill",
+    "commander_count": 13
+  },
+  "toolbox": {
+    "label": "Toolbox",
+    "commander_count": 12
+  },
+  "extra-combats": {
+    "label": "Extra Combats",
+    "commander_count": 12
+  },
+  "landfall": {
+    "label": "Landfall",
+    "commander_count": 11
+  },
+  "forced-combat": {
+    "label": "Forced Combat",
+    "commander_count": 11
+  },
+  "stompy": {
+    "label": "Stompy",
+    "commander_count": 11
+  },
+  "eldrazi": {
+    "label": "Eldrazi",
+    "commander_count": 10
+  },
+  "group-hug": {
+    "label": "Group Hug",
+    "commander_count": 10
+  },
+  "clones": {
+    "label": "Clones",
+    "commander_count": 10
+  },
+  "elves": {
+    "label": "Elves",
+    "commander_count": 10
+  },
+  "extra-turns": {
+    "label": "Extra Turns",
+    "commander_count": 10
+  },
+  "lifedrain": {
+    "label": "Lifedrain",
+    "commander_count": 9
+  },
+  "hatebears": {
+    "label": "Hatebears",
+    "commander_count": 9
+  },
+  "goblins": {
+    "label": "Goblins",
+    "commander_count": 9
+  },
+  "storm": {
+    "label": "Storm",
+    "commander_count": 9
+  },
+  "infect": {
+    "label": "Infect",
+    "commander_count": 8
+  },
+  "angels": {
+    "label": "Angels",
+    "commander_count": 8
+  },
+  "land-destruction": {
+    "label": "Land Destruction",
+    "commander_count": 8
+  },
+  "zombies": {
+    "label": "Zombies",
+    "commander_count": 8
+  },
+  "dredge": {
+    "label": "Dredge",
+    "commander_count": 8
+  },
+  "good-stuff": {
+    "label": "Good Stuff",
+    "commander_count": 8
+  },
+  "planeswalkers": {
+    "label": "Planeswalkers",
+    "commander_count": 7
+  },
+  "cascade": {
+    "label": "Cascade",
+    "commander_count": 7
+  },
+  "vampires": {
+    "label": "Vampires",
+    "commander_count": 7
+  },
+  "wizards": {
+    "label": "Wizards",
+    "commander_count": 6
+  },
+  "etb": {
+    "label": "ETB",
+    "commander_count": 6
+  },
+  "x-spells": {
+    "label": "X Spells",
+    "commander_count": 6
+  },
+  "minus-1-minus-1-counters": {
+    "label": "-1/-1 Counters",
+    "commander_count": 6
+  },
+  "historic": {
+    "label": "Historic",
+    "commander_count": 6
+  },
+  "legends": {
+    "label": "Legends",
+    "commander_count": 6
+  },
+  "treasure": {
+    "label": "Treasure",
+    "commander_count": 5
+  },
+  "counterspells": {
+    "label": "Counterspells",
+    "commander_count": 5
+  },
+  "populate": {
+    "label": "Populate",
+    "commander_count": 5
+  },
+  "self-damage": {
+    "label": "Self-Damage",
+    "commander_count": 5
+  },
+  "tap-untap": {
+    "label": "Tap / Untap",
+    "commander_count": 5
+  },
+  "spell-copy": {
+    "label": "Spell Copy",
+    "commander_count": 5
+  },
+  "toughness-matters": {
+    "label": "Toughness Matters",
+    "commander_count": 4
+  },
+  "cantrips": {
+    "label": "Cantrips",
+    "commander_count": 4
+  },
+  "demons": {
+    "label": "Demons",
+    "commander_count": 4
+  },
+  "affinity": {
+    "label": "Affinity",
+    "commander_count": 4
+  },
+  "flash": {
+    "label": "Flash",
+    "commander_count": 4
+  },
+  "vehicles": {
+    "label": "Vehicles",
+    "commander_count": 4
+  },
+  "tempo": {
+    "label": "Tempo",
+    "commander_count": 4
+  },
+  "saprolings": {
+    "label": "Saprolings",
+    "commander_count": 4
+  },
+  "slivers": {
+    "label": "Slivers",
+    "commander_count": 4
+  },
+  "topdeck": {
+    "label": "Topdeck",
+    "commander_count": 3
+  },
+  "cats": {
+    "label": "Cats",
+    "commander_count": 3
+  },
+  "kaheera-companion": {
+    "label": "Kaheera Companion",
+    "commander_count": 3
+  },
+  "defenders": {
+    "label": "Defenders",
+    "commander_count": 3
+  },
+  "commander-matters": {
+    "label": "Commander Matters",
+    "commander_count": 3
+  },
+  "proliferate": {
+    "label": "Proliferate",
+    "commander_count": 3
+  },
+  "giants": {
+    "label": "Giants",
+    "commander_count": 3
+  },
+  "spirits": {
+    "label": "Spirits",
+    "commander_count": 3
+  },
+  "mutate": {
+    "label": "Mutate",
+    "commander_count": 3
+  },
+  "soldiers": {
+    "label": "Soldiers",
+    "commander_count": 3
+  },
+  "birds": {
+    "label": "Birds",
+    "commander_count": 3
+  },
+  "unblockable": {
+    "label": "Unblockable",
+    "commander_count": 3
+  },
+  "dinosaurs": {
+    "label": "Dinosaurs",
+    "commander_count": 3
+  },
+  "fungi": {
+    "label": "Fungi",
+    "commander_count": 3
+  },
+  "spore-counters": {
+    "label": "Spore Counters",
+    "commander_count": 3
+  },
+  "snakes": {
+    "label": "Snakes",
+    "commander_count": 3
+  },
+  "ad-nauseam": {
+    "label": "Ad Nauseam",
+    "commander_count": 3
+  },
+  "merfolk": {
+    "label": "Merfolk",
+    "commander_count": 3
+  },
+  "primal-surge": {
+    "label": "Primal Surge",
+    "commander_count": 3
+  },
+  "morph": {
+    "label": "Morph",
+    "commander_count": 2
+  },
+  "knights": {
+    "label": "Knights",
+    "commander_count": 2
+  },
+  "shadowborn-apostles": {
+    "label": "Shadowborn Apostles",
+    "commander_count": 2
+  },
+  "clerics": {
+    "label": "Clerics",
+    "commander_count": 2
+  },
+  "phyrexians": {
+    "label": "Phyrexians",
+    "commander_count": 2
+  },
+  "counters-matter": {
+    "label": "Counters Matter",
+    "commander_count": 2
+  },
+  "thopters": {
+    "label": "Thopters",
+    "commander_count": 2
+  },
+  "devotion": {
+    "label": "Devotion",
+    "commander_count": 2
+  },
+  "humans": {
+    "label": "Humans",
+    "commander_count": 2
+  },
+  "experience-counters": {
+    "label": "Experience Counters",
+    "commander_count": 2
+  },
+  "sunforger": {
+    "label": "Sunforger",
+    "commander_count": 2
+  },
+  "deathtouch": {
+    "label": "Deathtouch",
+    "commander_count": 2
+  },
+  "prison": {
+    "label": "Prison",
+    "commander_count": 2
+  },
+  "fight": {
+    "label": "Fight",
+    "commander_count": 2
+  },
+  "elementals": {
+    "label": "Elementals",
+    "commander_count": 2
+  },
+  "spiders": {
+    "label": "Spiders",
+    "commander_count": 2
+  },
+  "exile": {
+    "label": "Exile",
+    "commander_count": 2
+  },
+  "attack-triggers": {
+    "label": "Attack Triggers",
+    "commander_count": 2
+  },
+  "donate": {
+    "label": "Donate",
+    "commander_count": 2
+  },
+  "warriors": {
+    "label": "Warriors",
+    "commander_count": 2
+  },
+  "politics": {
+    "label": "Politics",
+    "commander_count": 2
+  },
+  "shapeshifters": {
+    "label": "Shapeshifters",
+    "commander_count": 2
+  },
+  "cycling": {
+    "label": "Cycling",
+    "commander_count": 2
+  },
+  "sphinxes": {
+    "label": "Sphinxes",
+    "commander_count": 2
+  },
+  "pirates": {
+    "label": "Pirates",
+    "commander_count": 1
+  },
+  "anthems": {
+    "label": "Anthems",
+    "commander_count": 1
+  },
+  "sea-creatures": {
+    "label": "Sea Creatures",
+    "commander_count": 1
+  },
+  "atogs": {
+    "label": "Atogs",
+    "commander_count": 1
+  },
+  "fling": {
+    "label": "Fling",
+    "commander_count": 1
+  },
+  "guildgates": {
+    "label": "Guildgates",
+    "commander_count": 1
+  },
+  "gods": {
+    "label": "Gods",
+    "commander_count": 1
+  },
+  "dwarves": {
+    "label": "Dwarves",
+    "commander_count": 1
+  },
+  "treefolk": {
+    "label": "Treefolk",
+    "commander_count": 1
+  },
+  "allies": {
+    "label": "Allies",
+    "commander_count": 1
+  },
+  "power-matters": {
+    "label": "Power Matters",
+    "commander_count": 1
+  },
+  "discover": {
+    "label": "Discover",
+    "commander_count": 1
+  },
+  "enrage": {
+    "label": "Enrage",
+    "commander_count": 1
+  },
+  "persistent-petitioners": {
+    "label": "Persistent Petitioners",
+    "commander_count": 1
+  },
+  "kicker": {
+    "label": "Kicker",
+    "commander_count": 1
+  },
+  "polymorph": {
+    "label": "Polymorph",
+    "commander_count": 1
+  },
+  "suspend": {
+    "label": "Suspend",
+    "commander_count": 1
+  },
+  "time-counters": {
+    "label": "Time Counters",
+    "commander_count": 1
+  },
+  "cheerios": {
+    "label": "Cheerios",
+    "commander_count": 1
+  },
+  "tron": {
+    "label": "Tron",
+    "commander_count": 1
+  },
+  "haste": {
+    "label": "Haste",
+    "commander_count": 1
+  },
+  "rebels": {
+    "label": "Rebels",
+    "commander_count": 1
+  },
+  "modular": {
+    "label": "Modular",
+    "commander_count": 1
+  },
+  "rat-colony": {
+    "label": "Rat Colony",
+    "commander_count": 1
+  },
+  "rats": {
+    "label": "Rats",
+    "commander_count": 1
+  },
+  "relentless-rats": {
+    "label": "Relentless Rats",
+    "commander_count": 1
+  },
+  "dragons-approach": {
+    "label": "Dragon's Approach",
+    "commander_count": 1
+  },
+  "minotaurs": {
+    "label": "Minotaurs",
+    "commander_count": 1
+  },
+  "pingers": {
+    "label": "Pingers",
+    "commander_count": 1
+  },
+  "zoo": {
+    "label": "Zoo",
+    "commander_count": 1
+  },
+  "land-animation": {
+    "label": "Land Animation",
+    "commander_count": 1
+  },
+  "keywords": {
+    "label": "Keywords",
+    "commander_count": 1
+  },
+  "coin-flip": {
+    "label": "Coin Flip",
+    "commander_count": 1
+  },
+  "madness": {
+    "label": "Madness",
+    "commander_count": 1
+  },
+  "faeries": {
+    "label": "Faeries",
+    "commander_count": 1
+  },
+  "bounce": {
+    "label": "Bounce",
+    "commander_count": 1
+  },
+  "hydras": {
+    "label": "Hydras",
+    "commander_count": 1
+  },
+  "monarch": {
+    "label": "Monarch",
+    "commander_count": 1
+  },
+  "aikido": {
+    "label": "Aikido",
+    "commander_count": 1
+  },
+  "exalted": {
+    "label": "Exalted",
+    "commander_count": 1
+  },
+  "multicolor-matters": {
+    "label": "Multicolor Matters",
+    "commander_count": 1
+  },
+  "scarecrows": {
+    "label": "Scarecrows",
+    "commander_count": 1
+  },
+  "druids": {
+    "label": "Druids",
+    "commander_count": 1
+  },
+  "prowess": {
+    "label": "Prowess",
+    "commander_count": 1
+  },
+  "rogues": {
+    "label": "Rogues",
+    "commander_count": 1
+  },
+  "samurai": {
+    "label": "Samurai",
+    "commander_count": 1
+  },
+  "drakes": {
+    "label": "Drakes",
+    "commander_count": 1
+  },
+  "triggered-abilities": {
+    "label": "Triggered Abilities",
+    "commander_count": 1
+  },
+  "insects": {
+    "label": "Insects",
+    "commander_count": 1
+  },
+  "oozes": {
+    "label": "Oozes",
+    "commander_count": 1
+  },
+  "ninjutsu": {
+    "label": "Ninjutsu",
+    "commander_count": 1
+  },
+  "ninjas": {
+    "label": "Ninjas",
+    "commander_count": 1
+  },
+  "orcs": {
+    "label": "Orcs",
+    "commander_count": 1
+  }
+}
