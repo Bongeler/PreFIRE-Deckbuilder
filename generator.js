@@ -54,12 +54,20 @@ class PrefireDeckGenerator {
 
     // Checks if card colors are subset of commander colors
     isColorLegal(cardColors, commanderColors) {
+        if (!cardColors || cardColors.length === 0) return true;
         return cardColors.every(c => commanderColors.includes(c));
     }
 
-    // Step A: Assemble 62-63 Non-Land Spells
+    // Step A: Assemble 63 Non-Land Spells
     assembleSpells(themeData, themeSlug, commanderColors, cardCatalog) {
-        const targets = Object.assign({}, themeData.targets);
+        const targets = Object.assign({
+            ramp: 10,
+            removal_creature: 6,
+            removal_noncreature: 4,
+            board_wipe: 3,
+            draw: 10
+        }, themeData.targets || {});
+
         const sourceCards = themeData.cards || [];
         const selected = new Set();
         const buckets = {
@@ -98,8 +106,6 @@ class PrefireDeckGenerator {
             if (needed <= 0) continue;
 
             const candidates = this.staples[role] || [];
-            
-            // Prioritize candidates matching current theme
             const onTheme = [];
             const generic = [];
 
@@ -121,13 +127,13 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 3. Flatten non-land spells, target cap: 63
+        // Flatten collected cards
         let spellList = [];
         for (const role of Object.keys(buckets)) {
             spellList.push(...buckets[role]);
         }
 
-        // If short of 63, fill from remaining engine candidates
+        // 3. Fallback: fill up to 63 from remaining theme engine cards
         if (spellList.length < 63) {
             for (const cardName of sourceCards) {
                 if (!selected.has(cardName)) {
@@ -138,14 +144,33 @@ class PrefireDeckGenerator {
             }
         }
 
+        // 4. Secondary fallback: fill up to 63 from general on-color staples
+        if (spellList.length < 63) {
+            const allStaplePool = [];
+            for (const r of backfillRoles) {
+                (this.staples[r] || []).forEach(c => {
+                    if (!selected.has(c.name) && this.isColorLegal(c.colors, commanderColors)) {
+                        allStaplePool.push(c.name);
+                    }
+                });
+            }
+            for (const name of allStaplePool) {
+                if (!selected.has(name)) {
+                    spellList.push(name);
+                    selected.add(name);
+                    if (spellList.length === 63) break;
+                }
+            }
+        }
+
         return spellList.slice(0, 63);
     }
 
-    // Step B: Calculate Land Base (36-37 Lands)
-    assembleLands(commanderColors, themeSlug, nonLandSpells, cardCatalog) {
+    // Step B: Calculate Land Base (Fills to exactly 99 cards)
+    assembleLands(commanderColors, themeSlug, nonLandSpells, cardCatalog, commanderCount = 1) {
         const lands = [];
         const colorCount = commanderColors.length;
-        const totalLandTarget = 36;
+        const totalLandTarget = 100 - commanderCount - nonLandSpells.length;
 
         // 1. Universal Fixers
         if (colorCount >= 2) {
@@ -158,25 +183,24 @@ class PrefireDeckGenerator {
             lands.push(this.landsData.fixers.reflecting_pool);
         }
 
-        // 2. Dual Cycles (Pair combinations)
-        const pairs = [];
+        // 2. Dual Cycles (Check both orderings to catch WB, UR, WR, etc.)
         for (let i = 0; i < commanderColors.length; i++) {
             for (let j = i + 1; j < commanderColors.length; j++) {
-                const pairKey = [commanderColors[i], commanderColors[j]].sort().join("");
-                pairs.push(pairKey);
-            }
-        }
+                const c1 = commanderColors[i];
+                const c2 = commanderColors[j];
+                const key1 = `${c1}${c2}`;
+                const key2 = `${c2}${c1}`;
 
-        for (const pair of pairs) {
-            const duals = this.landsData.duals[pair];
-            if (duals) {
-                lands.push(duals.shock);
-                lands.push(duals.fetch);
-                lands.push(duals.check);
-                lands.push(duals.pain);
-                if (colorCount <= 3) {
-                    lands.push(duals.filter);
-                    lands.push(duals.abur);
+                const duals = this.landsData.duals[key1] || this.landsData.duals[key2];
+                if (duals) {
+                    if (duals.shock) lands.push(duals.shock);
+                    if (duals.fetch) lands.push(duals.fetch);
+                    if (duals.check) lands.push(duals.check);
+                    if (duals.pain) lands.push(duals.pain);
+                    if (colorCount <= 3) {
+                        if (duals.filter) lands.push(duals.filter);
+                        if (duals.abur) lands.push(duals.abur);
+                    }
                 }
             }
         }
@@ -196,14 +220,13 @@ class PrefireDeckGenerator {
         const maxColorless = colorlessCaps[colorCount] ?? 1;
         let colorlessCount = 0;
 
-        // Add theme-specific utility lands
-        const themeLands = this.landsData.utility.theme_specific[themeSlug] || [];
+        const themeLands = (this.landsData.utility && this.landsData.utility.theme_specific && this.landsData.utility.theme_specific[themeSlug]) || [];
         for (const lName of themeLands) {
             const cardMeta = cardCatalog[lName];
-            const isColorless = !cardMeta || cardMeta.color_identity.length === 0;
+            const isColorless = !cardMeta || !cardMeta.color_identity || cardMeta.color_identity.length === 0;
 
             if (isColorless && colorlessCount >= maxColorless) continue;
-            if (cardMeta && !this.isColorLegal(cardMeta.color_identity, commanderColors)) continue;
+            if (cardMeta && cardMeta.color_identity && !this.isColorLegal(cardMeta.color_identity, commanderColors)) continue;
 
             if (!lands.includes(lName)) {
                 lands.push(lName);
@@ -212,13 +235,13 @@ class PrefireDeckGenerator {
         }
 
         // Add colored utility staples for mono/dual
-        if (colorCount <= 2) {
+        if (colorCount <= 2 && this.landsData.utility && this.landsData.utility.colored_staples) {
             for (const color of commanderColors) {
                 const staples = this.landsData.utility.colored_staples[color] || [];
                 for (const lName of staples) {
                     if (!lands.includes(lName)) {
                         lands.push(lName);
-                        break; // 1 colored staple per color
+                        break;
                     }
                 }
             }
@@ -228,14 +251,12 @@ class PrefireDeckGenerator {
         const remainingSlots = Math.max(totalLandTarget - lands.length, 1);
         
         if (colorCount === 0) {
-            // Colorless commander gets Wastes
             for (let i = 0; i < remainingSlots; i++) {
                 lands.push("Wastes");
             }
             return lands;
         }
 
-        // Count colored mana pips across non-land spells
         const pipCounts = { W: 0, U: 0, B: 0, R: 0, G: 0 };
         let totalPips = 0;
 
@@ -262,7 +283,6 @@ class PrefireDeckGenerator {
         };
 
         if (totalPips === 0) {
-            // Even split if no pips detected
             const split = Math.floor(remainingSlots / colorCount);
             let rem = remainingSlots % colorCount;
             for (const color of commanderColors) {
@@ -273,7 +293,6 @@ class PrefireDeckGenerator {
             let allocated = 0;
             const basicAllocations = {};
 
-            // Allocate proportional basics (minimum 1 per color in identity)
             for (const color of commanderColors) {
                 const pips = pipCounts[color] || 0;
                 let count = Math.max(1, Math.round((pips / totalPips) * remainingSlots));
@@ -281,7 +300,6 @@ class PrefireDeckGenerator {
                 allocated += count;
             }
 
-            // Adjust rounding discrepancy to match exact remaining slot count
             let diff = remainingSlots - allocated;
             const primaryColor = commanderColors.reduce((a, b) => 
                 (pipCounts[a] || 0) >= (pipCounts[b] || 0) ? a : b
@@ -305,35 +323,29 @@ class PrefireDeckGenerator {
         const slug = this.getCommanderSlug(commanderA, commanderB);
         const commanderPayload = await this.loadCommanderThemes(slug);
 
-        // Derive commander color identity from commander card(s)
         const colors = new Set();
         [commanderA, commanderB].filter(Boolean).forEach(name => {
             const card = cardCatalog[name];
             if (card && card.color_identity) {
-                card.color_identity.forEach(c => colors.add(c));
+                card.color_identity.forEach(c => colors.add(c.toUpperCase()));
             }
         });
         const commanderColors = Array.from(colors);
 
-        // Determine theme dataset to use
-        let themeData = commanderPayload.default;
+        let themeData = commanderPayload.default || { targets: {}, cards: [] };
         let actualSlug = "default";
 
         if (selectedThemeSlug && commanderPayload.themes && commanderPayload.themes[selectedThemeSlug]) {
-            themeData = commanderPayload.themes[selectedThemeSlug].data;
+            themeData = commanderPayload.themes[selectedThemeSlug].data || commanderPayload.themes[selectedThemeSlug];
             actualSlug = selectedThemeSlug;
         }
 
-        // 1. Build Spells (62-63)
+        const cmdrCount = commanderB ? 2 : 1;
         const spells = this.assembleSpells(themeData, actualSlug, commanderColors, cardCatalog);
+        const lands = this.assembleLands(commanderColors, actualSlug, spells, cardCatalog, cmdrCount);
 
-        // 2. Build Lands (36-37)
-        const lands = this.assembleLands(commanderColors, actualSlug, spells, cardCatalog);
-
-        // Return completed 99-card list
         return [...spells, ...lands];
     }
 }
 
-// Expose globally for browser usage
 window.PrefireDeckGenerator = PrefireDeckGenerator;

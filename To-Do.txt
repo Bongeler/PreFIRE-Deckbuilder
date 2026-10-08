@@ -1,0 +1,8 @@
+Add color and search filtering, "All Colors Selected" checkbox functionality, and Pre-FIRE/All Legal functionality for EDHREC and Staples
+during Commander Search.
+
+Add EDHREC suggestions for "Doctor's Companion" and "Partner With"
+
+When click all colors selected, exclude, it should reload search.
+
+"Add all" button to EDHREC Suggestions.

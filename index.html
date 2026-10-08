@@ -26,6 +26,7 @@
       --red-btn-hover: #d32f2f;
       --notice-green: #2ecc71;
       --neon-green: #39ff14;
+      --preview-width: 240px;
     }
 
     * {
@@ -82,10 +83,10 @@
       background-color: #2e7d32;
       border: 2px solid var(--accent);
       color: #ffffff;
-      padding: 9px 24px;
+      padding: 9px 20px;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.8px;
@@ -96,6 +97,26 @@
     .btn-decklists-toggle:hover {
       background-color: #388e3c;
       border-color: var(--accent-hover);
+      filter: brightness(1.1);
+    }
+
+    .btn-to-deckbuilder-top {
+      background-color: #d48806;
+      border: 2px solid #f1c40f;
+      color: #121212;
+      padding: 9px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: background-color 0.15s ease, filter 0.15s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn-to-deckbuilder-top:hover {
+      background-color: #e09612;
       filter: brightness(1.1);
     }
 
@@ -1116,16 +1137,18 @@
     #card-preview-wrap {
       position: fixed;
       display: none;
-      z-index: 1000;
+      z-index: 10000;
+      pointer-events: auto;
     }
 
     #card-preview {
-      width: 240px;
+      width: var(--preview-width, 240px);
       border-radius: 11px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85);
       border: 1px solid var(--border-color);
       background-color: #1a1a1a;
       display: block;
+      transition: width 0.08s ease-out;
     }
 
     .btn-close-mobile-preview {
@@ -1407,7 +1430,7 @@
       cursor: not-allowed;
     }
 
-    /* Fullscreen Auto-Deckbuilder View */
+    /* Fullscreen Deck Builder View */
     #autobuild-screen {
       position: fixed;
       top: 0;
@@ -1440,7 +1463,7 @@
     .autobuild-header-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .btn-back-to-manual {
@@ -1460,6 +1483,24 @@
     .btn-back-to-manual:hover {
       background-color: #333333;
       border-color: var(--accent);
+    }
+
+    .btn-saved-decks-toggle {
+      background-color: #3a7bd5;
+      border: 1px solid var(--accent-hover);
+      color: #ffffff;
+      padding: 7px 14px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-saved-decks-toggle:hover {
+      background-color: #4a8be5;
     }
 
     .autobuild-sort-pill-group {
@@ -1557,6 +1598,22 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
       background-color: #1a1a1a;
       display: block;
+    }
+
+    .shingle-card-item .basic-count-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(18, 18, 18, 0.92);
+      border: 2px solid var(--neon-green);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 3px 7px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+      pointer-events: none;
+      z-index: 10;
     }
 
     .shingle-card-item:hover {
@@ -1689,7 +1746,8 @@
         display: none !important;
       }
 
-      body.mobile-tab-search #btn-decklists-toggle {
+      body.mobile-tab-search #btn-decklists-toggle,
+      body.mobile-tab-search #btn-to-deckbuilder-top {
         display: none !important;
       }
 
@@ -1939,6 +1997,7 @@
       </div>
       <div class="header-top-actions">
         <button type="button" class="btn-decklists-toggle" id="btn-decklists-toggle">Saved Lists</button>
+        <button type="button" class="btn-to-deckbuilder-top" id="btn-to-deckbuilder-top">To Deck Builder</button>
         <div id="cmdr-pool-toggle-group">
           <span style="font-size: 11px; text-transform: uppercase; color: var(--notice-green); font-weight: 700; letter-spacing: 0.5px;">COMMANDER POOL:</span>
           <div class="cmdr-toggle-pill-group">
@@ -2098,12 +2157,13 @@
     </div>
   </div>
 
-  <!-- Dedicated Fullscreen Auto-Deckbuilder Screen -->
+  <!-- Fullscreen Deck Builder View (The Shingled Canvas) -->
   <div id="autobuild-screen">
     <div class="autobuild-header">
       <div class="autobuild-header-left">
-        <button type="button" class="btn-back-to-manual" id="btn-back-to-manual">← Back to Manual Builder</button>
-        <strong id="autobuild-deck-title" style="font-size: 14px; color: var(--commander-accent);">Auto-Built Deck</strong>
+        <button type="button" class="btn-back-to-manual" id="btn-back-to-manual">← Back to Card Search</button>
+        <button type="button" class="btn-saved-decks-toggle" id="btn-saved-decks-toggle">Saved Decks</button>
+        <strong id="autobuild-deck-title" style="font-size: 14px; color: var(--commander-accent);">Deck Builder</strong>
         <span id="autobuild-count-badge" style="font-size: 13px; font-weight: 700; color: var(--accent);">0 Cards</span>
       </div>
       <div class="autobuild-sort-pill-group">
@@ -2116,7 +2176,7 @@
     <div class="autobuild-workspace">
       <div class="autobuild-cards-canvas" id="autobuild-canvas"></div>
       
-      <!-- Exact Same Deck Drawer UI as Manual Builder -->
+      <!-- Side Deck Drawer in Deck Builder View -->
       <aside id="aside-deck-autobuild">
         <div class="commander-section" id="commander-section-autobuild">
           <div class="commander-section-header">
@@ -2134,7 +2194,7 @@
         </div>
         <div class="deck-footer">
           <button type="button" class="btn-export" id="btn-export-autobuild">Copy Decklist</button>
-          <button type="button" class="btn-save-deck" id="btn-save-deck-autobuild">Save List</button>
+          <button type="button" class="btn-save-deck" id="btn-save-deck-autobuild">Save Deck</button>
         </div>
       </aside>
     </div>
@@ -2144,13 +2204,25 @@
     <button type="button" class="mobile-view-toggle-btn to-search" id="btn-mobile-view-toggle">To Card Search</button>
   </nav>
 
+  <!-- Modal for Saved Lists (Card Search Screen) -->
   <div class="decklists-modal" id="decklists-modal">
     <div class="decklists-dialog">
       <div class="decklists-header">
-        <h3>Saved Decklists</h3>
+        <h3>Saved Lists</h3>
         <button type="button" class="btn-close-modal" id="btn-close-decklists-modal">&times;</button>
       </div>
       <div class="decklists-body" id="decklists-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Modal for Saved Decks (Deck Builder Screen) -->
+  <div class="decklists-modal" id="saved-decks-modal">
+    <div class="decklists-dialog">
+      <div class="decklists-header">
+        <h3>Saved Decks</h3>
+        <button type="button" class="btn-close-modal" id="btn-close-saved-decks-modal">&times;</button>
+      </div>
+      <div class="decklists-body" id="saved-decks-modal-body"></div>
     </div>
   </div>
 
@@ -2286,10 +2358,17 @@
     const btnStaplesToggle = document.getElementById('btn-staples-toggle');
     const btnEdhrecToggle = document.getElementById('btn-edhrec-toggle');
     const btnDecklistsToggle = document.getElementById('btn-decklists-toggle');
+    const btnToDeckbuilderTop = document.getElementById('btn-to-deckbuilder-top');
     const btnDecklistsAside = document.getElementById('btn-decklists-aside');
     const decklistsModal = document.getElementById('decklists-modal');
     const btnCloseDecklistsModal = document.getElementById('btn-close-decklists-modal');
     const decklistsModalBody = document.getElementById('decklists-modal-body');
+
+    const savedDecksModal = document.getElementById('saved-decks-modal');
+    const btnCloseSavedDecksModal = document.getElementById('btn-close-saved-decks-modal');
+    const savedDecksModalBody = document.getElementById('saved-decks-modal-body');
+    const btnSavedDecksToggle = document.getElementById('btn-saved-decks-toggle');
+
     const btnClearListLink = document.getElementById('btn-clear-list-link');
     const previewWrapEl = document.getElementById('card-preview-wrap');
     const previewEl = document.getElementById('card-preview');
@@ -2471,8 +2550,30 @@
     const btnRandomCmdr = document.getElementById('btn-random-cmdr');
     const searchSortSelect = document.getElementById('search-sort');
 
-    let currentPreview = { name: '', faces: [], faceIndex: 0 };
+    let currentPreview = { name: '', faces: [], faceIndex: 0, lastTargetEl: null };
     let activeMobileTab = 'deck';
+
+    /* Persistent preview dimensions via wheel scroll */
+    let activePreviewWidth = 240;
+
+    function setPreviewWidth(newWidth) {
+      activePreviewWidth = Math.min(520, Math.max(160, newWidth));
+      document.documentElement.style.setProperty('--preview-width', `${activePreviewWidth}px`);
+      if (previewEl) {
+        previewEl.style.width = `${activePreviewWidth}px`;
+      }
+    }
+
+    window.addEventListener('wheel', (e) => {
+      if (previewWrapEl.style.display === 'block') {
+        e.preventDefault();
+        const delta = e.deltaY < 0 ? 25 : -25;
+        setPreviewWidth(activePreviewWidth + delta);
+        if (currentPreview.lastTargetEl) {
+          positionPreview(currentPreview.lastTargetEl);
+        }
+      }
+    }, { passive: false });
 
     function setRecentlyRemovedOpen(isOpen) {
       const btn = document.getElementById('btn-toggle-removed');
@@ -2881,9 +2982,17 @@
       }
     }
 
-    function getSavedDecklists() {
+    function getSavedLists() {
       try {
         return JSON.parse(localStorage.getItem('prefire_saved_decklists') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function getSavedDecks() {
+      try {
+        return JSON.parse(localStorage.getItem('prefire_saved_decks_completed') || '[]');
       } catch (e) {
         return [];
       }
@@ -2897,7 +3006,7 @@
     }
 
     function saveCurrentDecklist() {
-      const list = getSavedDecklists();
+      const list = getSavedLists();
       const title = getActiveDeckTitle();
       const deckCount = Object.keys(deck).reduce((acc, k) => acc + (deck[k].count || 1), 0);
 
@@ -2920,13 +3029,41 @@
       markCurrentStateSaved();
 
       const btn = document.getElementById('btn-save-deck');
-      const btnAuto = document.getElementById('btn-save-deck-autobuild');
       const originalText = btn.textContent;
       btn.textContent = 'Saved!';
-      if (btnAuto) btnAuto.textContent = 'Saved!';
       setTimeout(() => {
         btn.textContent = originalText;
-        if (btnAuto) btnAuto.textContent = originalText;
+      }, 1500);
+    }
+
+    function saveCurrentDeckInBuilder() {
+      const list = getSavedDecks();
+      const title = getActiveDeckTitle();
+      const deckCount = Object.keys(deck).reduce((acc, k) => acc + (deck[k].count || 1), 0);
+
+      const existingIndex = list.findIndex(d => d.title.toLowerCase() === title.toLowerCase());
+      const record = {
+        title: title,
+        commanders: JSON.parse(JSON.stringify(commanders)),
+        deck: JSON.parse(JSON.stringify(deck)),
+        cardCount: deckCount + commanders.length,
+        updatedAt: new Date().toISOString()
+      };
+
+      if (existingIndex >= 0) {
+        list[existingIndex] = record;
+      } else {
+        list.unshift(record);
+      }
+
+      localStorage.setItem('prefire_saved_decks_completed', JSON.stringify(list));
+      markCurrentStateSaved();
+
+      const btn = document.getElementById('btn-save-deck-autobuild');
+      const originalText = btn.textContent;
+      btn.textContent = 'Deck Saved!';
+      setTimeout(() => {
+        btn.textContent = originalText;
       }, 1500);
     }
 
@@ -2949,13 +3086,73 @@
 
     mobileTitlePopup.addEventListener('click', hideMobileTitlePopup);
 
-    function renderDecklistsModal() {
-      const list = getSavedDecklists();
+    function renderSavedListsModal() {
+      const list = getSavedLists();
       decklistsModalBody.innerHTML = '';
       hideMobileTitlePopup();
 
       if (list.length === 0) {
         decklistsModalBody.innerHTML = '<div style="color: var(--text-muted); text-align: center; padding: 25px;">No saved lists yet. Use "Save List" to store your lists.</div>';
+        return;
+      }
+
+      list.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.className = 'saved-deck-row';
+
+        const info = document.createElement('div');
+        info.className = 'saved-deck-info';
+
+        const title = document.createElement('div');
+        title.className = 'saved-deck-title';
+        title.textContent = item.title;
+
+        const meta = document.createElement('div');
+        meta.className = 'saved-deck-meta';
+        const dateStr = item.updatedAt ? new Date(item.updatedAt).toLocaleDateString() : '';
+        meta.textContent = `${item.cardCount || 0} Cards ${dateStr ? '• ' + dateStr : ''}`;
+
+        info.appendChild(title);
+        info.appendChild(meta);
+
+        info.addEventListener('click', (e) => {
+          if (window.innerWidth <= 768) {
+            e.stopPropagation();
+            showMobileTitlePopup(item.title);
+          }
+        });
+
+        const actions = document.createElement('div');
+        actions.className = 'saved-deck-actions';
+
+        const loadBtn = document.createElement('button');
+        loadBtn.type = 'button';
+        loadBtn.className = 'btn-saved-load';
+        loadBtn.textContent = 'Load';
+        loadBtn.onclick = () => loadSavedListByIndex(index);
+
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'btn-saved-delete';
+        delBtn.textContent = 'Delete';
+        delBtn.onclick = () => deleteSavedListByIndex(index);
+
+        actions.appendChild(loadBtn);
+        actions.appendChild(delBtn);
+
+        row.appendChild(info);
+        row.appendChild(actions);
+        decklistsModalBody.appendChild(row);
+      });
+    }
+
+    function renderSavedDecksModal() {
+      const list = getSavedDecks();
+      savedDecksModalBody.innerHTML = '';
+      hideMobileTitlePopup();
+
+      if (list.length === 0) {
+        savedDecksModalBody.innerHTML = '<div style="color: var(--text-muted); text-align: center; padding: 25px;">No saved decks yet. Use "Save Deck" inside Deck Builder to store decks in progress or completed.</div>';
         return;
       }
 
@@ -3005,12 +3202,12 @@
 
         row.appendChild(info);
         row.appendChild(actions);
-        decklistsModalBody.appendChild(row);
+        savedDecksModalBody.appendChild(row);
       });
     }
 
-    function loadSavedDeckByIndex(index) {
-      const list = getSavedDecklists();
+    function loadSavedListByIndex(index) {
+      const list = getSavedLists();
       const target = list[index];
       if (!target) return;
 
@@ -3044,8 +3241,8 @@
       renderAutobuildCanvas();
     }
 
-    function deleteSavedDeckByIndex(index) {
-      const list = getSavedDecklists();
+    function deleteSavedListByIndex(index) {
+      const list = getSavedLists();
       const target = list[index];
       if (!target) return;
 
@@ -3054,17 +3251,59 @@
         list.splice(index, 1);
         localStorage.setItem('prefire_saved_decklists', JSON.stringify(list));
         hideMobileTitlePopup();
-        renderDecklistsModal();
+        renderSavedListsModal();
+      }
+    }
+
+    function loadSavedDeckByIndex(index) {
+      const list = getSavedDecks();
+      const target = list[index];
+      if (!target) return;
+
+      if (hasUnsavedChanges()) {
+        const wantsToSave = window.confirm(`You have unsaved changes on your active deck "${getActiveDeckTitle()}".\n\nWould you like to save it before loading "${target.title}"?`);
+        if (wantsToSave) {
+          saveCurrentDeckInBuilder();
+        }
+      }
+
+      deck = JSON.parse(JSON.stringify(target.deck || {}));
+      commanders = JSON.parse(JSON.stringify(target.commanders || []));
+
+      localStorage.setItem('prefire_deck', JSON.stringify(deck));
+      localStorage.setItem('prefire_commanders', JSON.stringify(commanders));
+
+      markCurrentStateSaved();
+      hideMobileTitlePopup();
+      savedDecksModal.classList.remove('open');
+
+      renderCommander();
+      saveAndRenderDeck();
+      syncSearchDeckState();
+      renderAutobuildCanvas();
+    }
+
+    function deleteSavedDeckByIndex(index) {
+      const list = getSavedDecks();
+      const target = list[index];
+      if (!target) return;
+
+      const confirmDel = window.confirm(`Are you sure you want to delete "${target.title}"?`);
+      if (confirmDel) {
+        list.splice(index, 1);
+        localStorage.setItem('prefire_saved_decks_completed', JSON.stringify(list));
+        hideMobileTitlePopup();
+        renderSavedDecksModal();
       }
     }
 
     btnDecklistsToggle.addEventListener('click', () => {
-      renderDecklistsModal();
+      renderSavedListsModal();
       decklistsModal.classList.add('open');
     });
 
     btnDecklistsAside.addEventListener('click', () => {
-      renderDecklistsModal();
+      renderSavedListsModal();
       decklistsModal.classList.add('open');
     });
 
@@ -3080,12 +3319,29 @@
       }
     });
 
+    btnSavedDecksToggle.addEventListener('click', () => {
+      renderSavedDecksModal();
+      savedDecksModal.classList.add('open');
+    });
+
+    btnCloseSavedDecksModal.addEventListener('click', () => {
+      hideMobileTitlePopup();
+      savedDecksModal.classList.remove('open');
+    });
+
+    savedDecksModal.addEventListener('click', (e) => {
+      if (e.target === savedDecksModal) {
+        hideMobileTitlePopup();
+        savedDecksModal.classList.remove('open');
+      }
+    });
+
     document.getElementById('btn-save-deck').addEventListener('click', () => {
       saveCurrentDecklist();
     });
 
     document.getElementById('btn-save-deck-autobuild').addEventListener('click', () => {
-      saveCurrentDecklist();
+      saveCurrentDeckInBuilder();
     });
 
     btnClearListLink.addEventListener('click', () => {
@@ -3093,7 +3349,7 @@
       const confirmClear = window.confirm('Are you sure you want to clear your current list? (Cards will still be recoverable in Recently Removed).');
       if (confirmClear) {
         Object.keys(deck).forEach(name => {
-          recordRecentlyRemoved(name, deck[name].faces, deck[name].mana_cost, deck[name].cmc);
+          recordRecentlyRemoved(name, deck[name].faces, deck[name].mana_cost, deck[name].cmc, deck[name].type_line);
         });
         deck = {};
         hidePreview();
@@ -4543,6 +4799,8 @@
           cmc: cardCmc,
           type_line: typeLine || ''
         };
+      } else {
+        deck[name].count += 1;
       }
       saveAndRenderDeck();
       syncSearchDeckState();
@@ -4590,8 +4848,8 @@
 
       previewWrapEl.style.transform = 'none';
       const rowRect = targetElement.getBoundingClientRect();
-      const previewWidth = 240;
-      const previewHeight = 335;
+      const previewWidth = activePreviewWidth;
+      const previewHeight = previewWidth * 1.393;
 
       let leftPos = rowRect.left - previewWidth - 12;
       if (leftPos < 10) {
@@ -4706,10 +4964,12 @@
       currentPreview = {
         name: name,
         faces: resolvedFaces,
-        faceIndex: 0
+        faceIndex: 0,
+        lastTargetEl: targetEl
       };
 
       previewEl.src = resolvedFaces[0];
+      previewEl.style.width = `${activePreviewWidth}px`;
       positionPreview(targetEl);
       previewWrapEl.style.display = 'block';
 
@@ -4737,7 +4997,8 @@
         currentPreview = {
           name: name,
           faces: cardFaces,
-          faceIndex: 0
+          faceIndex: 0,
+          lastTargetEl: targetEl
         };
       } else {
         currentPreview.faces = cardFaces;
@@ -4755,7 +5016,7 @@
     function hidePreview() {
       previewWrapEl.style.display = 'none';
       previewEl.src = '';
-      currentPreview = { name: '', faces: [], faceIndex: 0 };
+      currentPreview = { name: '', faces: [], faceIndex: 0, lastTargetEl: null };
     }
 
     function renderRecentlyRemoved() {
@@ -4959,7 +5220,7 @@
     }
 
     /* -------------------------------------------------------------------------
-       AUTO-BUILD DECK INTEGRATION & SHINGLED CANVAS RENDERING
+       DECK BUILDER (SHINGLED CANVAS) & AUTO-BUILD ENGINE
     -------------------------------------------------------------------------- */
     let generatorInstance = null;
     let activeAutobuildView = 'cmc';
@@ -4980,6 +5241,17 @@
       }
       return generatorInstance;
     }
+
+    // Header buttons switching between Card Search and Deck Builder
+    btnToDeckbuilderTop.addEventListener('click', () => {
+      document.getElementById('autobuild-deck-title').textContent = `${getActiveDeckTitle()} — Deck Builder`;
+      autobuildScreen.classList.add('active');
+      renderAutobuildCanvas();
+    });
+
+    btnBackToManual.addEventListener('click', () => {
+      autobuildScreen.classList.remove('active');
+    });
 
     document.getElementById('btn-autobuild-trigger').addEventListener('click', async () => {
       if (commanders.length === 0) return;
@@ -5032,10 +5304,6 @@
       autobuildModal.classList.remove('open');
     });
 
-    btnBackToManual.addEventListener('click', () => {
-      autobuildScreen.classList.remove('active');
-    });
-
     btnExecuteAutobuild.addEventListener('click', async () => {
       const gen = getDeckGenerator();
       if (!gen) return;
@@ -5048,7 +5316,6 @@
       const secondary = commanders[1] || null;
 
       try {
-        // Collect catalog metadata from current deck and staples caches
         const catalog = {};
         commanders.forEach(c => {
           catalog[c.name] = { color_identity: c.color_identity, mana_cost: c.mana_cost, cmc: c.cmc, type_line: c.type_line };
@@ -5059,7 +5326,6 @@
 
         const generatedCards = await gen.generate(primary.name, secondary ? secondary.name : null, selectedTheme, catalog);
         
-        // Populate deck
         deck = {};
         for (const cName of generatedCards) {
           if (!deck[cName]) {
@@ -5076,7 +5342,6 @@
         document.getElementById('autobuild-deck-title').textContent = `${getActiveDeckTitle()} — ${selectedTheme.toUpperCase()}`;
         autobuildScreen.classList.add('active');
 
-        // Fetch card metadata in background to ensure accurate CMC/types on shingled view
         resolveMissingCardData().then(() => {
           renderAutobuildCanvas();
         });
@@ -5132,7 +5397,9 @@
       });
     });
 
-    function createShingleCardElement(cardName, zIndex) {
+    const BASIC_LAND_NAMES = new Set(["Plains", "Island", "Swamp", "Mountain", "Forest", "Wastes"]);
+
+    function createShingleCardElement(cardName, zIndex, countBadge = null) {
       const item = deck[cardName] || { faces: [getDirectScryfallImageUrl(cardName)] };
       const el = document.createElement('div');
       el.className = 'shingle-card-item';
@@ -5142,15 +5409,17 @@
       img.src = (item.faces && item.faces[0]) ? item.faces[0] : getDirectScryfallImageUrl(cardName);
       img.alt = cardName;
       img.loading = 'lazy';
-
       el.appendChild(img);
 
-      el.addEventListener('mouseenter', () => {
-        showPreview(el, cardName, item.faces);
-      });
-      el.addEventListener('mouseleave', () => {
-        hidePreview();
-      });
+      if (countBadge && countBadge > 1) {
+        const badge = document.createElement('div');
+        badge.className = 'basic-count-badge';
+        badge.textContent = `X${countBadge}`;
+        el.appendChild(badge);
+      }
+
+      el.addEventListener('mouseenter', () => showPreview(el, cardName, item.faces));
+      el.addEventListener('mouseleave', () => hidePreview());
       el.addEventListener('click', (e) => {
         e.stopPropagation();
         handleCardEntryClick(cardName, el, item.faces);
@@ -5187,8 +5456,12 @@
       cardNames.forEach(name => {
         const item = deck[name];
         const cmc = Math.min(Math.floor(item.cmc || 0), 6);
-        for (let i = 0; i < (item.count || 1); i++) {
-          cmcBuckets[cmc].push(name);
+        if (BASIC_LAND_NAMES.has(name)) {
+          cmcBuckets[cmc].push({ name, count: item.count });
+        } else {
+          for (let i = 0; i < (item.count || 1); i++) {
+            cmcBuckets[cmc].push({ name, count: 1 });
+          }
         }
       });
 
@@ -5197,16 +5470,17 @@
         const col = document.createElement('div');
         col.className = 'shingle-column';
 
+        const totalCardsInCol = list.reduce((sum, item) => sum + item.count, 0);
         const header = document.createElement('div');
         header.className = 'shingle-col-header';
-        header.innerHTML = `<span>CMC ${cmc === '6' ? '6+' : cmc}</span> <span>${list.length}</span>`;
+        header.innerHTML = `<span>CMC ${cmc === '6' ? '6+' : cmc}</span> <span>${totalCardsInCol}</span>`;
         col.appendChild(header);
 
         const stack = document.createElement('div');
         stack.className = 'shingle-stack';
 
-        list.forEach((name, idx) => {
-          stack.appendChild(createShingleCardElement(name, idx + 1));
+        list.forEach((entry, idx) => {
+          stack.appendChild(createShingleCardElement(entry.name, idx + 1, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
         });
 
         col.appendChild(stack);
@@ -5234,8 +5508,12 @@
         const item = deck[name];
         const cat = getCardPrimaryType(item);
         const targetList = typeBuckets[cat] || typeBuckets['Artifacts'];
-        for (let i = 0; i < (item.count || 1); i++) {
-          targetList.push(name);
+        if (BASIC_LAND_NAMES.has(name)) {
+          targetList.push({ name, count: item.count, cmc: item.cmc || 0 });
+        } else {
+          for (let i = 0; i < (item.count || 1); i++) {
+            targetList.push({ name, count: 1, cmc: item.cmc || 0 });
+          }
         }
       });
 
@@ -5243,22 +5521,22 @@
         const list = typeBuckets[typeKey];
         if (list.length === 0) return;
 
-        // Sort internal stack in CMC order
-        list.sort((a, b) => (deck[a].cmc || 0) - (deck[b].cmc || 0));
+        list.sort((a, b) => a.cmc - b.cmc);
 
         const col = document.createElement('div');
         col.className = 'shingle-column';
 
+        const totalColCards = list.reduce((sum, item) => sum + item.count, 0);
         const header = document.createElement('div');
         header.className = 'shingle-col-header';
-        header.innerHTML = `<span>${typeKey}</span> <span>${list.length}</span>`;
+        header.innerHTML = `<span>${typeKey}</span> <span>${totalColCards}</span>`;
         col.appendChild(header);
 
         const stack = document.createElement('div');
         stack.className = 'shingle-stack';
 
-        list.forEach((name, idx) => {
-          stack.appendChild(createShingleCardElement(name, idx + 1));
+        list.forEach((entry, idx) => {
+          stack.appendChild(createShingleCardElement(entry.name, idx + 1, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
         });
 
         col.appendChild(stack);
@@ -5295,20 +5573,20 @@
         const item = deck[name];
         const cat = getCardPrimaryType(item);
         const cmc = Math.min(Math.floor(item.cmc || 0), 6);
-        const count = item.count || 1;
 
-        for (let i = 0; i < count; i++) {
-          if (cat === 'Lands') {
-            landsList.push(name);
-          } else if (cat === 'Creatures') {
-            creatureBuckets[cmc].push(name);
+        if (cat === 'Lands') {
+          if (BASIC_LAND_NAMES.has(name)) {
+            landsList.push({ name, count: item.count });
           } else {
-            noncreatureBuckets[cmc].push(name);
+            for (let i = 0; i < (item.count || 1); i++) landsList.push({ name, count: 1 });
           }
+        } else if (cat === 'Creatures') {
+          for (let i = 0; i < (item.count || 1); i++) creatureBuckets[cmc].push({ name, count: 1 });
+        } else {
+          for (let i = 0; i < (item.count || 1); i++) noncreatureBuckets[cmc].push({ name, count: 1 });
         }
       });
 
-      // Build creature row
       const creatureRow = document.createElement('div');
       creatureRow.className = 'shingle-columns-container';
       Object.keys(creatureBuckets).forEach(cmc => {
@@ -5318,13 +5596,12 @@
         col.innerHTML = `<div class="shingle-col-header"><span>CMC ${cmc === '6' ? '6+' : cmc}</span><span>${list.length}</span></div>`;
         const stack = document.createElement('div');
         stack.className = 'shingle-stack';
-        list.forEach((n, idx) => stack.appendChild(createShingleCardElement(n, idx + 1)));
+        list.forEach((entry, idx) => stack.appendChild(createShingleCardElement(entry.name, idx + 1)));
         col.appendChild(stack);
         creatureRow.appendChild(col);
       });
       creaturesSec.appendChild(creatureRow);
 
-      // Build noncreature row
       const noncreatureRow = document.createElement('div');
       noncreatureRow.className = 'shingle-columns-container';
       Object.keys(noncreatureBuckets).forEach(cmc => {
@@ -5334,7 +5611,7 @@
         col.innerHTML = `<div class="shingle-col-header"><span>CMC ${cmc === '6' ? '6+' : cmc}</span><span>${list.length}</span></div>`;
         const stack = document.createElement('div');
         stack.className = 'shingle-stack';
-        list.forEach((n, idx) => stack.appendChild(createShingleCardElement(n, idx + 1)));
+        list.forEach((entry, idx) => stack.appendChild(createShingleCardElement(entry.name, idx + 1)));
         col.appendChild(stack);
         noncreatureRow.appendChild(col);
       });
@@ -5343,10 +5620,11 @@
       spellsMain.appendChild(creaturesSec);
       spellsMain.appendChild(noncreaturesSec);
 
-      // Build lands column
       const landStack = document.createElement('div');
       landStack.className = 'shingle-stack';
-      landsList.forEach((n, idx) => landStack.appendChild(createShingleCardElement(n, idx + 1)));
+      landsList.forEach((entry, idx) => {
+        landStack.appendChild(createShingleCardElement(entry.name, idx + 1, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
+      });
       landsSidebar.appendChild(landStack);
 
       splitWrap.appendChild(spellsMain);
