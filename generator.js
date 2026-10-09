@@ -24,7 +24,7 @@ class PrefireDeckGenerator {
                 fetch("card-roles.json"),
                 fetch("prefire-staples.json"),
                 fetch("prefire-lands.json"),
-                fetch("data/theme-fallbacks.json")
+                fetch("data/themes/theme-fallbacks.json")
             ]);
             this.cardRoles = await rolesRes.json();
             this.staples = await staplesRes.json();
