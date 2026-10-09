@@ -1,0 +1,1817 @@
+{
+  "combo": {
+    "slug": "combo",
+    "label": "Combo",
+    "source": "local_detected"
+  },
+  "tokens": {
+    "slug": "tokens",
+    "label": "Tokens",
+    "source": "local_detected"
+  },
+  "control": {
+    "slug": "control",
+    "label": "Control",
+    "source": "local_detected"
+  },
+  "plus-1-plus-1-counters": {
+    "slug": "plus-1-plus-1-counters",
+    "label": "+1/+1 Counters",
+    "source": "local_detected"
+  },
+  "aggro": {
+    "slug": "aggro",
+    "label": "Aggro",
+    "source": "local_detected"
+  },
+  "ramp": {
+    "slug": "ramp",
+    "label": "Ramp",
+    "source": "local_detected"
+  },
+  "reanimator": {
+    "slug": "reanimator",
+    "label": "Reanimator",
+    "source": "local_detected"
+  },
+  "lifegain": {
+    "slug": "lifegain",
+    "label": "Lifegain",
+    "source": "local_detected"
+  },
+  "artifacts": {
+    "slug": "artifacts",
+    "label": "Artifacts",
+    "source": "local_detected"
+  },
+  "voltron": {
+    "slug": "voltron",
+    "label": "Voltron",
+    "source": "local_detected"
+  },
+  "aristocrats": {
+    "slug": "aristocrats",
+    "label": "Aristocrats",
+    "source": "local_detected"
+  },
+  "midrange": {
+    "slug": "midrange",
+    "label": "Midrange",
+    "source": "local_detected"
+  },
+  "spellslinger": {
+    "slug": "spellslinger",
+    "label": "Spellslinger",
+    "source": "local_detected"
+  },
+  "sacrifice": {
+    "slug": "sacrifice",
+    "label": "Sacrifice",
+    "source": "local_detected"
+  },
+  "burn": {
+    "slug": "burn",
+    "label": "Burn",
+    "source": "local_detected"
+  },
+  "lands-matter": {
+    "slug": "lands-matter",
+    "label": "Lands Matter",
+    "source": "local_detected"
+  },
+  "graveyard": {
+    "slug": "graveyard",
+    "label": "Graveyard",
+    "source": "local_detected"
+  },
+  "equipment": {
+    "slug": "equipment",
+    "label": "Equipment",
+    "source": "local_detected"
+  },
+  "card-draw": {
+    "slug": "card-draw",
+    "label": "Card Draw",
+    "source": "local_detected"
+  },
+  "stax": {
+    "slug": "stax",
+    "label": "Stax",
+    "source": "local_detected"
+  },
+  "flying": {
+    "slug": "flying",
+    "label": "Flying",
+    "source": "local_detected"
+  },
+  "mill": {
+    "slug": "mill",
+    "label": "Mill",
+    "source": "local_detected"
+  },
+  "big-mana": {
+    "slug": "big-mana",
+    "label": "Big Mana",
+    "source": "local_detected"
+  },
+  "enchantress": {
+    "slug": "enchantress",
+    "label": "Enchantress",
+    "source": "local_detected"
+  },
+  "chaos": {
+    "slug": "chaos",
+    "label": "Chaos",
+    "source": "local_detected"
+  },
+  "auras": {
+    "slug": "auras",
+    "label": "Auras",
+    "source": "local_detected"
+  },
+  "group-slug": {
+    "slug": "group-slug",
+    "label": "Group Slug",
+    "source": "local_detected"
+  },
+  "wheels": {
+    "slug": "wheels",
+    "label": "Wheels",
+    "source": "local_detected"
+  },
+  "theft": {
+    "slug": "theft",
+    "label": "Theft",
+    "source": "local_detected"
+  },
+  "blink": {
+    "slug": "blink",
+    "label": "Blink",
+    "source": "local_detected"
+  },
+  "pillow-fort": {
+    "slug": "pillow-fort",
+    "label": "Pillow Fort",
+    "source": "local_detected"
+  },
+  "discard": {
+    "slug": "discard",
+    "label": "Discard",
+    "source": "local_detected"
+  },
+  "birthing-pod": {
+    "slug": "birthing-pod",
+    "label": "Birthing Pod",
+    "source": "local_detected"
+  },
+  "dragons": {
+    "slug": "dragons",
+    "label": "Dragons",
+    "source": "local_detected"
+  },
+  "self-mill": {
+    "slug": "self-mill",
+    "label": "Self-Mill",
+    "source": "local_detected"
+  },
+  "toolbox": {
+    "slug": "toolbox",
+    "label": "Toolbox",
+    "source": "local_detected"
+  },
+  "extra-combats": {
+    "slug": "extra-combats",
+    "label": "Extra Combats",
+    "source": "local_detected"
+  },
+  "landfall": {
+    "slug": "landfall",
+    "label": "Landfall",
+    "source": "local_detected"
+  },
+  "forced-combat": {
+    "slug": "forced-combat",
+    "label": "Forced Combat",
+    "source": "local_detected"
+  },
+  "stompy": {
+    "slug": "stompy",
+    "label": "Stompy",
+    "source": "local_detected"
+  },
+  "eldrazi": {
+    "slug": "eldrazi",
+    "label": "Eldrazi",
+    "source": "local_detected"
+  },
+  "group-hug": {
+    "slug": "group-hug",
+    "label": "Group Hug",
+    "source": "local_detected"
+  },
+  "clones": {
+    "slug": "clones",
+    "label": "Clones",
+    "source": "local_detected"
+  },
+  "elves": {
+    "slug": "elves",
+    "label": "Elves",
+    "source": "local_detected"
+  },
+  "extra-turns": {
+    "slug": "extra-turns",
+    "label": "Extra Turns",
+    "source": "local_detected"
+  },
+  "lifedrain": {
+    "slug": "lifedrain",
+    "label": "Lifedrain",
+    "source": "local_detected"
+  },
+  "hatebears": {
+    "slug": "hatebears",
+    "label": "Hatebears",
+    "source": "local_detected"
+  },
+  "goblins": {
+    "slug": "goblins",
+    "label": "Goblins",
+    "source": "local_detected"
+  },
+  "storm": {
+    "slug": "storm",
+    "label": "Storm",
+    "source": "local_detected"
+  },
+  "infect": {
+    "slug": "infect",
+    "label": "Infect",
+    "source": "local_detected"
+  },
+  "angels": {
+    "slug": "angels",
+    "label": "Angels",
+    "source": "local_detected"
+  },
+  "land-destruction": {
+    "slug": "land-destruction",
+    "label": "Land Destruction",
+    "source": "local_detected"
+  },
+  "zombies": {
+    "slug": "zombies",
+    "label": "Zombies",
+    "source": "local_detected"
+  },
+  "dredge": {
+    "slug": "dredge",
+    "label": "Dredge",
+    "source": "local_detected"
+  },
+  "good-stuff": {
+    "slug": "good-stuff",
+    "label": "Good Stuff",
+    "source": "local_detected"
+  },
+  "planeswalkers": {
+    "slug": "planeswalkers",
+    "label": "Planeswalkers",
+    "source": "local_detected"
+  },
+  "cascade": {
+    "slug": "cascade",
+    "label": "Cascade",
+    "source": "local_detected"
+  },
+  "vampires": {
+    "slug": "vampires",
+    "label": "Vampires",
+    "source": "local_detected"
+  },
+  "wizards": {
+    "slug": "wizards",
+    "label": "Wizards",
+    "source": "local_detected"
+  },
+  "etb": {
+    "slug": "etb",
+    "label": "ETB",
+    "source": "local_detected"
+  },
+  "x-spells": {
+    "slug": "x-spells",
+    "label": "X Spells",
+    "source": "local_detected"
+  },
+  "minus-1-minus-1-counters": {
+    "slug": "minus-1-minus-1-counters",
+    "label": "-1/-1 Counters",
+    "source": "local_detected"
+  },
+  "historic": {
+    "slug": "historic",
+    "label": "Historic",
+    "source": "local_detected"
+  },
+  "legends": {
+    "slug": "legends",
+    "label": "Legends",
+    "source": "local_detected"
+  },
+  "treasure": {
+    "slug": "treasure",
+    "label": "Treasure",
+    "source": "local_detected"
+  },
+  "counterspells": {
+    "slug": "counterspells",
+    "label": "Counterspells",
+    "source": "local_detected"
+  },
+  "populate": {
+    "slug": "populate",
+    "label": "Populate",
+    "source": "local_detected"
+  },
+  "self-damage": {
+    "slug": "self-damage",
+    "label": "Self-Damage",
+    "source": "local_detected"
+  },
+  "tap-untap": {
+    "slug": "tap-untap",
+    "label": "Tap / Untap",
+    "source": "local_detected"
+  },
+  "spell-copy": {
+    "slug": "spell-copy",
+    "label": "Spell Copy",
+    "source": "local_detected"
+  },
+  "toughness-matters": {
+    "slug": "toughness-matters",
+    "label": "Toughness Matters",
+    "source": "local_detected"
+  },
+  "cantrips": {
+    "slug": "cantrips",
+    "label": "Cantrips",
+    "source": "local_detected"
+  },
+  "demons": {
+    "slug": "demons",
+    "label": "Demons",
+    "source": "local_detected"
+  },
+  "affinity": {
+    "slug": "affinity",
+    "label": "Affinity",
+    "source": "local_detected"
+  },
+  "flash": {
+    "slug": "flash",
+    "label": "Flash",
+    "source": "local_detected"
+  },
+  "vehicles": {
+    "slug": "vehicles",
+    "label": "Vehicles",
+    "source": "local_detected"
+  },
+  "tempo": {
+    "slug": "tempo",
+    "label": "Tempo",
+    "source": "local_detected"
+  },
+  "saprolings": {
+    "slug": "saprolings",
+    "label": "Saprolings",
+    "source": "local_detected"
+  },
+  "slivers": {
+    "slug": "slivers",
+    "label": "Slivers",
+    "source": "local_detected"
+  },
+  "topdeck": {
+    "slug": "topdeck",
+    "label": "Topdeck",
+    "source": "local_detected"
+  },
+  "cats": {
+    "slug": "cats",
+    "label": "Cats",
+    "source": "local_detected"
+  },
+  "kaheera-companion": {
+    "slug": "kaheera-companion",
+    "label": "Kaheera Companion",
+    "source": "local_detected"
+  },
+  "defenders": {
+    "slug": "defenders",
+    "label": "Defenders",
+    "source": "local_detected"
+  },
+  "commander-matters": {
+    "slug": "commander-matters",
+    "label": "Commander Matters",
+    "source": "local_detected"
+  },
+  "proliferate": {
+    "slug": "proliferate",
+    "label": "Proliferate",
+    "source": "local_detected"
+  },
+  "giants": {
+    "slug": "giants",
+    "label": "Giants",
+    "source": "local_detected"
+  },
+  "spirits": {
+    "slug": "spirits",
+    "label": "Spirits",
+    "source": "local_detected"
+  },
+  "mutate": {
+    "slug": "mutate",
+    "label": "Mutate",
+    "source": "local_detected"
+  },
+  "soldiers": {
+    "slug": "soldiers",
+    "label": "Soldiers",
+    "source": "local_detected"
+  },
+  "birds": {
+    "slug": "birds",
+    "label": "Birds",
+    "source": "local_detected"
+  },
+  "unblockable": {
+    "slug": "unblockable",
+    "label": "Unblockable",
+    "source": "local_detected"
+  },
+  "dinosaurs": {
+    "slug": "dinosaurs",
+    "label": "Dinosaurs",
+    "source": "local_detected"
+  },
+  "fungi": {
+    "slug": "fungi",
+    "label": "Fungi",
+    "source": "local_detected"
+  },
+  "spore-counters": {
+    "slug": "spore-counters",
+    "label": "Spore Counters",
+    "source": "local_detected"
+  },
+  "snakes": {
+    "slug": "snakes",
+    "label": "Snakes",
+    "source": "local_detected"
+  },
+  "ad-nauseam": {
+    "slug": "ad-nauseam",
+    "label": "Ad Nauseam",
+    "source": "local_detected"
+  },
+  "merfolk": {
+    "slug": "merfolk",
+    "label": "Merfolk",
+    "source": "local_detected"
+  },
+  "primal-surge": {
+    "slug": "primal-surge",
+    "label": "Primal Surge",
+    "source": "local_detected"
+  },
+  "morph": {
+    "slug": "morph",
+    "label": "Morph",
+    "source": "local_detected"
+  },
+  "knights": {
+    "slug": "knights",
+    "label": "Knights",
+    "source": "local_detected"
+  },
+  "shadowborn-apostles": {
+    "slug": "shadowborn-apostles",
+    "label": "Shadowborn Apostles",
+    "source": "local_detected"
+  },
+  "clerics": {
+    "slug": "clerics",
+    "label": "Clerics",
+    "source": "local_detected"
+  },
+  "phyrexians": {
+    "slug": "phyrexians",
+    "label": "Phyrexians",
+    "source": "local_detected"
+  },
+  "counters-matter": {
+    "slug": "counters-matter",
+    "label": "Counters Matter",
+    "source": "local_detected"
+  },
+  "thopters": {
+    "slug": "thopters",
+    "label": "Thopters",
+    "source": "local_detected"
+  },
+  "devotion": {
+    "slug": "devotion",
+    "label": "Devotion",
+    "source": "local_detected"
+  },
+  "humans": {
+    "slug": "humans",
+    "label": "Humans",
+    "source": "local_detected"
+  },
+  "experience-counters": {
+    "slug": "experience-counters",
+    "label": "Experience Counters",
+    "source": "local_detected"
+  },
+  "sunforger": {
+    "slug": "sunforger",
+    "label": "Sunforger",
+    "source": "local_detected"
+  },
+  "deathtouch": {
+    "slug": "deathtouch",
+    "label": "Deathtouch",
+    "source": "local_detected"
+  },
+  "prison": {
+    "slug": "prison",
+    "label": "Prison",
+    "source": "local_detected"
+  },
+  "fight": {
+    "slug": "fight",
+    "label": "Fight",
+    "source": "local_detected"
+  },
+  "elementals": {
+    "slug": "elementals",
+    "label": "Elementals",
+    "source": "local_detected"
+  },
+  "spiders": {
+    "slug": "spiders",
+    "label": "Spiders",
+    "source": "local_detected"
+  },
+  "exile": {
+    "slug": "exile",
+    "label": "Exile",
+    "source": "local_detected"
+  },
+  "attack-triggers": {
+    "slug": "attack-triggers",
+    "label": "Attack Triggers",
+    "source": "local_detected"
+  },
+  "donate": {
+    "slug": "donate",
+    "label": "Donate",
+    "source": "local_detected"
+  },
+  "warriors": {
+    "slug": "warriors",
+    "label": "Warriors",
+    "source": "local_detected"
+  },
+  "politics": {
+    "slug": "politics",
+    "label": "Politics",
+    "source": "local_detected"
+  },
+  "shapeshifters": {
+    "slug": "shapeshifters",
+    "label": "Shapeshifters",
+    "source": "local_detected"
+  },
+  "cycling": {
+    "slug": "cycling",
+    "label": "Cycling",
+    "source": "local_detected"
+  },
+  "sphinxes": {
+    "slug": "sphinxes",
+    "label": "Sphinxes",
+    "source": "local_detected"
+  },
+  "pirates": {
+    "slug": "pirates",
+    "label": "Pirates",
+    "source": "local_detected"
+  },
+  "anthems": {
+    "slug": "anthems",
+    "label": "Anthems",
+    "source": "local_detected"
+  },
+  "sea-creatures": {
+    "slug": "sea-creatures",
+    "label": "Sea Creatures",
+    "source": "local_detected"
+  },
+  "atogs": {
+    "slug": "atogs",
+    "label": "Atogs",
+    "source": "local_detected"
+  },
+  "fling": {
+    "slug": "fling",
+    "label": "Fling",
+    "source": "local_detected"
+  },
+  "guildgates": {
+    "slug": "guildgates",
+    "label": "Guildgates",
+    "source": "local_detected"
+  },
+  "gods": {
+    "slug": "gods",
+    "label": "Gods",
+    "source": "local_detected"
+  },
+  "dwarves": {
+    "slug": "dwarves",
+    "label": "Dwarves",
+    "source": "local_detected"
+  },
+  "treefolk": {
+    "slug": "treefolk",
+    "label": "Treefolk",
+    "source": "local_detected"
+  },
+  "allies": {
+    "slug": "allies",
+    "label": "Allies",
+    "source": "local_detected"
+  },
+  "power-matters": {
+    "slug": "power-matters",
+    "label": "Power Matters",
+    "source": "local_detected"
+  },
+  "discover": {
+    "slug": "discover",
+    "label": "Discover",
+    "source": "local_detected"
+  },
+  "enrage": {
+    "slug": "enrage",
+    "label": "Enrage",
+    "source": "local_detected"
+  },
+  "persistent-petitioners": {
+    "slug": "persistent-petitioners",
+    "label": "Persistent Petitioners",
+    "source": "local_detected"
+  },
+  "kicker": {
+    "slug": "kicker",
+    "label": "Kicker",
+    "source": "local_detected"
+  },
+  "polymorph": {
+    "slug": "polymorph",
+    "label": "Polymorph",
+    "source": "local_detected"
+  },
+  "suspend": {
+    "slug": "suspend",
+    "label": "Suspend",
+    "source": "local_detected"
+  },
+  "time-counters": {
+    "slug": "time-counters",
+    "label": "Time Counters",
+    "source": "local_detected"
+  },
+  "cheerios": {
+    "slug": "cheerios",
+    "label": "Cheerios",
+    "source": "local_detected"
+  },
+  "tron": {
+    "slug": "tron",
+    "label": "Tron",
+    "source": "local_detected"
+  },
+  "haste": {
+    "slug": "haste",
+    "label": "Haste",
+    "source": "local_detected"
+  },
+  "rebels": {
+    "slug": "rebels",
+    "label": "Rebels",
+    "source": "local_detected"
+  },
+  "modular": {
+    "slug": "modular",
+    "label": "Modular",
+    "source": "local_detected"
+  },
+  "rat-colony": {
+    "slug": "rat-colony",
+    "label": "Rat Colony",
+    "source": "local_detected"
+  },
+  "rats": {
+    "slug": "rats",
+    "label": "Rats",
+    "source": "local_detected"
+  },
+  "relentless-rats": {
+    "slug": "relentless-rats",
+    "label": "Relentless Rats",
+    "source": "local_detected"
+  },
+  "dragons-approach": {
+    "slug": "dragons-approach",
+    "label": "Dragon's Approach",
+    "source": "local_detected"
+  },
+  "minotaurs": {
+    "slug": "minotaurs",
+    "label": "Minotaurs",
+    "source": "local_detected"
+  },
+  "pingers": {
+    "slug": "pingers",
+    "label": "Pingers",
+    "source": "local_detected"
+  },
+  "zoo": {
+    "slug": "zoo",
+    "label": "Zoo",
+    "source": "local_detected"
+  },
+  "land-animation": {
+    "slug": "land-animation",
+    "label": "Land Animation",
+    "source": "local_detected"
+  },
+  "keywords": {
+    "slug": "keywords",
+    "label": "Keywords",
+    "source": "local_detected"
+  },
+  "coin-flip": {
+    "slug": "coin-flip",
+    "label": "Coin Flip",
+    "source": "local_detected"
+  },
+  "madness": {
+    "slug": "madness",
+    "label": "Madness",
+    "source": "local_detected"
+  },
+  "faeries": {
+    "slug": "faeries",
+    "label": "Faeries",
+    "source": "local_detected"
+  },
+  "bounce": {
+    "slug": "bounce",
+    "label": "Bounce",
+    "source": "local_detected"
+  },
+  "hydras": {
+    "slug": "hydras",
+    "label": "Hydras",
+    "source": "local_detected"
+  },
+  "monarch": {
+    "slug": "monarch",
+    "label": "Monarch",
+    "source": "local_detected"
+  },
+  "aikido": {
+    "slug": "aikido",
+    "label": "Aikido",
+    "source": "local_detected"
+  },
+  "exalted": {
+    "slug": "exalted",
+    "label": "Exalted",
+    "source": "local_detected"
+  },
+  "multicolor-matters": {
+    "slug": "multicolor-matters",
+    "label": "Multicolor Matters",
+    "source": "local_detected"
+  },
+  "scarecrows": {
+    "slug": "scarecrows",
+    "label": "Scarecrows",
+    "source": "local_detected"
+  },
+  "druids": {
+    "slug": "druids",
+    "label": "Druids",
+    "source": "local_detected"
+  },
+  "prowess": {
+    "slug": "prowess",
+    "label": "Prowess",
+    "source": "local_detected"
+  },
+  "rogues": {
+    "slug": "rogues",
+    "label": "Rogues",
+    "source": "local_detected"
+  },
+  "samurai": {
+    "slug": "samurai",
+    "label": "Samurai",
+    "source": "local_detected"
+  },
+  "drakes": {
+    "slug": "drakes",
+    "label": "Drakes",
+    "source": "local_detected"
+  },
+  "triggered-abilities": {
+    "slug": "triggered-abilities",
+    "label": "Triggered Abilities",
+    "source": "local_detected"
+  },
+  "insects": {
+    "slug": "insects",
+    "label": "Insects",
+    "source": "local_detected"
+  },
+  "oozes": {
+    "slug": "oozes",
+    "label": "Oozes",
+    "source": "local_detected"
+  },
+  "ninjutsu": {
+    "slug": "ninjutsu",
+    "label": "Ninjutsu",
+    "source": "local_detected"
+  },
+  "ninjas": {
+    "slug": "ninjas",
+    "label": "Ninjas",
+    "source": "local_detected"
+  },
+  "orcs": {
+    "slug": "orcs",
+    "label": "Orcs",
+    "source": "local_detected"
+  },
+  "+1-+1-counters": {
+    "slug": "+1-+1-counters",
+    "label": "+1 +1 Counters",
+    "source": "commander_shards"
+  },
+  "sponges": {
+    "slug": "sponges",
+    "label": "Sponges",
+    "source": "prefire_typeline"
+  },
+  "wolfs": {
+    "slug": "wolfs",
+    "label": "Wolfs",
+    "source": "prefire_typeline"
+  },
+  "salamanders": {
+    "slug": "salamanders",
+    "label": "Salamanders",
+    "source": "prefire_typeline"
+  },
+  "vedalkens": {
+    "slug": "vedalkens",
+    "label": "Vedalkens",
+    "source": "prefire_typeline"
+  },
+  "illusions": {
+    "slug": "illusions",
+    "label": "Illusions",
+    "source": "prefire_typeline"
+  },
+  "jackals": {
+    "slug": "jackals",
+    "label": "Jackals",
+    "source": "prefire_typeline"
+  },
+  "shades": {
+    "slug": "shades",
+    "label": "Shades",
+    "source": "prefire_typeline"
+  },
+  "beasts": {
+    "slug": "beasts",
+    "label": "Beasts",
+    "source": "prefire_typeline"
+  },
+  "wurms": {
+    "slug": "wurms",
+    "label": "Wurms",
+    "source": "prefire_typeline"
+  },
+  "gorgons": {
+    "slug": "gorgons",
+    "label": "Gorgons",
+    "source": "prefire_typeline"
+  },
+  "scorpions": {
+    "slug": "scorpions",
+    "label": "Scorpions",
+    "source": "prefire_typeline"
+  },
+  "incarnations": {
+    "slug": "incarnations",
+    "label": "Incarnations",
+    "source": "prefire_typeline"
+  },
+  "scouts": {
+    "slug": "scouts",
+    "label": "Scouts",
+    "source": "prefire_typeline"
+  },
+  "dwarfs": {
+    "slug": "dwarfs",
+    "label": "Dwarfs",
+    "source": "prefire_typeline"
+  },
+  "juggernauts": {
+    "slug": "juggernauts",
+    "label": "Juggernauts",
+    "source": "prefire_typeline"
+  },
+  "gnomes": {
+    "slug": "gnomes",
+    "label": "Gnomes",
+    "source": "prefire_typeline"
+  },
+  "ogres": {
+    "slug": "ogres",
+    "label": "Ogres",
+    "source": "prefire_typeline"
+  },
+  "golems": {
+    "slug": "golems",
+    "label": "Golems",
+    "source": "prefire_typeline"
+  },
+  "sorcerers": {
+    "slug": "sorcerers",
+    "label": "Sorcerers",
+    "source": "prefire_typeline"
+  },
+  "dryads": {
+    "slug": "dryads",
+    "label": "Dryads",
+    "source": "prefire_typeline"
+  },
+  "constructs": {
+    "slug": "constructs",
+    "label": "Constructs",
+    "source": "prefire_typeline"
+  },
+  "spellshapers": {
+    "slug": "spellshapers",
+    "label": "Spellshapers",
+    "source": "prefire_typeline"
+  },
+  "wraiths": {
+    "slug": "wraiths",
+    "label": "Wraiths",
+    "source": "prefire_typeline"
+  },
+  "kavus": {
+    "slug": "kavus",
+    "label": "Kavus",
+    "source": "prefire_typeline"
+  },
+  "allys": {
+    "slug": "allys",
+    "label": "Allys",
+    "source": "prefire_typeline"
+  },
+  "eggs": {
+    "slug": "eggs",
+    "label": "Eggs",
+    "source": "prefire_typeline"
+  },
+  "apes": {
+    "slug": "apes",
+    "label": "Apes",
+    "source": "prefire_typeline"
+  },
+  "shamans": {
+    "slug": "shamans",
+    "label": "Shamans",
+    "source": "prefire_typeline"
+  },
+  "goats": {
+    "slug": "goats",
+    "label": "Goats",
+    "source": "prefire_typeline"
+  },
+  "dogs": {
+    "slug": "dogs",
+    "label": "Dogs",
+    "source": "prefire_typeline"
+  },
+  "lizards": {
+    "slug": "lizards",
+    "label": "Lizards",
+    "source": "prefire_typeline"
+  },
+  "nymphs": {
+    "slug": "nymphs",
+    "label": "Nymphs",
+    "source": "prefire_typeline"
+  },
+  "rhinos": {
+    "slug": "rhinos",
+    "label": "Rhinos",
+    "source": "prefire_typeline"
+  },
+  "crabs": {
+    "slug": "crabs",
+    "label": "Crabs",
+    "source": "prefire_typeline"
+  },
+  "elfs": {
+    "slug": "elfs",
+    "label": "Elfs",
+    "source": "prefire_typeline"
+  },
+  "devils": {
+    "slug": "devils",
+    "label": "Devils",
+    "source": "prefire_typeline"
+  },
+  "horrors": {
+    "slug": "horrors",
+    "label": "Horrors",
+    "source": "prefire_typeline"
+  },
+  "hellions": {
+    "slug": "hellions",
+    "label": "Hellions",
+    "source": "prefire_typeline"
+  },
+  "foxs": {
+    "slug": "foxs",
+    "label": "Foxs",
+    "source": "prefire_typeline"
+  },
+  "assembly-workers": {
+    "slug": "assembly-workers",
+    "label": "Assembly-workers",
+    "source": "prefire_typeline"
+  },
+  "drones": {
+    "slug": "drones",
+    "label": "Drones",
+    "source": "prefire_typeline"
+  },
+  "djinns": {
+    "slug": "djinns",
+    "label": "Djinns",
+    "source": "prefire_typeline"
+  },
+  "trolls": {
+    "slug": "trolls",
+    "label": "Trolls",
+    "source": "prefire_typeline"
+  },
+  "nomads": {
+    "slug": "nomads",
+    "label": "Nomads",
+    "source": "prefire_typeline"
+  },
+  "mutants": {
+    "slug": "mutants",
+    "label": "Mutants",
+    "source": "prefire_typeline"
+  },
+  "werewolfs": {
+    "slug": "werewolfs",
+    "label": "Werewolfs",
+    "source": "prefire_typeline"
+  },
+  "s": {
+    "slug": "s",
+    "label": "//s",
+    "source": "prefire_typeline"
+  },
+  "creatures": {
+    "slug": "creatures",
+    "label": "Creatures",
+    "source": "prefire_typeline"
+  },
+  "archers": {
+    "slug": "archers",
+    "label": "Archers",
+    "source": "prefire_typeline"
+  },
+  "azras": {
+    "slug": "azras",
+    "label": "Azras",
+    "source": "prefire_typeline"
+  },
+  "crocodiles": {
+    "slug": "crocodiles",
+    "label": "Crocodiles",
+    "source": "prefire_typeline"
+  },
+  "walls": {
+    "slug": "walls",
+    "label": "Walls",
+    "source": "prefire_typeline"
+  },
+  "kithkins": {
+    "slug": "kithkins",
+    "label": "Kithkins",
+    "source": "prefire_typeline"
+  },
+  "surrakars": {
+    "slug": "surrakars",
+    "label": "Surrakars",
+    "source": "prefire_typeline"
+  },
+  "aetherborns": {
+    "slug": "aetherborns",
+    "label": "Aetherborns",
+    "source": "prefire_typeline"
+  },
+  "artificers": {
+    "slug": "artificers",
+    "label": "Artificers",
+    "source": "prefire_typeline"
+  },
+  "elephants": {
+    "slug": "elephants",
+    "label": "Elephants",
+    "source": "prefire_typeline"
+  },
+  "sphinxs": {
+    "slug": "sphinxs",
+    "label": "Sphinxs",
+    "source": "prefire_typeline"
+  },
+  "assassins": {
+    "slug": "assassins",
+    "label": "Assassins",
+    "source": "prefire_typeline"
+  },
+  "volvers": {
+    "slug": "volvers",
+    "label": "Volvers",
+    "source": "prefire_typeline"
+  },
+  "moonfolks": {
+    "slug": "moonfolks",
+    "label": "Moonfolks",
+    "source": "prefire_typeline"
+  },
+  "thrulls": {
+    "slug": "thrulls",
+    "label": "Thrulls",
+    "source": "prefire_typeline"
+  },
+  "squirrels": {
+    "slug": "squirrels",
+    "label": "Squirrels",
+    "source": "prefire_typeline"
+  },
+  "advisors": {
+    "slug": "advisors",
+    "label": "Advisors",
+    "source": "prefire_typeline"
+  },
+  "manticores": {
+    "slug": "manticores",
+    "label": "Manticores",
+    "source": "prefire_typeline"
+  },
+  "barbarians": {
+    "slug": "barbarians",
+    "label": "Barbarians",
+    "source": "prefire_typeline"
+  },
+  "rabbits": {
+    "slug": "rabbits",
+    "label": "Rabbits",
+    "source": "prefire_typeline"
+  },
+  "cyclopss": {
+    "slug": "cyclopss",
+    "label": "Cyclopss",
+    "source": "prefire_typeline"
+  },
+  "rangers": {
+    "slug": "rangers",
+    "label": "Rangers",
+    "source": "prefire_typeline"
+  },
+  "badgers": {
+    "slug": "badgers",
+    "label": "Badgers",
+    "source": "prefire_typeline"
+  },
+  "avatars": {
+    "slug": "avatars",
+    "label": "Avatars",
+    "source": "prefire_typeline"
+  },
+  "praetors": {
+    "slug": "praetors",
+    "label": "Praetors",
+    "source": "prefire_typeline"
+  },
+  "kors": {
+    "slug": "kors",
+    "label": "Kors",
+    "source": "prefire_typeline"
+  },
+  "horses": {
+    "slug": "horses",
+    "label": "Horses",
+    "source": "prefire_typeline"
+  },
+  "krakens": {
+    "slug": "krakens",
+    "label": "Krakens",
+    "source": "prefire_typeline"
+  },
+  "mercenarys": {
+    "slug": "mercenarys",
+    "label": "Mercenarys",
+    "source": "prefire_typeline"
+  },
+  "processors": {
+    "slug": "processors",
+    "label": "Processors",
+    "source": "prefire_typeline"
+  },
+  "oysters": {
+    "slug": "oysters",
+    "label": "Oysters",
+    "source": "prefire_typeline"
+  },
+  "berserkers": {
+    "slug": "berserkers",
+    "label": "Berserkers",
+    "source": "prefire_typeline"
+  },
+  "nightstalkers": {
+    "slug": "nightstalkers",
+    "label": "Nightstalkers",
+    "source": "prefire_typeline"
+  },
+  "monks": {
+    "slug": "monks",
+    "label": "Monks",
+    "source": "prefire_typeline"
+  },
+  "gremlins": {
+    "slug": "gremlins",
+    "label": "Gremlins",
+    "source": "prefire_typeline"
+  },
+  "funguss": {
+    "slug": "funguss",
+    "label": "Funguss",
+    "source": "prefire_typeline"
+  },
+  "elders": {
+    "slug": "elders",
+    "label": "Elders",
+    "source": "prefire_typeline"
+  },
+  "homunculuss": {
+    "slug": "homunculuss",
+    "label": "Homunculuss",
+    "source": "prefire_typeline"
+  },
+  "dauthis": {
+    "slug": "dauthis",
+    "label": "Dauthis",
+    "source": "prefire_typeline"
+  },
+  "griffins": {
+    "slug": "griffins",
+    "label": "Griffins",
+    "source": "prefire_typeline"
+  },
+  "metathrans": {
+    "slug": "metathrans",
+    "label": "Metathrans",
+    "source": "prefire_typeline"
+  },
+  "bards": {
+    "slug": "bards",
+    "label": "Bards",
+    "source": "prefire_typeline"
+  },
+  "weirds": {
+    "slug": "weirds",
+    "label": "Weirds",
+    "source": "prefire_typeline"
+  },
+  "bears": {
+    "slug": "bears",
+    "label": "Bears",
+    "source": "prefire_typeline"
+  },
+  "leechs": {
+    "slug": "leechs",
+    "label": "Leechs",
+    "source": "prefire_typeline"
+  },
+  "centaurs": {
+    "slug": "centaurs",
+    "label": "Centaurs",
+    "source": "prefire_typeline"
+  },
+  "minions": {
+    "slug": "minions",
+    "label": "Minions",
+    "source": "prefire_typeline"
+  },
+  "plants": {
+    "slug": "plants",
+    "label": "Plants",
+    "source": "prefire_typeline"
+  },
+  "nightmares": {
+    "slug": "nightmares",
+    "label": "Nightmares",
+    "source": "prefire_typeline"
+  },
+  "jellyfishs": {
+    "slug": "jellyfishs",
+    "label": "Jellyfishs",
+    "source": "prefire_typeline"
+  },
+  "nobles": {
+    "slug": "nobles",
+    "label": "Nobles",
+    "source": "prefire_typeline"
+  },
+  "skeletons": {
+    "slug": "skeletons",
+    "label": "Skeletons",
+    "source": "prefire_typeline"
+  },
+  "hippos": {
+    "slug": "hippos",
+    "label": "Hippos",
+    "source": "prefire_typeline"
+  },
+  "legendarys": {
+    "slug": "legendarys",
+    "label": "Legendarys",
+    "source": "prefire_typeline"
+  },
+  "chimeras": {
+    "slug": "chimeras",
+    "label": "Chimeras",
+    "source": "prefire_typeline"
+  },
+  "bats": {
+    "slug": "bats",
+    "label": "Bats",
+    "source": "prefire_typeline"
+  },
+  "elks": {
+    "slug": "elks",
+    "label": "Elks",
+    "source": "prefire_typeline"
+  },
+  "nautiluss": {
+    "slug": "nautiluss",
+    "label": "Nautiluss",
+    "source": "prefire_typeline"
+  },
+  "sharks": {
+    "slug": "sharks",
+    "label": "Sharks",
+    "source": "prefire_typeline"
+  },
+  "sirens": {
+    "slug": "sirens",
+    "label": "Sirens",
+    "source": "prefire_typeline"
+  },
+  "frogs": {
+    "slug": "frogs",
+    "label": "Frogs",
+    "source": "prefire_typeline"
+  },
+  "nagas": {
+    "slug": "nagas",
+    "label": "Nagas",
+    "source": "prefire_typeline"
+  },
+  "boars": {
+    "slug": "boars",
+    "label": "Boars",
+    "source": "prefire_typeline"
+  },
+  "octopuss": {
+    "slug": "octopuss",
+    "label": "Octopuss",
+    "source": "prefire_typeline"
+  },
+  "serpents": {
+    "slug": "serpents",
+    "label": "Serpents",
+    "source": "prefire_typeline"
+  },
+  "oxs": {
+    "slug": "oxs",
+    "label": "Oxs",
+    "source": "prefire_typeline"
+  },
+  "cockatrices": {
+    "slug": "cockatrices",
+    "label": "Cockatrices",
+    "source": "prefire_typeline"
+  },
+  "lhurgoyfs": {
+    "slug": "lhurgoyfs",
+    "label": "Lhurgoyfs",
+    "source": "prefire_typeline"
+  },
+  "mongooses": {
+    "slug": "mongooses",
+    "label": "Mongooses",
+    "source": "prefire_typeline"
+  },
+  "fishs": {
+    "slug": "fishs",
+    "label": "Fishs",
+    "source": "prefire_typeline"
+  },
+  "gargoyles": {
+    "slug": "gargoyles",
+    "label": "Gargoyles",
+    "source": "prefire_typeline"
+  },
+  "phoenixs": {
+    "slug": "phoenixs",
+    "label": "Phoenixs",
+    "source": "prefire_typeline"
+  },
+  "leviathans": {
+    "slug": "leviathans",
+    "label": "Leviathans",
+    "source": "prefire_typeline"
+  },
+  "homarids": {
+    "slug": "homarids",
+    "label": "Homarids",
+    "source": "prefire_typeline"
+  },
+  "imps": {
+    "slug": "imps",
+    "label": "Imps",
+    "source": "prefire_typeline"
+  },
+  "ouphes": {
+    "slug": "ouphes",
+    "label": "Ouphes",
+    "source": "prefire_typeline"
+  },
+  "spikes": {
+    "slug": "spikes",
+    "label": "Spikes",
+    "source": "prefire_typeline"
+  },
+  "efreets": {
+    "slug": "efreets",
+    "label": "Efreets",
+    "source": "prefire_typeline"
+  },
+  "masticores": {
+    "slug": "masticores",
+    "label": "Masticores",
+    "source": "prefire_typeline"
+  },
+  "noggles": {
+    "slug": "noggles",
+    "label": "Noggles",
+    "source": "prefire_typeline"
+  },
+  "kirins": {
+    "slug": "kirins",
+    "label": "Kirins",
+    "source": "prefire_typeline"
+  },
+  "satyrs": {
+    "slug": "satyrs",
+    "label": "Satyrs",
+    "source": "prefire_typeline"
+  },
+  "unicorns": {
+    "slug": "unicorns",
+    "label": "Unicorns",
+    "source": "prefire_typeline"
+  },
+  "specters": {
+    "slug": "specters",
+    "label": "Specters",
+    "source": "prefire_typeline"
+  },
+  "archons": {
+    "slug": "archons",
+    "label": "Archons",
+    "source": "prefire_typeline"
+  },
+  "camels": {
+    "slug": "camels",
+    "label": "Camels",
+    "source": "prefire_typeline"
+  },
+  "thalakoss": {
+    "slug": "thalakoss",
+    "label": "Thalakoss",
+    "source": "prefire_typeline"
+  },
+  "slugs": {
+    "slug": "slugs",
+    "label": "Slugs",
+    "source": "prefire_typeline"
+  },
+  "hippogriffs": {
+    "slug": "hippogriffs",
+    "label": "Hippogriffs",
+    "source": "prefire_typeline"
+  },
+  "flagbearers": {
+    "slug": "flagbearers",
+    "label": "Flagbearers",
+    "source": "prefire_typeline"
+  },
+  "monkeys": {
+    "slug": "monkeys",
+    "label": "Monkeys",
+    "source": "prefire_typeline"
+  },
+  "pangolins": {
+    "slug": "pangolins",
+    "label": "Pangolins",
+    "source": "prefire_typeline"
+  },
+  "pegasuss": {
+    "slug": "pegasuss",
+    "label": "Pegasuss",
+    "source": "prefire_typeline"
+  },
+  "antelopes": {
+    "slug": "antelopes",
+    "label": "Antelopes",
+    "source": "prefire_typeline"
+  },
+  "wolverines": {
+    "slug": "wolverines",
+    "label": "Wolverines",
+    "source": "prefire_typeline"
+  },
+  "zuberas": {
+    "slug": "zuberas",
+    "label": "Zuberas",
+    "source": "prefire_typeline"
+  },
+  "myrs": {
+    "slug": "myrs",
+    "label": "Myrs",
+    "source": "prefire_typeline"
+  },
+  "hags": {
+    "slug": "hags",
+    "label": "Hags",
+    "source": "prefire_typeline"
+  },
+  "nephilims": {
+    "slug": "nephilims",
+    "label": "Nephilims",
+    "source": "prefire_typeline"
+  },
+  "hyenas": {
+    "slug": "hyenas",
+    "label": "Hyenas",
+    "source": "prefire_typeline"
+  },
+  "bringers": {
+    "slug": "bringers",
+    "label": "Bringers",
+    "source": "prefire_typeline"
+  },
+  "licids": {
+    "slug": "licids",
+    "label": "Licids",
+    "source": "prefire_typeline"
+  },
+  "mongers": {
+    "slug": "mongers",
+    "label": "Mongers",
+    "source": "prefire_typeline"
+  },
+  "turtles": {
+    "slug": "turtles",
+    "label": "Turtles",
+    "source": "prefire_typeline"
+  },
+  "worms": {
+    "slug": "worms",
+    "label": "Worms",
+    "source": "prefire_typeline"
+  },
+  "brushwaggs": {
+    "slug": "brushwaggs",
+    "label": "Brushwaggs",
+    "source": "prefire_typeline"
+  },
+  "whales": {
+    "slug": "whales",
+    "label": "Whales",
+    "source": "prefire_typeline"
+  },
+  "lammasus": {
+    "slug": "lammasus",
+    "label": "Lammasus",
+    "source": "prefire_typeline"
+  },
+  "spawns": {
+    "slug": "spawns",
+    "label": "Spawns",
+    "source": "prefire_typeline"
+  },
+  "kobolds": {
+    "slug": "kobolds",
+    "label": "Kobolds",
+    "source": "prefire_typeline"
+  },
+  "yetis": {
+    "slug": "yetis",
+    "label": "Yetis",
+    "source": "prefire_typeline"
+  },
+  "soltaris": {
+    "slug": "soltaris",
+    "label": "Soltaris",
+    "source": "prefire_typeline"
+  },
+  "aurochss": {
+    "slug": "aurochss",
+    "label": "Aurochss",
+    "source": "prefire_typeline"
+  },
+  "sheeps": {
+    "slug": "sheeps",
+    "label": "Sheeps",
+    "source": "prefire_typeline"
+  },
+  "pilots": {
+    "slug": "pilots",
+    "label": "Pilots",
+    "source": "prefire_typeline"
+  },
+  "eyes": {
+    "slug": "eyes",
+    "label": "Eyes",
+    "source": "prefire_typeline"
+  },
+  "squids": {
+    "slug": "squids",
+    "label": "Squids",
+    "source": "prefire_typeline"
+  },
+  "riggers": {
+    "slug": "riggers",
+    "label": "Riggers",
+    "source": "prefire_typeline"
+  },
+  "basilisks": {
+    "slug": "basilisks",
+    "label": "Basilisks",
+    "source": "prefire_typeline"
+  },
+  "sliths": {
+    "slug": "sliths",
+    "label": "Sliths",
+    "source": "prefire_typeline"
+  },
+  "beebles": {
+    "slug": "beebles",
+    "label": "Beebles",
+    "source": "prefire_typeline"
+  },
+  "carriers": {
+    "slug": "carriers",
+    "label": "Carriers",
+    "source": "prefire_typeline"
+  },
+  "warlocks": {
+    "slug": "warlocks",
+    "label": "Warlocks",
+    "source": "prefire_typeline"
+  },
+  "lands": {
+    "slug": "lands",
+    "label": "Lands",
+    "source": "prefire_typeline"
+  },
+  "harpys": {
+    "slug": "harpys",
+    "label": "Harpys",
+    "source": "prefire_typeline"
+  },
+  "mystics": {
+    "slug": "mystics",
+    "label": "Mystics",
+    "source": "prefire_typeline"
+  },
+  "moles": {
+    "slug": "moles",
+    "label": "Moles",
+    "source": "prefire_typeline"
+  },
+  "trilobites": {
+    "slug": "trilobites",
+    "label": "Trilobites",
+    "source": "prefire_typeline"
+  },
+  "reflections": {
+    "slug": "reflections",
+    "label": "Reflections",
+    "source": "prefire_typeline"
+  },
+  "starfishs": {
+    "slug": "starfishs",
+    "label": "Starfishs",
+    "source": "prefire_typeline"
+  },
+  "orggs": {
+    "slug": "orggs",
+    "label": "Orggs",
+    "source": "prefire_typeline"
+  },
+  "enchantments": {
+    "slug": "enchantments",
+    "label": "Enchantments",
+    "source": "prefire_typeline"
+  },
+  "pests": {
+    "slug": "pests",
+    "label": "Pests",
+    "source": "prefire_typeline"
+  },
+  "phelddagrifs": {
+    "slug": "phelddagrifs",
+    "label": "Phelddagrifs",
+    "source": "prefire_typeline"
+  },
+  "dreadnoughts": {
+    "slug": "dreadnoughts",
+    "label": "Dreadnoughts",
+    "source": "prefire_typeline"
+  },
+  "wombats": {
+    "slug": "wombats",
+    "label": "Wombats",
+    "source": "prefire_typeline"
+  },
+  "ferrets": {
+    "slug": "ferrets",
+    "label": "Ferrets",
+    "source": "prefire_typeline"
+  },
+  "lamias": {
+    "slug": "lamias",
+    "label": "Lamias",
+    "source": "prefire_typeline"
+  },
+  "forests": {
+    "slug": "forests",
+    "label": "Forests",
+    "source": "prefire_typeline"
+  },
+  "sables": {
+    "slug": "sables",
+    "label": "Sables",
+    "source": "prefire_typeline"
+  }
+}

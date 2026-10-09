@@ -55,11 +55,24 @@ class PrefireDeckGenerator {
 
     async loadCommanderThemes(slug) {
         const firstChar = /^[a-z0-9]/.test(slug) ? slug[0] : "_";
-        const res = await fetch(`data/themes/${firstChar}/${slug}.json`);
-        if (!res.ok) {
-            throw new Error(`Theme data not found for slug: ${slug}`);
+        try {
+            const res = await fetch(`data/themes/${firstChar}/${slug}.json`);
+            if (!res.ok) return null;
+            return await res.json();
+        } catch (err) {
+            return null;
         }
-        return await res.json();
+    }
+
+    async loadArchetypeFallback(themeSlug) {
+        if (!themeSlug) return null;
+        try {
+            const res = await fetch(`data/archetypes/${themeSlug}.json`);
+            if (!res.ok) return null;
+            return await res.json();
+        } catch (err) {
+            return null;
+        }
     }
 
     isColorLegal(cardColors, commanderColors) {
@@ -93,7 +106,11 @@ class PrefireDeckGenerator {
             draw: 10
         }, themeData.targets || {});
 
-        const rawCards = themeData.cards || [];
+        const rawCards = (themeData.cards || []).filter(c => {
+            const meta = cardCatalog[c];
+            return !meta || this.isColorLegal(meta.color_identity, commanderColors);
+        });
+
         const onThemeCards = [];
         const genericCards = [];
 
@@ -370,12 +387,38 @@ class PrefireDeckGenerator {
         });
         const commanderColors = Array.from(colors);
 
-        let themeData = commanderPayload.default || { targets: {}, cards: [] };
-        let actualSlug = "default";
+        let themeData = null;
+        let actualSlug = selectedThemeSlug || "default";
 
-        if (selectedThemeSlug && commanderPayload.themes && commanderPayload.themes[selectedThemeSlug]) {
-            themeData = commanderPayload.themes[selectedThemeSlug].data || commanderPayload.themes[selectedThemeSlug];
-            actualSlug = selectedThemeSlug;
+        // 1. Try commander's specific theme data
+        if (commanderPayload) {
+            if (selectedThemeSlug && commanderPayload.themes && commanderPayload.themes[selectedThemeSlug]) {
+                const candidate = commanderPayload.themes[selectedThemeSlug].data || commanderPayload.themes[selectedThemeSlug];
+                if (candidate.cards && candidate.cards.length >= 20) {
+                    themeData = candidate;
+                }
+            } else if (!selectedThemeSlug && commanderPayload.default && (commanderPayload.default.cards || []).length >= 20) {
+                themeData = commanderPayload.default;
+            }
+        }
+
+        // 2. Archetype fallback: fetch data/archetypes/{slug}.json
+        if (!themeData && selectedThemeSlug) {
+            const fallbackArchetype = await this.loadArchetypeFallback(selectedThemeSlug);
+            if (fallbackArchetype && fallbackArchetype.cards && fallbackArchetype.cards.length > 0) {
+                themeData = fallbackArchetype;
+                actualSlug = selectedThemeSlug;
+            }
+        }
+
+        // 3. Fallback to commander's default theme if available
+        if (!themeData && commanderPayload && commanderPayload.default) {
+            themeData = commanderPayload.default;
+        }
+
+        // 4. Safe fallback if zero data was found
+        if (!themeData) {
+            themeData = { targets: {}, cards: [] };
         }
 
         const cmdrCount = commanderB ? 2 : 1;

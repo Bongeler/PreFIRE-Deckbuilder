@@ -5286,7 +5286,7 @@
             const tObj = loadedCommanderThemesData.themes[tSlug];
             const opt = document.createElement('option');
             opt.value = tSlug;
-            opt.textContent = `${tObj.label || tSlug} (${tObj.count || 0} decks)`;
+            opt.textContent = tObj.label || tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
             autobuildThemeSelect.appendChild(opt);
           });
         }
