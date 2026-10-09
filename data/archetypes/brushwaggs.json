@@ -1,0 +1,13 @@
+{
+  "slug": "brushwaggs",
+  "label": "Brushwaggs",
+  "sample_commanders": 0,
+  "targets": {
+    "ramp": 10,
+    "removal_creature": 6,
+    "removal_noncreature": 4,
+    "board_wipe": 3,
+    "draw": 10
+  },
+  "cards": []
+}

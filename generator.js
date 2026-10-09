@@ -5,6 +5,16 @@ class PrefireDeckGenerator {
         this.cardRoles = null;
         this.staples = null;
         this.landsData = null;
+
+        // Signature keywords and mechanics for theme filtration
+        this.themeSignatures = {
+            "aristocrats": ["sacrifice", "dies", "morbid", "blood artist", "zulaport", "altar", "grave pact", "dictate of erebos", "viscera seer"],
+            "lifegain": ["gain life", "gains life", "lifelink", "soul warden", "well of lost dreams", "ajani", "crest", "sanguine bond", "exquisite blood"],
+            "+1-+1-counters": ["+1/+1 counter", "proliferate", "cathars' crusade", "hardened scales", "corpsejack", "doubling season"],
+            "tokens": ["create", "token", "tokens", "populate", "lingering souls", "spectral procession", "bitterblossom", "anointed procession"],
+            "reanimator": ["reanimate", "animate dead", "graveyard", "return target creature card from your graveyard", "necromancy", "living death"],
+            "voltron": ["equipment", "equipped", "aura", "enchant creature", "sword of", "jitte", "puresteel"]
+        };
     }
 
     async init() {
@@ -52,10 +62,25 @@ class PrefireDeckGenerator {
         return await res.json();
     }
 
-    // Checks if card colors are subset of commander colors
     isColorLegal(cardColors, commanderColors) {
         if (!cardColors || cardColors.length === 0) return true;
         return cardColors.every(c => commanderColors.includes(c));
+    }
+
+    isCardOnTheme(cardName, themeSlug, cardCatalog) {
+        if (!themeSlug || themeSlug === "default") return false;
+        const keywords = this.themeSignatures[themeSlug] || [themeSlug.replace("-", " ")];
+        const lowerName = cardName.toLowerCase();
+
+        if (keywords.some(kw => lowerName.includes(kw))) return true;
+
+        const meta = cardCatalog[cardName];
+        if (meta && meta.oracle_text) {
+            const lowerText = meta.oracle_text.toLowerCase();
+            if (keywords.some(kw => lowerText.includes(kw))) return true;
+        }
+
+        return false;
     }
 
     // Step A: Assemble 63 Non-Land Spells
@@ -68,7 +93,20 @@ class PrefireDeckGenerator {
             draw: 10
         }, themeData.targets || {});
 
-        const sourceCards = themeData.cards || [];
+        const rawCards = themeData.cards || [];
+        const onThemeCards = [];
+        const genericCards = [];
+
+        // Partition candidate pool so on-theme cards get placed first
+        for (const c of rawCards) {
+            if (this.isCardOnTheme(c, themeSlug, cardCatalog)) {
+                onThemeCards.push(c);
+            } else {
+                genericCards.push(c);
+            }
+        }
+
+        const sourceCards = [...onThemeCards, ...genericCards];
         const selected = new Set();
         const buckets = {
             ramp: [],
@@ -79,7 +117,7 @@ class PrefireDeckGenerator {
             engine: []
         };
 
-        // 1. Ingest cards directly from theme list into role buckets
+        // 1. Ingest cards from theme list into role buckets
         for (const cardName of sourceCards) {
             const roles = this.cardRoles[cardName] || [];
             let placed = false;
@@ -99,41 +137,43 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 2. Backfill empty role quotas using prefire-staples.json
+        // 2. Backfill empty role quotas using prefire-staples.json prioritizing current theme
         const backfillRoles = ["ramp", "removal_creature", "removal_noncreature", "board_wipe", "draw"];
         for (const role of backfillRoles) {
             const needed = (targets[role] || 0) - buckets[role].length;
             if (needed <= 0) continue;
 
             const candidates = this.staples[role] || [];
-            const onTheme = [];
-            const generic = [];
+            const onThemeStaples = [];
+            const genericStaples = [];
 
             for (const c of candidates) {
                 if (selected.has(c.name)) continue;
                 if (!this.isColorLegal(c.colors, commanderColors)) continue;
 
-                if (c.themes && c.themes.includes(themeSlug)) {
-                    onTheme.push(c.name);
+                const hasThemeTag = c.themes && c.themes.includes(themeSlug);
+                const matchesSignature = this.isCardOnTheme(c.name, themeSlug, cardCatalog);
+
+                if (hasThemeTag || matchesSignature) {
+                    onThemeStaples.push(c.name);
                 } else {
-                    generic.push(c.name);
+                    genericStaples.push(c.name);
                 }
             }
 
-            const pool = [...onTheme, ...generic];
+            const pool = [...onThemeStaples, ...genericStaples];
             for (let i = 0; i < needed && i < pool.length; i++) {
                 buckets[role].push(pool[i]);
                 selected.add(pool[i]);
             }
         }
 
-        // Flatten collected cards
         let spellList = [];
         for (const role of Object.keys(buckets)) {
             spellList.push(...buckets[role]);
         }
 
-        // 3. Fallback: fill up to 63 from remaining theme engine cards
+        // 3. Fallback: fill up to 63 from remaining candidates
         if (spellList.length < 63) {
             for (const cardName of sourceCards) {
                 if (!selected.has(cardName)) {
@@ -144,7 +184,7 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 4. Secondary fallback: fill up to 63 from general on-color staples
+        // 4. Secondary fallback: fill from general on-color staples
         if (spellList.length < 63) {
             const allStaplePool = [];
             for (const r of backfillRoles) {
@@ -166,7 +206,7 @@ class PrefireDeckGenerator {
         return spellList.slice(0, 63);
     }
 
-    // Step B: Calculate Land Base (Fills to exactly 99 cards)
+    // Step B: Calculate Land Base (Total deck target = 99)
     assembleLands(commanderColors, themeSlug, nonLandSpells, cardCatalog, commanderCount = 1) {
         const lands = [];
         const colorCount = commanderColors.length;
@@ -183,7 +223,7 @@ class PrefireDeckGenerator {
             lands.push(this.landsData.fixers.reflecting_pool);
         }
 
-        // 2. Dual Cycles (Check both orderings to catch WB, UR, WR, etc.)
+        // 2. Dual Cycles (Checks both orderings)
         for (let i = 0; i < commanderColors.length; i++) {
             for (let j = i + 1; j < commanderColors.length; j++) {
                 const c1 = commanderColors[i];
@@ -234,7 +274,6 @@ class PrefireDeckGenerator {
             }
         }
 
-        // Add colored utility staples for mono/dual
         if (colorCount <= 2 && this.landsData.utility && this.landsData.utility.colored_staples) {
             for (const color of commanderColors) {
                 const staples = this.landsData.utility.colored_staples[color] || [];
@@ -316,7 +355,6 @@ class PrefireDeckGenerator {
         return lands;
     }
 
-    // Main Execution Hook
     async generate(commanderA, commanderB = null, selectedThemeSlug = null, cardCatalog = {}) {
         await this.init();
 
