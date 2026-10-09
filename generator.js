@@ -57,11 +57,16 @@ class PrefireDeckGenerator {
 
     isColorLegal(cardColors, commanderColors) {
         if (!cardColors || cardColors.length === 0) return true;
-        return cardColors.every(c => commanderColors.includes(c));
+        for (let i = 0; i < cardColors.length; i++) {
+            if (!commanderColors.includes(cardColors[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     getCardScore(cardName, themeSlug) {
-        const rankObj = this.cardRanks[cardName];
+        const rankObj = this.cardRanks ? this.cardRanks[cardName] : null;
         if (!rankObj) return 0.01;
 
         const globalScore = rankObj.global_rank || 0.0;
@@ -85,7 +90,10 @@ class PrefireDeckGenerator {
         let candidateSet = new Set(themeData.cards || []);
 
         if (candidateSet.size < 63 && themeSlug && this.cardRanks) {
-            for (const [cName, cData] of Object.entries(this.cardRanks)) {
+            const rankEntries = Object.entries(this.cardRanks);
+            for (let i = 0; i < rankEntries.length; i++) {
+                const cName = rankEntries[i][0];
+                const cData = rankEntries[i][1];
                 if (cData.theme_ranks && cData.theme_ranks[themeSlug] && cData.theme_ranks[themeSlug] > 0) {
                     candidateSet.add(cName);
                 }
@@ -113,11 +121,13 @@ class PrefireDeckGenerator {
         };
 
         // 1. Ingest cards from pool into role buckets
-        for (const cardName of rawCards) {
+        for (let i = 0; i < rawCards.length; i++) {
+            const cardName = rawCards[i];
             const roles = this.cardRoles[cardName] || [];
             let placed = false;
 
-            for (const r of roles) {
+            for (let j = 0; j < roles.length; j++) {
+                const r = roles[j];
                 if (targets[r] && buckets[r].length < targets[r] && !selected.has(cardName)) {
                     buckets[r].push(cardName);
                     selected.add(cardName);
@@ -134,7 +144,8 @@ class PrefireDeckGenerator {
 
         // 2. Backfill empty role quotas using prefire-staples.json prioritizing weighted score
         const backfillRoles = ["ramp", "removal_creature", "removal_noncreature", "board_wipe", "draw"];
-        for (const role of backfillRoles) {
+        for (let i = 0; i < backfillRoles.length; i++) {
+            const role = backfillRoles[i];
             const needed = (targets[role] || 0) - buckets[role].length;
             if (needed <= 0) continue;
 
@@ -144,4 +155,37 @@ class PrefireDeckGenerator {
 
             candidates.sort((a, b) => this.getCardScore(b.name, themeSlug) - this.getCardScore(a.name, themeSlug));
 
-            for (let i
+            for (let k = 0; k < needed && k < candidates.length; k++) {
+                buckets[role].push(candidates[k].name);
+                selected.add(candidates[k].name);
+            }
+        }
+
+        let spellList = [];
+        const bucketKeys = Object.keys(buckets);
+        for (let i = 0; i < bucketKeys.length; i++) {
+            const role = bucketKeys[i];
+            spellList.push(...buckets[role]);
+        }
+
+        // 3. Fallback: fill up to 63 from remaining thematic candidates
+        if (spellList.length < 63) {
+            for (let i = 0; i < rawCards.length; i++) {
+                const cardName = rawCards[i];
+                if (!selected.has(cardName)) {
+                    spellList.push(cardName);
+                    selected.add(cardName);
+                    if (spellList.length === 63) break;
+                }
+            }
+        }
+
+        // 4. Secondary fallback: fill from general on-color staples sorted by global rank
+        if (spellList.length < 63) {
+            const allStaplePool = [];
+            for (let i = 0; i < backfillRoles.length; i++) {
+                const r = backfillRoles[i];
+                const list = this.staples[r] || [];
+                for (let k = 0; k < list.length; k++) {
+                    const c = list[k];
+                    if (!selected
