@@ -5272,8 +5272,14 @@
 
       autobuildModal.classList.add('open');
 
-      try {
-        loadedCommanderThemesData = await gen.loadCommanderThemes(slug);
+     try {
+        await gen.init();
+        try {
+          loadedCommanderThemesData = await gen.loadCommanderThemes(slug);
+        } catch (e) {
+          loadedCommanderThemesData = null;
+        }
+
         autobuildThemeSelect.innerHTML = '';
 
         const defaultOption = document.createElement('option');
@@ -5281,18 +5287,34 @@
         defaultOption.textContent = 'Default / High Synergy';
         autobuildThemeSelect.appendChild(defaultOption);
 
-        // Populate all supported themes from fallbacks
-        const allThemes = gen.themeFallbacks ? Object.keys(gen.themeFallbacks).sort() : [];
-        allThemes.forEach(tSlug => {
-          const opt = document.createElement('option');
-          opt.value = tSlug;
-          opt.textContent = tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-          autobuildThemeSelect.appendChild(opt);
-        });
+        // Gather commander-specific themes first
+        const commanderThemes = new Set();
+        if (loadedCommanderThemesData && loadedCommanderThemesData.themes) {
+          Object.keys(loadedCommanderThemesData.themes).forEach(tSlug => {
+            commanderThemes.add(tSlug);
+            const tObj = loadedCommanderThemesData.themes[tSlug];
+            const opt = document.createElement('option');
+            opt.value = tSlug;
+            opt.textContent = `★ ${tObj.label || tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}`;
+            autobuildThemeSelect.appendChild(opt);
+          });
+        }
+
+        // Add all remaining fallback themes
+        if (gen.themeFallbacks) {
+          Object.keys(gen.themeFallbacks).sort().forEach(tSlug => {
+            if (!commanderThemes.has(tSlug)) {
+              const opt = document.createElement('option');
+              opt.value = tSlug;
+              opt.textContent = tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+              autobuildThemeSelect.appendChild(opt);
+            }
+          });
+        }
 
         btnExecuteAutobuild.disabled = false;
       } catch (err) {
-        console.error("Theme fetch failed:", err);
+        console.error("Theme menu build failed:", err);
         autobuildThemeSelect.innerHTML = '<option value="default">Default / High Synergy</option>';
         autobuildStatusText.textContent = 'Using baseline synergy data.';
         btnExecuteAutobuild.disabled = false;
