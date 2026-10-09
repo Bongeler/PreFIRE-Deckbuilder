@@ -5,28 +5,24 @@ class PrefireDeckGenerator {
         this.cardRoles = null;
         this.staples = null;
         this.landsData = null;
-
-        // Signature keywords and mechanics for theme filtration
-        this.themeSignatures = {
-            "aristocrats": ["sacrifice", "dies", "morbid", "blood artist", "zulaport", "altar", "grave pact", "dictate of erebos", "viscera seer"],
-            "lifegain": ["gain life", "gains life", "lifelink", "soul warden", "well of lost dreams", "ajani", "crest", "sanguine bond", "exquisite blood"],
-            "+1-+1-counters": ["+1/+1 counter", "proliferate", "cathars' crusade", "hardened scales", "corpsejack", "doubling season"],
-            "tokens": ["create", "token", "tokens", "populate", "lingering souls", "spectral procession", "bitterblossom", "anointed procession"],
-            "reanimator": ["reanimate", "animate dead", "graveyard", "return target creature card from your graveyard", "necromancy", "living death"],
-            "voltron": ["equipment", "equipped", "aura", "enchant creature", "sword of", "jitte", "puresteel"]
-        };
+        this.cardRanks = null;
+        this.archetypeAverages = null;
     }
 
     async init() {
         if (!this.cardRoles) {
-            const [rolesRes, staplesRes, landsRes] = await Promise.all([
+            const [rolesRes, staplesRes, landsRes, ranksRes, archRes] = await Promise.all([
                 fetch("card-roles.json"),
                 fetch("prefire-staples.json"),
-                fetch("prefire-lands.json")
+                fetch("prefire-lands.json"),
+                fetch("card-theme-ranks.json"),
+                fetch("archetype-averages.json")
             ]);
             this.cardRoles = await rolesRes.json();
             this.staples = await staplesRes.json();
             this.landsData = await landsRes.json();
+            this.cardRanks = await ranksRes.json();
+            this.archetypeAverages = await archRes.json();
         }
     }
 
@@ -55,11 +51,13 @@ class PrefireDeckGenerator {
 
     async loadCommanderThemes(slug) {
         const firstChar = /^[a-z0-9]/.test(slug) ? slug[0] : "_";
-        const res = await fetch(`data/themes/${firstChar}/${slug}.json`);
-        if (!res.ok) {
-            throw new Error(`Theme data not found for slug: ${slug}`);
+        try {
+            const res = await fetch(`data/themes/${firstChar}/${slug}.json`);
+            if (!res.ok) return null;
+            return await res.json();
+        } catch (err) {
+            return null;
         }
-        return await res.json();
     }
 
     isColorLegal(cardColors, commanderColors) {
@@ -67,46 +65,36 @@ class PrefireDeckGenerator {
         return cardColors.every(c => commanderColors.includes(c));
     }
 
-    isCardOnTheme(cardName, themeSlug, cardCatalog) {
-        if (!themeSlug || themeSlug === "default") return false;
-        const keywords = this.themeSignatures[themeSlug] || [themeSlug.replace("-", " ")];
-        const lowerName = cardName.toLowerCase();
+    getCardScore(cardName, themeSlug) {
+        const rankObj = this.cardRanks[cardName];
+        if (!rankObj) return 0.01;
 
-        if (keywords.some(kw => lowerName.includes(kw))) return true;
+        const globalScore = rankObj.global_rank || 0.0;
+        const themeScore = (themeSlug && rankObj.theme_ranks) ? (rankObj.theme_ranks[themeSlug] || 0.0) : 0.0;
 
-        const meta = cardCatalog[cardName];
-        if (meta && meta.oracle_text) {
-            const lowerText = meta.oracle_text.toLowerCase();
-            if (keywords.some(kw => lowerText.includes(kw))) return true;
-        }
-
-        return false;
+        // Weight theme affinity at 75%, global staple weight at 25%
+        return (themeScore * 0.75) + (globalScore * 0.25);
     }
 
     // Step A: Assemble 63 Non-Land Spells
     assembleSpells(themeData, themeSlug, commanderColors, cardCatalog) {
-        const targets = Object.assign({
+        const defaultTargets = {
             ramp: 10,
             removal_creature: 6,
             removal_noncreature: 4,
             board_wipe: 3,
             draw: 10
-        }, themeData.targets || {});
+        };
 
-        const rawCards = themeData.cards || [];
-        const onThemeCards = [];
-        const genericCards = [];
+        const targets = Object.assign(defaultTargets, themeData.targets || {});
+        let rawCards = (themeData.cards || []).filter(cName => {
+            const meta = cardCatalog[cName];
+            return !meta || this.isColorLegal(meta.color_identity, commanderColors);
+        });
 
-        // Partition candidate pool so on-theme cards get placed first
-        for (const c of rawCards) {
-            if (this.isCardOnTheme(c, themeSlug, cardCatalog)) {
-                onThemeCards.push(c);
-            } else {
-                genericCards.push(c);
-            }
-        }
+        // Sort candidate pool by weighted score descending
+        rawCards.sort((a, b) => this.getCardScore(b, themeSlug) - this.getCardScore(a, themeSlug));
 
-        const sourceCards = [...onThemeCards, ...genericCards];
         const selected = new Set();
         const buckets = {
             ramp: [],
@@ -117,8 +105,8 @@ class PrefireDeckGenerator {
             engine: []
         };
 
-        // 1. Ingest cards from theme list into role buckets
-        for (const cardName of sourceCards) {
+        // 1. Ingest cards from pool into role buckets
+        for (const cardName of rawCards) {
             const roles = this.cardRoles[cardName] || [];
             let placed = false;
 
@@ -137,34 +125,22 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 2. Backfill empty role quotas using prefire-staples.json prioritizing current theme
+        // 2. Backfill empty role quotas using prefire-staples.json prioritizing weighted score
         const backfillRoles = ["ramp", "removal_creature", "removal_noncreature", "board_wipe", "draw"];
         for (const role of backfillRoles) {
             const needed = (targets[role] || 0) - buckets[role].length;
             if (needed <= 0) continue;
 
-            const candidates = this.staples[role] || [];
-            const onThemeStaples = [];
-            const genericStaples = [];
+            let candidates = (this.staples[role] || []).filter(c => 
+                !selected.has(c.name) && this.isColorLegal(c.colors, commanderColors)
+            );
 
-            for (const c of candidates) {
-                if (selected.has(c.name)) continue;
-                if (!this.isColorLegal(c.colors, commanderColors)) continue;
+            // Sort staples by their theme and global scores
+            candidates.sort((a, b) => this.getCardScore(b.name, themeSlug) - this.getCardScore(a.name, themeSlug));
 
-                const hasThemeTag = c.themes && c.themes.includes(themeSlug);
-                const matchesSignature = this.isCardOnTheme(c.name, themeSlug, cardCatalog);
-
-                if (hasThemeTag || matchesSignature) {
-                    onThemeStaples.push(c.name);
-                } else {
-                    genericStaples.push(c.name);
-                }
-            }
-
-            const pool = [...onThemeStaples, ...genericStaples];
-            for (let i = 0; i < needed && i < pool.length; i++) {
-                buckets[role].push(pool[i]);
-                selected.add(pool[i]);
+            for (let i = 0; i < needed && i < candidates.length; i++) {
+                buckets[role].push(candidates[i].name);
+                selected.add(candidates[i].name);
             }
         }
 
@@ -175,7 +151,7 @@ class PrefireDeckGenerator {
 
         // 3. Fallback: fill up to 63 from remaining candidates
         if (spellList.length < 63) {
-            for (const cardName of sourceCards) {
+            for (const cardName of rawCards) {
                 if (!selected.has(cardName)) {
                     spellList.push(cardName);
                     selected.add(cardName);
@@ -184,7 +160,7 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 4. Secondary fallback: fill from general on-color staples
+        // 4. Secondary fallback: fill from general on-color staples sorted by global rank
         if (spellList.length < 63) {
             const allStaplePool = [];
             for (const r of backfillRoles) {
@@ -194,6 +170,9 @@ class PrefireDeckGenerator {
                     }
                 });
             }
+
+            allStaplePool.sort((a, b) => this.getCardScore(b, themeSlug) - this.getCardScore(a, themeSlug));
+
             for (const name of allStaplePool) {
                 if (!selected.has(name)) {
                     spellList.push(name);
@@ -223,7 +202,7 @@ class PrefireDeckGenerator {
             lands.push(this.landsData.fixers.reflecting_pool);
         }
 
-        // 2. Dual Cycles (Checks both orderings)
+        // 2. Dual Cycles
         for (let i = 0; i < commanderColors.length; i++) {
             for (let j = i + 1; j < commanderColors.length; j++) {
                 const c1 = commanderColors[i];
@@ -370,12 +349,31 @@ class PrefireDeckGenerator {
         });
         const commanderColors = Array.from(colors);
 
-        let themeData = commanderPayload.default || { targets: {}, cards: [] };
-        let actualSlug = "default";
+        let themeData = null;
+        let actualSlug = selectedThemeSlug || "default";
 
-        if (selectedThemeSlug && commanderPayload.themes && commanderPayload.themes[selectedThemeSlug]) {
-            themeData = commanderPayload.themes[selectedThemeSlug].data || commanderPayload.themes[selectedThemeSlug];
-            actualSlug = selectedThemeSlug;
+        // Check if commander shard exists and has data for the requested theme
+        if (commanderPayload) {
+            if (selectedThemeSlug && commanderPayload.themes && commanderPayload.themes[selectedThemeSlug]) {
+                themeData = commanderPayload.themes[selectedThemeSlug].data || commanderPayload.themes[selectedThemeSlug];
+            } else if (commanderPayload.default && (commanderPayload.default.cards || []).length > 0) {
+                themeData = commanderPayload.default;
+            }
+        }
+
+        // Trigger Fallback to archetype-averages.json if no data was found
+        if (!themeData || !themeData.cards || themeData.cards.length < 20) {
+            const fallbackKey = (selectedThemeSlug && this.archetypeAverages[selectedThemeSlug]) 
+                ? selectedThemeSlug 
+                : "good-stuff";
+            
+            const arch = this.archetypeAverages[fallbackKey] || { targets: {}, cards: [] };
+            
+            themeData = {
+                targets: arch.targets || {},
+                cards: arch.cards || []
+            };
+            actualSlug = fallbackKey;
         }
 
         const cmdrCount = commanderB ? 2 : 1;
