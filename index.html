@@ -5281,15 +5281,14 @@
         defaultOption.textContent = 'Default / High Synergy';
         autobuildThemeSelect.appendChild(defaultOption);
 
-        if (loadedCommanderThemesData.themes) {
-          Object.keys(loadedCommanderThemesData.themes).forEach(tSlug => {
-            const tObj = loadedCommanderThemesData.themes[tSlug];
-            const opt = document.createElement('option');
-            opt.value = tSlug;
-            opt.textContent = tObj.label || tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-            autobuildThemeSelect.appendChild(opt);
-          });
-        }
+        // Populate all supported themes from fallbacks
+        const allThemes = gen.themeFallbacks ? Object.keys(gen.themeFallbacks).sort() : [];
+        allThemes.forEach(tSlug => {
+          const opt = document.createElement('option');
+          opt.value = tSlug;
+          opt.textContent = tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          autobuildThemeSelect.appendChild(opt);
+        });
 
         btnExecuteAutobuild.disabled = false;
       } catch (err) {
