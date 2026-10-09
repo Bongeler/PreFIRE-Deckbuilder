@@ -33,8 +33,8 @@ class PrefireDeckGenerator {
     cleanSlug(name) {
         let slug = name.toLowerCase();
         const chars = ["'", ",", "\"", "(", ")", ":", "."];
-        for (const char of chars) {
-            slug = slug.replaceAll(char, "");
+        for (let i = 0; i < chars.length; i++) {
+            slug = slug.replaceAll(chars[i], "");
         }
         slug = slug.replaceAll(" // ", "-").replaceAll(" / ", "-");
         slug = slug.replaceAll(" ", "-");
@@ -77,7 +77,12 @@ class PrefireDeckGenerator {
 
     isColorLegal(cardColors, commanderColors) {
         if (!cardColors || cardColors.length === 0) return true;
-        return cardColors.every(c => commanderColors.includes(c));
+        for (let i = 0; i < cardColors.length; i++) {
+            if (!commanderColors.includes(cardColors[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     isCardOnTheme(cardName, themeSlug, cardCatalog) {
@@ -85,12 +90,16 @@ class PrefireDeckGenerator {
         const keywords = this.themeSignatures[themeSlug] || [themeSlug.replace("-", " ")];
         const lowerName = cardName.toLowerCase();
 
-        if (keywords.some(kw => lowerName.includes(kw))) return true;
+        for (let i = 0; i < keywords.length; i++) {
+            if (lowerName.includes(keywords[i])) return true;
+        }
 
         const meta = cardCatalog[cardName];
         if (meta && meta.oracle_text) {
             const lowerText = meta.oracle_text.toLowerCase();
-            if (keywords.some(kw => lowerText.includes(kw))) return true;
+            for (let i = 0; i < keywords.length; i++) {
+                if (lowerText.includes(keywords[i])) return true;
+            }
         }
 
         return false;
@@ -106,16 +115,21 @@ class PrefireDeckGenerator {
             draw: 10
         }, themeData.targets || {});
 
-        const rawCards = (themeData.cards || []).filter(c => {
+        const rawList = themeData.cards || [];
+        const rawCards = [];
+        for (let i = 0; i < rawList.length; i++) {
+            const c = rawList[i];
             const meta = cardCatalog[c];
-            return !meta || this.isColorLegal(meta.color_identity, commanderColors);
-        });
+            if (!meta || this.isColorLegal(meta.color_identity, commanderColors)) {
+                rawCards.push(c);
+            }
+        }
 
         const onThemeCards = [];
         const genericCards = [];
 
-        // Partition candidate pool so on-theme cards get placed first
-        for (const c of rawCards) {
+        for (let i = 0; i < rawCards.length; i++) {
+            const c = rawCards[i];
             if (this.isCardOnTheme(c, themeSlug, cardCatalog)) {
                 onThemeCards.push(c);
             } else {
@@ -123,7 +137,7 @@ class PrefireDeckGenerator {
             }
         }
 
-        const sourceCards = [...onThemeCards, ...genericCards];
+        const sourceCards = onThemeCards.concat(genericCards);
         const selected = new Set();
         const buckets = {
             ramp: [],
@@ -135,11 +149,13 @@ class PrefireDeckGenerator {
         };
 
         // 1. Ingest cards from theme list into role buckets
-        for (const cardName of sourceCards) {
+        for (let i = 0; i < sourceCards.length; i++) {
+            const cardName = sourceCards[i];
             const roles = this.cardRoles[cardName] || [];
             let placed = false;
 
-            for (const r of roles) {
+            for (let j = 0; j < roles.length; j++) {
+                const r = roles[j];
                 if (targets[r] && buckets[r].length < targets[r] && !selected.has(cardName)) {
                     buckets[r].push(cardName);
                     selected.add(cardName);
@@ -156,7 +172,8 @@ class PrefireDeckGenerator {
 
         // 2. Backfill empty role quotas using prefire-staples.json prioritizing current theme
         const backfillRoles = ["ramp", "removal_creature", "removal_noncreature", "board_wipe", "draw"];
-        for (const role of backfillRoles) {
+        for (let i = 0; i < backfillRoles.length; i++) {
+            const role = backfillRoles[i];
             const needed = (targets[role] || 0) - buckets[role].length;
             if (needed <= 0) continue;
 
@@ -164,7 +181,8 @@ class PrefireDeckGenerator {
             const onThemeStaples = [];
             const genericStaples = [];
 
-            for (const c of candidates) {
+            for (let j = 0; j < candidates.length; j++) {
+                const c = candidates[j];
                 if (selected.has(c.name)) continue;
                 if (!this.isColorLegal(c.colors, commanderColors)) continue;
 
@@ -178,21 +196,26 @@ class PrefireDeckGenerator {
                 }
             }
 
-            const pool = [...onThemeStaples, ...genericStaples];
-            for (let i = 0; i < needed && i < pool.length; i++) {
-                buckets[role].push(pool[i]);
-                selected.add(pool[i]);
+            const pool = onThemeStaples.concat(genericStaples);
+            for (let k = 0; k < needed && k < pool.length; k++) {
+                buckets[role].push(pool[k]);
+                selected.add(pool[k]);
             }
         }
 
         let spellList = [];
-        for (const role of Object.keys(buckets)) {
-            spellList.push(...buckets[role]);
+        const bucketKeys = Object.keys(buckets);
+        for (let i = 0; i < bucketKeys.length; i++) {
+            const role = bucketKeys[i];
+            for (let j = 0; j < buckets[role].length; j++) {
+                spellList.push(buckets[role][j]);
+            }
         }
 
         // 3. Fallback: fill up to 63 from remaining candidates
         if (spellList.length < 63) {
-            for (const cardName of sourceCards) {
+            for (let i = 0; i < sourceCards.length; i++) {
+                const cardName = sourceCards[i];
                 if (!selected.has(cardName)) {
                     spellList.push(cardName);
                     selected.add(cardName);
@@ -204,14 +227,18 @@ class PrefireDeckGenerator {
         // 4. Secondary fallback: fill from general on-color staples
         if (spellList.length < 63) {
             const allStaplePool = [];
-            for (const r of backfillRoles) {
-                (this.staples[r] || []).forEach(c => {
+            for (let i = 0; i < backfillRoles.length; i++) {
+                const r = backfillRoles[i];
+                const list = this.staples[r] || [];
+                for (let j = 0; j < list.length; j++) {
+                    const c = list[j];
                     if (!selected.has(c.name) && this.isColorLegal(c.colors, commanderColors)) {
                         allStaplePool.push(c.name);
                     }
-                });
+                }
             }
-            for (const name of allStaplePool) {
+            for (let i = 0; i < allStaplePool.length; i++) {
+                const name = allStaplePool[i];
                 if (!selected.has(name)) {
                     spellList.push(name);
                     selected.add(name);
@@ -240,7 +267,7 @@ class PrefireDeckGenerator {
             lands.push(this.landsData.fixers.reflecting_pool);
         }
 
-        // 2. Dual Cycles (Checks both orderings)
+        // 2. Dual Cycles
         for (let i = 0; i < commanderColors.length; i++) {
             for (let j = i + 1; j < commanderColors.length; j++) {
                 const c1 = commanderColors[i];
@@ -264,9 +291,19 @@ class PrefireDeckGenerator {
 
         // 3. Tri-Lands for 3+ colors
         if (colorCount >= 3) {
-            for (const [triKey, triName] of Object.entries(this.landsData.tri_lands)) {
+            const triEntries = Object.entries(this.landsData.tri_lands);
+            for (let i = 0; i < triEntries.length; i++) {
+                const triKey = triEntries[i][0];
+                const triName = triEntries[i][1];
                 const triColors = triKey.split("");
-                if (triColors.every(c => commanderColors.includes(c))) {
+                let match = true;
+                for (let k = 0; k < triColors.length; k++) {
+                    if (!commanderColors.includes(triColors[k])) {
+                        match = false;
+                        break;
+                    }
+                }
+                if (match) {
                     lands.push(triName);
                 }
             }
@@ -274,11 +311,12 @@ class PrefireDeckGenerator {
 
         // 4. Utility Lands with Colorless Quota Cap
         const colorlessCaps = { 0: 36, 1: 7, 2: 4, 3: 2, 4: 1, 5: 0 };
-        const maxColorless = colorlessCaps[colorCount] ?? 1;
+        const maxColorless = colorlessCaps[colorCount] !== undefined ? colorlessCaps[colorCount] : 1;
         let colorlessCount = 0;
 
         const themeLands = (this.landsData.utility && this.landsData.utility.theme_specific && this.landsData.utility.theme_specific[themeSlug]) || [];
-        for (const lName of themeLands) {
+        for (let i = 0; i < themeLands.length; i++) {
+            const lName = themeLands[i];
             const cardMeta = cardCatalog[lName];
             const isColorless = !cardMeta || !cardMeta.color_identity || cardMeta.color_identity.length === 0;
 
@@ -292,9 +330,11 @@ class PrefireDeckGenerator {
         }
 
         if (colorCount <= 2 && this.landsData.utility && this.landsData.utility.colored_staples) {
-            for (const color of commanderColors) {
+            for (let i = 0; i < commanderColors.length; i++) {
+                const color = commanderColors[i];
                 const staples = this.landsData.utility.colored_staples[color] || [];
-                for (const lName of staples) {
+                for (let k = 0; k < staples.length; k++) {
+                    const lName = staples[k];
                     if (!lands.includes(lName)) {
                         lands.push(lName);
                         break;
@@ -316,13 +356,13 @@ class PrefireDeckGenerator {
         const pipCounts = { W: 0, U: 0, B: 0, R: 0, G: 0 };
         let totalPips = 0;
 
-        for (const spellName of nonLandSpells) {
-            const card = cardCatalog[spellName];
+        for (let i = 0; i < nonLandSpells.length; i++) {
+            const card = cardCatalog[nonLandSpells[i]];
             if (!card || !card.mana_cost) continue;
 
             const matches = card.mana_cost.match(/\{([WUBRG])\}/g) || [];
-            for (const m of matches) {
-                const color = m.replace(/[\{\}]/g, "");
+            for (let k = 0; k < matches.length; k++) {
+                const color = matches[k].replace(/[\{\}]/g, "");
                 if (pipCounts[color] !== undefined) {
                     pipCounts[color]++;
                     totalPips++;
@@ -341,29 +381,43 @@ class PrefireDeckGenerator {
         if (totalPips === 0) {
             const split = Math.floor(remainingSlots / colorCount);
             let rem = remainingSlots % colorCount;
-            for (const color of commanderColors) {
-                const count = split + (rem-- > 0 ? 1 : 0);
-                for (let i = 0; i < count; i++) lands.push(basicNames[color]);
+            for (let i = 0; i < commanderColors.length; i++) {
+                const color = commanderColors[i];
+                let count = split;
+                if (rem > 0) {
+                    count++;
+                    rem--;
+                }
+                for (let k = 0; k < count; k++) {
+                    lands.push(basicNames[color]);
+                }
             }
         } else {
             let allocated = 0;
             const basicAllocations = {};
 
-            for (const color of commanderColors) {
+            for (let i = 0; i < commanderColors.length; i++) {
+                const color = commanderColors[i];
                 const pips = pipCounts[color] || 0;
-                let count = Math.max(1, Math.round((pips / totalPips) * remainingSlots));
+                const count = Math.max(1, Math.round((pips / totalPips) * remainingSlots));
                 basicAllocations[color] = count;
                 allocated += count;
             }
 
-            let diff = remainingSlots - allocated;
-            const primaryColor = commanderColors.reduce((a, b) => 
-                (pipCounts[a] || 0) >= (pipCounts[b] || 0) ? a : b
-            );
+            const diff = remainingSlots - allocated;
+            let primaryColor = commanderColors[0];
+            for (let i = 1; i < commanderColors.length; i++) {
+                const c = commanderColors[i];
+                if ((pipCounts[c] || 0) > (pipCounts[primaryColor] || 0)) {
+                    primaryColor = c;
+                }
+            }
             basicAllocations[primaryColor] = Math.max(1, basicAllocations[primaryColor] + diff);
 
-            for (const color of commanderColors) {
-                for (let i = 0; i < basicAllocations[color]; i++) {
+            for (let i = 0; i < commanderColors.length; i++) {
+                const color = commanderColors[i];
+                const count = basicAllocations[color];
+                for (let k = 0; k < count; k++) {
                     lands.push(basicNames[color]);
                 }
             }
@@ -379,12 +433,15 @@ class PrefireDeckGenerator {
         const commanderPayload = await this.loadCommanderThemes(slug);
 
         const colors = new Set();
-        [commanderA, commanderB].filter(Boolean).forEach(name => {
-            const card = cardCatalog[name];
+        const cmdrs = [commanderA, commanderB].filter(Boolean);
+        for (let i = 0; i < cmdrs.length; i++) {
+            const card = cardCatalog[cmdrs[i]];
             if (card && card.color_identity) {
-                card.color_identity.forEach(c => colors.add(c.toUpperCase()));
+                for (let k = 0; k < card.color_identity.length; k++) {
+                    colors.add(card.color_identity[k].toUpperCase());
+                }
             }
-        });
+        }
         const commanderColors = Array.from(colors);
 
         let themeData = null;
@@ -425,7 +482,7 @@ class PrefireDeckGenerator {
         const spells = this.assembleSpells(themeData, actualSlug, commanderColors, cardCatalog);
         const lands = this.assembleLands(commanderColors, actualSlug, spells, cardCatalog, cmdrCount);
 
-        return [...spells, ...lands];
+        return spells.concat(lands);
     }
 }
 
