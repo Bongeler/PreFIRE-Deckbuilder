@@ -87,10 +87,8 @@ class PrefireDeckGenerator {
 
         const targets = Object.assign(defaultTargets, themeData.targets || {});
         
-        // Filter card pool to color-legal choices
         let candidateSet = new Set(themeData.cards || []);
 
-        // If candidates are sparse, supplement with any Pre-FIRE cards featuring this theme rank
         if (candidateSet.size < 63 && themeSlug && this.cardRanks) {
             for (const [cName, cData] of Object.entries(this.cardRanks)) {
                 if (cData.theme_ranks && cData.theme_ranks[themeSlug] && cData.theme_ranks[themeSlug] > 0) {
@@ -107,7 +105,6 @@ class PrefireDeckGenerator {
             return true;
         });
 
-        // Sort candidate pool by weighted score descending
         rawCards.sort((a, b) => this.getCardScore(b, themeSlug) - this.getCardScore(a, themeSlug));
 
         const selected = new Set();
@@ -168,86 +165,4 @@ class PrefireDeckGenerator {
             for (const cardName of rawCards) {
                 if (!selected.has(cardName)) {
                     spellList.push(cardName);
-                    selected.add(cardName);
-                    if (spellList.length === 63) break;
-                }
-            }
-        }
-
-        // 4. Secondary fallback: fill from general on-color staples sorted by global rank
-        if (spellList.length < 63) {
-            const allStaplePool = [];
-            for (const r of backfillRoles) {
-                (this.staples[r] || []).forEach(c => {
-                    if (!selected.has(c.name) && this.isColorLegal(c.colors, commanderColors)) {
-                        allStaplePool.push(c.name);
-                    }
-                });
-            }
-
-            allStaplePool.sort((a, b) => this.getCardScore(b, themeSlug) - this.getCardScore(a, themeSlug));
-
-            for (const name of allStaplePool) {
-                if (!selected.has(name)) {
-                    spellList.push(name);
-                    selected.add(name);
-                    if (spellList.length === 63) break;
-                }
-            }
-        }
-
-        return spellList.slice(0, 63);
-    }
-
-    // Step B: Calculate Land Base (Total deck target = 99)
-    assembleLands(commanderColors, themeSlug, nonLandSpells, cardCatalog, commanderCount = 1) {
-        const lands = [];
-        const colorCount = commanderColors.length;
-        const totalLandTarget = 100 - commanderCount - nonLandSpells.length;
-
-        // 1. Universal Fixers
-        if (colorCount >= 2) {
-            lands.push(this.landsData.fixers.command_tower);
-            lands.push(this.landsData.fixers.city_of_brass);
-            lands.push(this.landsData.fixers.mana_confluence);
-        }
-        if (colorCount >= 3) {
-            lands.push(this.landsData.fixers.exotic_orchard);
-            lands.push(this.landsData.fixers.reflecting_pool);
-        }
-
-        // 2. Dual Cycles
-        for (let i = 0; i < commanderColors.length; i++) {
-            for (let j = i + 1; j < commanderColors.length; j++) {
-                const c1 = commanderColors[i];
-                const c2 = commanderColors[j];
-                const key1 = `${c1}${c2}`;
-                const key2 = `${c2}${c1}`;
-
-                const duals = this.landsData.duals[key1] || this.landsData.duals[key2];
-                if (duals) {
-                    if (duals.shock) lands.push(duals.shock);
-                    if (duals.fetch) lands.push(duals.fetch);
-                    if (duals.check) lands.push(duals.check);
-                    if (duals.pain) lands.push(duals.pain);
-                    if (colorCount <= 3) {
-                        if (duals.filter) lands.push(duals.filter);
-                        if (duals.abur) lands.push(duals.abur);
-                    }
-                }
-            }
-        }
-
-        // 3. Tri-Lands for 3+ colors
-        if (colorCount >= 3) {
-            for (const [triKey, triName] of Object.entries(this.landsData.tri_lands)) {
-                const triColors = triKey.split("");
-                if (triColors.every(c => commanderColors.includes(c))) {
-                    lands.push(triName);
-                }
-            }
-        }
-
-        // 4. Utility Lands with Colorless Quota Cap
-        const colorlessCaps = { 0: 36, 1: 7, 2: 4, 3: 2, 4: 1, 5: 0 };
-        const maxColorless = colorless
+                    selected.add
