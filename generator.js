@@ -67,62 +67,18 @@ class PrefireDeckGenerator {
 
     getCardScore(cardName, themeSlug) {
         const rankObj = this.cardRanks[cardName];
-        if (!rankObj) return 0.001;
+        if (!rankObj) return 0.01;
 
         const globalScore = rankObj.global_rank || 0.0;
         const themeScore = (themeSlug && rankObj.theme_ranks) ? (rankObj.theme_ranks[themeSlug] || 0.0) : 0.0;
 
-        return (themeScore * 0.8) + (globalScore * 0.2);
+        // Weight theme affinity at 75%, global staple weight at 25%
+        return (themeScore * 0.75) + (globalScore * 0.25);
     }
 
-    // Gathers all Pre-FIRE cards matching colors and scores them for this theme
-    buildThematicCandidatePool(themeSlug, commanderColors, cardCatalog, commanderCards = []) {
-        const candidateMap = new Map();
-
-        // 1. Add any cards specifically sourced from the commander shard
-        for (const name of commanderCards) {
-            candidateMap.set(name, this.getCardScore(name, themeSlug) + 0.1); // Small affinity boost for commander-specific source
-        }
-
-        // 2. Scan archetype average cards
-        if (themeSlug && this.archetypeAverages[themeSlug]) {
-            for (const name of (this.archetypeAverages[themeSlug].cards || [])) {
-                if (!candidateMap.has(name)) {
-                    candidateMap.set(name, this.getCardScore(name, themeSlug));
-                }
-            }
-        }
-
-        // 3. Scan all cards in card-theme-ranks.json that have an affinity for this theme
-        if (themeSlug) {
-            for (const [name, meta] of Object.entries(this.cardRanks)) {
-                if (meta.theme_ranks && meta.theme_ranks[themeSlug] && meta.theme_ranks[themeSlug] > 0) {
-                    if (!candidateMap.has(name)) {
-                        candidateMap.set(name, this.getCardScore(name, themeSlug));
-                    }
-                }
-            }
-        }
-
-        // Filter by color legality and catalog verification
-        const validCandidates = [];
-        for (const [name, score] of candidateMap.entries()) {
-            const meta = cardCatalog[name];
-            const colors = meta ? meta.color_identity : (this.cardRoles[name] ? [] : null);
-            
-            if (this.isColorLegal(colors, commanderColors)) {
-                validCandidates.push({ name, score });
-            }
-        }
-
-        // Sort descending by score
-        validCandidates.sort((a, b) => b.score - a.score);
-        return validCandidates.map(c => c.name);
-    }
-
-    assembleSpells(themeSlug, commanderColors, cardCatalog, commanderCards = [], customTargets = null) {
-        // Target distribution defaults
-        let targets = {
+    // Step A: Assemble 63 Non-Land Spells
+    assembleSpells(themeData, themeSlug, commanderColors, cardCatalog) {
+        const defaultTargets = {
             ramp: 10,
             removal_creature: 6,
             removal_noncreature: 4,
@@ -130,16 +86,14 @@ class PrefireDeckGenerator {
             draw: 10
         };
 
-        if (customTargets) {
-            targets = Object.assign(targets, customTargets);
-        } else if (themeSlug && this.archetypeAverages[themeSlug]) {
-            targets = Object.assign(targets, this.archetypeAverages[themeSlug].targets || {});
-        }
+        const targets = Object.assign(defaultTargets, themeData.targets || {});
+        let rawCards = (themeData.cards || []).filter(cName => {
+            const meta = cardCatalog[cName];
+            return !meta || this.isColorLegal(meta.color_identity, commanderColors);
+        });
 
-        const utilityQuotaTotal = targets.ramp + targets.removal_creature + targets.removal_noncreature + targets.board_wipe + targets.draw;
-        const targetEngineSlots = Math.max(63 - utilityQuotaTotal, 25);
-
-        const candidates = this.buildThematicCandidatePool(themeSlug, commanderColors, cardCatalog, commanderCards);
+        // Sort candidate pool by weighted score descending
+        rawCards.sort((a, b) => this.getCardScore(b, themeSlug) - this.getCardScore(a, themeSlug));
 
         const selected = new Set();
         const buckets = {
@@ -151,58 +105,53 @@ class PrefireDeckGenerator {
             engine: []
         };
 
-        // 1. Fill engine slots first using the highest-scoring thematic cards
-        for (const cardName of candidates) {
-            if (buckets.engine.length >= targetEngineSlots) break;
+        // 1. Ingest cards from pool into role buckets
+        for (const cardName of rawCards) {
             const roles = this.cardRoles[cardName] || [];
-            
-            // Prefer cards that aren't strictly pure utility for the engine bucket
-            if (roles.length === 0 || roles.includes("engine")) {
+            let placed = false;
+
+            for (const r of roles) {
+                if (targets[r] && buckets[r].length < targets[r] && !selected.has(cardName)) {
+                    buckets[r].push(cardName);
+                    selected.add(cardName);
+                    placed = true;
+                    break;
+                }
+            }
+
+            if (!placed && !selected.has(cardName)) {
                 buckets.engine.push(cardName);
                 selected.add(cardName);
             }
         }
 
-        // 2. Fill utility buckets using candidate pool (thematic utility first)
-        for (const cardName of candidates) {
-            if (selected.has(cardName)) continue;
-            const roles = this.cardRoles[cardName] || [];
-
-            for (const r of roles) {
-                if (targets[r] && buckets[r].length < targets[r]) {
-                    buckets[r].push(cardName);
-                    selected.add(cardName);
-                    break;
-                }
-            }
-        }
-
-        // 3. Backfill missing utility quotas using prefire-staples.json
-        const utilityRoles = ["ramp", "removal_creature", "removal_noncreature", "board_wipe", "draw"];
-        for (const role of utilityRoles) {
+        // 2. Backfill empty role quotas using prefire-staples.json prioritizing weighted score
+        const backfillRoles = ["ramp", "removal_creature", "removal_noncreature", "board_wipe", "draw"];
+        for (const role of backfillRoles) {
             const needed = (targets[role] || 0) - buckets[role].length;
             if (needed <= 0) continue;
 
-            let staplePool = (this.staples[role] || []).filter(c => 
+            let candidates = (this.staples[role] || []).filter(c => 
                 !selected.has(c.name) && this.isColorLegal(c.colors, commanderColors)
             );
 
-            staplePool.sort((a, b) => this.getCardScore(b.name, themeSlug) - this.getCardScore(a.name, themeSlug));
+            // Sort staples by their theme and global scores
+            candidates.sort((a, b) => this.getCardScore(b.name, themeSlug) - this.getCardScore(a.name, themeSlug));
 
-            for (let i = 0; i < needed && i < staplePool.length; i++) {
-                buckets[role].push(staplePool[i].name);
-                selected.add(staplePool[i].name);
+            for (let i = 0; i < needed && i < candidates.length; i++) {
+                buckets[role].push(candidates[i].name);
+                selected.add(candidates[i].name);
             }
         }
 
-        // 4. Fill remaining engine slots to reach exactly 63 spells
         let spellList = [];
         for (const role of Object.keys(buckets)) {
             spellList.push(...buckets[role]);
         }
 
+        // 3. Fallback: fill up to 63 from remaining candidates
         if (spellList.length < 63) {
-            for (const cardName of candidates) {
+            for (const cardName of rawCards) {
                 if (!selected.has(cardName)) {
                     spellList.push(cardName);
                     selected.add(cardName);
@@ -211,19 +160,20 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 5. Final fallback if candidate pool was exhausted
+        // 4. Secondary fallback: fill from general on-color staples sorted by global rank
         if (spellList.length < 63) {
-            const allStaples = [];
-            for (const r of utilityRoles) {
+            const allStaplePool = [];
+            for (const r of backfillRoles) {
                 (this.staples[r] || []).forEach(c => {
                     if (!selected.has(c.name) && this.isColorLegal(c.colors, commanderColors)) {
-                        allStaples.push(c.name);
+                        allStaplePool.push(c.name);
                     }
                 });
             }
-            allStaples.sort((a, b) => this.getCardScore(b, themeSlug) - this.getCardScore(a, themeSlug));
 
-            for (const name of allStaples) {
+            allStaplePool.sort((a, b) => this.getCardScore(b, themeSlug) - this.getCardScore(a, themeSlug));
+
+            for (const name of allStaplePool) {
                 if (!selected.has(name)) {
                     spellList.push(name);
                     selected.add(name);
@@ -235,6 +185,7 @@ class PrefireDeckGenerator {
         return spellList.slice(0, 63);
     }
 
+    // Step B: Calculate Land Base (Total deck target = 99)
     assembleLands(commanderColors, themeSlug, nonLandSpells, cardCatalog, commanderCount = 1) {
         const lands = [];
         const colorCount = commanderColors.length;
@@ -283,7 +234,7 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 4. Utility Lands
+        // 4. Utility Lands with Colorless Quota Cap
         const colorlessCaps = { 0: 36, 1: 7, 2: 4, 3: 2, 4: 1, 5: 0 };
         const maxColorless = colorlessCaps[colorCount] ?? 1;
         let colorlessCount = 0;
@@ -314,11 +265,13 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 5. Basic Land Allocation
+        // 5. Basic Land Allocation Proportional to Pips
         const remainingSlots = Math.max(totalLandTarget - lands.length, 1);
         
         if (colorCount === 0) {
-            for (let i = 0; i < remainingSlots; i++) lands.push("Wastes");
+            for (let i = 0; i < remainingSlots; i++) {
+                lands.push("Wastes");
+            }
             return lands;
         }
 
@@ -396,24 +349,35 @@ class PrefireDeckGenerator {
         });
         const commanderColors = Array.from(colors);
 
-        let commanderCards = [];
-        let customTargets = null;
+        let themeData = null;
         let actualSlug = selectedThemeSlug || "default";
 
+        // Check if commander shard exists and has data for the requested theme
         if (commanderPayload) {
             if (selectedThemeSlug && commanderPayload.themes && commanderPayload.themes[selectedThemeSlug]) {
-                const tObj = commanderPayload.themes[selectedThemeSlug];
-                const tData = tObj.data || tObj;
-                commanderCards = tData.cards || [];
-                customTargets = tData.targets || null;
-            } else if (commanderPayload.default) {
-                commanderCards = commanderPayload.default.cards || [];
-                customTargets = commanderPayload.default.targets || null;
+                themeData = commanderPayload.themes[selectedThemeSlug].data || commanderPayload.themes[selectedThemeSlug];
+            } else if (commanderPayload.default && (commanderPayload.default.cards || []).length > 0) {
+                themeData = commanderPayload.default;
             }
         }
 
+        // Trigger Fallback to archetype-averages.json if no data was found
+        if (!themeData || !themeData.cards || themeData.cards.length < 20) {
+            const fallbackKey = (selectedThemeSlug && this.archetypeAverages[selectedThemeSlug]) 
+                ? selectedThemeSlug 
+                : "good-stuff";
+            
+            const arch = this.archetypeAverages[fallbackKey] || { targets: {}, cards: [] };
+            
+            themeData = {
+                targets: arch.targets || {},
+                cards: arch.cards || []
+            };
+            actualSlug = fallbackKey;
+        }
+
         const cmdrCount = commanderB ? 2 : 1;
-        const spells = this.assembleSpells(actualSlug, commanderColors, cardCatalog, commanderCards, customTargets);
+        const spells = this.assembleSpells(themeData, actualSlug, commanderColors, cardCatalog);
         const lands = this.assembleLands(commanderColors, actualSlug, spells, cardCatalog, cmdrCount);
 
         return [...spells, ...lands];
