@@ -3920,15 +3920,37 @@ async function loadMoreThemeCommanders() {
           const stage = document.createElement('div');
           stage.className = 'partner-shingle-stage';
 
-          const imgA = document.createElement('img');
+         const imgA = document.createElement('img');
           imgA.className = 'pair-front';
-          imgA.src = getDirectScryfallImageUrl(nameA);
+          const srcA = getDirectScryfallImageUrl(nameA);
+          imgA.src = srcA;
           imgA.alt = nameA;
+          imgA.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 768) showPreview(imgA, nameA, [srcA]);
+          });
+          imgA.addEventListener('mouseleave', () => {
+            if (window.innerWidth > 768) hidePreview();
+          });
+          imgA.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (window.innerWidth <= 768) showPreview(imgA, nameA, [srcA]);
+          });
 
           const imgB = document.createElement('img');
           imgB.className = 'pair-back';
-          imgB.src = getDirectScryfallImageUrl(nameB);
+          const srcB = getDirectScryfallImageUrl(nameB);
+          imgB.src = srcB;
           imgB.alt = nameB;
+          imgB.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 768) showPreview(imgB, nameB, [srcB]);
+          });
+          imgB.addEventListener('mouseleave', () => {
+            if (window.innerWidth > 768) hidePreview();
+          });
+          imgB.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (window.innerWidth <= 768) showPreview(imgB, nameB, [srcB]);
+          });
 
           stage.appendChild(imgB);
           stage.appendChild(imgA);
