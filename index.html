@@ -2626,6 +2626,7 @@
 
     loadPrefireNames();
     loadCaches();
+    loadCommanderThemeIndex();
 
     let rawDeck = JSON.parse(localStorage.getItem('prefire_deck') || '{}');
     let deck = {};
@@ -3744,10 +3745,12 @@
         const cmdrThemeInputsWrap = document.getElementById('cmdr-theme-inputs-wrap');
         const isHidden = cmdrThemeInputsWrap.style.display === 'none';
         if (isHidden) {
-          await loadCommanderThemeIndex();
-          populateThemeDatalists();
           cmdrThemeInputsWrap.style.display = 'flex';
           btnToggleCmdrThemes.textContent = 'Hide Themes ▴';
+          if (!commanderThemeIndex) {
+            await loadCommanderThemeIndex();
+          }
+          populateThemeDatalists();
         } else {
           cmdrThemeInputsWrap.style.display = 'none';
           btnToggleCmdrThemes.textContent = 'Choose a Theme ▾';
@@ -3789,18 +3792,30 @@
         for (let i = 0; i < names.length; i += 75) {
           const chunk = names.slice(i, i + 75);
           try {
-            const res = await fetch('https://api.scryfall.com/cards/collection', {
+            let res = await fetch('https://api.scryfall.com/cards/collection', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
               body: JSON.stringify({ identifiers: chunk.map(n => ({ name: n })) })
             });
+
+            if (res.status === 429) {
+              await new Promise(r => setTimeout(r, 1500));
+              res = await fetch('https://api.scryfall.com/cards/collection', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ identifiers: chunk.map(n => ({ name: n })) })
+              });
+            }
+
             if (res.ok) {
               const d = await res.json();
               list = list.concat(d.data || []);
             }
-          } catch (e) {}
+          } catch (e) {
+            console.error('Theme collection fetch error:', e);
+          }
           if (i + 75 < names.length) {
-            await new Promise(r => setTimeout(r, 100));
+            await new Promise(r => setTimeout(r, 200));
           }
         }
         return list;
@@ -3855,11 +3870,20 @@
           btn.textContent = '★ Select Pair';
           btn.onclick = async () => {
             const cards = await fetchCollection([nameA, nameB]);
-            if (cards.length >= 2) {
-              let facesA = cards[0].image_uris ? [cards[0].image_uris.normal] : [];
-              let facesB = cards[1].image_uris ? [cards[1].image_uris.normal] : [];
-              selectCommander(cards[0], facesA, cards[0].mana_cost, cards[0].cmc);
-              selectPartner(cards[1], facesB, cards[1].mana_cost, cards[1].cmc);
+            const cardA = cards.find(c => c.name.toLowerCase() === nameA.toLowerCase()) || cards[0];
+            const cardB = cards.find(c => c.name.toLowerCase() === nameB.toLowerCase()) || cards[1];
+
+            if (cardA && cardB) {
+              const getFaces = (c, defaultName) => {
+                if (c.card_faces && c.card_faces.length > 0 && c.card_faces[0].image_uris?.normal) {
+                  return c.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
+                }
+                if (c.image_uris?.normal) return [c.image_uris.normal];
+                return [getDirectScryfallImageUrl(defaultName)];
+              };
+
+              selectCommander(cardA, getFaces(cardA, nameA), cardA.mana_cost || '', cardA.cmc || 0);
+              selectPartner(cardB, getFaces(cardB, nameB), cardB.mana_cost || '', cardB.cmc || 0);
             }
           };
 
@@ -3901,15 +3925,22 @@
         btn.classList.add('active');
         commanderPoolMode = btn.dataset.pool;
         updateModeLabel();
+
+        const themeSelect = document.getElementById('cmdr-theme-select');
+        const tribeSelect = document.getElementById('cmdr-tribe-select');
+        const selectedThemeSlug = themeSelect ? themeSelect.value : '';
+        const selectedTribeSlug = tribeSelect ? tribeSelect.value : '';
+
         if (typeof populateThemeDatalists === 'function') {
           populateThemeDatalists();
         }
-        const activeTheme = document.getElementById('cmdr-theme-select')?.value;
-        const activeTribe = document.getElementById('cmdr-tribe-select')?.value;
-        if (activeTheme) {
-          triggerThemeFilterSelection(activeTheme, false);
-        } else if (activeTribe) {
-          triggerThemeFilterSelection(activeTribe, true);
+
+        if (selectedThemeSlug) {
+          if (themeSelect) themeSelect.value = selectedThemeSlug;
+          triggerThemeFilterSelection(selectedThemeSlug, false);
+        } else if (selectedTribeSlug) {
+          if (tribeSelect) tribeSelect.value = selectedTribeSlug;
+          triggerThemeFilterSelection(selectedTribeSlug, true);
         } else {
           executeSearch();
         }
@@ -4164,12 +4195,16 @@
 
     function createCardElement(card) {
       let faces = [];
-      if (card.card_faces && card.card_faces.length > 1 && card.card_faces[0].image_uris) {
+      if (card.card_faces && card.card_faces.length > 0 && card.card_faces[0].image_uris?.normal) {
         faces = card.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
       } else if (card.image_uris?.normal) {
         faces = [card.image_uris.normal];
+      } else if (card.image_uris?.large) {
+        faces = [card.image_uris.large];
       }
-      if (faces.length === 0) return null;
+      if (faces.length === 0) {
+        faces = [getDirectScryfallImageUrl(card.name)];
+      }
 
       let manaCost = card.mana_cost;
       if (!manaCost && card.card_faces && card.card_faces.length > 0) {
@@ -4428,24 +4463,25 @@
           const pct = Math.round((rawCards.length / legalNames.length) * 100);
           updateProgressBar(pct, `Loading EDHREC cards (${rawCards.length}/${legalNames.length})...`);
 
-          let res = await fetch('https://api.scryfall.com/cards/collection', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({
-              identifiers: chunk.map(n => ({ name: n }))
-            })
-          });
+          const identifiers = chunk.map(n => {
+              const clean = n.trim();
+              return { name: clean };
+            });
 
-          if (res.status === 429) {
-            await new Promise(r => setTimeout(r, 1600));
-            res = await fetch('https://api.scryfall.com/cards/collection', {
+            let res = await fetch('https://api.scryfall.com/cards/collection', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify({
-                identifiers: chunk.map(n => ({ name: n }))
-              })
+              body: JSON.stringify({ identifiers })
             });
-          }
+
+            if (res.status === 429) {
+              await new Promise(r => setTimeout(r, 1500));
+              res = await fetch('https://api.scryfall.com/cards/collection', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ identifiers })
+              });
+            }
 
           if (!res.ok) {
             const errData = await res.json().catch(() => ({}));
