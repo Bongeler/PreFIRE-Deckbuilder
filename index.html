@@ -1985,6 +1985,65 @@
         touch-action: manipulation;
       }
     }
+
+    /* Partner Pair Shingled Display */
+    .partners-section-header {
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--commander-accent);
+      border-bottom: 2px solid #2a2a2a;
+      padding-bottom: 6px;
+      margin: 28px 0 14px 0;
+      width: 100%;
+    }
+
+    .partner-pair-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px;
+      gap: 6px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .partner-pair-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--commander-accent);
+    }
+
+    .partner-shingle-stage {
+      position: relative;
+      width: 100%;
+      height: 250px;
+    }
+
+    .partner-shingle-stage img.pair-front {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 78%;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .partner-shingle-stage img.pair-back {
+      position: absolute;
+      top: 25px;
+      right: 0;
+      width: 78%;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      z-index: 1;
+      opacity: 0.95;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body class="mobile-tab-deck">
@@ -2066,6 +2125,31 @@
       <div class="search-btn-wrap">
         <button type="button" class="btn-random-cmdr" id="btn-random-cmdr" style="display: none;">Random Commander?</button>
         <button type="button" class="btn-search" id="btn-search">Search Cards</button>
+      </div>
+    </div>
+
+    <!-- Theme & Tribe Filter Controls (Shown in Commander Search) -->
+    <div id="cmdr-theme-filter-row" style="display: none; width: 100%; padding-top: 6px; border-top: 1px solid var(--border-color); gap: 10px; align-items: center; flex-wrap: wrap;">
+      <button type="button" id="btn-toggle-cmdr-themes" style="background-color: var(--commander-accent); color: #121212; border: none; padding: 7px 14px; border-radius: 4px; font-size: 11px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;">
+        Choose a Theme ▾
+      </button>
+      
+      <div id="cmdr-theme-inputs-wrap" style="display: none; align-items: center; gap: 10px; flex-wrap: wrap; flex: 1;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Theme:</label>
+          <input type="text" id="cmdr-theme-input" list="theme-options-datalist" placeholder="Select or type theme..." style="width: 200px; padding: 6px 10px; font-size: 12px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 4px;">
+          <datalist id="theme-options-datalist"></datalist>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Tribal / Kindred:</label>
+          <input type="text" id="cmdr-tribe-input" list="tribe-options-datalist" placeholder="Select or type tribe..." style="width: 200px; padding: 6px 10px; font-size: 12px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 4px;">
+          <datalist id="tribe-options-datalist"></datalist>
+        </div>
+
+        <button type="button" id="btn-apply-theme-filter" style="background-color: #2e7d32; color: #ffffff; border: 1px solid #388e3c; padding: 6px 16px; border-radius: 4px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer;">
+          Filter
+        </button>
       </div>
     </div>
   </header>
@@ -3460,6 +3544,53 @@
       }
     }
 
+    let commanderThemeIndex = null;
+
+    async function loadCommanderThemeIndex() {
+      if (commanderThemeIndex) return;
+      try {
+        const res = await fetch("commander-theme-index.json");
+        if (res.ok) {
+          commanderThemeIndex = await res.json();
+        }
+      } catch (err) {
+        console.error("Could not load commander-theme-index.json", err);
+      }
+    }
+
+    function populateThemeDatalists() {
+      if (!commanderThemeIndex) return;
+
+      const isPrefireOnly = (commanderPoolMode === 'prefire');
+      const themeListEl = document.getElementById('theme-options-datalist');
+      const tribeListEl = document.getElementById('tribe-options-datalist');
+
+      if (!themeListEl || !tribeListEl) return;
+
+      themeListEl.innerHTML = '';
+      tribeListEl.innerHTML = '';
+
+      const buildOptions = (bucket, container) => {
+        Object.keys(bucket).sort().forEach(slug => {
+          const item = bucket[slug];
+          const soloCount = isPrefireOnly ? item.prefire_solo.length : (item.prefire_solo.length + item.postfire_solo.length);
+          const partnerCount = isPrefireOnly ? item.prefire_partner.length : (item.prefire_partner.length + item.postfire_partner.length);
+          const total = soloCount + partnerCount;
+
+          if (total > 0) {
+            const opt = document.createElement('option');
+            opt.value = item.label;
+            opt.label = `${item.label} (${total})`;
+            opt.dataset.slug = slug;
+            container.appendChild(opt);
+          }
+        });
+      };
+
+      buildOptions(commanderThemeIndex.themes, themeListEl);
+      buildOptions(commanderThemeIndex.tribes, tribeListEl);
+    }
+
     function setCommanderSearchMode(active) {
       isCommanderSearchMode = active;
       if (!active) {
@@ -3469,6 +3600,17 @@
       }
       const searchBtn = document.getElementById('btn-search');
       const cmdrToggleGroup = document.getElementById('cmdr-pool-toggle-group');
+      const themeFilterRow = document.getElementById('cmdr-theme-filter-row');
+      const cmdrThemeInputsWrap = document.getElementById('cmdr-theme-inputs-wrap');
+      const btnToggleCmdrThemes = document.getElementById('btn-toggle-cmdr-themes');
+
+      if (themeFilterRow) {
+        themeFilterRow.style.display = active && !isPartnerSearchMode ? 'flex' : 'none';
+        if (!active || isPartnerSearchMode) {
+          if (cmdrThemeInputsWrap) cmdrThemeInputsWrap.style.display = 'none';
+          if (btnToggleCmdrThemes) btnToggleCmdrThemes.textContent = 'Choose a Theme ▾';
+        }
+      }
 
       if (isCommanderSearchMode) {
         clearSearchInputs();
@@ -3496,12 +3638,165 @@
       }
     }
 
+    const btnToggleCmdrThemes = document.getElementById('btn-toggle-cmdr-themes');
+    if (btnToggleCmdrThemes) {
+      btnToggleCmdrThemes.addEventListener('click', async () => {
+        const cmdrThemeInputsWrap = document.getElementById('cmdr-theme-inputs-wrap');
+        const isHidden = cmdrThemeInputsWrap.style.display === 'none';
+        if (isHidden) {
+          await loadCommanderThemeIndex();
+          populateThemeDatalists();
+          cmdrThemeInputsWrap.style.display = 'flex';
+          btnToggleCmdrThemes.textContent = 'Hide Themes ▴';
+        } else {
+          cmdrThemeInputsWrap.style.display = 'none';
+          btnToggleCmdrThemes.textContent = 'Choose a Theme ▾';
+        }
+      });
+    }
+
+    const btnApplyThemeFilter = document.getElementById('btn-apply-theme-filter');
+    if (btnApplyThemeFilter) {
+      btnApplyThemeFilter.addEventListener('click', async () => {
+        if (!commanderThemeIndex) {
+          await loadCommanderThemeIndex();
+        }
+        if (!commanderThemeIndex) return;
+
+        const themeVal = document.getElementById('cmdr-theme-input').value.trim().toLowerCase();
+        const tribeVal = document.getElementById('cmdr-tribe-input').value.trim().toLowerCase();
+        const isPrefireOnly = (commanderPoolMode === 'prefire');
+
+        const findSlug = (val, bucket) => {
+          return Object.keys(bucket).find(k => bucket[k].label.toLowerCase() === val || k === val);
+        };
+
+        let chosenItem = null;
+        if (themeVal) {
+          const slug = findSlug(themeVal, commanderThemeIndex.themes);
+          if (slug) chosenItem = commanderThemeIndex.themes[slug];
+        } else if (tribeVal) {
+          const slug = findSlug(tribeVal, commanderThemeIndex.tribes);
+          if (slug) chosenItem = commanderThemeIndex.tribes[slug];
+        }
+
+        if (!chosenItem) {
+          alert("Please select a valid theme or tribe from the suggestions.");
+          return;
+        }
+
+        const soloNames = isPrefireOnly ? chosenItem.prefire_solo : [...chosenItem.prefire_solo, ...chosenItem.postfire_solo];
+        const partnerPairs = isPrefireOnly ? chosenItem.prefire_partner : [...chosenItem.prefire_partner, ...chosenItem.postfire_partner];
+
+        showProgressBar(`Loading commanders for ${chosenItem.label}...`);
+
+        const resultsGrid = document.getElementById('results-grid');
+        resultsGrid.innerHTML = '';
+        resultsGrid.style.display = 'block';
+
+        const soloGrid = document.createElement('div');
+        soloGrid.className = 'results-grid';
+        resultsGrid.appendChild(soloGrid);
+
+        const fetchCollection = async (names) => {
+          let list = [];
+          for (let i = 0; i < names.length; i += 75) {
+            const chunk = names.slice(i, i + 75);
+            try {
+              const res = await fetch('https://api.scryfall.com/cards/collection', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ identifiers: chunk.map(n => ({ name: n })) })
+              });
+              if (res.ok) {
+                const d = await res.json();
+                list = list.concat(d.data || []);
+              }
+            } catch (e) {}
+            if (i + 75 < names.length) {
+              await new Promise(r => setTimeout(r, 100));
+            }
+          }
+          return list;
+        };
+
+        const soloCards = await fetchCollection(soloNames);
+        hideProgressBar();
+
+        soloCards.forEach(c => {
+          const el = createCardElement(c);
+          if (el) soloGrid.appendChild(el);
+        });
+
+        if (partnerPairs.length > 0) {
+          const pHeader = document.createElement('div');
+          pHeader.className = 'partners-section-header';
+          pHeader.textContent = `Partner Combinations (${partnerPairs.length})`;
+          resultsGrid.appendChild(pHeader);
+
+          const partnerGrid = document.createElement('div');
+          partnerGrid.className = 'results-grid';
+
+          partnerPairs.forEach(pairStr => {
+            const [nameA, nameB] = pairStr.split('&').map(s => s.trim());
+            const cardWrap = document.createElement('div');
+            cardWrap.className = 'partner-pair-card';
+
+            const stage = document.createElement('div');
+            stage.className = 'partner-shingle-stage';
+
+            const imgA = document.createElement('img');
+            imgA.className = 'pair-front';
+            imgA.src = getDirectScryfallImageUrl(nameA);
+            imgA.alt = nameA;
+
+            const imgB = document.createElement('img');
+            imgB.className = 'pair-back';
+            imgB.src = getDirectScryfallImageUrl(nameB);
+            imgB.alt = nameB;
+
+            stage.appendChild(imgB);
+            stage.appendChild(imgA);
+
+            const title = document.createElement('div');
+            title.style.fontSize = '12px';
+            title.style.fontWeight = '700';
+            title.style.marginTop = '4px';
+            title.textContent = `${nameA} & ${nameB}`;
+
+            const btn = document.createElement('button');
+            btn.className = 'btn-set-commander';
+            btn.textContent = '★ Select Pair';
+            btn.onclick = async () => {
+              const cards = await fetchCollection([nameA, nameB]);
+              if (cards.length >= 2) {
+                let facesA = cards[0].image_uris ? [cards[0].image_uris.normal] : [];
+                let facesB = cards[1].image_uris ? [cards[1].image_uris.normal] : [];
+                selectCommander(cards[0], facesA, cards[0].mana_cost, cards[0].cmc);
+                selectPartner(cards[1], facesB, cards[1].mana_cost, cards[1].cmc);
+              }
+            };
+
+            cardWrap.appendChild(stage);
+            cardWrap.appendChild(title);
+            cardWrap.appendChild(btn);
+            partnerGrid.appendChild(cardWrap);
+          });
+
+          resultsGrid.appendChild(partnerGrid);
+        }
+      });
+    }
+
     document.querySelectorAll('.cmdr-pool-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.cmdr-pool-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         commanderPoolMode = btn.dataset.pool;
         updateModeLabel();
+        if (typeof populateThemeDatalists === 'function') {
+          populateThemeDatalists();
+        }
         executeSearch();
       });
     });
@@ -5272,14 +5567,8 @@
 
       autobuildModal.classList.add('open');
 
-     try {
-        await gen.init();
-        try {
-          loadedCommanderThemesData = await gen.loadCommanderThemes(slug);
-        } catch (e) {
-          loadedCommanderThemesData = null;
-        }
-
+      try {
+        loadedCommanderThemesData = await gen.loadCommanderThemes(slug);
         autobuildThemeSelect.innerHTML = '';
 
         const defaultOption = document.createElement('option');
@@ -5287,34 +5576,19 @@
         defaultOption.textContent = 'Default / High Synergy';
         autobuildThemeSelect.appendChild(defaultOption);
 
-        // Gather commander-specific themes first
-        const commanderThemes = new Set();
-        if (loadedCommanderThemesData && loadedCommanderThemesData.themes) {
+        if (loadedCommanderThemesData.themes) {
           Object.keys(loadedCommanderThemesData.themes).forEach(tSlug => {
-            commanderThemes.add(tSlug);
             const tObj = loadedCommanderThemesData.themes[tSlug];
             const opt = document.createElement('option');
             opt.value = tSlug;
-            opt.textContent = `★ ${tObj.label || tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}`;
+            opt.textContent = tObj.label || tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
             autobuildThemeSelect.appendChild(opt);
-          });
-        }
-
-        // Add all remaining fallback themes
-        if (gen.themeFallbacks) {
-          Object.keys(gen.themeFallbacks).sort().forEach(tSlug => {
-            if (!commanderThemes.has(tSlug)) {
-              const opt = document.createElement('option');
-              opt.value = tSlug;
-              opt.textContent = tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-              autobuildThemeSelect.appendChild(opt);
-            }
           });
         }
 
         btnExecuteAutobuild.disabled = false;
       } catch (err) {
-        console.error("Theme menu build failed:", err);
+        console.error("Theme fetch failed:", err);
         autobuildThemeSelect.innerHTML = '<option value="default">Default / High Synergy</option>';
         autobuildStatusText.textContent = 'Using baseline synergy data.';
         btnExecuteAutobuild.disabled = false;
