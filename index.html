@@ -1576,18 +1576,26 @@
       position: relative;
       display: flex;
       flex-direction: column;
+      isolation: isolate;
     }
 
     .shingle-card-item {
       position: relative;
       width: 145px;
       margin-bottom: -160px;
-      transition: transform 0.15s ease, z-index 0.15s ease, margin 0.15s ease;
       cursor: pointer;
     }
 
     .shingle-card-item:last-child {
       margin-bottom: 0;
+    }
+
+    .shingle-card-item:hover {
+      border-color: var(--accent);
+    }
+
+    .shingle-card-item:hover {
+      z-index: 100 !important;
     }
 
     .shingle-card-item img {
@@ -2248,9 +2256,9 @@
         <strong id="autobuild-deck-title" style="font-size: 14px; color: var(--commander-accent);">Deck Builder</strong>
         <span id="autobuild-count-badge" style="font-size: 13px; font-weight: 700; color: var(--accent);">0 Cards</span>
       </div>
-      <div class="autobuild-sort-pill-group">
-        <button type="button" class="autobuild-sort-btn active" data-view="cmc">CMC Shingled</button>
-        <button type="button" class="autobuild-sort-btn" data-view="type">By Card Type</button>
+      <<div class="autobuild-sort-pill-group">
+        <button type="button" class="autobuild-sort-btn active" data-view="cmc">CMC</button>
+        <button type="button" class="autobuild-sort-btn" data-view="type">CARD TYPE</button>
         <button type="button" class="autobuild-sort-btn" data-view="split">Split (Creatures / Spells / Lands)</button>
       </div>
     </div>
@@ -2411,7 +2419,20 @@
     }
 
     function getCardPrimaryType(card) {
-      // Inspect ONLY front face to avoid cards that transform/flip into lands
+      if (!card) return 'Other';
+      const cardName = card.name || '';
+
+      // Check basic lands set
+      if (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(cardName)) return 'Lands';
+
+      // Check if generator landsData is available
+      const gen = getDeckGenerator();
+      if (gen && gen.landsData) {
+        if (gen.landsData.fixers && Object.values(gen.landsData.fixers).includes(cardName)) return 'Lands';
+        if (gen.landsData.tri_lands && Object.values(gen.landsData.tri_lands).includes(cardName)) return 'Lands';
+      }
+
+      // Check front-face type line only
       let frontType = '';
       if (card.card_faces && card.card_faces.length > 0) {
         frontType = (card.card_faces[0].type_line || '').toLowerCase();
@@ -2419,7 +2440,7 @@
         frontType = (card.type_line || '').split('//')[0].toLowerCase();
       }
 
-      // Priority 1: Any card that has Land in its front face is always a Land (even Artifact Lands)
+      // Strict type check order: Land takes top priority (catches artifact lands)
       if (frontType.includes('land')) return 'Lands';
       if (frontType.includes('creature')) return 'Creatures';
       if (frontType.includes('instant')) return 'Instants';
@@ -2428,6 +2449,7 @@
       if (frontType.includes('enchantment')) return 'Enchantments';
       if (frontType.includes('planeswalker')) return 'Planeswalkers';
       if (frontType.includes('battle')) return 'Battles';
+
       return 'Other';
     }
 
@@ -3434,7 +3456,7 @@
       saveCurrentDeckInBuilder();
     });
 
-    btnClearListLink.addEventListener('click', () => {
+   btnClearListLink.addEventListener('click', () => {
       if (Object.keys(deck).length === 0) return;
       const confirmClear = window.confirm('Are you sure you want to clear your current list? (Cards will still be recoverable in Recently Removed).');
       if (confirmClear) {
@@ -3442,6 +3464,10 @@
           recordRecentlyRemoved(name, deck[name].faces, deck[name].mana_cost, deck[name].cmc, deck[name].type_line);
         });
         deck = {};
+        cardMetadataCache = {};
+        try {
+          localStorage.removeItem('prefire_card_metadata_cache');
+        } catch (e) {}
         hidePreview();
         saveAndRenderDeck();
         syncSearchDeckState();
@@ -5806,41 +5832,51 @@
       }
     }
 
-    function renderCanvasByCmc(canvas, cardNames) {
+  function renderCanvasByCmc(canvas, cardNames) {
       const container = document.createElement('div');
       container.className = 'shingle-columns-container';
 
       const cmcBuckets = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
 
       cardNames.forEach(name => {
-        const item = deck[name];
-        const cat = getCardPrimaryType(item);
-        const targetList = typeBuckets[cat] || typeBuckets['Lands'];
-        if (BASIC_LAND_NAMES.has(name)) {
-          cmcBuckets[cmc].push({ name, count: item.count });
+        const item = deck[name] || {};
+        let cardCmc = 0;
+        if (typeof item.cmc === 'number' && !isNaN(item.cmc)) {
+          cardCmc = item.cmc;
+        } else if (item.mana_cost) {
+          cardCmc = parseCmcFromManaCost(item.mana_cost);
+        }
+        
+        let bucketKey = Math.min(Math.max(0, Math.floor(cardCmc)), 6);
+        if (isNaN(bucketKey)) bucketKey = 0;
+
+        if (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(name)) {
+          cmcBuckets[bucketKey].push({ name, count: item.count || 1 });
         } else {
-          for (let i = 0; i < (item.count || 1); i++) {
-            cmcBuckets[cmc].push({ name, count: 1 });
+          const qty = item.count || 1;
+          for (let i = 0; i < qty; i++) {
+            cmcBuckets[bucketKey].push({ name, count: 1 });
           }
         }
       });
 
-      Object.keys(cmcBuckets).forEach(cmc => {
-        const list = cmcBuckets[cmc];
+      [0, 1, 2, 3, 4, 5, 6].forEach(cmcNum => {
+        const list = cmcBuckets[cmcNum] || [];
         const col = document.createElement('div');
         col.className = 'shingle-column';
 
         const totalCardsInCol = list.reduce((sum, item) => sum + item.count, 0);
         const header = document.createElement('div');
         header.className = 'shingle-col-header';
-        header.innerHTML = `<span>CMC ${cmc === '6' ? '6+' : cmc}</span> <span>${totalCardsInCol}</span>`;
+        header.innerHTML = `<span>CMC ${cmcNum === 6 ? '6+' : cmcNum}</span> <span>${totalCardsInCol}</span>`;
         col.appendChild(header);
 
         const stack = document.createElement('div');
         stack.className = 'shingle-stack';
 
         list.forEach((entry, idx) => {
-          stack.appendChild(createShingleCardElement(entry.name, idx + 1, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
+          const badgeCount = (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(entry.name)) ? entry.count : null;
+          stack.appendChild(createShingleCardElement(entry.name, list.length - idx, badgeCount));
         });
 
         col.appendChild(stack);
@@ -5896,7 +5932,7 @@
         stack.className = 'shingle-stack';
 
         list.forEach((entry, idx) => {
-          stack.appendChild(createShingleCardElement(entry.name, idx + 1, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
+          stack.appendChild(createShingleCardElement(entry.name, list.length - idx, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
         });
 
         col.appendChild(stack);
@@ -5956,7 +5992,7 @@
         col.innerHTML = `<div class="shingle-col-header"><span>CMC ${cmc === '6' ? '6+' : cmc}</span><span>${list.length}</span></div>`;
         const stack = document.createElement('div');
         stack.className = 'shingle-stack';
-        list.forEach((entry, idx) => stack.appendChild(createShingleCardElement(entry.name, idx + 1)));
+        list.forEach((entry, idx) => stack.appendChild(createShingleCardElement(entry.name, list.length - idx)));
         col.appendChild(stack);
         creatureRow.appendChild(col);
       });
@@ -5971,7 +6007,7 @@
         col.innerHTML = `<div class="shingle-col-header"><span>CMC ${cmc === '6' ? '6+' : cmc}</span><span>${list.length}</span></div>`;
         const stack = document.createElement('div');
         stack.className = 'shingle-stack';
-        list.forEach((entry, idx) => stack.appendChild(createShingleCardElement(entry.name, idx + 1)));
+        list.forEach((entry, idx) => stack.appendChild(createShingleCardElement(entry.name, list.length - idx)));
         col.appendChild(stack);
         noncreatureRow.appendChild(col);
       });
@@ -5983,7 +6019,7 @@
       const landStack = document.createElement('div');
       landStack.className = 'shingle-stack';
       landsList.forEach((entry, idx) => {
-        landStack.appendChild(createShingleCardElement(entry.name, idx + 1, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
+        landStack.appendChild(createShingleCardElement(entry.name, landsList.length - idx, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
       });
       landsSidebar.appendChild(landStack);
 
