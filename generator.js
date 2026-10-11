@@ -32,19 +32,23 @@ class PrefireDeckGenerator {
                 }
             };
 
-            const [roles, staples, lands, fallbacks] = await Promise.all([
+            let fallbacksData = await safeFetchJson("data/themes/theme-fallbacks.json");
+            if (!fallbacksData) {
+                fallbacksData = await safeFetchJson("theme-fallbacks.json");
+            }
+
+            const [roles, staples, lands] = await Promise.all([
                 safeFetchJson("card-roles.json"),
                 safeFetchJson("prefire-staples.json"),
-                safeFetchJson("prefire-lands.json"),
-                safeFetchJson("data/themes/theme-fallbacks.json").then(res => res || safeFetchJson("theme-fallbacks.json"))
+                safeFetchJson("prefire-lands.json")
             ]);
 
             this.cardRoles = roles || {};
             this.staples = staples || {};
             this.landsData = lands || {};
-            this.themeFallbacks = fallbacks || {};
+            this.themeFallbacks = fallbacksData || {};
 
-            // Populate base color lookup from staples
+            // Base color lookup from staples
             if (this.staples) {
                 Object.values(this.staples).forEach(list => {
                     if (Array.isArray(list)) {
@@ -52,6 +56,19 @@ class PrefireDeckGenerator {
                             if (c && c.name && c.colors) {
                                 this.cardColorMap[c.name] = c.colors;
                             }
+                        });
+                    }
+                });
+            }
+
+            // Land color lookup from prefire-lands.json
+            if (this.landsData && this.landsData.utility && this.landsData.utility.colored_staples) {
+                const coloredMap = this.landsData.utility.colored_staples;
+                Object.keys(coloredMap).forEach(colorKey => {
+                    const landList = coloredMap[colorKey];
+                    if (Array.isArray(landList)) {
+                        landList.forEach(lName => {
+                            this.cardColorMap[lName] = [colorKey];
                         });
                     }
                 });
