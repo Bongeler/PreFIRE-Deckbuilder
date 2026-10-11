@@ -5117,59 +5117,30 @@
       const labelText = document.getElementById('commander-label-text');
       const autoBuildBtn = document.getElementById('btn-autobuild-trigger');
       
+      if (!container) return;
+
       container.innerHTML = '';
       if (containerAuto) containerAuto.innerHTML = '';
 
-      labelText.textContent = commanders.length > 1 ? 'Commanders' : 'Commander';
-
-      if (commanders.length === 0) {
-        changeBtn.style.display = 'none';
-        if (changeBtnAuto) changeBtnAuto.style.display = 'none';
-        if (autoBuildBtn) autoBuildBtn.disabled = true;
-
-        const chooseBtn = document.createElement('button');
-        chooseBtn.type = 'button';
-        chooseBtn.className = 'btn-choose-commander' + (isCommanderSearchMode ? ' active' : '');
-        chooseBtn.textContent = isCommanderSearchMode ? 'Cancel Commander Search' : 'Choose a Commander';
-        chooseBtn.onclick = () => {
-          if (isCommanderSearchMode) {
-            setCommanderSearchMode(false);
-            const resultsGrid = document.getElementById('results-grid');
-            const emptyState = document.getElementById('empty-state');
-            resultsGrid.style.display = 'grid';
-            resultsGrid.innerHTML = '';
-            loadMoreWrap.style.display = 'none';
-            hideProgressBar();
-            emptyState.style.display = 'block';
-            emptyState.textContent = 'Commander search canceled. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
-          } else {
-            clearSearchInputs();
-            setCommanderSearchMode(true);
-            executeSearch();
-            if (window.innerWidth <= 768) {
-              setMobileTab('search');
-            }
-          }
-        };
-        container.appendChild(chooseBtn);
-        return;
+      if (labelText) {
+        labelText.textContent = commanders.length > 1 ? 'Commanders' : 'Commander';
       }
 
-      if (autoBuildBtn) autoBuildBtn.disabled = false;
-      changeBtn.style.display = 'inline-block';
-      if (changeBtnAuto) changeBtnAuto.style.display = 'inline-block';
-      changeBtn.textContent = (isCommanderSearchMode || isPartnerSearchMode) ? 'Cancel' : 'Change Commander?';
-      changeBtn.onclick = () => {
+      const handleChangeClick = () => {
         if (isCommanderSearchMode || isPartnerSearchMode) {
           setCommanderSearchMode(false);
           const resultsGrid = document.getElementById('results-grid');
           const emptyState = document.getElementById('empty-state');
-          resultsGrid.style.display = 'grid';
-          resultsGrid.innerHTML = '';
-          loadMoreWrap.style.display = 'none';
+          if (resultsGrid) {
+            resultsGrid.style.display = 'grid';
+            resultsGrid.innerHTML = '';
+          }
+          if (loadMoreWrap) loadMoreWrap.style.display = 'none';
           hideProgressBar();
-          emptyState.style.display = 'block';
-          emptyState.textContent = 'Search closed. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
+          if (emptyState) {
+            emptyState.style.display = 'block';
+            emptyState.textContent = 'Search closed. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
+          }
         } else {
           clearSearchInputs();
           commanders = [];
@@ -5186,11 +5157,69 @@
         }
       };
 
+      if (commanders.length === 0) {
+        if (changeBtn) changeBtn.style.display = 'none';
+        if (changeBtnAuto) changeBtnAuto.style.display = 'none';
+        if (autoBuildBtn) autoBuildBtn.disabled = true;
+
+        const createChooseBtn = () => {
+          const chooseBtn = document.createElement('button');
+          chooseBtn.type = 'button';
+          chooseBtn.className = 'btn-choose-commander' + (isCommanderSearchMode ? ' active' : '');
+          chooseBtn.textContent = isCommanderSearchMode ? 'Cancel Commander Search' : 'Choose a Commander';
+          chooseBtn.onclick = () => {
+            if (isCommanderSearchMode) {
+              setCommanderSearchMode(false);
+              const resultsGrid = document.getElementById('results-grid');
+              const emptyState = document.getElementById('empty-state');
+              if (resultsGrid) {
+                resultsGrid.style.display = 'grid';
+                resultsGrid.innerHTML = '';
+              }
+              if (loadMoreWrap) loadMoreWrap.style.display = 'none';
+              hideProgressBar();
+              if (emptyState) {
+                emptyState.style.display = 'block';
+                emptyState.textContent = 'Commander search canceled. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
+              }
+            } else {
+              clearSearchInputs();
+              setCommanderSearchMode(true);
+              executeSearch();
+              if (window.innerWidth <= 768) {
+                setMobileTab('search');
+              }
+            }
+          };
+          return chooseBtn;
+        };
+
+        container.appendChild(createChooseBtn());
+        if (containerAuto) containerAuto.appendChild(createChooseBtn());
+        return;
+      }
+
+      if (autoBuildBtn) autoBuildBtn.disabled = false;
+
+      if (changeBtn) {
+        changeBtn.style.display = 'inline-block';
+        changeBtn.textContent = (isCommanderSearchMode || isPartnerSearchMode) ? 'Cancel' : 'Change Commander?';
+        changeBtn.onclick = handleChangeClick;
+      }
+
+      if (changeBtnAuto) {
+        changeBtnAuto.style.display = 'inline-block';
+        changeBtnAuto.textContent = (isCommanderSearchMode || isPartnerSearchMode) ? 'Cancel' : 'Change Commander?';
+        changeBtnAuto.onclick = handleChangeClick;
+      }
+
       function buildCommanderListWrap() {
         const wrap = document.createElement('div');
         wrap.className = 'commander-list-wrap';
 
         commanders.forEach(cmdr => {
+          if (!cmdr || !cmdr.name) return;
+
           const row = document.createElement('div');
           row.className = 'deck-entry commander-entry';
           row.dataset.cardName = cmdr.name;
@@ -5208,12 +5237,16 @@
               setCommanderSearchMode(false);
               const resultsGrid = document.getElementById('results-grid');
               const emptyState = document.getElementById('empty-state');
-              resultsGrid.style.display = 'grid';
-              resultsGrid.innerHTML = '';
-              loadMoreWrap.style.display = 'none';
+              if (resultsGrid) {
+                resultsGrid.style.display = 'grid';
+                resultsGrid.innerHTML = '';
+              }
+              if (loadMoreWrap) loadMoreWrap.style.display = 'none';
               hideProgressBar();
-              emptyState.style.display = 'block';
-              emptyState.textContent = 'Search closed. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
+              if (emptyState) {
+                emptyState.style.display = 'block';
+                emptyState.textContent = 'Search closed. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
+              }
               return;
             }
             handleCardEntryClick(cmdr.name, row, cmdr.faces);
@@ -5227,7 +5260,7 @@
           nameSpan.textContent = cmdr.name;
           nameSpan.title = (isCommanderSearchMode || isPartnerSearchMode) ? `${cmdr.name} (Click to close search)` : cmdr.name;
 
-          const manaSpan = createManaCostElement(cmdr.mana_cost);
+          const manaSpan = createManaCostElement(cmdr.mana_cost || '');
 
           contentWrap.appendChild(nameSpan);
           contentWrap.appendChild(manaSpan);
@@ -5235,7 +5268,7 @@
           wrap.appendChild(row);
         });
 
-        if (commanders.length === 1 && commanders[0].partnerInfo && !isPartnerSearchMode) {
+        if (commanders.length === 1 && commanders[0] && commanders[0].partnerInfo && !isPartnerSearchMode) {
           const addPartnerBtn = document.createElement('button');
           addPartnerBtn.type = 'button';
           addPartnerBtn.className = 'btn-add-partner-shortcut';
