@@ -1617,9 +1617,7 @@
     }
 
     .shingle-card-item:hover {
-      transform: translateY(-24px) scale(1.04);
-      z-index: 500 !important;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.95);
+      border-color: var(--accent);
     }
 
     /* Split Mode Container */
@@ -2413,15 +2411,23 @@
     }
 
     function getCardPrimaryType(card) {
-      const typeLine = (card.type_line || (card.card_faces ? card.card_faces.map(f => f.type_line).join(' ') : '')).toLowerCase();
-      if (typeLine.includes('land')) return 'Lands';
-      if (typeLine.includes('creature')) return 'Creatures';
-      if (typeLine.includes('instant')) return 'Instants';
-      if (typeLine.includes('sorcery')) return 'Sorceries';
-      if (typeLine.includes('artifact')) return 'Artifacts';
-      if (typeLine.includes('enchantment')) return 'Enchantments';
-      if (typeLine.includes('planeswalker')) return 'Planeswalkers';
-      if (typeLine.includes('battle')) return 'Battles';
+      // Inspect ONLY front face to avoid cards that transform/flip into lands
+      let frontType = '';
+      if (card.card_faces && card.card_faces.length > 0) {
+        frontType = (card.card_faces[0].type_line || '').toLowerCase();
+      } else {
+        frontType = (card.type_line || '').split('//')[0].toLowerCase();
+      }
+
+      // Priority 1: Any card that has Land in its front face is always a Land (even Artifact Lands)
+      if (frontType.includes('land')) return 'Lands';
+      if (frontType.includes('creature')) return 'Creatures';
+      if (frontType.includes('instant')) return 'Instants';
+      if (frontType.includes('sorcery')) return 'Sorceries';
+      if (frontType.includes('artifact')) return 'Artifacts';
+      if (frontType.includes('enchantment')) return 'Enchantments';
+      if (frontType.includes('planeswalker')) return 'Planeswalkers';
+      if (frontType.includes('battle')) return 'Battles';
       return 'Other';
     }
 
@@ -5633,13 +5639,12 @@
         saveAndRenderDeck();
         syncSearchDeckState();
 
+        autobuildStatusText.textContent = 'Fetching card artwork & types...';
+        await resolveMissingCardData();
+
         autobuildModal.classList.remove('open');
         document.getElementById('autobuild-deck-title').textContent = `${getActiveDeckTitle()} — ${selectedTheme.toUpperCase()}`;
         autobuildScreen.classList.add('active');
-
-        resolveMissingCardData().then(() => {
-          renderAutobuildCanvas();
-        });
 
         renderAutobuildCanvas();
 
@@ -5651,16 +5656,47 @@
       }
     });
 
+    let cardMetadataCache = {};
+    try {
+      cardMetadataCache = JSON.parse(localStorage.getItem('prefire_card_metadata_cache') || '{}');
+    } catch (e) {}
+
     async function resolveMissingCardData() {
-      const names = Object.keys(deck).filter(name => !deck[name].type_line || typeof deck[name].cmc !== 'number');
-      if (names.length === 0) return;
+      // 1. Populate from localStorage cache first
+      Object.keys(deck).forEach(name => {
+        if (cardMetadataCache[name]) {
+          const cached = cardMetadataCache[name];
+          deck[name].cmc = cached.cmc;
+          deck[name].type_line = cached.type_line;
+          deck[name].mana_cost = cached.mana_cost;
+          if (cached.faces && cached.faces.length > 0) {
+            deck[name].faces = cached.faces;
+          }
+        }
+      });
+
+      // 2. Identify remaining uncached cards
+      const names = Object.keys(deck).filter(name => 
+        !deck[name].type_line || 
+        typeof deck[name].cmc !== 'number' || 
+        !deck[name].faces || 
+        deck[name].faces.length === 0 || 
+        deck[name].faces[0].includes('/cards/named?exact=')
+      );
+
+      if (names.length === 0) {
+        saveAndRenderDeck();
+        return;
+      }
 
       const chunks = [];
       for (let i = 0; i < names.length; i += 75) {
         chunks.push(names.slice(i, i + 75));
       }
 
-      for (const chunk of chunks) {
+      let cacheUpdated = false;
+      for (let i = 0; i < chunks.length; i++) {
+        const chunk = chunks[i];
         try {
           const res = await fetch('https://api.scryfall.com/cards/collection', {
             method: 'POST',
@@ -5672,24 +5708,42 @@
             if (data && Array.isArray(data.data)) {
               data.data.forEach(card => {
                 if (card && card.name && deck[card.name]) {
-                  deck[card.name].cmc = getCardCmc(card);
-                  deck[card.name].type_line = card.type_line || '';
-                  deck[card.name].mana_cost = card.mana_cost || '';
+                  const cmc = getCardCmc(card);
+                  const type_line = card.type_line || '';
+                  const mana_cost = card.mana_cost || '';
                   let faces = [];
                   if (card.card_faces && card.card_faces.length > 1 && card.card_faces[0].image_uris) {
                     faces = card.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
                   } else if (card.image_uris?.normal) {
                     faces = [card.image_uris.normal];
                   }
+
+                  deck[card.name].cmc = cmc;
+                  deck[card.name].type_line = type_line;
+                  deck[card.name].mana_cost = mana_cost;
                   if (faces.length > 0) {
                     deck[card.name].faces = faces;
                   }
+
+                  cardMetadataCache[card.name] = { cmc, type_line, mana_cost, faces };
+                  cacheUpdated = true;
                 }
               });
             }
           }
         } catch (e) {}
+
+        if (i < chunks.length - 1) {
+          await new Promise(r => setTimeout(r, 120));
+        }
       }
+
+      if (cacheUpdated) {
+        try {
+          localStorage.setItem('prefire_card_metadata_cache', JSON.stringify(cardMetadataCache));
+        } catch (e) {}
+      }
+
       saveAndRenderDeck();
     }
 
@@ -5760,7 +5814,8 @@
 
       cardNames.forEach(name => {
         const item = deck[name];
-        const cmc = Math.min(Math.floor(item.cmc || 0), 6);
+        const cat = getCardPrimaryType(item);
+        const targetList = typeBuckets[cat] || typeBuckets['Lands'];
         if (BASIC_LAND_NAMES.has(name)) {
           cmcBuckets[cmc].push({ name, count: item.count });
         } else {
@@ -5874,12 +5929,12 @@
       const noncreatureBuckets = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
       const landsList = [];
 
-      cardNames.forEach(name => {
+     cardNames.forEach(name => {
         const item = deck[name];
         const cat = getCardPrimaryType(item);
         const cmc = Math.min(Math.floor(item.cmc || 0), 6);
 
-        if (cat === 'Lands') {
+        if (cat === 'Lands' || BASIC_LAND_NAMES.has(name)) {
           if (BASIC_LAND_NAMES.has(name)) {
             landsList.push({ name, count: item.count });
           } else {
