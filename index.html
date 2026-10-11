@@ -5664,22 +5664,34 @@
         try {
           const res = await fetch('https://api.scryfall.com/cards/collection', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({ identifiers: chunk.map(n => ({ name: n })) })
           });
           if (res.ok) {
             const data = await res.json();
-            (data.data || []).forEach(card => {
-              if (deck[card.name]) {
-                deck[card.name].cmc = getCardCmc(card);
-                deck[card.name].type_line = card.type_line || '';
-                deck[card.name].mana_cost = card.mana_cost || '';
-                if (card.image_uris?.normal) deck[card.name].faces = [card.image_uris.normal];
-              }
-            });
+            if (data && Array.isArray(data.data)) {
+              data.data.forEach(card => {
+                if (card && card.name && deck[card.name]) {
+                  deck[card.name].cmc = getCardCmc(card);
+                  deck[card.name].type_line = card.type_line || '';
+                  deck[card.name].mana_cost = card.mana_cost || '';
+                  let faces = [];
+                  if (card.card_faces && card.card_faces.length > 1 && card.card_faces[0].image_uris) {
+                    faces = card.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
+                  } else if (card.image_uris?.normal) {
+                    faces = [card.image_uris.normal];
+                  }
+                  if (faces.length > 0) {
+                    deck[card.name].faces = faces;
+                  }
+                }
+              });
+            }
           }
         } catch (e) {}
       }
+      saveAndRenderDeck();
+    }
       saveAndRenderDeck();
     }
 

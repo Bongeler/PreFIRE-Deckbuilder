@@ -20,27 +20,55 @@ class PrefireDeckGenerator {
 
     async init() {
         if (!this.cardRoles) {
-            const [rolesRes, staplesRes, landsRes, fallbacksRes] = await Promise.all([
-                fetch("card-roles.json"),
-                fetch("prefire-staples.json"),
-                fetch("prefire-lands.json"),
-                fetch("data/themes/theme-fallbacks.json")
+            const safeFetchJson = async (url) => {
+                try {
+                    const res = await fetch(url);
+                    if (!res.ok) return null;
+                    const text = await res.text();
+                    if (!text || text.trim().startsWith("<")) return null;
+                    return JSON.parse(text);
+                } catch (e) {
+                    return null;
+                }
+            };
+
+            const [roles, staples, lands, fallbacks] = await Promise.all([
+                safeFetchJson("card-roles.json"),
+                safeFetchJson("prefire-staples.json"),
+                safeFetchJson("prefire-lands.json"),
+                safeFetchJson("data/themes/theme-fallbacks.json").then(res => res || safeFetchJson("theme-fallbacks.json"))
             ]);
-            this.cardRoles = await rolesRes.json();
-            this.staples = await staplesRes.json();
-            this.landsData = await landsRes.json();
-            this.themeFallbacks = await fallbacksRes.json();
+
+            this.cardRoles = roles || {};
+            this.staples = staples || {};
+            this.landsData = lands || {};
+            this.themeFallbacks = fallbacks || {};
 
             // Populate base color lookup from staples
             if (this.staples) {
                 Object.values(this.staples).forEach(list => {
-                    list.forEach(c => {
-                        if (c.name && c.colors) {
-                            this.cardColorMap[c.name] = c.colors;
-                        }
-                    });
+                    if (Array.isArray(list)) {
+                        list.forEach(c => {
+                            if (c && c.name && c.colors) {
+                                this.cardColorMap[c.name] = c.colors;
+                            }
+                        });
+                    }
                 });
             }
+
+            // Populate land color lookup from prefire-lands.json
+            if (this.landsData && this.landsData.utility && this.landsData.utility.colored_staples) {
+                Object.entries(this.landsData.utility.colored_staples).forEach(([col, list]) => {
+                    if (Array.isArray(list)) {
+                        list.forEach(lName => {
+                            this.cardColorMap[lName] = [col];
+                        });
+                    }
+                });
+            }
+        }
+    }
 
             // Populate land color lookup from prefire-lands.json
             if (this.landsData && this.landsData.utility && this.landsData.utility.colored_staples) {
@@ -77,12 +105,16 @@ class PrefireDeckGenerator {
     }
 
     async loadCommanderThemes(slug) {
-        const firstChar = /^[a-z0-9]/.test(slug) ? slug[0] : "_";
-        const res = await fetch(`data/themes/${firstChar}/${slug}.json`);
-        if (!res.ok) {
-            throw new Error(`Theme data not found for slug: ${slug}`);
+        try {
+            const firstChar = /^[a-z0-9]/.test(slug) ? slug[0] : "_";
+            const res = await fetch(`data/themes/${firstChar}/${slug}.json`);
+            if (!res.ok) return null;
+            const text = await res.text();
+            if (!text || text.trim().startsWith("<")) return null;
+            return JSON.parse(text);
+        } catch (e) {
+            return null;
         }
-        return await res.json();
     }
 
     isColorLegal(cardColors, commanderColors) {
@@ -387,62 +419,57 @@ class PrefireDeckGenerator {
         await this.init();
 
         const slug = this.getCommanderSlug(commanderA, commanderB);
-        let commanderPayload = null;
-        try {
-            commanderPayload = await this.loadCommanderThemes(slug);
-        } catch (err) {
-            commanderPayload = null;
-        }
+        let commanderPayload = await this.loadCommanderThemes(slug);
 
         const colors = new Set();
         [commanderA, commanderB].filter(Boolean).forEach(name => {
             const card = cardCatalog[name];
-            if (card && card.color_identity) {
-                card.color_identity.forEach(c => colors.add(c.toUpperCase()));
+            const identity = (card && card.color_identity) ? card.color_identity : this.cardColorMap[name];
+            if (identity) {
+                identity.forEach(c => colors.add(c.toUpperCase()));
             }
         });
         const commanderColors = Array.from(colors);
 
+        const normalizedTheme = selectedThemeSlug ? selectedThemeSlug.toString().toLowerCase().trim() : null;
         let themeData = null;
-        let actualSlug = selectedThemeSlug || "default";
+        let actualSlug = normalizedTheme || "default";
 
         // 1. Try commander-specific theme data first
         if (commanderPayload) {
-            if (selectedThemeSlug && commanderPayload.themes && commanderPayload.themes[selectedThemeSlug]) {
-                const candidate = commanderPayload.themes[selectedThemeSlug].data || commanderPayload.themes[selectedThemeSlug];
-                if (candidate.cards && candidate.cards.length >= 20) {
+            if (normalizedTheme && commanderPayload.themes && commanderPayload.themes[normalizedTheme]) {
+                const candidate = commanderPayload.themes[normalizedTheme].data || commanderPayload.themes[normalizedTheme];
+                if (candidate && Array.isArray(candidate.cards) && candidate.cards.length >= 10) {
                     themeData = candidate;
                 }
-            } else if (!selectedThemeSlug && commanderPayload.default && (commanderPayload.default.cards || []).length >= 20) {
-                themeData = commanderPayload.default;
+            } else if ((!normalizedTheme || normalizedTheme === "default") && commanderPayload.default) {
+                const defCandidate = commanderPayload.default.data || commanderPayload.default;
+                if (defCandidate && Array.isArray(defCandidate.cards) && defCandidate.cards.length >= 10) {
+                    themeData = defCandidate;
+                }
             }
         }
 
         // 2. Fallback to unified theme profile if commander has insufficient data for this theme
-        if (!themeData && selectedThemeSlug && this.themeFallbacks && this.themeFallbacks[selectedThemeSlug]) {
-            const fallback = this.themeFallbacks[selectedThemeSlug];
-            if (fallback.cards && fallback.cards.length > 0) {
+        if (!themeData && normalizedTheme && this.themeFallbacks && this.themeFallbacks[normalizedTheme]) {
+            const fallback = this.themeFallbacks[normalizedTheme];
+            if (fallback && Array.isArray(fallback.cards) && fallback.cards.length > 0) {
                 themeData = fallback;
-                actualSlug = selectedThemeSlug;
+                actualSlug = normalizedTheme;
             }
         }
 
         // 3. Fallback to commander's default theme if available
         if (!themeData && commanderPayload && commanderPayload.default) {
-            themeData = commanderPayload.default;
+            const defCandidate = commanderPayload.default.data || commanderPayload.default;
+            if (defCandidate && Array.isArray(defCandidate.cards)) {
+                themeData = defCandidate;
+            }
         }
 
         // 4. Safe fallback if zero data was found
         if (!themeData) {
             themeData = { targets: {}, cards: [] };
         }
-
-        const cmdrCount = commanderB ? 2 : 1;
-        const spells = this.assembleSpells(themeData, actualSlug, commanderColors, cardCatalog);
-        const lands = this.assembleLands(commanderColors, actualSlug, spells, cardCatalog, cmdrCount);
-
-        return [...spells, ...lands];
-    }
-}
 
 window.PrefireDeckGenerator = PrefireDeckGenerator;
