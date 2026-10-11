@@ -1595,8 +1595,7 @@
     }
 
     .shingle-card-item:hover {
-      border: 1px solid var(--accent);
-      z-index: 100 !important;
+      outline: 1px solid var(--accent);
     }
 
     .shingle-card-item img {
@@ -2273,6 +2272,7 @@
         <div class="commander-section" id="commander-section-autobuild">
           <div class="commander-section-header">
             <span class="commander-label">Commander</span>
+            <button type="button" class="btn-change-commander" id="btn-change-commander-autobuild">Change Commander?</button>
           </div>
           <div id="commander-container-autobuild"></div>
         </div>
@@ -4987,6 +4987,7 @@
       const container = document.getElementById('commander-container');
       const containerAuto = document.getElementById('commander-container-autobuild');
       const changeBtn = document.getElementById('btn-change-commander');
+      const changeBtnAuto = document.getElementById('btn-change-commander-autobuild');
       const labelText = document.getElementById('commander-label-text');
       const autoBuildBtn = document.getElementById('btn-autobuild-trigger');
       
@@ -4997,6 +4998,7 @@
 
       if (commanders.length === 0) {
         changeBtn.style.display = 'none';
+        if (changeBtnAuto) changeBtnAuto.style.display = 'none';
         if (autoBuildBtn) autoBuildBtn.disabled = true;
 
         const chooseBtn = document.createElement('button');
@@ -5029,6 +5031,7 @@
 
       if (autoBuildBtn) autoBuildBtn.disabled = false;
       changeBtn.style.display = 'inline-block';
+      if (changeBtnAuto) changeBtnAuto.style.display = 'inline-block';
       changeBtn.textContent = (isCommanderSearchMode || isPartnerSearchMode) ? 'Cancel' : 'Change Commander?';
       changeBtn.onclick = () => {
         if (isCommanderSearchMode || isPartnerSearchMode) {
@@ -5581,6 +5584,17 @@
     btnBackToManual.addEventListener('click', () => {
       autobuildScreen.classList.remove('active');
     });
+
+    const btnChangeCmdrAuto = document.getElementById('btn-change-commander-autobuild');
+    if (btnChangeCmdrAuto) {
+      btnChangeCmdrAuto.addEventListener('click', () => {
+        autobuildScreen.classList.remove('active');
+        const mainChangeBtn = document.getElementById('btn-change-commander');
+        if (mainChangeBtn) {
+          mainChangeBtn.click();
+        }
+      });
+    }
 
     document.getElementById('btn-autobuild-trigger').addEventListener('click', async () => {
       if (commanders.length === 0) return;
