@@ -3777,17 +3777,20 @@
       let rawSolo = isPrefireOnly ? [...preSolo] : [...preSolo, ...postSolo];
       const partnerPairs = isPrefireOnly ? [...prePartner] : [...prePartner, ...postPartner];
 
-      // Extract any accidental "&" partner strings inside solo lists into partnerPairs
+      // Deduplicate and filter partner strings
       const soloNames = [];
+      const seenSolo = new Set();
       rawSolo.forEach(n => {
-        if (n.includes('&')) {
-          partnerPairs.push(n);
-        } else {
-          soloNames.push(n);
+        const clean = n.trim();
+        if (clean.includes('&')) {
+          if (!partnerPairs.includes(clean)) partnerPairs.push(clean);
+        } else if (!seenSolo.has(clean.toLowerCase())) {
+          seenSolo.add(clean.toLowerCase());
+          soloNames.push(clean);
         }
       });
 
-      showProgressBar(`Loading commanders for ${chosenItem.label}...`);
+      showProgressBar(`Loading commanders for ${chosenItem.label} (0/${soloNames.length})...`);
 
       const resultsGrid = document.getElementById('results-grid');
       resultsGrid.innerHTML = '';
@@ -3799,45 +3802,65 @@
 
       const fetchCollection = async (names) => {
         let list = [];
-        for (let i = 0; i < names.length; i += 75) {
-          const chunk = names.slice(i, i + 75);
-          try {
-            let res = await fetch('https://api.scryfall.com/cards/collection', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify({ identifiers: chunk.map(n => ({ name: n })) })
-            });
+        const chunkSize = 75;
+        for (let i = 0; i < names.length; i += chunkSize) {
+          const chunk = names.slice(i, i + chunkSize);
+          const pct = Math.round((i / names.length) * 100);
+          updateProgressBar(pct, `Loading commanders (${list.length}/${names.length})...`);
 
-            if (res.status === 429) {
-              await new Promise(r => setTimeout(r, 1500));
-              res = await fetch('https://api.scryfall.com/cards/collection', {
+          const identifiers = chunk.map(n => ({ name: n.split('//')[0].trim() }));
+
+          let retries = 0;
+          let success = false;
+          while (retries < 3 && !success) {
+            try {
+              let res = await fetch('https://api.scryfall.com/cards/collection', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({ identifiers: chunk.map(n => ({ name: n })) })
+                body: JSON.stringify({ identifiers })
               });
-            }
 
-            if (res.ok) {
-              const d = await res.json();
-              list = list.concat(d.data || []);
+              if (res.status === 429) {
+                await new Promise(r => setTimeout(r, 1600));
+                retries++;
+                continue;
+              }
+
+              if (res.ok) {
+                const d = await res.json();
+                if (d && Array.isArray(d.data)) {
+                  list = list.concat(d.data);
+                }
+                success = true;
+              } else {
+                retries++;
+                await new Promise(r => setTimeout(r, 500));
+              }
+            } catch (e) {
+              retries++;
+              await new Promise(r => setTimeout(r, 500));
             }
-          } catch (e) {
-            console.error('Theme collection fetch error:', e);
           }
-          if (i + 75 < names.length) {
-            await new Promise(r => setTimeout(r, 200));
+
+          if (i + chunkSize < names.length) {
+            await new Promise(r => setTimeout(r, 150));
           }
         }
         return list;
       };
 
       const soloCards = await fetchCollection(soloNames);
-      hideProgressBar();
+      updateProgressBar(100, 'Rendering cards...');
+
+      const sortChoice = searchSortSelect ? searchSortSelect.value : 'cmc';
+      sortCardArray(soloCards, sortChoice);
 
       soloCards.forEach(c => {
         const el = createCardElement(c);
         if (el) soloGrid.appendChild(el);
       });
+
+      hideProgressBar();
 
       if (partnerPairs.length > 0) {
         const pHeader = document.createElement('div');
