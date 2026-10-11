@@ -1744,6 +1744,59 @@
       user-select: none;
     }
 
+    /* Neon Yellow Centered Container & Styled Dropdowns for Commander Themes */
+    #cmdr-theme-filter-row {
+      display: none;
+      width: 100%;
+      padding-top: 8px;
+      margin-top: 4px;
+      border-top: 1px solid var(--border-color);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cmdr-theme-neon-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 14px;
+      border: 2px solid #e2f409;
+      border-radius: 10px;
+      background-color: rgba(226, 244, 9, 0.05);
+      box-shadow: 0 0 12px rgba(226, 244, 9, 0.3);
+      flex-wrap: wrap;
+    }
+
+    .cmdr-theme-select-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cmdr-theme-styled-select {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 28px 6px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%226%22%20viewBox%3D%220%200%2010%206%22%3E%3Cpath%20fill%3D%22%23aaaaaa%22%20d%3D%22M0%200l5%206%205-6z%22%2F%3E%3C%2Fsvg%3E');
+      background-repeat: no-repeat;
+      background-position: right 9px center;
+      background-size: 8px 5px;
+      min-width: 210px;
+      max-width: 280px;
+    }
+
+    .cmdr-theme-styled-select:focus {
+      border-color: #e2f409;
+    }
+
     @media (max-width: 768px) {
       .mobile-tab-nav {
         display: flex;
@@ -2136,27 +2189,25 @@
     </div>
 
     <!-- Theme & Tribe Filter Controls (Shown in Commander Search) -->
-    <div id="cmdr-theme-filter-row" style="display: none; width: 100%; padding-top: 6px; border-top: 1px solid var(--border-color); gap: 10px; align-items: center; flex-wrap: wrap;">
-      <button type="button" id="btn-toggle-cmdr-themes" style="background-color: var(--commander-accent); color: #121212; border: none; padding: 7px 14px; border-radius: 4px; font-size: 11px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;">
-        Choose a Theme ▾
-      </button>
-      
-      <div id="cmdr-theme-inputs-wrap" style="display: none; align-items: center; gap: 10px; flex-wrap: wrap; flex: 1;">
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Theme:</label>
-          <input type="text" id="cmdr-theme-input" list="theme-options-datalist" placeholder="Select or type theme..." style="width: 200px; padding: 6px 10px; font-size: 12px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 4px;">
-          <datalist id="theme-options-datalist"></datalist>
-        </div>
-
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Tribal / Kindred:</label>
-          <input type="text" id="cmdr-tribe-input" list="tribe-options-datalist" placeholder="Select or type tribe..." style="width: 200px; padding: 6px 10px; font-size: 12px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 4px;">
-          <datalist id="tribe-options-datalist"></datalist>
-        </div>
-
-        <button type="button" id="btn-apply-theme-filter" style="background-color: #2e7d32; color: #ffffff; border: 1px solid #388e3c; padding: 6px 16px; border-radius: 4px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer;">
-          Filter
+    <div id="cmdr-theme-filter-row">
+      <div class="cmdr-theme-neon-box">
+        <button type="button" id="btn-toggle-cmdr-themes" style="background-color: var(--commander-accent); color: #121212; border: none; padding: 7px 14px; border-radius: 6px; font-size: 11px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;">
+          Choose a Theme ▾
         </button>
+        
+        <div id="cmdr-theme-inputs-wrap" style="display: none; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div class="cmdr-theme-select-wrap">
+            <select id="cmdr-theme-select" class="cmdr-theme-styled-select">
+              <option value="">Theme/Tag</option>
+            </select>
+          </div>
+
+          <div class="cmdr-theme-select-wrap">
+            <select id="cmdr-tribe-select" class="cmdr-theme-styled-select">
+              <option value="">Tribe/Kin</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -3596,33 +3647,48 @@
       if (!commanderThemeIndex) return;
 
       const isPrefireOnly = (commanderPoolMode === 'prefire');
-      const themeListEl = document.getElementById('theme-options-datalist');
-      const tribeListEl = document.getElementById('tribe-options-datalist');
+      const themeSelect = document.getElementById('cmdr-theme-select');
+      const tribeSelect = document.getElementById('cmdr-tribe-select');
 
-      if (!themeListEl || !tribeListEl) return;
+      if (!themeSelect || !tribeSelect) return;
 
-      themeListEl.innerHTML = '';
-      tribeListEl.innerHTML = '';
+      const prevTheme = themeSelect.value;
+      const prevTribe = tribeSelect.value;
 
-      const buildOptions = (bucket, container) => {
-        Object.keys(bucket).sort().forEach(slug => {
+      themeSelect.innerHTML = '<option value="">Theme/Tag</option>';
+      tribeSelect.innerHTML = '<option value="">Tribe/Kin</option>';
+
+      const buildSortedOptions = (bucket, selectEl) => {
+        const items = [];
+        Object.keys(bucket).forEach(slug => {
           const item = bucket[slug];
-          const soloCount = isPrefireOnly ? item.prefire_solo.length : (item.prefire_solo.length + item.postfire_solo.length);
-          const partnerCount = isPrefireOnly ? item.prefire_partner.length : (item.prefire_partner.length + item.postfire_partner.length);
-          const total = soloCount + partnerCount;
+          const preSolo = (item.prefire_solo || []).length;
+          const prePartner = (item.prefire_partner || []).length;
+          const postSolo = (item.postfire_solo || item.post_fire_solo || []).length;
+          const postPartner = (item.postfire_partner || item.post_fire_partner || []).length;
 
+          const total = isPrefireOnly ? (preSolo + prePartner) : (preSolo + prePartner + postSolo + postPartner);
           if (total > 0) {
-            const opt = document.createElement('option');
-            opt.value = item.label;
-            opt.label = `${item.label} (${total})`;
-            opt.dataset.slug = slug;
-            container.appendChild(opt);
+            items.push({ slug, label: item.label, total });
           }
+        });
+
+        // Sort descending: most commanders at top, least at bottom
+        items.sort((a, b) => b.total - a.total || a.label.localeCompare(b.label));
+
+        items.forEach(it => {
+          const opt = document.createElement('option');
+          opt.value = it.slug;
+          opt.textContent = `${it.label} (${it.total})`;
+          selectEl.appendChild(opt);
         });
       };
 
-      buildOptions(commanderThemeIndex.themes, themeListEl);
-      buildOptions(commanderThemeIndex.tribes, tribeListEl);
+      buildSortedOptions(commanderThemeIndex.themes, themeSelect);
+      buildSortedOptions(commanderThemeIndex.tribes, tribeSelect);
+
+      if (prevTheme) themeSelect.value = prevTheme;
+      if (prevTribe) tribeSelect.value = prevTribe;
     }
 
     function setCommanderSearchMode(active) {
@@ -3689,141 +3755,142 @@
       });
     }
 
-    const btnApplyThemeFilter = document.getElementById('btn-apply-theme-filter');
-    if (btnApplyThemeFilter) {
-      btnApplyThemeFilter.addEventListener('click', async () => {
-        if (!commanderThemeIndex) {
-          await loadCommanderThemeIndex();
-        }
-        if (!commanderThemeIndex) return;
+    async function triggerThemeFilterSelection(selectedSlug, isTribe = false) {
+      if (!commanderThemeIndex) {
+        await loadCommanderThemeIndex();
+      }
+      if (!commanderThemeIndex || !selectedSlug) return;
 
-        const themeVal = document.getElementById('cmdr-theme-input').value.trim().toLowerCase();
-        const tribeVal = document.getElementById('cmdr-tribe-input').value.trim().toLowerCase();
-        const isPrefireOnly = (commanderPoolMode === 'prefire');
+      const isPrefireOnly = (commanderPoolMode === 'prefire');
+      const bucket = isTribe ? commanderThemeIndex.tribes : commanderThemeIndex.themes;
+      const chosenItem = bucket[selectedSlug];
+      if (!chosenItem) return;
 
-        const findSlug = (val, bucket) => {
-          return Object.keys(bucket).find(k => bucket[k].label.toLowerCase() === val || k === val);
-        };
+      const preSolo = chosenItem.prefire_solo || [];
+      const postSolo = chosenItem.postfire_solo || chosenItem.post_fire_solo || [];
+      const prePartner = chosenItem.prefire_partner || [];
+      const postPartner = chosenItem.postfire_partner || chosenItem.post_fire_partner || [];
 
-        let chosenItem = null;
-        if (themeVal) {
-          const slug = findSlug(themeVal, commanderThemeIndex.themes);
-          if (slug) chosenItem = commanderThemeIndex.themes[slug];
-        } else if (tribeVal) {
-          const slug = findSlug(tribeVal, commanderThemeIndex.tribes);
-          if (slug) chosenItem = commanderThemeIndex.tribes[slug];
-        }
+      const soloNames = isPrefireOnly ? [...preSolo] : [...preSolo, ...postSolo];
+      const partnerPairs = isPrefireOnly ? [...prePartner] : [...prePartner, ...postPartner];
 
-        if (!chosenItem) {
-          alert("Please select a valid theme or tribe from the suggestions.");
-          return;
-        }
+      showProgressBar(`Loading commanders for ${chosenItem.label}...`);
 
-        const getList = (item, prefix) => {
-          const pre = item[`prefire_${prefix}`] || item[`pre_${prefix}`] || [];
-          const post = item[`postfire_${prefix}`] || item[`post_fire_${prefix}`] || item[`post_${prefix}`] || [];
-          return isPrefireOnly ? [...pre] : [...pre, ...post];
-        };
+      const resultsGrid = document.getElementById('results-grid');
+      resultsGrid.innerHTML = '';
+      resultsGrid.style.display = 'block';
 
-        const soloNames = getList(chosenItem, 'solo');
-        const partnerPairs = getList(chosenItem, 'partner');
+      const soloGrid = document.createElement('div');
+      soloGrid.className = 'results-grid';
+      resultsGrid.appendChild(soloGrid);
 
-        showProgressBar(`Loading commanders for ${chosenItem.label}...`);
-
-        const resultsGrid = document.getElementById('results-grid');
-        resultsGrid.innerHTML = '';
-        resultsGrid.style.display = 'block';
-
-        const soloGrid = document.createElement('div');
-        soloGrid.className = 'results-grid';
-        resultsGrid.appendChild(soloGrid);
-
-        const fetchCollection = async (names) => {
-          let list = [];
-          for (let i = 0; i < names.length; i += 75) {
-            const chunk = names.slice(i, i + 75);
-            try {
-              const res = await fetch('https://api.scryfall.com/cards/collection', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ identifiers: chunk.map(n => ({ name: n })) })
-              });
-              if (res.ok) {
-                const d = await res.json();
-                list = list.concat(d.data || []);
-              }
-            } catch (e) {}
-            if (i + 75 < names.length) {
-              await new Promise(r => setTimeout(r, 100));
+      const fetchCollection = async (names) => {
+        let list = [];
+        for (let i = 0; i < names.length; i += 75) {
+          const chunk = names.slice(i, i + 75);
+          try {
+            const res = await fetch('https://api.scryfall.com/cards/collection', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ identifiers: chunk.map(n => ({ name: n })) })
+            });
+            if (res.ok) {
+              const d = await res.json();
+              list = list.concat(d.data || []);
             }
+          } catch (e) {}
+          if (i + 75 < names.length) {
+            await new Promise(r => setTimeout(r, 100));
           }
-          return list;
-        };
+        }
+        return list;
+      };
 
-        const soloCards = await fetchCollection(soloNames);
-        hideProgressBar();
+      const soloCards = await fetchCollection(soloNames);
+      hideProgressBar();
 
-        soloCards.forEach(c => {
-          const el = createCardElement(c);
-          if (el) soloGrid.appendChild(el);
+      soloCards.forEach(c => {
+        const el = createCardElement(c);
+        if (el) soloGrid.appendChild(el);
+      });
+
+      if (partnerPairs.length > 0) {
+        const pHeader = document.createElement('div');
+        pHeader.className = 'partners-section-header';
+        pHeader.textContent = `Partner Combinations (${partnerPairs.length})`;
+        resultsGrid.appendChild(pHeader);
+
+        const partnerGrid = document.createElement('div');
+        partnerGrid.className = 'results-grid';
+
+        partnerPairs.forEach(pairStr => {
+          const [nameA, nameB] = pairStr.split('&').map(s => s.trim());
+          const cardWrap = document.createElement('div');
+          cardWrap.className = 'partner-pair-card';
+
+          const stage = document.createElement('div');
+          stage.className = 'partner-shingle-stage';
+
+          const imgA = document.createElement('img');
+          imgA.className = 'pair-front';
+          imgA.src = getDirectScryfallImageUrl(nameA);
+          imgA.alt = nameA;
+
+          const imgB = document.createElement('img');
+          imgB.className = 'pair-back';
+          imgB.src = getDirectScryfallImageUrl(nameB);
+          imgB.alt = nameB;
+
+          stage.appendChild(imgB);
+          stage.appendChild(imgA);
+
+          const title = document.createElement('div');
+          title.style.fontSize = '12px';
+          title.style.fontWeight = '700';
+          title.style.marginTop = '4px';
+          title.textContent = `${nameA} & ${nameB}`;
+
+          const btn = document.createElement('button');
+          btn.className = 'btn-set-commander';
+          btn.textContent = '★ Select Pair';
+          btn.onclick = async () => {
+            const cards = await fetchCollection([nameA, nameB]);
+            if (cards.length >= 2) {
+              let facesA = cards[0].image_uris ? [cards[0].image_uris.normal] : [];
+              let facesB = cards[1].image_uris ? [cards[1].image_uris.normal] : [];
+              selectCommander(cards[0], facesA, cards[0].mana_cost, cards[0].cmc);
+              selectPartner(cards[1], facesB, cards[1].mana_cost, cards[1].cmc);
+            }
+          };
+
+          cardWrap.appendChild(stage);
+          cardWrap.appendChild(title);
+          cardWrap.appendChild(btn);
+          partnerGrid.appendChild(cardWrap);
         });
 
-        if (partnerPairs.length > 0) {
-          const pHeader = document.createElement('div');
-          pHeader.className = 'partners-section-header';
-          pHeader.textContent = `Partner Combinations (${partnerPairs.length})`;
-          resultsGrid.appendChild(pHeader);
+        resultsGrid.appendChild(partnerGrid);
+      }
+    }
 
-          const partnerGrid = document.createElement('div');
-          partnerGrid.className = 'results-grid';
+    const themeSelectEl = document.getElementById('cmdr-theme-select');
+    if (themeSelectEl) {
+      themeSelectEl.addEventListener('change', () => {
+        const tribeSelect = document.getElementById('cmdr-tribe-select');
+        if (tribeSelect) tribeSelect.value = '';
+        if (themeSelectEl.value) {
+          triggerThemeFilterSelection(themeSelectEl.value, false);
+        }
+      });
+    }
 
-          partnerPairs.forEach(pairStr => {
-            const [nameA, nameB] = pairStr.split('&').map(s => s.trim());
-            const cardWrap = document.createElement('div');
-            cardWrap.className = 'partner-pair-card';
-
-            const stage = document.createElement('div');
-            stage.className = 'partner-shingle-stage';
-
-            const imgA = document.createElement('img');
-            imgA.className = 'pair-front';
-            imgA.src = getDirectScryfallImageUrl(nameA);
-            imgA.alt = nameA;
-
-            const imgB = document.createElement('img');
-            imgB.className = 'pair-back';
-            imgB.src = getDirectScryfallImageUrl(nameB);
-            imgB.alt = nameB;
-
-            stage.appendChild(imgB);
-            stage.appendChild(imgA);
-
-            const title = document.createElement('div');
-            title.style.fontSize = '12px';
-            title.style.fontWeight = '700';
-            title.style.marginTop = '4px';
-            title.textContent = `${nameA} & ${nameB}`;
-
-            const btn = document.createElement('button');
-            btn.className = 'btn-set-commander';
-            btn.textContent = '★ Select Pair';
-            btn.onclick = async () => {
-              const cards = await fetchCollection([nameA, nameB]);
-              if (cards.length >= 2) {
-                let facesA = cards[0].image_uris ? [cards[0].image_uris.normal] : [];
-                let facesB = cards[1].image_uris ? [cards[1].image_uris.normal] : [];
-                selectCommander(cards[0], facesA, cards[0].mana_cost, cards[0].cmc);
-                selectPartner(cards[1], facesB, cards[1].mana_cost, cards[1].cmc);
-              }
-            };
-
-            cardWrap.appendChild(stage);
-            cardWrap.appendChild(title);
-            cardWrap.appendChild(btn);
-            partnerGrid.appendChild(cardWrap);
-          });
-
-          resultsGrid.appendChild(partnerGrid);
+    const tribeSelectEl = document.getElementById('cmdr-tribe-select');
+    if (tribeSelectEl) {
+      tribeSelectEl.addEventListener('change', () => {
+        const themeSelect = document.getElementById('cmdr-theme-select');
+        if (themeSelect) themeSelect.value = '';
+        if (tribeSelectEl.value) {
+          triggerThemeFilterSelection(tribeSelectEl.value, true);
         }
       });
     }
@@ -3837,10 +3904,12 @@
         if (typeof populateThemeDatalists === 'function') {
           populateThemeDatalists();
         }
-        const themeVal = document.getElementById('cmdr-theme-input')?.value.trim();
-        const tribeVal = document.getElementById('cmdr-tribe-input')?.value.trim();
-        if ((themeVal || tribeVal) && document.getElementById('cmdr-theme-inputs-wrap')?.style.display !== 'none') {
-          document.getElementById('btn-apply-theme-filter').click();
+        const activeTheme = document.getElementById('cmdr-theme-select')?.value;
+        const activeTribe = document.getElementById('cmdr-tribe-select')?.value;
+        if (activeTheme) {
+          triggerThemeFilterSelection(activeTheme, false);
+        } else if (activeTribe) {
+          triggerThemeFilterSelection(activeTribe, true);
         } else {
           executeSearch();
         }
