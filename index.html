@@ -2572,8 +2572,16 @@
     const btnMobileRandomizeAgain = document.getElementById('btn-mobile-randomize-again');
     const btnMobileSelectCommander = document.getElementById('btn-mobile-select-commander');
 
+    let activeThemeQueue = {
+      names: [],
+      currentIndex: 0,
+      soloGrid: null
+    };
+
     btnLoadMore.addEventListener('click', () => {
-      if (nextSearchPageUrl) {
+      if (activeThemeQueue.names.length > 0) {
+        loadMoreThemeCommanders();
+      } else if (nextSearchPageUrl) {
         loadMoreScryfall();
       }
     });
@@ -2964,6 +2972,7 @@
     });
 
     async function executeTopCommandersSearch() {
+      activeThemeQueue = { names: [], currentIndex: 0, soloGrid: null };
       const resultsGrid = document.getElementById('results-grid');
       const emptyState = document.getElementById('empty-state');
 
@@ -3049,6 +3058,7 @@
     }
 
     async function executeStaplesSearch() {
+      activeThemeQueue = { names: [], currentIndex: 0, soloGrid: null };
       const resultsGrid = document.getElementById('results-grid');
       const emptyState = document.getElementById('empty-state');
       const sortChoice = searchSortSelect.value || 'cmc';
@@ -3758,11 +3768,78 @@
       });
     }
 
+async function fetchCollectionChunk(chunkNames) {
+      const identifiers = chunkNames.map(n => ({ name: n.split('//')[0].trim() }));
+      let retries = 0;
+      while (retries < 3) {
+        try {
+          let res = await fetch('https://api.scryfall.com/cards/collection', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ identifiers })
+          });
+
+          if (res.status === 429) {
+            await new Promise(r => setTimeout(r, 1600));
+            retries++;
+            continue;
+          }
+
+          if (res.ok) {
+            const d = await res.json();
+            return d.data || [];
+          }
+          retries++;
+          await new Promise(r => setTimeout(r, 500));
+        } catch (e) {
+          retries++;
+          await new Promise(r => setTimeout(r, 500));
+        }
+      }
+      return [];
+    }
+
+    async function loadMoreThemeCommanders() {
+      if (activeThemeQueue.currentIndex >= activeThemeQueue.names.length) {
+        loadMoreWrap.style.display = 'none';
+        return;
+      }
+
+      btnLoadMore.disabled = true;
+      btnLoadMore.textContent = 'Loading...';
+      showProgressBar(`Loading next commanders...`);
+
+      const nextBatch = activeThemeQueue.names.slice(activeThemeQueue.currentIndex, activeThemeQueue.currentIndex + 75);
+      const cards = await fetchCollectionChunk(nextBatch);
+      activeThemeQueue.currentIndex += nextBatch.length;
+
+      const sortChoice = searchSortSelect ? searchSortSelect.value : 'cmc';
+      sortCardArray(cards, sortChoice);
+
+      cards.forEach(c => {
+        const el = createCardElement(c);
+        if (el && activeThemeQueue.soloGrid) activeThemeQueue.soloGrid.appendChild(el);
+      });
+
+      hideProgressBar();
+      btnLoadMore.disabled = false;
+      btnLoadMore.textContent = 'Load More';
+
+      if (activeThemeQueue.currentIndex < activeThemeQueue.names.length) {
+        loadMoreWrap.style.display = 'flex';
+      } else {
+        loadMoreWrap.style.display = 'none';
+      }
+    }
+
     async function triggerThemeFilterSelection(selectedSlug, isTribe = false) {
       if (!commanderThemeIndex) {
         await loadCommanderThemeIndex();
       }
       if (!commanderThemeIndex || !selectedSlug) return;
+
+      // Reset Scryfall search page url when switching to theme query
+      nextSearchPageUrl = null;
 
       const isPrefireOnly = (commanderPoolMode === 'prefire');
       const bucket = isTribe ? commanderThemeIndex.tribes : commanderThemeIndex.themes;
@@ -3777,7 +3854,6 @@
       let rawSolo = isPrefireOnly ? [...preSolo] : [...preSolo, ...postSolo];
       const partnerPairs = isPrefireOnly ? [...prePartner] : [...prePartner, ...postPartner];
 
-      // Deduplicate and filter partner strings
       const soloNames = [];
       const seenSolo = new Set();
       rawSolo.forEach(n => {
@@ -3790,8 +3866,6 @@
         }
       });
 
-      showProgressBar(`Loading commanders for ${chosenItem.label} (0/${soloNames.length})...`);
-
       const resultsGrid = document.getElementById('results-grid');
       resultsGrid.innerHTML = '';
       resultsGrid.style.display = 'block';
@@ -3800,57 +3874,18 @@
       soloGrid.className = 'results-grid';
       resultsGrid.appendChild(soloGrid);
 
-      const fetchCollection = async (names) => {
-        let list = [];
-        const chunkSize = 75;
-        for (let i = 0; i < names.length; i += chunkSize) {
-          const chunk = names.slice(i, i + chunkSize);
-          const pct = Math.round((i / names.length) * 100);
-          updateProgressBar(pct, `Loading commanders (${list.length}/${names.length})...`);
-
-          const identifiers = chunk.map(n => ({ name: n.split('//')[0].trim() }));
-
-          let retries = 0;
-          let success = false;
-          while (retries < 3 && !success) {
-            try {
-              let res = await fetch('https://api.scryfall.com/cards/collection', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({ identifiers })
-              });
-
-              if (res.status === 429) {
-                await new Promise(r => setTimeout(r, 1600));
-                retries++;
-                continue;
-              }
-
-              if (res.ok) {
-                const d = await res.json();
-                if (d && Array.isArray(d.data)) {
-                  list = list.concat(d.data);
-                }
-                success = true;
-              } else {
-                retries++;
-                await new Promise(r => setTimeout(r, 500));
-              }
-            } catch (e) {
-              retries++;
-              await new Promise(r => setTimeout(r, 500));
-            }
-          }
-
-          if (i + chunkSize < names.length) {
-            await new Promise(r => setTimeout(r, 150));
-          }
-        }
-        return list;
+      // Initialize pagination queue
+      activeThemeQueue = {
+        names: soloNames,
+        currentIndex: 0,
+        soloGrid: soloGrid
       };
 
-      const soloCards = await fetchCollection(soloNames);
-      updateProgressBar(100, 'Rendering cards...');
+      const firstBatch = soloNames.slice(0, 75);
+      showProgressBar(`Loading commanders for ${chosenItem.label} (1-${Math.min(75, soloNames.length)} of ${soloNames.length})...`);
+
+      const soloCards = await fetchCollectionChunk(firstBatch);
+      activeThemeQueue.currentIndex = firstBatch.length;
 
       const sortChoice = searchSortSelect ? searchSortSelect.value : 'cmc';
       sortCardArray(soloCards, sortChoice);
@@ -3902,7 +3937,7 @@
           btn.className = 'btn-set-commander';
           btn.textContent = '★ Select Pair';
           btn.onclick = async () => {
-            const cards = await fetchCollection([nameA, nameB]);
+            const cards = await fetchCollectionChunk([nameA, nameB]);
             const cardA = cards.find(c => c.name.toLowerCase() === nameA.toLowerCase()) || cards[0];
             const cardB = cards.find(c => c.name.toLowerCase() === nameB.toLowerCase()) || cards[1];
 
@@ -3927,6 +3962,14 @@
         });
 
         resultsGrid.appendChild(partnerGrid);
+      }
+
+      if (activeThemeQueue.currentIndex < activeThemeQueue.names.length) {
+        loadMoreWrap.style.display = 'flex';
+        btnLoadMore.disabled = false;
+        btnLoadMore.textContent = 'Load More';
+      } else {
+        loadMoreWrap.style.display = 'none';
       }
     }
 
@@ -4439,6 +4482,7 @@
     }
 
     async function executeEdhrecSearch() {
+      activeThemeQueue = { names: [], currentIndex: 0, soloGrid: null };
       const resultsGrid = document.getElementById('results-grid');
       const emptyState = document.getElementById('empty-state');
 
@@ -4555,6 +4599,7 @@
     }
 
     async function executeSearch() {
+      activeThemeQueue = { names: [], currentIndex: 0, soloGrid: null };
       const sortChoice = searchSortSelect.value || 'cmc';
 
       const name = document.getElementById('search-name').value.trim();
@@ -4752,6 +4797,7 @@
     }
 
     async function executeRandomCommander() {
+      activeThemeQueue = { names: [], currentIndex: 0, soloGrid: null };
       const activeToggles = Array.from(document.querySelectorAll('.color-toggle.active')).map(btn => btn.dataset.color);
       const colored = activeToggles.filter(c => c !== 'C');
       const hasColorless = activeToggles.includes('C');
