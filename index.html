@@ -3771,9 +3771,10 @@
 
       const preSolo = chosenItem.prefire_solo || [];
       const postSolo = chosenItem.postfire_solo || chosenItem.post_fire_solo || [];
-      const [nameA, nameB] = pairStr.split('&').map(s => s.trim());
+      const prePartner = chosenItem.prefire_partner || [];
+      const postPartner = chosenItem.postfire_partner || chosenItem.post_fire_partner || [];
 
-      clet rawSolo = isPrefireOnly ? [...preSolo] : [...preSolo, ...postSolo];
+      let rawSolo = isPrefireOnly ? [...preSolo] : [...preSolo, ...postSolo];
       const partnerPairs = isPrefireOnly ? [...prePartner] : [...prePartner, ...postPartner];
 
       // Extract any accidental "&" partner strings inside solo lists into partnerPairs
