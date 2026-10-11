@@ -3760,6 +3760,14 @@
           if (!commanderThemeIndex) {
             await loadCommanderThemeIndex();
           }
+
+          const themeSelect = document.getElementById('cmdr-theme-select');
+          const tribeSelect = document.getElementById('cmdr-tribe-select');
+          if (themeSelect) themeSelect.value = '';
+          if (tribeSelect) tribeSelect.value = '';
+
+          activeThemeQueue = { names: [], currentIndex: 0, soloGrid: null };
+
           populateThemeDatalists();
         } else {
           cmdrThemeInputsWrap.style.display = 'none';
@@ -3985,8 +3993,56 @@ async function loadMoreThemeCommanders() {
                 return [getDirectScryfallImageUrl(defaultName)];
               };
 
-              selectCommander(cardA, getFaces(cardA, nameA), cardA.mana_cost || '', cardA.cmc || 0);
-              selectPartner(cardB, getFaces(cardB, nameB), cardB.mana_cost || '', cardB.cmc || 0);
+              const primaryCmdr = {
+                name: cardA.name,
+                faces: getFaces(cardA, nameA),
+                mana_cost: cardA.mana_cost || '',
+                color_identity: cardA.color_identity || [],
+                type_line: cardA.type_line || '',
+                cmc: (typeof cardA.cmc === 'number') ? cardA.cmc : parseCmcFromManaCost(cardA.mana_cost)
+              };
+
+              const secondaryCmdr = {
+                name: cardB.name,
+                faces: getFaces(cardB, nameB),
+                mana_cost: cardB.mana_cost || '',
+                color_identity: cardB.color_identity || [],
+                type_line: cardB.type_line || '',
+                cmc: (typeof cardB.cmc === 'number') ? cardB.cmc : parseCmcFromManaCost(cardB.mana_cost)
+              };
+
+              commanders = [primaryCmdr, secondaryCmdr];
+              localStorage.setItem('prefire_commanders', JSON.stringify(commanders));
+
+              staplesRawCardsCache = {};
+              edhrecRawCardsCache = {};
+
+              setCommanderSearchMode(false);
+              setEdhrecButtonState(false);
+              setStaplesButtonState(false);
+
+              const themeFilterRow = document.getElementById('cmdr-theme-filter-row');
+              const cmdrThemeInputsWrap = document.getElementById('cmdr-theme-inputs-wrap');
+              const btnToggleCmdrThemes = document.getElementById('btn-toggle-cmdr-themes');
+              if (themeFilterRow) themeFilterRow.style.display = 'none';
+              if (cmdrThemeInputsWrap) cmdrThemeInputsWrap.style.display = 'none';
+              if (btnToggleCmdrThemes) btnToggleCmdrThemes.textContent = 'Choose a Theme ▾';
+
+              const resultsGrid = document.getElementById('results-grid');
+              const emptyState = document.getElementById('empty-state');
+              if (resultsGrid) {
+                resultsGrid.style.display = 'grid';
+                resultsGrid.innerHTML = '';
+              }
+              if (loadMoreWrap) loadMoreWrap.style.display = 'none';
+              hideProgressBar();
+              if (emptyState) {
+                emptyState.style.display = 'block';
+                emptyState.textContent = `Partners set to "${cardA.name}" & "${cardB.name}". Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).`;
+              }
+
+              renderCommander();
+              saveAndRenderDeck();
             }
           };
 
