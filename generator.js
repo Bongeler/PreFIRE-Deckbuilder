@@ -5,6 +5,7 @@ class PrefireDeckGenerator {
         this.cardRoles = null;
         this.staples = null;
         this.landsData = null;
+        this.themeFallbacks = null;
 
         // Signature keywords and mechanics for theme filtration
         this.themeSignatures = {
@@ -19,14 +20,36 @@ class PrefireDeckGenerator {
 
     async init() {
         if (!this.cardRoles) {
-            const [rolesRes, staplesRes, landsRes] = await Promise.all([
+            const [rolesRes, staplesRes, landsRes, fallbacksRes] = await Promise.all([
                 fetch("card-roles.json"),
                 fetch("prefire-staples.json"),
-                fetch("prefire-lands.json")
+                fetch("prefire-lands.json"),
+                fetch("data/themes/theme-fallbacks.json")
             ]);
             this.cardRoles = await rolesRes.json();
             this.staples = await staplesRes.json();
             this.landsData = await landsRes.json();
+            this.themeFallbacks = await fallbacksRes.json();
+
+            // Populate base color lookup from staples
+            if (this.staples) {
+                Object.values(this.staples).forEach(list => {
+                    list.forEach(c => {
+                        if (c.name && c.colors) {
+                            this.cardColorMap[c.name] = c.colors;
+                        }
+                    });
+                });
+            }
+
+            // Populate land color lookup from prefire-lands.json
+            if (this.landsData && this.landsData.utility && this.landsData.utility.colored_staples) {
+                Object.entries(this.landsData.utility.colored_staples).forEach(([col, list]) => {
+                    list.forEach(lName => {
+                        this.cardColorMap[lName] = [col];
+                    });
+                });
+            }
         }
     }
 
@@ -262,11 +285,16 @@ class PrefireDeckGenerator {
 
         const themeLands = (this.landsData.utility && this.landsData.utility.theme_specific && this.landsData.utility.theme_specific[themeSlug]) || [];
         for (const lName of themeLands) {
-            const cardMeta = cardCatalog[lName];
-            const isColorless = !cardMeta || !cardMeta.color_identity || cardMeta.color_identity.length === 0;
+            const meta = cardCatalog[lName];
+            const landColors = (meta && meta.color_identity) ? meta.color_identity : this.cardColorMap[lName];
 
+            // If color info exists, enforce legality; otherwise only permit if colorless
+            if (landColors && landColors.length > 0) {
+                if (!this.isColorLegal(landColors, commanderColors)) continue;
+            }
+
+            const isColorless = !landColors || landColors.length === 0;
             if (isColorless && colorlessCount >= maxColorless) continue;
-            if (cardMeta && cardMeta.color_identity && !this.isColorLegal(cardMeta.color_identity, commanderColors)) continue;
 
             if (!lands.includes(lName)) {
                 lands.push(lName);
@@ -359,7 +387,12 @@ class PrefireDeckGenerator {
         await this.init();
 
         const slug = this.getCommanderSlug(commanderA, commanderB);
-        const commanderPayload = await this.loadCommanderThemes(slug);
+        let commanderPayload = null;
+        try {
+            commanderPayload = await this.loadCommanderThemes(slug);
+        } catch (err) {
+            commanderPayload = null;
+        }
 
         const colors = new Set();
         [commanderA, commanderB].filter(Boolean).forEach(name => {
@@ -370,12 +403,38 @@ class PrefireDeckGenerator {
         });
         const commanderColors = Array.from(colors);
 
-        let themeData = commanderPayload.default || { targets: {}, cards: [] };
-        let actualSlug = "default";
+        let themeData = null;
+        let actualSlug = selectedThemeSlug || "default";
 
-        if (selectedThemeSlug && commanderPayload.themes && commanderPayload.themes[selectedThemeSlug]) {
-            themeData = commanderPayload.themes[selectedThemeSlug].data || commanderPayload.themes[selectedThemeSlug];
-            actualSlug = selectedThemeSlug;
+        // 1. Try commander-specific theme data first
+        if (commanderPayload) {
+            if (selectedThemeSlug && commanderPayload.themes && commanderPayload.themes[selectedThemeSlug]) {
+                const candidate = commanderPayload.themes[selectedThemeSlug].data || commanderPayload.themes[selectedThemeSlug];
+                if (candidate.cards && candidate.cards.length >= 20) {
+                    themeData = candidate;
+                }
+            } else if (!selectedThemeSlug && commanderPayload.default && (commanderPayload.default.cards || []).length >= 20) {
+                themeData = commanderPayload.default;
+            }
+        }
+
+        // 2. Fallback to unified theme profile if commander has insufficient data for this theme
+        if (!themeData && selectedThemeSlug && this.themeFallbacks && this.themeFallbacks[selectedThemeSlug]) {
+            const fallback = this.themeFallbacks[selectedThemeSlug];
+            if (fallback.cards && fallback.cards.length > 0) {
+                themeData = fallback;
+                actualSlug = selectedThemeSlug;
+            }
+        }
+
+        // 3. Fallback to commander's default theme if available
+        if (!themeData && commanderPayload && commanderPayload.default) {
+            themeData = commanderPayload.default;
+        }
+
+        // 4. Safe fallback if zero data was found
+        if (!themeData) {
+            themeData = { targets: {}, cards: [] };
         }
 
         const cmdrCount = commanderB ? 2 : 1;
