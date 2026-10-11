@@ -2256,7 +2256,7 @@
         <strong id="autobuild-deck-title" style="font-size: 14px; color: var(--commander-accent);">Deck Builder</strong>
         <span id="autobuild-count-badge" style="font-size: 13px; font-weight: 700; color: var(--accent);">0 Cards</span>
       </div>
-      <<div class="autobuild-sort-pill-group">
+      <div class="autobuild-sort-pill-group">
         <button type="button" class="autobuild-sort-btn active" data-view="cmc">CMC</button>
         <button type="button" class="autobuild-sort-btn" data-view="type">CARD TYPE</button>
         <button type="button" class="autobuild-sort-btn" data-view="split">Split (Creatures / Spells / Lands)</button>
@@ -5874,9 +5874,9 @@
         const stack = document.createElement('div');
         stack.className = 'shingle-stack';
 
-        list.forEach((entry, idx) => {
+       list.forEach((entry, idx) => {
           const badgeCount = (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(entry.name)) ? entry.count : null;
-          stack.appendChild(createShingleCardElement(entry.name, list.length - idx, badgeCount));
+          stack.appendChild(createShingleCardElement(entry.name, idx + 1, badgeCount));
         });
 
         col.appendChild(stack);
@@ -5932,7 +5932,7 @@
         stack.className = 'shingle-stack';
 
         list.forEach((entry, idx) => {
-          stack.appendChild(createShingleCardElement(entry.name, list.length - idx, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
+          stack.appendChild(createShingleCardElement(entry.name, idx + 1, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
         });
 
         col.appendChild(stack);
@@ -5990,9 +5990,9 @@
         const col = document.createElement('div');
         col.className = 'shingle-column';
         col.innerHTML = `<div class="shingle-col-header"><span>CMC ${cmc === '6' ? '6+' : cmc}</span><span>${list.length}</span></div>`;
-        const stack = document.createElement('div');
+       const stack = document.createElement('div');
         stack.className = 'shingle-stack';
-        list.forEach((entry, idx) => stack.appendChild(createShingleCardElement(entry.name, list.length - idx)));
+        list.forEach((entry, idx) => stack.appendChild(createShingleCardElement(entry.name, idx + 1)));
         col.appendChild(stack);
         creatureRow.appendChild(col);
       });
@@ -6007,7 +6007,7 @@
         col.innerHTML = `<div class="shingle-col-header"><span>CMC ${cmc === '6' ? '6+' : cmc}</span><span>${list.length}</span></div>`;
         const stack = document.createElement('div');
         stack.className = 'shingle-stack';
-        list.forEach((entry, idx) => stack.appendChild(createShingleCardElement(entry.name, list.length - idx)));
+        list.forEach((entry, idx) => stack.appendChild(createShingleCardElement(entry.name, idx + 1)));
         col.appendChild(stack);
         noncreatureRow.appendChild(col);
       });
@@ -6019,7 +6019,7 @@
       const landStack = document.createElement('div');
       landStack.className = 'shingle-stack';
       landsList.forEach((entry, idx) => {
-        landStack.appendChild(createShingleCardElement(entry.name, landsList.length - idx, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
+        landStack.appendChild(createShingleCardElement(entry.name, idx + 1, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
       });
       landsSidebar.appendChild(landStack);
 
