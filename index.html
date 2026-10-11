@@ -5762,7 +5762,8 @@
         syncSearchDeckState();
 
         autobuildModal.classList.remove('open');
-        document.getElementById('autobuild-deck-title').textContent = `${getActiveDeckTitle()} — ${selectedTheme.toUpperCase()}`;
+        const themeLabel = autobuildThemeSelect.options[autobuildThemeSelect.selectedIndex]?.textContent || selectedTheme;
+        document.getElementById('autobuild-deck-title').textContent = `${getActiveDeckTitle()} — ${themeLabel.toUpperCase()}`;
         autobuildScreen.classList.add('active');
 
         renderAutobuildCanvas();
