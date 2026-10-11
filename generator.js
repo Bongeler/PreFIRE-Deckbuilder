@@ -6,6 +6,7 @@ class PrefireDeckGenerator {
         this.staples = null;
         this.landsData = null;
         this.themeFallbacks = null;
+        this.cardColorMap = {};
 
         // Signature keywords and mechanics for theme filtration
         this.themeSignatures = {
@@ -82,17 +83,6 @@ class PrefireDeckGenerator {
                             this.cardColorMap[lName] = [col];
                         });
                     }
-                });
-            }
-        }
-    }
-
-            // Populate land color lookup from prefire-lands.json
-            if (this.landsData && this.landsData.utility && this.landsData.utility.colored_staples) {
-                Object.entries(this.landsData.utility.colored_staples).forEach(([col, list]) => {
-                    list.forEach(lName => {
-                        this.cardColorMap[lName] = [col];
-                    });
                 });
             }
         }
@@ -488,5 +478,13 @@ class PrefireDeckGenerator {
         if (!themeData) {
             themeData = { targets: {}, cards: [] };
         }
+
+        const cmdrCount = commanderB ? 2 : 1;
+        const spells = this.assembleSpells(themeData, actualSlug, commanderColors, cardCatalog);
+        const lands = this.assembleLands(commanderColors, actualSlug, spells, cardCatalog, cmdrCount);
+
+        return [...spells, ...lands];
+    }
+}
 
 window.PrefireDeckGenerator = PrefireDeckGenerator;
