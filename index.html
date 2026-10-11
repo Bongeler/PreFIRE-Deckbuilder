@@ -3873,6 +3873,13 @@ async function loadMoreThemeCommanders() {
       resultsGrid.innerHTML = '';
       resultsGrid.style.display = 'block';
 
+      const themeHeader = document.createElement('div');
+      themeHeader.className = 'partners-section-header';
+      themeHeader.style.marginTop = '0';
+      themeHeader.style.marginBottom = '14px';
+      themeHeader.textContent = `${chosenItem.label.toUpperCase()} (${soloNames.length})`;
+      resultsGrid.appendChild(themeHeader);
+
       const soloGrid = document.createElement('div');
       soloGrid.className = 'results-grid';
       resultsGrid.appendChild(soloGrid);
