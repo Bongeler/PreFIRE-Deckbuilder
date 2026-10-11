@@ -3771,11 +3771,20 @@
 
       const preSolo = chosenItem.prefire_solo || [];
       const postSolo = chosenItem.postfire_solo || chosenItem.post_fire_solo || [];
-      const prePartner = chosenItem.prefire_partner || [];
-      const postPartner = chosenItem.postfire_partner || chosenItem.post_fire_partner || [];
+      const [nameA, nameB] = pairStr.split('&').map(s => s.trim());
 
-      const soloNames = isPrefireOnly ? [...preSolo] : [...preSolo, ...postSolo];
+      clet rawSolo = isPrefireOnly ? [...preSolo] : [...preSolo, ...postSolo];
       const partnerPairs = isPrefireOnly ? [...prePartner] : [...prePartner, ...postPartner];
+
+      // Extract any accidental "&" partner strings inside solo lists into partnerPairs
+      const soloNames = [];
+      rawSolo.forEach(n => {
+        if (n.includes('&')) {
+          partnerPairs.push(n);
+        } else {
+          soloNames.push(n);
+        }
+      });
 
       showProgressBar(`Loading commanders for ${chosenItem.label}...`);
 
@@ -5320,6 +5329,7 @@
     }
 
     function getDirectScryfallImageUrl(name) {
+      if (!name) return '';
       const frontName = name.split('//')[0].trim();
       return `https://api.scryfall.com/cards/named?exact=${encodeURIComponent(frontName)}&format=image&version=normal`;
     }
