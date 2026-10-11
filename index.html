@@ -3719,8 +3719,14 @@
           return;
         }
 
-        const soloNames = isPrefireOnly ? chosenItem.prefire_solo : [...chosenItem.prefire_solo, ...chosenItem.postfire_solo];
-        const partnerPairs = isPrefireOnly ? chosenItem.prefire_partner : [...chosenItem.prefire_partner, ...chosenItem.postfire_partner];
+        const getList = (item, prefix) => {
+          const pre = item[`prefire_${prefix}`] || item[`pre_${prefix}`] || [];
+          const post = item[`postfire_${prefix}`] || item[`post_fire_${prefix}`] || item[`post_${prefix}`] || [];
+          return isPrefireOnly ? [...pre] : [...pre, ...post];
+        };
+
+        const soloNames = getList(chosenItem, 'solo');
+        const partnerPairs = getList(chosenItem, 'partner');
 
         showProgressBar(`Loading commanders for ${chosenItem.label}...`);
 
@@ -3831,7 +3837,13 @@
         if (typeof populateThemeDatalists === 'function') {
           populateThemeDatalists();
         }
-        executeSearch();
+        const themeVal = document.getElementById('cmdr-theme-input')?.value.trim();
+        const tribeVal = document.getElementById('cmdr-tribe-input')?.value.trim();
+        if ((themeVal || tribeVal) && document.getElementById('cmdr-theme-inputs-wrap')?.style.display !== 'none') {
+          document.getElementById('btn-apply-theme-filter').click();
+        } else {
+          executeSearch();
+        }
       });
     });
 
