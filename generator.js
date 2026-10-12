@@ -38,16 +38,18 @@ class PrefireDeckGenerator {
                 fallbacksData = await safeFetchJson("theme-fallbacks.json");
             }
 
-            const [roles, staples, lands] = await Promise.all([
+            const [roles, staples, lands, archetypes] = await Promise.all([
                 safeFetchJson("card-roles.json"),
                 safeFetchJson("prefire-staples.json"),
-                safeFetchJson("prefire-lands.json")
+                safeFetchJson("prefire-lands.json"),
+                safeFetchJson("archetype-index.json")
             ]);
 
             this.cardRoles = roles || {};
             this.staples = staples || {};
             this.landsData = lands || {};
             this.themeFallbacks = fallbacksData || {};
+            this.archetypeIndex = archetypes || {};
 
             // Base color lookup from staples
             if (this.staples) {
@@ -145,8 +147,42 @@ class PrefireDeckGenerator {
         return false;
     }
 
-    // Step A: Assemble 63 Non-Land Spells
-    assembleSpells(themeData, themeSlug, commanderColors, cardCatalog) {
+    getArchetypeCards(themeSlug, commanderColors, limit = 28) {
+        if (!this.archetypeIndex || !themeSlug || themeSlug === "default") {
+            return [];
+        }
+
+        const cleanSlug = this.cleanSlug(themeSlug);
+        let pool = this.archetypeIndex[cleanSlug];
+
+        if (!pool) {
+            const matchedKey = Object.keys(this.archetypeIndex).find(k =>
+                k.replace(/-/g, "") === cleanSlug.replace(/-/g, "") ||
+                cleanSlug.includes(k) ||
+                k.includes(cleanSlug)
+            );
+            if (matchedKey) {
+                pool = this.archetypeIndex[matchedKey];
+            }
+        }
+
+        if (!pool || !Array.isArray(pool)) {
+            return [];
+        }
+
+        const legal = pool.filter(card => {
+            if (!card.colors || card.colors.length === 0) return true;
+            return this.isColorLegal(card.colors, commanderColors);
+        });
+
+        return legal.slice(0, limit).map(c => c.name);
+    }
+
+    // Step A: Assemble Non-Land Spells (63 for single commander, 62 for partner pairs)
+    assembleSpells(themeData, themeSlug, commanderColors, cardCatalog, commanderCount = 1) {
+        const targetLandCount = (themeData && themeData.targets && themeData.targets.lands) ? themeData.targets.lands : 36;
+        const targetSpellsCount = 100 - commanderCount - targetLandCount;
+
         const targets = Object.assign({
             ramp: 10,
             removal_creature: 6,
@@ -155,7 +191,7 @@ class PrefireDeckGenerator {
             draw: 10
         }, themeData.targets || {});
 
-        const rawCards = themeData.cards || [];
+        const rawCards = (themeData.cards || []).map(c => typeof c === 'string' ? c : c.name);
         const onThemeCards = [];
         const genericCards = [];
 
@@ -168,7 +204,17 @@ class PrefireDeckGenerator {
             }
         }
 
-        const sourceCards = [...onThemeCards, ...genericCards];
+        // Pull top 28 archetype cards from global archetype index
+        const globalArchetypeCards = this.getArchetypeCards(themeSlug, commanderColors, 28);
+        const rawSource = Array.from(new Set([...globalArchetypeCards, ...onThemeCards, ...genericCards]));
+
+        // Exclude any lands from entering the spell pool
+        const sourceCards = rawSource.filter(name => {
+            const meta = cardCatalog[name];
+            const tLine = (meta && (meta.type || meta.type_line)) ? (meta.type || meta.type_line).toLowerCase() : "";
+            return !tLine.includes("land");
+        });
+
         const selected = new Set();
         const buckets = {
             ramp: [],
@@ -235,19 +281,19 @@ class PrefireDeckGenerator {
             spellList.push(...buckets[role]);
         }
 
-        // 3. Fallback: fill up to 63 from remaining candidates
-        if (spellList.length < 63) {
+        // 3. Fallback: fill up to targetSpellsCount from remaining candidates
+        if (spellList.length < targetSpellsCount) {
             for (const cardName of sourceCards) {
                 if (!selected.has(cardName)) {
                     spellList.push(cardName);
                     selected.add(cardName);
-                    if (spellList.length === 63) break;
+                    if (spellList.length === targetSpellsCount) break;
                 }
             }
         }
 
         // 4. Secondary fallback: fill from general on-color staples
-        if (spellList.length < 63) {
+        if (spellList.length < targetSpellsCount) {
             const allStaplePool = [];
             for (const r of backfillRoles) {
                 (this.staples[r] || []).forEach(c => {
@@ -260,12 +306,12 @@ class PrefireDeckGenerator {
                 if (!selected.has(name)) {
                     spellList.push(name);
                     selected.add(name);
-                    if (spellList.length === 63) break;
+                    if (spellList.length === targetSpellsCount) break;
                 }
             }
         }
 
-        return spellList.slice(0, 63);
+        return spellList.slice(0, targetSpellsCount);
     }
 
     // Step B: Calculate Land Base (Total deck target = 99)
@@ -274,103 +320,182 @@ class PrefireDeckGenerator {
         const colorCount = commanderColors.length;
         const totalLandTarget = 100 - commanderCount - nonLandSpells.length;
 
+        // Guaranteed basic land floors
+        let minBasics = 0;
+        if (colorCount === 1) minBasics = 16;
+        else if (colorCount === 2) minBasics = 8;
+        else if (colorCount === 3) minBasics = 6;
+        else if (colorCount >= 4) minBasics = colorCount;
+
+        const maxNonBasics = totalLandTarget - minBasics;
+
+        const MONO_ONLY_LANDS = new Set([
+            "nykthos, shrine to nyx",
+            "valakut, the molten pinnacle",
+            "cabal coffers",
+            "emeria, the sky ruin"
+        ]);
+
+        const ATTACK_ONLY_LANDS = new Set([
+            "slayers' stronghold",
+            "sunhome, fortress of the legion",
+            "hanweir battlements",
+            "flamekin village",
+            "kessig wolf run",
+            "rogue's passage",
+            "windbrisk heights"
+        ]);
+
+        // Evaluate live deck spell composition
+        let numArtifacts = 0;
+        let numCreatures = 0;
+        let requiresSnow = themeSlug === "snow";
+
+        for (const spellName of nonLandSpells) {
+            const meta = cardCatalog[spellName];
+            const tLine = (meta && (meta.type || meta.type_line)) ? (meta.type || meta.type_line).toLowerCase() : "";
+            const oText = (meta && meta.oracle_text) ? meta.oracle_text.toLowerCase() : "";
+            const lowerName = spellName.toLowerCase();
+
+            if (tLine.includes("artifact")) numArtifacts++;
+            if (tLine.includes("creature")) numCreatures++;
+
+            if (!requiresSnow) {
+                if (oText.includes("{s}") || oText.includes("snow-covered") || oText.includes("snow land") || oText.includes("snow permanent") || lowerName === "extraplanar lens") {
+                    requiresSnow = true;
+                }
+            }
+        }
+
+        const isPillowfortOrControl = themeSlug === "pillowfort" || themeSlug === "stax" || themeSlug === "control";
+
+        const tryAddLand = (landName) => {
+            if (!landName || lands.includes(landName)) return false;
+            if (lands.length >= maxNonBasics) return false;
+
+            const lower = landName.toLowerCase();
+
+            if (MONO_ONLY_LANDS.has(lower) && colorCount > 1) return false;
+            if (ATTACK_ONLY_LANDS.has(lower) && isPillowfortOrControl) return false;
+            if (lower === "academy ruins" && numArtifacts < 8 && themeSlug !== "artifacts" && themeSlug !== "cheerios") return false;
+            if (lower === "volrath's stronghold" && numCreatures < 15 && themeSlug !== "reanimator") return false;
+
+            const meta = cardCatalog[landName];
+            const landColors = (meta && meta.color_identity) ? meta.color_identity : this.cardColorMap[landName];
+            if (landColors && landColors.length > 0 && !this.isColorLegal(landColors, commanderColors)) {
+                return false;
+            }
+
+            lands.push(landName);
+            return true;
+        };
+
         // 1. Universal Fixers
         if (colorCount >= 2) {
-            lands.push(this.landsData.fixers.command_tower);
-            lands.push(this.landsData.fixers.city_of_brass);
-            lands.push(this.landsData.fixers.mana_confluence);
+            tryAddLand(this.landsData.fixers.command_tower);
+            tryAddLand(this.landsData.fixers.city_of_brass);
+            tryAddLand(this.landsData.fixers.mana_confluence);
+            tryAddLand(this.landsData.fixers.reflecting_pool);
         }
         if (colorCount >= 3) {
-            lands.push(this.landsData.fixers.exotic_orchard);
-            lands.push(this.landsData.fixers.reflecting_pool);
+            tryAddLand(this.landsData.fixers.exotic_orchard);
         }
 
-        // 2. Dual Cycles (Checks both orderings)
-        for (let i = 0; i < commanderColors.length; i++) {
-            for (let j = i + 1; j < commanderColors.length; j++) {
-                const c1 = commanderColors[i];
-                const c2 = commanderColors[j];
-                const key1 = `${c1}${c2}`;
-                const key2 = `${c2}${c1}`;
-
-                const duals = this.landsData.duals[key1] || this.landsData.duals[key2];
-                if (duals) {
-                    if (duals.shock) lands.push(duals.shock);
-                    if (duals.fetch) lands.push(duals.fetch);
-                    if (duals.check) lands.push(duals.check);
-                    if (duals.pain) lands.push(duals.pain);
-                    if (colorCount <= 3) {
-                        if (duals.filter) lands.push(duals.filter);
-                        if (duals.abur) lands.push(duals.abur);
+        // 2. Dual Cycles (Fetches, Shocks, ABUR, Checks, Pains, Filters)
+        const cyclesOrder = ["fetch", "shock", "abur", "check", "pain", "filter"];
+        for (const cycle of cyclesOrder) {
+            for (let i = 0; i < commanderColors.length; i++) {
+                for (let j = i + 1; j < commanderColors.length; j++) {
+                    const c1 = commanderColors[i];
+                    const c2 = commanderColors[j];
+                    const key1 = `${c1}${c2}`;
+                    const key2 = `${c2}${c1}`;
+                    const duals = this.landsData.duals[key1] || this.landsData.duals[key2];
+                    if (duals && duals[cycle]) {
+                        tryAddLand(duals[cycle]);
                     }
                 }
             }
         }
 
-        // 3. Tri-Lands for 3+ colors
-        if (colorCount >= 3) {
+        // 3. Tri-Lands for 3-color decks
+        if (colorCount === 3 && this.landsData.tri_lands) {
             for (const [triKey, triName] of Object.entries(this.landsData.tri_lands)) {
                 const triColors = triKey.split("");
                 if (triColors.every(c => commanderColors.includes(c))) {
-                    lands.push(triName);
+                    tryAddLand(triName);
                 }
             }
         }
 
-        // 4. Utility Lands with Colorless Quota Cap
-        const colorlessCaps = { 0: 36, 1: 7, 2: 4, 3: 2, 4: 1, 5: 0 };
-        const maxColorless = colorlessCaps[colorCount] ?? 1;
-        let colorlessCount = 0;
-
-        const themeLands = (this.landsData.utility && this.landsData.utility.theme_specific && this.landsData.utility.theme_specific[themeSlug]) || [];
-        for (const lName of themeLands) {
-            const meta = cardCatalog[lName];
-            const landColors = (meta && meta.color_identity) ? meta.color_identity : this.cardColorMap[lName];
-
-            // If color info exists, enforce legality; otherwise only permit if colorless
-            if (landColors && landColors.length > 0) {
-                if (!this.isColorLegal(landColors, commanderColors)) continue;
-            }
-
-            const isColorless = !landColors || landColors.length === 0;
-            if (isColorless && colorlessCount >= maxColorless) continue;
-
-            if (!lands.includes(lName)) {
-                lands.push(lName);
-                if (isColorless) colorlessCount++;
-            }
-        }
-
-        if (colorCount <= 2 && this.landsData.utility && this.landsData.utility.colored_staples) {
-            for (const color of commanderColors) {
-                const staples = this.landsData.utility.colored_staples[color] || [];
-                for (const lName of staples) {
-                    if (!lands.includes(lName)) {
-                        lands.push(lName);
-                        break;
+        // 4. Guild Utility Lands (2 to 3 colors)
+        if (colorCount >= 2 && colorCount <= 3 && this.landsData.utility && this.landsData.utility.guild_utility) {
+            for (let i = 0; i < commanderColors.length; i++) {
+                for (let j = i + 1; j < commanderColors.length; j++) {
+                    const key1 = `${commanderColors[i]}${commanderColors[j]}`;
+                    const key2 = `${commanderColors[j]}${commanderColors[i]}`;
+                    const guildLands = this.landsData.utility.guild_utility[key1] || this.landsData.utility.guild_utility[key2] || [];
+                    for (const lName of guildLands) {
+                        tryAddLand(lName);
                     }
                 }
             }
         }
 
-        // 5. Basic Land Allocation Proportional to Pips
+        // 5. Theme-Specific Utility Lands
+        const themeLands = (this.landsData.utility && this.landsData.utility.theme_specific && this.landsData.utility.theme_specific[themeSlug]) || [];
+        for (const lName of themeLands) {
+            tryAddLand(lName);
+        }
+
+        // 6. Colored Staples
+        if (this.landsData.utility && this.landsData.utility.colored_staples) {
+            for (const color of commanderColors) {
+                const staples = this.landsData.utility.colored_staples[color] || [];
+                for (const lName of staples) {
+                    tryAddLand(lName);
+                }
+            }
+        }
+
+        // 7. Generic Colorless Utility (Cap at 2 for 3-color, 4 for mono/2-color, 0 for 4-5 color)
+        const colorlessCaps = { 0: 36, 1: 4, 2: 4, 3: 2, 4: 0, 5: 0 };
+        const maxColorless = colorlessCaps[colorCount] ?? 0;
+        let colorlessCount = 0;
+        const genericColorless = (this.landsData.utility && this.landsData.utility.generic_colorless) || [];
+        for (const item of genericColorless) {
+            if (colorlessCount >= maxColorless) break;
+            const uName = typeof item === "string" ? item : item.name;
+            if (tryAddLand(uName)) {
+                colorlessCount++;
+            }
+        }
+
+        // 8. Basic Land Allocation Proportional to Pips
         const remainingSlots = Math.max(totalLandTarget - lands.length, 1);
         
         if (colorCount === 0) {
-            for (let i = 0; i < remainingSlots; i++) {
-                lands.push("Wastes");
-            }
+            for (let i = 0; i < remainingSlots; i++) lands.push("Wastes");
             return lands;
         }
+
+        const prefix = requiresSnow ? "Snow-Covered " : "";
+        const basicNames = {
+            W: `${prefix}Plains`,
+            U: `${prefix}Island`,
+            B: `${prefix}Swamp`,
+            R: `${prefix}Mountain`,
+            G: `${prefix}Forest`
+        };
 
         const pipCounts = { W: 0, U: 0, B: 0, R: 0, G: 0 };
         let totalPips = 0;
 
         for (const spellName of nonLandSpells) {
             const card = cardCatalog[spellName];
-            if (!card || !card.mana_cost) continue;
-
-            const matches = card.mana_cost.match(/\{([WUBRG])\}/g) || [];
+            if (!card) continue;
+            const costStr = card.mana_cost || card.manaCost || "";
+            const matches = costStr.match(/\{([WUBRG])\}/g) || [];
             for (const m of matches) {
                 const color = m.replace(/[\{\}]/g, "");
                 if (pipCounts[color] !== undefined) {
@@ -379,14 +504,6 @@ class PrefireDeckGenerator {
                 }
             }
         }
-
-        const basicNames = {
-            W: "Plains",
-            U: "Island",
-            B: "Swamp",
-            R: "Mountain",
-            G: "Forest"
-        };
 
         if (totalPips === 0) {
             const split = Math.floor(remainingSlots / colorCount);
@@ -480,7 +597,7 @@ class PrefireDeckGenerator {
         }
 
         const cmdrCount = commanderB ? 2 : 1;
-        const spells = this.assembleSpells(themeData, actualSlug, commanderColors, cardCatalog);
+        const spells = this.assembleSpells(themeData, actualSlug, commanderColors, cardCatalog, cmdrCount);
         const lands = this.assembleLands(commanderColors, actualSlug, spells, cardCatalog, cmdrCount);
 
         return [...spells, ...lands];

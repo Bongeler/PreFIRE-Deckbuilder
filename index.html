@@ -5859,12 +5859,32 @@ async function loadMoreThemeCommanders() {
           exportLines.push(`1 ${cmdr.name}`);
         });
         exportLines.push('');
-        exportLines.push('// Deck');
       }
 
+      const spells = [];
+      const lands = [];
+
       cardNames.forEach(name => {
-        exportLines.push(`${deck[name].count} ${name}`);
+        const item = deck[name];
+        const isLand = (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(name)) || 
+                       (item && item.type_line && item.type_line.toLowerCase().includes('land'));
+        if (isLand) {
+          lands.push(`${item.count} ${name}`);
+        } else {
+          spells.push(`${item.count} ${name}`);
+        }
       });
+
+      if (spells.length > 0) {
+        exportLines.push(`// Spells (${spells.reduce((acc, s) => acc + parseInt(s, 10), 0)})`);
+        exportLines.push(...spells);
+        exportLines.push('');
+      }
+
+      if (lands.length > 0) {
+        exportLines.push(`// Lands (${lands.reduce((acc, l) => acc + parseInt(l, 10), 0)})`);
+        exportLines.push(...lands);
+      }
 
       const exportText = exportLines.join('\n');
       navigator.clipboard.writeText(exportText).then(() => {
@@ -5949,14 +5969,29 @@ async function loadMoreThemeCommanders() {
         defaultOption.textContent = 'Default / High Synergy';
         autobuildThemeSelect.appendChild(defaultOption);
 
-        if (loadedCommanderThemesData.themes) {
-          Object.keys(loadedCommanderThemesData.themes).forEach(tSlug => {
-            const tObj = loadedCommanderThemesData.themes[tSlug];
+        const appendThemeOptions = (sourceObj, prefix = "") => {
+          if (!sourceObj) return;
+          Object.keys(sourceObj).forEach(tSlug => {
+            const item = sourceObj[tSlug];
             const opt = document.createElement('option');
             opt.value = tSlug;
-            opt.textContent = tObj.label || tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            const displayLabel = item.label || tSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            opt.textContent = prefix ? `${prefix}: ${displayLabel}` : displayLabel;
             autobuildThemeSelect.appendChild(opt);
           });
+        };
+
+        if (loadedCommanderThemesData) {
+          if (loadedCommanderThemesData.themes) appendThemeOptions(loadedCommanderThemesData.themes);
+          if (loadedCommanderThemesData.tribes) appendThemeOptions(loadedCommanderThemesData.tribes, "Tribe");
+        }
+
+        // Auto-select whatever theme or tribe was already active in the search header
+        const activeThemeSearch = document.getElementById('cmdr-theme-select')?.value;
+        const activeTribeSearch = document.getElementById('cmdr-tribe-select')?.value;
+        const preselected = activeThemeSearch || activeTribeSearch;
+        if (preselected && autobuildThemeSelect.querySelector(`option[value="${preselected}"]`)) {
+          autobuildThemeSelect.value = preselected;
         }
 
         btnExecuteAutobuild.disabled = false;
@@ -6058,6 +6093,19 @@ async function loadMoreThemeCommanders() {
           catalog[name] = { mana_cost: deck[name].mana_cost, cmc: deck[name].cmc, type_line: deck[name].type_line };
         });
 
+        // Seed catalog with cached metadata for known staples and lands
+        if (cardMetadataCache) {
+          Object.keys(cardMetadataCache).forEach(k => {
+            if (!catalog[k]) {
+              catalog[k] = {
+                mana_cost: cardMetadataCache[k].mana_cost || '',
+                cmc: cardMetadataCache[k].cmc || 0,
+                type_line: cardMetadataCache[k].type_line || ''
+              };
+            }
+          });
+        }
+
         const generatedCards = await gen.generate(primary.name, secondary ? secondary.name : null, selectedTheme, catalog);
 
         autobuildStatusText.textContent = 'Loading card images & types...';
@@ -6126,7 +6174,11 @@ async function loadMoreThemeCommanders() {
       });
     });
 
-    const BASIC_LAND_NAMES = new Set(["Plains", "Island", "Swamp", "Mountain", "Forest", "Wastes"]);
+    const BASIC_LAND_NAMES = new Set([
+      "Plains", "Island", "Swamp", "Mountain", "Forest", "Wastes",
+      "Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", 
+      "Snow-Covered Mountain", "Snow-Covered Forest"
+    ]);
 
     function createShingleCardElement(cardName, zIndex, countBadge = null) {
       const item = deck[cardName] || { faces: [getDirectScryfallImageUrl(cardName)] };
