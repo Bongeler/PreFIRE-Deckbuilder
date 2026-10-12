@@ -249,20 +249,37 @@ class PrefireDeckGenerator {
             return 0;
         };
 
-        // 2. FILL THEME CARDS FIRST
-        cmdrThemeCards.sort(typePrioritySort);
-        for (const name of cmdrThemeCards) {
+        // Combine commander-specific cards and global archetype index into a unified theme pool
+        const unifiedThemePool = Array.from(new Set([...globalArchCards, ...cmdrThemeCards]));
+
+        // Target minimum type floor (e.g. 30 enchantments for enchantress)
+        let minTargetType = 0;
+        if (isEnchantTheme) minTargetType = 30;
+        else if (isArtifactTheme) minTargetType = 28;
+
+        // Pass 1: Ingest all cards matching the archetype's core card type first
+        if (minTargetType > 0) {
+            const pureTypeMatches = unifiedThemePool.filter(name => {
+                const tLine = this.getCardTypeLine(name, cardCatalog);
+                if (isEnchantTheme && tLine.includes("enchantment")) return true;
+                if (isArtifactTheme && tLine.includes("artifact")) return true;
+                return false;
+            });
+
+            for (const name of pureTypeMatches) {
+                if (selected.size >= targetSpellsCount) break;
+                selected.add(name);
+            }
+        }
+
+        // Pass 2: Fill remaining slots with the highest-ranked thematic cards
+        unifiedThemePool.sort(typePrioritySort);
+        for (const name of unifiedThemePool) {
             if (selected.size >= targetSpellsCount) break;
             selected.add(name);
         }
 
-        globalArchCards.sort(typePrioritySort);
-        for (const name of globalArchCards) {
-            if (selected.size >= targetSpellsCount) break;
-            selected.add(name);
-        }
-
-        // 3. FILL REMAINING SLOTS WITH STAPLES STRICTLY AS LAST RESORT
+        // Pass 3: Staples strictly as last resort if theme pool had fewer than 63 cards
         if (selected.size < targetSpellsCount) {
             const roles = ["ramp", "draw", "removal_creature", "removal_noncreature", "board_wipe"];
             const staplePool = [];
