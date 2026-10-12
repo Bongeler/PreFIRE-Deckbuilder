@@ -196,7 +196,7 @@ class PrefireDeckGenerator {
         return legal.slice(0, limit).map(c => typeof c === 'string' ? c : c.name);
     }
 
-    // Step A: Assemble Non-Land Spells with Universal Thematic Double-Duty Priority
+    // Step A: Assemble Non-Land Spells with Balanced Distribution and On-Theme Functional Quotas
     assembleSpells(themeData, themeSlug, commanderColors, cardCatalog, commanderCount = 1) {
         const dist = (themeData && themeData.distribution) ? themeData.distribution : {};
         const targetLandCount = (typeof dist.lands === 'number') ? dist.lands : ((themeData && themeData.targets && themeData.targets.lands) ? themeData.targets.lands : 36);
@@ -246,23 +246,36 @@ class PrefireDeckGenerator {
             const text = (meta.oracle_text || meta.text || "").toLowerCase();
             const lowerName = name.toLowerCase();
 
-            // Permanent archetype lines
             if ((clean.includes("enchant") || clean === "auras") && tLine.includes("enchantment")) return true;
             if ((clean.includes("artifact") || clean === "equipment" || clean === "cheerios") && tLine.includes("artifact")) return true;
             if (clean.includes("spellslinger") && (tLine.includes("instant") || tLine.includes("sorcery"))) return true;
 
-            // Tribal types
             const singularTribe = clean.replace(/s$/, "");
             if (tLine.includes(clean) || tLine.includes(singularTribe)) return true;
 
-            // Mechanically linked keywords
             const keywords = this.themeSignatures[clean] || [clean.replace(/-/g, " ")];
             if (keywords.some(kw => lowerName.includes(kw) || text.includes(kw))) return true;
 
             return false;
         };
 
-        // 1. Gather all candidates from commander payload and archetype index
+        // Determine target quotas
+        const empRoles = (themeData && themeData.roles) ? themeData.roles : {};
+        const empTargets = (themeData && themeData.targets) ? themeData.targets : {};
+        const quotas = {
+            ramp: empRoles.ramp || empTargets.ramp || 10,
+            draw: empRoles.draw || empTargets.draw || 10,
+            removal_creature: empRoles.removal_creature || empTargets.removal_creature || 5,
+            removal_noncreature: empRoles.removal_noncreature || empTargets.removal_noncreature || 3,
+            board_wipe: empRoles.wipes || empTargets.board_wipe || 3
+        };
+
+        // Target archetype permanent floor
+        const isEnchantTheme = themeSlug.includes("enchant") || themeSlug === "auras";
+        const isArtifactTheme = themeSlug.includes("artifact") || themeSlug === "equipment" || themeSlug === "cheerios";
+        const targetArchetypeDensity = isEnchantTheme ? 30 : (isArtifactTheme ? 26 : 0);
+
+        // Gather candidate pools
         let rawThemeList = [];
         if (Array.isArray(themeData)) {
             rawThemeList = themeData;
@@ -276,7 +289,20 @@ class PrefireDeckGenerator {
 
         const cmdrThemeCards = rawThemeList.map(c => typeof c === 'string' ? c : (c.name || "")).filter(isLegalSpell);
         const globalArchCards = this.getArchetypeCards(themeSlug, commanderColors, 150).filter(isLegalSpell);
-        const unifiedThemePool = Array.from(new Set([...globalArchCards, ...cmdrThemeCards]));
+        const unifiedThemePool = Array.from(new Set([...cmdrThemeCards, ...globalArchCards]));
+
+        // Gather format staples pool
+        const staplePool = [];
+        for (const roleList of Object.values(this.staples)) {
+            if (Array.isArray(roleList)) {
+                for (const item of roleList) {
+                    const name = typeof item === 'string' ? item : (item.name || "");
+                    if (isLegalSpell(name) && !staplePool.includes(name)) {
+                        staplePool.push(name);
+                    }
+                }
+            }
+        }
 
         const selected = new Set();
         const roleBuckets = {
@@ -287,81 +313,77 @@ class PrefireDeckGenerator {
             board_wipe: 0
         };
 
-        const quotas = {
-            ramp: (themeData && themeData.targets && themeData.targets.ramp) || 10,
-            draw: (themeData && themeData.targets && themeData.targets.draw) || 10,
-            removal_creature: (themeData && themeData.targets && themeData.targets.removal_creature) || 5,
-            removal_noncreature: (themeData && themeData.targets && themeData.targets.removal_noncreature) || 3,
-            board_wipe: (themeData && themeData.targets && themeData.targets.board_wipe) || 2
+        let archetypePermanentCount = 0;
+
+        const checkArchetypePermanent = (name) => {
+            const tLine = this.getCardTypeLine(name, cardCatalog);
+            if (isEnchantTheme && tLine.includes("enchantment")) return true;
+            if (isArtifactTheme && tLine.includes("artifact")) return true;
+            return false;
         };
 
-        // Rank candidates: theme synergy + functional role bonus
-        const scoreCandidate = (name) => {
-            let score = 0;
-            const aligned = isThemeAligned(name);
-            const roles = detectCardRoles(name);
-
-            if (aligned) score += 100;
-            if (cmdrThemeCards.includes(name)) score += 30;
-
-            for (const r of roles) {
-                if (quotas[r] && roleBuckets[r] < quotas[r]) {
-                    score += aligned ? 50 : 15;
-                }
-            }
-
-            return score;
-        };
-
-        unifiedThemePool.sort((a, b) => scoreCandidate(b) - scoreCandidate(a));
-
-        // Pass 1: Ingest theme-aligned double-duty cards and core theme pieces
-        for (const name of unifiedThemePool) {
-            if (selected.size >= targetSpellsCount) break;
+        const addCardToDeck = (name) => {
+            if (selected.has(name) || selected.size >= targetSpellsCount) return false;
             selected.add(name);
+            if (checkArchetypePermanent(name)) archetypePermanentCount++;
             for (const r of detectCardRoles(name)) {
                 if (roleBuckets[r] !== undefined) roleBuckets[r]++;
             }
-        }
+            return true;
+        };
 
-        // Pass 2: Backfill any role deficits prioritizing theme-aligned candidates
+        // PASS 1: Fill functional quotas prioritizing theme-aligned / double-duty cards
         for (const [role, quota] of Object.entries(quotas)) {
-            let needed = quota - (roleBuckets[role] || 0);
+            let needed = quota - roleBuckets[role];
             if (needed <= 0) continue;
 
-            const roleCandidates = unifiedThemePool.filter(name => !selected.has(name) && detectCardRoles(name).includes(role));
+            // Sort: 1st on-theme + role, 2nd commander file + role, 3rd generic staples + role
+            const roleCandidates = [...unifiedThemePool, ...staplePool].filter(name =>
+                !selected.has(name) && detectCardRoles(name).includes(role)
+            );
+
+            roleCandidates.sort((a, b) => {
+                const aTheme = isThemeAligned(a) ? 100 : (cmdrThemeCards.includes(a) ? 50 : 0);
+                const bTheme = isThemeAligned(b) ? 100 : (cmdrThemeCards.includes(b) ? 50 : 0);
+                return bTheme - aTheme;
+            });
+
             for (const name of roleCandidates) {
                 if (needed <= 0 || selected.size >= targetSpellsCount) break;
-                selected.add(name);
-                roleBuckets[role]++;
-                needed--;
+                if (addCardToDeck(name)) {
+                    needed--;
+                }
             }
         }
 
-        // Pass 3: Fill any remaining open slots with format staples strictly as a last resort
-        if (selected.size < targetSpellsCount) {
-            const staplePool = [];
-            for (const roleList of Object.values(this.staples)) {
-                if (Array.isArray(roleList)) {
-                    for (const item of roleList) {
-                        const name = typeof item === 'string' ? item : (item.name || "");
-                        if (isLegalSpell(name) && !selected.has(name)) {
-                            staplePool.push(name);
-                        }
-                    }
-                }
-            }
+        // PASS 2: Ingest core thematic engine cards up to archetype density floor
+        if (targetArchetypeDensity > 0) {
+            const pureArchPermanents = unifiedThemePool.filter(name =>
+                !selected.has(name) && checkArchetypePermanent(name)
+            );
 
-            staplePool.sort((a, b) => {
-                const aBonus = isThemeAligned(a) ? 50 : 0;
-                const bBonus = isThemeAligned(b) ? 50 : 0;
-                return bBonus - aBonus;
-            });
-
-            for (const name of staplePool) {
-                if (selected.size >= targetSpellsCount) break;
-                selected.add(name);
+            for (const name of pureArchPermanents) {
+                if (archetypePermanentCount >= targetArchetypeDensity || selected.size >= targetSpellsCount) break;
+                addCardToDeck(name);
             }
+        }
+
+        // PASS 3: Fill remaining open slots from the commander's synergy pool
+        for (const name of cmdrThemeCards) {
+            if (selected.size >= targetSpellsCount) break;
+            addCardToDeck(name);
+        }
+
+        // PASS 4: Fill remaining open slots from global archetype candidates
+        for (const name of globalArchCards) {
+            if (selected.size >= targetSpellsCount) break;
+            addCardToDeck(name);
+        }
+
+        // PASS 5: Fill any remaining open slots with highest-ranked generic staples
+        for (const name of staplePool) {
+            if (selected.size >= targetSpellsCount) break;
+            addCardToDeck(name);
         }
 
         return Array.from(selected).slice(0, targetSpellsCount);
