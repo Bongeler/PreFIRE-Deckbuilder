@@ -3829,7 +3829,11 @@ async function loadMoreThemeCommanders() {
         cards.forEach(c => cardMap.set(c.name.toLowerCase(), c));
 
         nextBatch.forEach(name => {
-          const cardObj = cardMap.get(name.toLowerCase()) || cards.find(c => c.name.toLowerCase().startsWith(name.toLowerCase()));
+          const cleanTarget = name.toLowerCase().trim();
+          const cardObj = cardMap.get(cleanTarget) || cards.find(c => {
+            const cName = c.name.toLowerCase().trim();
+            return cName === cleanTarget || cName.startsWith(cleanTarget + ' ') || cName.split(' // ')[0] === cleanTarget;
+          });
           if (cardObj && activeThemeQueue.soloGrid) {
             const el = createCardElement(cardObj);
             if (el) activeThemeQueue.soloGrid.appendChild(el);
@@ -3867,6 +3871,10 @@ async function loadMoreThemeCommanders() {
       const postSolo = chosenItem.postfire_solo || chosenItem.post_fire_solo || [];
       const prePartner = chosenItem.prefire_partner || [];
       const postPartner = chosenItem.postfire_partner || chosenItem.post_fire_partner || [];
+
+      // If Pre-FIRE is active, filter strictly to prefire arrays; otherwise use all legal
+      let rawSolo = isPrefireOnly ? [...preSolo] : [...postSolo, ...preSolo];
+      const partnerPairs = isPrefireOnly ? [...prePartner] : [...postPartner, ...prePartner];
 
       // Combine pools if 'All Legal'
       let rawSolo = isPrefireOnly ? [...preSolo] : [...postSolo, ...preSolo];
@@ -3918,7 +3926,11 @@ async function loadMoreThemeCommanders() {
         soloCards.forEach(c => cardMap.set(c.name.toLowerCase(), c));
 
         firstBatch.forEach(name => {
-          const cardObj = cardMap.get(name.toLowerCase()) || soloCards.find(c => c.name.toLowerCase().startsWith(name.toLowerCase()));
+          const cleanTarget = name.toLowerCase().trim();
+          const cardObj = cardMap.get(cleanTarget) || soloCards.find(c => {
+            const cName = c.name.toLowerCase().trim();
+            return cName === cleanTarget || cName.startsWith(cleanTarget + ' ') || cName.split(' // ')[0] === cleanTarget;
+          });
           if (cardObj) {
             const el = createCardElement(cardObj);
             if (el) soloGrid.appendChild(el);
@@ -4107,19 +4119,19 @@ async function loadMoreThemeCommanders() {
 
         const themeSelect = document.getElementById('cmdr-theme-select');
         const tribeSelect = document.getElementById('cmdr-tribe-select');
-        const currentThemeSlug = themeSelect ? themeSelect.value : '';
-        const currentTribeSlug = tribeSelect ? tribeSelect.value : '';
+        const savedTheme = themeSelect ? themeSelect.value : '';
+        const savedTribe = tribeSelect ? tribeSelect.value : '';
 
         if (typeof populateThemeDatalists === 'function') {
           populateThemeDatalists();
         }
 
-        if (currentThemeSlug) {
-          if (themeSelect) themeSelect.value = currentThemeSlug;
-          triggerThemeFilterSelection(currentThemeSlug, false);
-        } else if (currentTribeSlug) {
-          if (tribeSelect) tribeSelect.value = currentTribeSlug;
-          triggerThemeFilterSelection(currentTribeSlug, true);
+        if (savedTheme) {
+          if (themeSelect) themeSelect.value = savedTheme;
+          triggerThemeFilterSelection(savedTheme, false);
+        } else if (savedTribe) {
+          if (tribeSelect) tribeSelect.value = savedTribe;
+          triggerThemeFilterSelection(savedTribe, true);
         } else {
           executeSearch();
         }
