@@ -3874,9 +3874,6 @@ async function loadMoreThemeCommanders() {
         }
       });
 
-      // Sort the full commander name list alphabetically before slicing
-      soloNames.sort((a, b) => a.localeCompare(b));
-
       const resultsGrid = document.getElementById('results-grid');
       resultsGrid.innerHTML = '';
       resultsGrid.style.display = 'block';
@@ -3923,9 +3920,6 @@ async function loadMoreThemeCommanders() {
 
         const partnerGrid = document.createElement('div');
         partnerGrid.className = 'results-grid';
-
-        // Sort partner pairs alphabetically
-        partnerPairs.sort((a, b) => a.localeCompare(b));
 
         partnerPairs.forEach(pairStr => {
           const [nameA, nameB] = pairStr.split('&').map(s => s.trim());
