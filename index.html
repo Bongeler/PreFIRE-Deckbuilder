@@ -2572,15 +2572,16 @@
     const btnMobileRandomizeAgain = document.getElementById('btn-mobile-randomize-again');
     const btnMobileSelectCommander = document.getElementById('btn-mobile-select-commander');
 
+    let activeThemeCache = null;
     let activeThemeQueue = {
-      names: [],
+      displayedCards: [],
       currentIndex: 0,
       soloGrid: null
     };
 
     btnLoadMore.addEventListener('click', () => {
-      if (activeThemeQueue.names.length > 0) {
-        loadMoreThemeCommanders();
+      if (activeThemeCache && activeThemeQueue.displayedCards.length > 0) {
+        loadMoreCachedThemeCommanders();
       } else if (nextSearchPageUrl) {
         loadMoreScryfall();
       }
@@ -3708,6 +3709,7 @@
         isPartnerSearchMode = false;
         activePartnerQuery = '';
         activePartnerType = '';
+        activeThemeCache = null;
       }
       const searchBtn = document.getElementById('btn-search');
       const cmdrToggleGroup = document.getElementById('cmdr-pool-toggle-group');
@@ -3810,154 +3812,83 @@ async function fetchCollectionChunk(chunkNames) {
       return [];
     }
 
-async function loadMoreThemeCommanders() {
-      if (activeThemeQueue.currentIndex >= activeThemeQueue.names.length) {
-        loadMoreWrap.style.display = 'none';
-        return;
+function matchesColorFilters(card) {
+      const activeToggles = Array.from(document.querySelectorAll('.color-toggle.active')).map(btn => btn.dataset.color);
+      if (activeToggles.length === 0) return true;
+
+      const colored = activeToggles.filter(c => c !== 'C');
+      const hasColorless = activeToggles.includes('C');
+      const matchAllColors = document.getElementById('match-all-colors').checked;
+      const cardId = card.color_identity || [];
+
+      if (activeToggles.length === 1 && hasColorless) {
+        return cardId.length === 0;
       }
-
-      btnLoadMore.disabled = true;
-      btnLoadMore.textContent = 'Loading...';
-      showProgressBar(`Loading next commanders...`);
-
-      const nextBatch = activeThemeQueue.names.slice(activeThemeQueue.currentIndex, activeThemeQueue.currentIndex + 75);
-      try {
-        const cards = await fetchCollectionChunk(nextBatch);
-        activeThemeQueue.currentIndex += nextBatch.length;
-
-        const cardMap = new Map();
-        cards.forEach(c => cardMap.set(c.name.toLowerCase(), c));
-
-        nextBatch.forEach(name => {
-          const cleanTarget = name.toLowerCase().trim();
-          const cardObj = cardMap.get(cleanTarget) || cards.find(c => {
-            const cName = c.name.toLowerCase().trim();
-            return cName === cleanTarget || cName.startsWith(cleanTarget + ' ') || cName.split(' // ')[0] === cleanTarget;
-          });
-          if (cardObj && activeThemeQueue.soloGrid) {
-            const el = createCardElement(cardObj);
-            if (el) activeThemeQueue.soloGrid.appendChild(el);
-          }
-        });
-      } catch (err) {
-        console.error("Failed to load more theme commanders:", err);
-      } finally {
-        hideProgressBar();
-        btnLoadMore.disabled = false;
-        btnLoadMore.textContent = 'Load More';
+      if (colored.length > 0) {
+        if (matchAllColors) {
+          return colored.every(c => cardId.includes(c)) && cardId.every(c => colored.includes(c));
+        } else {
+          const subset = cardId.every(c => colored.includes(c));
+          if (!subset) return false;
+          if (!hasColorless && cardId.length === 0) return false;
+          return true;
+        }
       }
-
-      if (activeThemeQueue.currentIndex < activeThemeQueue.names.length) {
-        loadMoreWrap.style.display = 'flex';
-      } else {
-        loadMoreWrap.style.display = 'none';
-      }
+      return true;
     }
 
-    async function triggerThemeFilterSelection(selectedSlug, isTribe = false) {
-      if (!commanderThemeIndex) {
-        await loadCommanderThemeIndex();
-      }
-      if (!commanderThemeIndex || !selectedSlug) return;
-
-      nextSearchPageUrl = null;
+    function renderFilteredThemeCards() {
+      if (!activeThemeCache) return;
 
       const isPrefireOnly = (commanderPoolMode === 'prefire');
-      const bucket = isTribe ? commanderThemeIndex.tribes : commanderThemeIndex.themes;
-      const chosenItem = bucket[selectedSlug];
-      if (!chosenItem) return;
-
-      const preSolo = chosenItem.prefire_solo || [];
-      const postSolo = chosenItem.postfire_solo || chosenItem.post_fire_solo || [];
-      const prePartner = chosenItem.prefire_partner || [];
-      const postPartner = chosenItem.postfire_partner || chosenItem.post_fire_partner || [];
-
-      let rawSolo = [];
-      let partnerPairs = [];
-
-      if (isPrefireOnly) {
-        // Pre-FIRE: strictly use Pre-FIRE pools
-        rawSolo = [...preSolo];
-        partnerPairs = [...prePartner];
-      } else {
-        // All Legal: merge both pools
-        rawSolo = [...postSolo, ...preSolo];
-        partnerPairs = [...postPartner, ...prePartner];
-      }
-
-      const soloNames = [];
-      const seenSolo = new Set();
-      rawSolo.forEach(n => {
-        const clean = n.trim();
-        if (clean.includes('&')) {
-          if (!partnerPairs.includes(clean)) partnerPairs.push(clean);
-        } else if (!seenSolo.has(clean.toLowerCase())) {
-          seenSolo.add(clean.toLowerCase());
-          soloNames.push(clean);
-        }
-      });
-
       const resultsGrid = document.getElementById('results-grid');
       resultsGrid.innerHTML = '';
       resultsGrid.style.display = 'block';
+
+      let sourceSolo = isPrefireOnly ? activeThemeCache.preSoloCards : activeThemeCache.allSoloCards;
+      let sourcePartners = isPrefireOnly ? activeThemeCache.prePartnerPairs : activeThemeCache.allPartnerPairs;
+
+      const filteredSolo = sourceSolo.filter(c => matchesColorFilters(c));
+      const filteredPartners = sourcePartners.filter(pair => {
+        const [cA, cB] = pair;
+        const combId = Array.from(new Set([...(cA.color_identity || []), ...(cB.color_identity || [])]));
+        return matchesColorFilters({ color_identity: combId });
+      });
 
       const themeHeader = document.createElement('div');
       themeHeader.className = 'partners-section-header';
       themeHeader.style.marginTop = '0';
       themeHeader.style.marginBottom = '14px';
-      themeHeader.textContent = `${chosenItem.label.toUpperCase()} (${soloNames.length})`;
+      themeHeader.textContent = `${activeThemeCache.label.toUpperCase()} (${filteredSolo.length})`;
       resultsGrid.appendChild(themeHeader);
 
       const soloGrid = document.createElement('div');
       soloGrid.className = 'results-grid';
       resultsGrid.appendChild(soloGrid);
 
-      // Initialize pagination queue for solo commanders
       activeThemeQueue = {
-        names: soloNames,
+        displayedCards: filteredSolo,
         currentIndex: 0,
         soloGrid: soloGrid
       };
 
-      const firstBatch = soloNames.slice(0, 75);
-      showProgressBar(`Loading commanders for ${chosenItem.label} (1-${Math.min(75, soloNames.length)} of ${soloNames.length})...`);
+      const initialBatch = filteredSolo.slice(0, 75);
+      initialBatch.forEach(c => {
+        const el = createCardElement(c);
+        if (el) soloGrid.appendChild(el);
+      });
+      activeThemeQueue.currentIndex = initialBatch.length;
 
-      try {
-        const soloCards = await fetchCollectionChunk(firstBatch);
-        activeThemeQueue.currentIndex = firstBatch.length;
-
-        // Maintain popularity order defined in the index
-        const cardMap = new Map();
-        soloCards.forEach(c => cardMap.set(c.name.toLowerCase(), c));
-
-        firstBatch.forEach(name => {
-          const cleanTarget = name.toLowerCase().trim();
-          const cardObj = cardMap.get(cleanTarget) || soloCards.find(c => {
-            const cName = c.name.toLowerCase().trim();
-            return cName === cleanTarget || cName.startsWith(cleanTarget + ' ') || cName.split(' // ')[0] === cleanTarget;
-          });
-          if (cardObj) {
-            const el = createCardElement(cardObj);
-            if (el) soloGrid.appendChild(el);
-          }
-        });
-      } catch (err) {
-        console.error("Failed to load solo theme cards:", err);
-      } finally {
-        hideProgressBar();
-      }
-
-      if (partnerPairs.length > 0) {
+      if (filteredPartners.length > 0) {
         const pHeader = document.createElement('div');
         pHeader.className = 'partners-section-header';
-        pHeader.textContent = `Partner Combinations (${partnerPairs.length})`;
+        pHeader.textContent = `Partner Combinations (${filteredPartners.length})`;
         resultsGrid.appendChild(pHeader);
 
         const partnerGrid = document.createElement('div');
         partnerGrid.className = 'results-grid';
 
-        partnerPairs.forEach(pairStr => {
-          const [nameA, nameB] = pairStr.split('&').map(s => s.trim());
+        filteredPartners.forEach(([cardA, cardB]) => {
           const cardWrap = document.createElement('div');
           cardWrap.className = 'partner-pair-card';
 
@@ -3966,35 +3897,21 @@ async function loadMoreThemeCommanders() {
 
           const imgA = document.createElement('img');
           imgA.className = 'pair-front';
-          const srcA = getDirectScryfallImageUrl(nameA);
+          const srcA = (cardA.card_faces?.[0]?.image_uris?.normal) || cardA.image_uris?.normal || getDirectScryfallImageUrl(cardA.name);
           imgA.src = srcA;
-          imgA.alt = nameA;
-          imgA.addEventListener('mouseenter', () => {
-            if (window.innerWidth > 768) showPreview(imgA, nameA, [srcA]);
-          });
-          imgA.addEventListener('mouseleave', () => {
-            if (window.innerWidth > 768) hidePreview();
-          });
-          imgA.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (window.innerWidth <= 768) showPreview(imgA, nameA, [srcA]);
-          });
+          imgA.alt = cardA.name;
+          imgA.addEventListener('mouseenter', () => { if (window.innerWidth > 768) showPreview(imgA, cardA.name, [srcA]); });
+          imgA.addEventListener('mouseleave', () => { if (window.innerWidth > 768) hidePreview(); });
+          imgA.addEventListener('click', (e) => { e.stopPropagation(); if (window.innerWidth <= 768) showPreview(imgA, cardA.name, [srcA]); });
 
           const imgB = document.createElement('img');
           imgB.className = 'pair-back';
-          const srcB = getDirectScryfallImageUrl(nameB);
+          const srcB = (cardB.card_faces?.[0]?.image_uris?.normal) || cardB.image_uris?.normal || getDirectScryfallImageUrl(cardB.name);
           imgB.src = srcB;
-          imgB.alt = nameB;
-          imgB.addEventListener('mouseenter', () => {
-            if (window.innerWidth > 768) showPreview(imgB, nameB, [srcB]);
-          });
-          imgB.addEventListener('mouseleave', () => {
-            if (window.innerWidth > 768) hidePreview();
-          });
-          imgB.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (window.innerWidth <= 768) showPreview(imgB, nameB, [srcB]);
-          });
+          imgB.alt = cardB.name;
+          imgB.addEventListener('mouseenter', () => { if (window.innerWidth > 768) showPreview(imgB, cardB.name, [srcB]); });
+          imgB.addEventListener('mouseleave', () => { if (window.innerWidth > 768) hidePreview(); });
+          imgB.addEventListener('click', (e) => { e.stopPropagation(); if (window.innerWidth <= 768) showPreview(imgB, cardB.name, [srcB]); });
 
           stage.appendChild(imgB);
           stage.appendChild(imgA);
@@ -4003,76 +3920,65 @@ async function loadMoreThemeCommanders() {
           title.style.fontSize = '12px';
           title.style.fontWeight = '700';
           title.style.marginTop = '4px';
-          title.textContent = `${nameA} & ${nameB}`;
+          title.textContent = `${cardA.name} & ${cardB.name}`;
 
           const btn = document.createElement('button');
           btn.className = 'btn-set-commander';
           btn.textContent = '★ Select Pair';
-          btn.onclick = async () => {
-            const cards = await fetchCollectionChunk([nameA, nameB]);
-            const cardA = cards.find(c => c.name.toLowerCase() === nameA.toLowerCase()) || cards[0];
-            const cardB = cards.find(c => c.name.toLowerCase() === nameB.toLowerCase()) || cards[1];
-
-            if (cardA && cardB) {
-              const getFaces = (c, defaultName) => {
-                if (c.card_faces && c.card_faces.length > 0 && c.card_faces[0].image_uris?.normal) {
-                  return c.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
-                }
-                if (c.image_uris?.normal) return [c.image_uris.normal];
-                return [getDirectScryfallImageUrl(defaultName)];
-              };
-
-              const primaryCmdr = {
-                name: cardA.name,
-                faces: getFaces(cardA, nameA),
-                mana_cost: cardA.mana_cost || '',
-                color_identity: cardA.color_identity || [],
-                type_line: cardA.type_line || '',
-                cmc: (typeof cardA.cmc === 'number') ? cardA.cmc : parseCmcFromManaCost(cardA.mana_cost)
-              };
-
-              const secondaryCmdr = {
-                name: cardB.name,
-                faces: getFaces(cardB, nameB),
-                mana_cost: cardB.mana_cost || '',
-                color_identity: cardB.color_identity || [],
-                type_line: cardB.type_line || '',
-                cmc: (typeof cardB.cmc === 'number') ? cardB.cmc : parseCmcFromManaCost(cardB.mana_cost)
-              };
-
-              commanders = [primaryCmdr, secondaryCmdr];
-              localStorage.setItem('prefire_commanders', JSON.stringify(commanders));
-
-              staplesRawCardsCache = {};
-              edhrecRawCardsCache = {};
-
-              setCommanderSearchMode(false);
-              setEdhrecButtonState(false);
-              setStaplesButtonState(false);
-
-              const themeFilterRow = document.getElementById('cmdr-theme-filter-row');
-              const cmdrThemeInputsWrap = document.getElementById('cmdr-theme-inputs-wrap');
-              const btnToggleCmdrThemes = document.getElementById('btn-toggle-cmdr-themes');
-              if (themeFilterRow) themeFilterRow.style.display = 'none';
-              if (cmdrThemeInputsWrap) cmdrThemeInputsWrap.style.display = 'none';
-              if (btnToggleCmdrThemes) btnToggleCmdrThemes.textContent = 'Choose a Theme ▾';
-
-              const resultsGrid = document.getElementById('results-grid');
-              const emptyState = document.getElementById('empty-state');
-              if (resultsGrid) {
-                resultsGrid.style.display = 'grid';
-                resultsGrid.innerHTML = '';
+          btn.onclick = () => {
+            const getFaces = (c) => {
+              if (c.card_faces && c.card_faces.length > 0 && c.card_faces[0].image_uris?.normal) {
+                return c.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
               }
-              if (loadMoreWrap) loadMoreWrap.style.display = 'none';
-              hideProgressBar();
-              if (emptyState) {
-                emptyState.style.display = 'block';
-                emptyState.textContent = `Partners set to "${cardA.name}" & "${cardB.name}". Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).`;
-              }
+              if (c.image_uris?.normal) return [c.image_uris.normal];
+              return [getDirectScryfallImageUrl(c.name)];
+            };
 
-              renderCommander();
-              saveAndRenderDeck();
+            const primaryCmdr = {
+              name: cardA.name,
+              faces: getFaces(cardA),
+              mana_cost: cardA.mana_cost || '',
+              color_identity: cardA.color_identity || [],
+              type_line: cardA.type_line || '',
+              cmc: (typeof cardA.cmc === 'number') ? cardA.cmc : parseCmcFromManaCost(cardA.mana_cost)
+            };
+
+            const secondaryCmdr = {
+              name: cardB.name,
+              faces: getFaces(cardB),
+              mana_cost: cardB.mana_cost || '',
+              color_identity: cardB.color_identity || [],
+              type_line: cardB.type_line || '',
+              cmc: (typeof cardB.cmc === 'number') ? cardB.cmc : parseCmcFromManaCost(cardB.mana_cost)
+            };
+
+            commanders = [primaryCmdr, secondaryCmdr];
+            localStorage.setItem('prefire_commanders', JSON.stringify(commanders));
+
+            setCommanderSearchMode(false);
+            setEdhrecButtonState(false);
+            setStaplesButtonState(false);
+
+            const themeFilterRow = document.getElementById('cmdr-theme-filter-row');
+            const cmdrThemeInputsWrap = document.getElementById('cmdr-theme-inputs-wrap');
+            const btnToggleCmdrThemes = document.getElementById('btn-toggle-cmdr-themes');
+            if (themeFilterRow) themeFilterRow.style.display = 'none';
+            if (cmdrThemeInputsWrap) cmdrThemeInputsWrap.style.display = 'none';
+            if (btnToggleCmdrThemes) btnToggleCmdrThemes.textContent = 'Choose a Theme ▾';
+
+            resultsGrid.style.display = 'grid';
+            resultsGrid.innerHTML = '';
+            loadMoreWrap.style.display = 'none';
+            hideProgressBar();
+
+            const emptyState = document.getElementById('empty-state');
+            if (emptyState) {
+              emptyState.style.display = 'block';
+              emptyState.textContent = `Partners set to "${cardA.name}" & "${cardB.name}". Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).`;
             }
+
+            renderCommander();
+            saveAndRenderDeck();
           };
 
           cardWrap.appendChild(stage);
@@ -4084,13 +3990,107 @@ async function loadMoreThemeCommanders() {
         resultsGrid.appendChild(partnerGrid);
       }
 
-      if (activeThemeQueue.currentIndex < activeThemeQueue.names.length) {
+      if (activeThemeQueue.currentIndex < activeThemeQueue.displayedCards.length) {
         loadMoreWrap.style.display = 'flex';
         btnLoadMore.disabled = false;
         btnLoadMore.textContent = 'Load More';
       } else {
         loadMoreWrap.style.display = 'none';
       }
+    }
+
+    function loadMoreCachedThemeCommanders() {
+      if (!activeThemeQueue || activeThemeQueue.currentIndex >= activeThemeQueue.displayedCards.length) {
+        loadMoreWrap.style.display = 'none';
+        return;
+      }
+      const nextBatch = activeThemeQueue.displayedCards.slice(activeThemeQueue.currentIndex, activeThemeQueue.currentIndex + 75);
+      nextBatch.forEach(c => {
+        const el = createCardElement(c);
+        if (el && activeThemeQueue.soloGrid) activeThemeQueue.soloGrid.appendChild(el);
+      });
+      activeThemeQueue.currentIndex += nextBatch.length;
+
+      if (activeThemeQueue.currentIndex < activeThemeQueue.displayedCards.length) {
+        loadMoreWrap.style.display = 'flex';
+      } else {
+        loadMoreWrap.style.display = 'none';
+      }
+    }
+
+    async function triggerThemeFilterSelection(selectedSlug, isTribe = false) {
+      if (!commanderThemeIndex) await loadCommanderThemeIndex();
+      if (!commanderThemeIndex || !selectedSlug) return;
+
+      nextSearchPageUrl = null;
+
+      const bucket = isTribe ? commanderThemeIndex.tribes : commanderThemeIndex.themes;
+      const chosenItem = bucket[selectedSlug];
+      if (!chosenItem) return;
+
+      const preSoloNames = (chosenItem.prefire_solo || []).map(n => n.trim()).filter(n => !n.includes('&'));
+      const postSoloNames = (chosenItem.postfire_solo || chosenItem.post_fire_solo || []).map(n => n.trim()).filter(n => !n.includes('&'));
+      
+      const prePartnerStrings = (chosenItem.prefire_partner || []);
+      const postPartnerStrings = (chosenItem.postfire_partner || chosenItem.post_fire_partner || []);
+
+      const allUniqueNames = new Set([...preSoloNames, ...postSoloNames]);
+      [...prePartnerStrings, ...postPartnerStrings].forEach(p => {
+        p.split('&').forEach(n => allUniqueNames.add(n.trim()));
+      });
+
+      const uniqueNamesList = Array.from(allUniqueNames);
+      showProgressBar(`Pre-caching commanders for ${chosenItem.label} (0/${uniqueNamesList.length})...`);
+
+      const cardLookup = new Map();
+      const chunks = [];
+      for (let i = 0; i < uniqueNamesList.length; i += 75) {
+        chunks.push(uniqueNamesList.slice(i, i + 75));
+      }
+
+      for (let i = 0; i < chunks.length; i++) {
+        const chunk = chunks[i];
+        updateProgressBar(Math.round((i / chunks.length) * 100), `Pre-caching ${chosenItem.label} (${cardLookup.size}/${uniqueNamesList.length})...`);
+        const batchCards = await fetchCollectionChunk(chunk);
+        batchCards.forEach(c => {
+          cardLookup.set(c.name.toLowerCase().trim(), c);
+        });
+      }
+
+      hideProgressBar();
+
+      const resolveCard = (name) => {
+        const target = name.toLowerCase().trim();
+        if (cardLookup.has(target)) return cardLookup.get(target);
+        for (const [key, val] of cardLookup.entries()) {
+          if (key.startsWith(target + ' ') || key.split(' // ')[0] === target) return val;
+        }
+        return null;
+      };
+
+      const preSoloCards = preSoloNames.map(resolveCard).filter(Boolean);
+      const allSoloCards = [...postSoloNames.map(resolveCard).filter(Boolean), ...preSoloCards];
+
+      const resolvePair = (pairStr) => {
+        const [nA, nB] = pairStr.split('&').map(s => s.trim());
+        const cA = resolveCard(nA);
+        const cB = resolveCard(nB);
+        return (cA && cB) ? [cA, cB] : null;
+      };
+
+      const prePartnerPairs = prePartnerStrings.map(resolvePair).filter(Boolean);
+      const allPartnerPairs = [...postPartnerStrings.map(resolvePair).filter(Boolean), ...prePartnerPairs];
+
+      activeThemeCache = {
+        label: chosenItem.label,
+        slug: selectedSlug,
+        preSoloCards,
+        allSoloCards,
+        prePartnerPairs,
+        allPartnerPairs
+      };
+
+      renderFilteredThemeCards();
     }
 
     const themeSelectEl = document.getElementById('cmdr-theme-select');
@@ -4124,19 +4124,21 @@ async function loadMoreThemeCommanders() {
 
         const themeSelect = document.getElementById('cmdr-theme-select');
         const tribeSelect = document.getElementById('cmdr-tribe-select');
-        const savedTheme = themeSelect ? themeSelect.value : '';
-        const savedTribe = tribeSelect ? tribeSelect.value : '';
+        const currentThemeSlug = themeSelect ? themeSelect.value : '';
+        const currentTribeSlug = tribeSelect ? tribeSelect.value : '';
 
         if (typeof populateThemeDatalists === 'function') {
           populateThemeDatalists();
         }
 
-        if (savedTheme) {
-          if (themeSelect) themeSelect.value = savedTheme;
-          triggerThemeFilterSelection(savedTheme, false);
-        } else if (savedTribe) {
-          if (tribeSelect) tribeSelect.value = savedTribe;
-          triggerThemeFilterSelection(savedTribe, true);
+        if (currentThemeSlug && themeSelect) {
+          themeSelect.value = currentThemeSlug;
+        } else if (currentTribeSlug && tribeSelect) {
+          tribeSelect.value = currentTribeSlug;
+        }
+
+        if (activeThemeCache && (currentThemeSlug || currentTribeSlug)) {
+          renderFilteredThemeCards();
         } else {
           executeSearch();
         }
@@ -4169,6 +4171,12 @@ async function loadMoreThemeCommanders() {
     }
 
     function triggerSearchIfActive() {
+      const themeSelect = document.getElementById('cmdr-theme-select');
+      const tribeSelect = document.getElementById('cmdr-tribe-select');
+      if (activeThemeCache && (themeSelect?.value || tribeSelect?.value)) {
+        renderFilteredThemeCards();
+        return;
+      }
       if (!hasActiveSearch()) return;
       if (isShowingEdhrec) {
         executeEdhrecSearch();
