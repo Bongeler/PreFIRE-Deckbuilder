@@ -2188,9 +2188,17 @@
       </div>
     </div>
 
-    <!-- Theme & Tribe Filter Controls (Shown in Commander Search) -->
-    <div id="cmdr-theme-filter-row">
-      <div class="cmdr-theme-neon-box">
+    <!-- Commander / Theme Neon Action Row -->
+    <div id="cmdr-theme-filter-row" style="display: flex;">
+      <!-- Shown when no commander is selected and not in commander search -->
+      <div class="cmdr-theme-neon-box" id="cmdr-choose-action-box" style="display: none;">
+        <button type="button" id="btn-header-choose-cmdr" style="background-color: var(--commander-accent); color: #121212; border: none; padding: 7px 14px; border-radius: 6px; font-size: 11px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;">
+          Choose Commander(s)
+        </button>
+      </div>
+
+      <!-- Shown during commander search mode -->
+      <div class="cmdr-theme-neon-box" id="cmdr-theme-filter-box" style="display: none;">
         <button type="button" id="btn-toggle-cmdr-themes" style="background-color: var(--commander-accent); color: #121212; border: none; padding: 7px 14px; border-radius: 6px; font-size: 11px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;">
           Choose a Theme ▾
         </button>
@@ -3714,12 +3722,21 @@
       const searchBtn = document.getElementById('btn-search');
       const cmdrToggleGroup = document.getElementById('cmdr-pool-toggle-group');
       const themeFilterRow = document.getElementById('cmdr-theme-filter-row');
+      const chooseActionBox = document.getElementById('cmdr-choose-action-box');
+      const themeFilterBox = document.getElementById('cmdr-theme-filter-box');
       const cmdrThemeInputsWrap = document.getElementById('cmdr-theme-inputs-wrap');
       const btnToggleCmdrThemes = document.getElementById('btn-toggle-cmdr-themes');
       const sortGroup = document.querySelector('.sort-left-group');
 
       if (themeFilterRow) {
-        themeFilterRow.style.display = active && !isPartnerSearchMode ? 'flex' : 'none';
+        const hasCommanders = commanders && commanders.length > 0;
+        const showChooseBox = !hasCommanders && !active;
+        const showThemeBox = active && !isPartnerSearchMode;
+
+        themeFilterRow.style.display = (showChooseBox || showThemeBox) ? 'flex' : 'none';
+        if (chooseActionBox) chooseActionBox.style.display = showChooseBox ? 'inline-flex' : 'none';
+        if (themeFilterBox) themeFilterBox.style.display = showThemeBox ? 'inline-flex' : 'none';
+
         if (!active || isPartnerSearchMode) {
           if (cmdrThemeInputsWrap) cmdrThemeInputsWrap.style.display = 'none';
           if (btnToggleCmdrThemes) btnToggleCmdrThemes.textContent = 'Choose a Theme ▾';
@@ -5322,6 +5339,49 @@ function matchesColorFilters(card) {
 
       if (labelText) {
         labelText.textContent = commanders.length > 1 ? 'Commanders' : 'Commander';
+      }
+
+      const themeFilterRow = document.getElementById('cmdr-theme-filter-row');
+      const chooseActionBox = document.getElementById('cmdr-choose-action-box');
+      const themeFilterBox = document.getElementById('cmdr-theme-filter-box');
+      const btnHeaderChooseCmdr = document.getElementById('btn-header-choose-cmdr');
+
+      if (btnHeaderChooseCmdr) {
+        btnHeaderChooseCmdr.textContent = isCommanderSearchMode ? 'Cancel Commander Search' : 'Choose Commander(s)';
+        btnHeaderChooseCmdr.onclick = () => {
+          if (isCommanderSearchMode) {
+            setCommanderSearchMode(false);
+            const resultsGrid = document.getElementById('results-grid');
+            const emptyState = document.getElementById('empty-state');
+            if (resultsGrid) {
+              resultsGrid.style.display = 'grid';
+              resultsGrid.innerHTML = '';
+            }
+            if (loadMoreWrap) loadMoreWrap.style.display = 'none';
+            hideProgressBar();
+            if (emptyState) {
+              emptyState.style.display = 'block';
+              emptyState.textContent = 'Commander search canceled. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
+            }
+          } else {
+            clearSearchInputs();
+            setCommanderSearchMode(true);
+            executeSearch();
+            if (window.innerWidth <= 768) {
+              setMobileTab('search');
+            }
+          }
+        };
+      }
+
+      if (themeFilterRow) {
+        const hasCommanders = commanders && commanders.length > 0;
+        const showChooseBox = !hasCommanders && !isCommanderSearchMode;
+        const showThemeBox = isCommanderSearchMode && !isPartnerSearchMode;
+
+        themeFilterRow.style.display = (showChooseBox || showThemeBox) ? 'flex' : 'none';
+        if (chooseActionBox) chooseActionBox.style.display = showChooseBox ? 'inline-flex' : 'none';
+        if (themeFilterBox) themeFilterBox.style.display = showThemeBox ? 'inline-flex' : 'none';
       }
 
       const handleChangeClick = () => {
