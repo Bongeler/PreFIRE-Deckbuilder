@@ -3821,19 +3821,27 @@ async function loadMoreThemeCommanders() {
       showProgressBar(`Loading next commanders...`);
 
       const nextBatch = activeThemeQueue.names.slice(activeThemeQueue.currentIndex, activeThemeQueue.currentIndex + 75);
-      const cards = await fetchCollectionChunk(nextBatch);
-      activeThemeQueue.currentIndex += nextBatch.length;
+      try {
+        const cards = await fetchCollectionChunk(nextBatch);
+        activeThemeQueue.currentIndex += nextBatch.length;
 
-      // Preserve popularity sorting from commander-theme-index.json
+        const cardMap = new Map();
+        cards.forEach(c => cardMap.set(c.name.toLowerCase(), c));
 
-      cards.forEach(c => {
-        const el = createCardElement(c);
-        if (el && activeThemeQueue.soloGrid) activeThemeQueue.soloGrid.appendChild(el);
-      });
-
-      hideProgressBar();
-      btnLoadMore.disabled = false;
-      btnLoadMore.textContent = 'Load More';
+        nextBatch.forEach(name => {
+          const cardObj = cardMap.get(name.toLowerCase()) || cards.find(c => c.name.toLowerCase().startsWith(name.toLowerCase()));
+          if (cardObj && activeThemeQueue.soloGrid) {
+            const el = createCardElement(cardObj);
+            if (el) activeThemeQueue.soloGrid.appendChild(el);
+          }
+        });
+      } catch (err) {
+        console.error("Failed to load more theme commanders:", err);
+      } finally {
+        hideProgressBar();
+        btnLoadMore.disabled = false;
+        btnLoadMore.textContent = 'Load More';
+      }
 
       if (activeThemeQueue.currentIndex < activeThemeQueue.names.length) {
         loadMoreWrap.style.display = 'flex';
@@ -3848,7 +3856,6 @@ async function loadMoreThemeCommanders() {
       }
       if (!commanderThemeIndex || !selectedSlug) return;
 
-      // Reset Scryfall search page url when switching to theme query
       nextSearchPageUrl = null;
 
       const isPrefireOnly = (commanderPoolMode === 'prefire');
@@ -3861,8 +3868,9 @@ async function loadMoreThemeCommanders() {
       const prePartner = chosenItem.prefire_partner || [];
       const postPartner = chosenItem.postfire_partner || chosenItem.post_fire_partner || [];
 
-      let rawSolo = isPrefireOnly ? [...preSolo] : [...preSolo, ...postSolo];
-      const partnerPairs = isPrefireOnly ? [...prePartner] : [...prePartner, ...postPartner];
+      // Combine pools if 'All Legal'
+      let rawSolo = isPrefireOnly ? [...preSolo] : [...postSolo, ...preSolo];
+      const partnerPairs = isPrefireOnly ? [...prePartner] : [...postPartner, ...prePartner];
 
       const soloNames = [];
       const seenSolo = new Set();
@@ -3891,7 +3899,7 @@ async function loadMoreThemeCommanders() {
       soloGrid.className = 'results-grid';
       resultsGrid.appendChild(soloGrid);
 
-      // Initialize pagination queue
+      // Initialize pagination queue for solo commanders
       activeThemeQueue = {
         names: soloNames,
         currentIndex: 0,
@@ -3901,17 +3909,26 @@ async function loadMoreThemeCommanders() {
       const firstBatch = soloNames.slice(0, 75);
       showProgressBar(`Loading commanders for ${chosenItem.label} (1-${Math.min(75, soloNames.length)} of ${soloNames.length})...`);
 
-      const soloCards = await fetchCollectionChunk(firstBatch);
-      activeThemeQueue.currentIndex = firstBatch.length;
+      try {
+        const soloCards = await fetchCollectionChunk(firstBatch);
+        activeThemeQueue.currentIndex = firstBatch.length;
 
-      // Preserve popularity sorting from commander-theme-index.json
+        // Maintain popularity order defined in the index
+        const cardMap = new Map();
+        soloCards.forEach(c => cardMap.set(c.name.toLowerCase(), c));
 
-      soloCards.forEach(c => {
-        const el = createCardElement(c);
-        if (el) soloGrid.appendChild(el);
-      });
-
-      hideProgressBar();
+        firstBatch.forEach(name => {
+          const cardObj = cardMap.get(name.toLowerCase()) || soloCards.find(c => c.name.toLowerCase().startsWith(name.toLowerCase()));
+          if (cardObj) {
+            const el = createCardElement(cardObj);
+            if (el) soloGrid.appendChild(el);
+          }
+        });
+      } catch (err) {
+        console.error("Failed to load solo theme cards:", err);
+      } finally {
+        hideProgressBar();
+      }
 
       if (partnerPairs.length > 0) {
         const pHeader = document.createElement('div');
@@ -3930,7 +3947,7 @@ async function loadMoreThemeCommanders() {
           const stage = document.createElement('div');
           stage.className = 'partner-shingle-stage';
 
-         const imgA = document.createElement('img');
+          const imgA = document.createElement('img');
           imgA.className = 'pair-front';
           const srcA = getDirectScryfallImageUrl(nameA);
           imgA.src = srcA;
@@ -4090,19 +4107,19 @@ async function loadMoreThemeCommanders() {
 
         const themeSelect = document.getElementById('cmdr-theme-select');
         const tribeSelect = document.getElementById('cmdr-tribe-select');
-        const selectedThemeSlug = themeSelect ? themeSelect.value : '';
-        const selectedTribeSlug = tribeSelect ? tribeSelect.value : '';
+        const currentThemeSlug = themeSelect ? themeSelect.value : '';
+        const currentTribeSlug = tribeSelect ? tribeSelect.value : '';
 
         if (typeof populateThemeDatalists === 'function') {
           populateThemeDatalists();
         }
 
-        if (selectedThemeSlug) {
-          if (themeSelect) themeSelect.value = selectedThemeSlug;
-          triggerThemeFilterSelection(selectedThemeSlug, false);
-        } else if (selectedTribeSlug) {
-          if (tribeSelect) tribeSelect.value = selectedTribeSlug;
-          triggerThemeFilterSelection(selectedTribeSlug, true);
+        if (currentThemeSlug) {
+          if (themeSelect) themeSelect.value = currentThemeSlug;
+          triggerThemeFilterSelection(currentThemeSlug, false);
+        } else if (currentTribeSlug) {
+          if (tribeSelect) tribeSelect.value = currentTribeSlug;
+          triggerThemeFilterSelection(currentTribeSlug, true);
         } else {
           executeSearch();
         }
