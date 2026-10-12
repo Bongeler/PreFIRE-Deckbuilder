@@ -2008,6 +2008,64 @@
         overflow: visible;
       }
 
+      /* Responsive Commander Theme & Action Bar */
+      #cmdr-theme-filter-row {
+        width: 100%;
+        padding: 6px 0;
+      }
+
+      .cmdr-theme-neon-box {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+        padding: 6px 8px;
+      }
+
+      #cmdr-theme-inputs-wrap {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .cmdr-theme-select-wrap {
+        width: 100%;
+      }
+
+      .cmdr-theme-styled-select {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        font-size: 13px;
+        padding: 8px 28px 8px 10px;
+      }
+
+      #btn-reset-theme-search {
+        width: 100%;
+        padding: 8px;
+        font-size: 12px;
+      }
+
+      #btn-header-choose-cmdr, #btn-toggle-cmdr-themes {
+        width: 100%;
+        padding: 9px 12px;
+        font-size: 12px;
+      }
+
+      /* Mobile Partner Combinations Grid */
+      .partner-shingle-stage {
+        height: 190px;
+      }
+
+      .partner-pair-card {
+        padding: 6px;
+      }
+
+      .partner-pair-card .btn-set-commander {
+        font-size: 11px;
+        padding: 6px;
+      }
+
       #card-preview {
         width: 100% !important;
         height: auto !important;
@@ -4142,6 +4200,9 @@ function matchesColorFilters(card) {
         if (tribeSelect) tribeSelect.value = '';
         if (themeSelectEl.value) {
           triggerThemeFilterSelection(themeSelectEl.value, false);
+          if (window.innerWidth <= 768) {
+            setMobileTab('search');
+          }
         }
       });
     }
@@ -4153,6 +4214,9 @@ function matchesColorFilters(card) {
         if (themeSelect) themeSelect.value = '';
         if (tribeSelectEl.value) {
           triggerThemeFilterSelection(tribeSelectEl.value, true);
+          if (window.innerWidth <= 768) {
+            setMobileTab('search');
+          }
         }
       });
     }
