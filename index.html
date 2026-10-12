@@ -3872,13 +3872,18 @@ async function loadMoreThemeCommanders() {
       const prePartner = chosenItem.prefire_partner || [];
       const postPartner = chosenItem.postfire_partner || chosenItem.post_fire_partner || [];
 
-      // If Pre-FIRE is active, filter strictly to prefire arrays; otherwise use all legal
-      let rawSolo = isPrefireOnly ? [...preSolo] : [...postSolo, ...preSolo];
-      const partnerPairs = isPrefireOnly ? [...prePartner] : [...postPartner, ...prePartner];
+      let rawSolo = [];
+      let partnerPairs = [];
 
-      // Combine pools if 'All Legal'
-      let rawSolo = isPrefireOnly ? [...preSolo] : [...postSolo, ...preSolo];
-      const partnerPairs = isPrefireOnly ? [...prePartner] : [...postPartner, ...prePartner];
+      if (isPrefireOnly) {
+        // Pre-FIRE: strictly use Pre-FIRE pools
+        rawSolo = [...preSolo];
+        partnerPairs = [...prePartner];
+      } else {
+        // All Legal: merge both pools
+        rawSolo = [...postSolo, ...preSolo];
+        partnerPairs = [...postPartner, ...prePartner];
+      }
 
       const soloNames = [];
       const seenSolo = new Set();
