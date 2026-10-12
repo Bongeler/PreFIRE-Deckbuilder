@@ -2215,6 +2215,10 @@
               <option value="">Tribe/Kin</option>
             </select>
           </div>
+
+          <button type="button" id="btn-reset-theme-search" style="background-color: var(--red-btn); color: #ffffff; border: 1px solid #e53935; padding: 6px 12px; border-radius: 5px; font-size: 11px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: background-color 0.15s ease;">
+            Reset
+          </button>
         </div>
       </div>
     </div>
@@ -3788,13 +3792,34 @@
           if (themeSelect) themeSelect.value = '';
           if (tribeSelect) tribeSelect.value = '';
 
-          activeThemeQueue = { names: [], currentIndex: 0, soloGrid: null };
+          activeThemeCache = null;
+          activeThemeQueue = { displayedCards: [], currentIndex: 0, soloGrid: null };
 
           populateThemeDatalists();
         } else {
           cmdrThemeInputsWrap.style.display = 'none';
           btnToggleCmdrThemes.textContent = 'Choose a Theme ▾';
         }
+      });
+    }
+
+    const btnResetThemeSearch = document.getElementById('btn-reset-theme-search');
+    if (btnResetThemeSearch) {
+      btnResetThemeSearch.addEventListener('click', () => {
+        const themeSelect = document.getElementById('cmdr-theme-select');
+        const tribeSelect = document.getElementById('cmdr-tribe-select');
+        if (themeSelect) themeSelect.value = '';
+        if (tribeSelect) tribeSelect.value = '';
+
+        activeThemeCache = null;
+        activeThemeQueue = { displayedCards: [], currentIndex: 0, soloGrid: null };
+
+        document.querySelectorAll('.color-toggle').forEach(b => b.classList.remove('active'));
+        const matchAllCheck = document.getElementById('match-all-colors');
+        if (matchAllCheck) matchAllCheck.checked = false;
+
+        clearSearchInputs();
+        executeSearch();
       });
     }
 
