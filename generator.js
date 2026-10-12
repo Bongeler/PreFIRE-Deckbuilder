@@ -3,9 +3,11 @@
 class PrefireDeckGenerator {
     constructor() {
         this.cardRoles = null;
+        this.cardTypes = null;
         this.staples = null;
         this.landsData = null;
         this.themeFallbacks = null;
+        this.archetypeIndex = null;
         this.cardColorMap = {};
 
         // Signature keywords and mechanics for theme filtration
@@ -15,7 +17,9 @@ class PrefireDeckGenerator {
             "+1-+1-counters": ["+1/+1 counter", "proliferate", "cathars' crusade", "hardened scales", "corpsejack", "doubling season"],
             "tokens": ["create", "token", "tokens", "populate", "lingering souls", "spectral procession", "bitterblossom", "anointed procession"],
             "reanimator": ["reanimate", "animate dead", "graveyard", "return target creature card from your graveyard", "necromancy", "living death"],
-            "voltron": ["equipment", "equipped", "aura", "enchant creature", "sword of", "jitte", "puresteel"]
+            "voltron": ["equipment", "equipped", "aura", "enchant creature", "sword of", "jitte", "puresteel"],
+            "enchantress": ["enchantment", "enchantress", "aura", "constellation", "totem armor", "umbra", "enchant", "replenish", "serra's sanctum"],
+            "auras": ["aura", "enchant creature", "totem armor", "umbra", "enchanted creature", "heroic"]
         };
     }
 
@@ -38,14 +42,16 @@ class PrefireDeckGenerator {
                 fallbacksData = await safeFetchJson("theme-fallbacks.json");
             }
 
-            const [roles, staples, lands, archetypes] = await Promise.all([
+           const [roles, staples, lands, archetypes, cardTypes] = await Promise.all([
                 safeFetchJson("card-roles.json"),
                 safeFetchJson("prefire-staples.json"),
                 safeFetchJson("prefire-lands.json"),
-                safeFetchJson("archetype-index.json")
+                safeFetchJson("archetype-index.json"),
+                safeFetchJson("card-types.json")
             ]);
 
             this.cardRoles = roles || {};
+            this.cardTypes = cardTypes || {};
             this.staples = staples || {};
             this.landsData = lands || {};
             this.themeFallbacks = fallbacksData || {};
@@ -59,19 +65,6 @@ class PrefireDeckGenerator {
                             if (c && c.name && c.colors) {
                                 this.cardColorMap[c.name] = c.colors;
                             }
-                        });
-                    }
-                });
-            }
-
-            // Land color lookup from prefire-lands.json
-            if (this.landsData && this.landsData.utility && this.landsData.utility.colored_staples) {
-                const coloredMap = this.landsData.utility.colored_staples;
-                Object.keys(coloredMap).forEach(colorKey => {
-                    const landList = coloredMap[colorKey];
-                    if (Array.isArray(landList)) {
-                        landList.forEach(lName => {
-                            this.cardColorMap[lName] = [colorKey];
                         });
                     }
                 });
@@ -133,21 +126,31 @@ class PrefireDeckGenerator {
 
     isCardOnTheme(cardName, themeSlug, cardCatalog) {
         if (!themeSlug || themeSlug === "default") return false;
-        const keywords = this.themeSignatures[themeSlug] || [themeSlug.replace("-", " ")];
+        const cleanSlug = themeSlug.toLowerCase();
+        const meta = cardCatalog[cardName] || {};
+        const tLine = (meta.type_line || meta.type || "").toLowerCase();
+        const oText = (meta.oracle_text || meta.text || "").toLowerCase();
         const lowerName = cardName.toLowerCase();
 
-        if (keywords.some(kw => lowerName.includes(kw))) return true;
-
-        const meta = cardCatalog[cardName];
-        if (meta && meta.oracle_text) {
-            const lowerText = meta.oracle_text.toLowerCase();
-            if (keywords.some(kw => lowerText.includes(kw))) return true;
+        // Type line inheritance: Any enchantment/artifact is inherently on-theme for matching archetypes
+        if ((cleanSlug === "enchantress" || cleanSlug.includes("enchant")) && tLine.includes("enchantment")) {
+            return true;
         }
+        if (cleanSlug === "auras" && tLine.includes("aura")) {
+            return true;
+        }
+        if ((cleanSlug === "artifacts" || cleanSlug.includes("artifact")) && tLine.includes("artifact")) {
+            return true;
+        }
+
+        const keywords = this.themeSignatures[cleanSlug] || [cleanSlug.replace(/-/g, " ")];
+        if (keywords.some(kw => lowerName.includes(kw))) return true;
+        if (oText && keywords.some(kw => oText.includes(kw))) return true;
 
         return false;
     }
 
-    getArchetypeCards(themeSlug, commanderColors, limit = 28) {
+    getArchetypeCards(themeSlug, commanderColors, limit = 60) {
         if (!this.archetypeIndex || !themeSlug || themeSlug === "default") {
             return [];
         }
@@ -175,146 +178,213 @@ class PrefireDeckGenerator {
             return this.isColorLegal(card.colors, commanderColors);
         });
 
-        return legal.slice(0, limit).map(c => c.name);
+        return legal.slice(0, limit).map(c => typeof c === 'string' ? c : c.name);
     }
 
-    // Step A: Assemble Non-Land Spells (63 for single commander, 62 for partner pairs)
+    // Step A: Assemble Non-Land Spells with Empirical Targets and In-Theme Role Filling
     assembleSpells(themeData, themeSlug, commanderColors, cardCatalog, commanderCount = 1) {
-        const targetLandCount = (themeData && themeData.targets && themeData.targets.lands) ? themeData.targets.lands : 36;
+        const dist = (themeData && themeData.distribution) ? themeData.distribution : {};
+        const targetLandCount = (typeof dist.lands === 'number') ? dist.lands : ((themeData && themeData.targets && themeData.targets.lands) ? themeData.targets.lands : 36);
         const targetSpellsCount = 100 - commanderCount - targetLandCount;
 
-        const targets = Object.assign({
-            ramp: 10,
-            removal_creature: 6,
-            removal_noncreature: 4,
-            board_wipe: 3,
-            draw: 10
-        }, themeData.targets || {});
+        // Empirical type floors
+        const targetTypes = {
+            enchantment: dist.enchantments || ((themeSlug.includes("enchant") || themeSlug === "auras") ? 28 : 0),
+            artifact: dist.artifacts || ((themeSlug.includes("artifact") || themeSlug === "equipment") ? 26 : 0),
+            creature: dist.creatures || 0,
+            instant: dist.instants || 0,
+            sorcery: dist.sorceries || 0,
+            planeswalker: dist.planeswalkers || 0
+        };
 
-        const rawCards = (themeData.cards || []).map(c => typeof c === 'string' ? c : c.name);
-        const onThemeCards = [];
-        const genericCards = [];
+        // Empirical functional role targets
+        const empRoles = (themeData && themeData.roles) ? themeData.roles : {};
+        const quotas = {
+            ramp: empRoles.ramp || (themeData.targets && themeData.targets.ramp) || 10,
+            draw: empRoles.draw || (themeData.targets && themeData.targets.draw) || 10,
+            removal_creature: empRoles.removal_creature || (themeData.targets && themeData.targets.removal_creature) || 6,
+            removal_noncreature: empRoles.removal_noncreature || (themeData.targets && themeData.targets.removal_noncreature) || 4,
+            board_wipe: empRoles.wipes || (themeData.targets && themeData.targets.board_wipe) || 3
+        };
 
-        // Partition candidate pool so on-theme cards get placed first
-        for (const c of rawCards) {
-            if (this.isCardOnTheme(c, themeSlug, cardCatalog)) {
-                onThemeCards.push(c);
-            } else {
-                genericCards.push(c);
+        const isLand = (cName) => {
+            const meta = cardCatalog[cName] || {};
+            const tLine = (meta.type || meta.type_line || "").toLowerCase();
+            return tLine.includes("land") || (this.landsData && this.landsData.baseline_lands && this.landsData.baseline_lands[cName]);
+        };
+
+        const getCardType = (cName) => {
+            if (this.cardTypes && this.cardTypes[cName]) {
+                return this.cardTypes[cName].toLowerCase();
             }
-        }
+            const meta = cardCatalog[cName] || {};
+            return (meta.type || meta.type_line || "").toLowerCase();
+        };
 
-        // Pull top 28 archetype cards from global archetype index
-        const globalArchetypeCards = this.getArchetypeCards(themeSlug, commanderColors, 28);
-        const rawSource = Array.from(new Set([...globalArchetypeCards, ...onThemeCards, ...genericCards]));
+        // Dynamic functional role detector (Oracle text and explicit tags)
+        const detectCardRoles = (cardName) => {
+            const explicit = this.cardRoles[cardName] || [];
+            if (explicit.length > 0) return explicit;
+            const meta = cardCatalog[cardName] || {};
+            const text = (meta.oracle_text || meta.text || "").toLowerCase();
+            const tLine = (meta.type || meta.type_line || "").toLowerCase();
+            const detected = [];
 
-        // Exclude any lands from entering the spell pool
-        const sourceCards = rawSource.filter(name => {
-            const meta = cardCatalog[name];
-            const tLine = (meta && (meta.type || meta.type_line)) ? (meta.type || meta.type_line).toLowerCase() : "";
-            return !tLine.includes("land");
+            if (text.includes("add ") || (text.includes("search your library for a") && text.includes("land")) || tLine.includes("mana rock")) {
+                detected.push("ramp");
+            }
+            if (text.includes("draw a card") || text.includes("draw two") || text.includes("draw cards") || text.includes("draws a card")) {
+                detected.push("draw");
+            }
+            if (text.includes("destroy all") || text.includes("exile all") || text.includes("each player sacrifices all")) {
+                detected.push("board_wipe");
+            } else if (text.includes("destroy target") || text.includes("exile target") || text.includes("deals damage to target")) {
+                if (text.includes("creature")) detected.push("removal_creature");
+                if (text.includes("noncreature") || text.includes("artifact") || text.includes("enchantment") || text.includes("permanent")) {
+                    detected.push("removal_noncreature");
+                }
+            }
+            return detected;
+        };
+
+        // 1. Gather all candidates and score by empirical synergy
+        const cmdrCards = (themeData.cards || []).map(c => typeof c === 'string' ? c : c.name).filter(c => !isLand(c));
+        const globalArchCards = this.getArchetypeCards(themeSlug, commanderColors, 60).filter(c => !isLand(c));
+
+        const candidateScores = new Map();
+        const registerCandidate = (cardName, baseScore, weight = 1.0) => {
+            if (isLand(cardName)) return;
+            const meta = cardCatalog[cardName];
+            const colors = (meta && meta.color_identity) ? meta.color_identity : this.cardColorMap[cardName];
+            if (colors && !this.isColorLegal(colors, commanderColors)) return;
+
+            const current = candidateScores.get(cardName) || 0;
+            candidateScores.set(cardName, Math.max(current, baseScore * weight));
+        };
+
+        cmdrCards.forEach((name, idx) => {
+            const score = 150 - Math.min(idx, 100);
+            registerCandidate(name, score, 1.2);
+        });
+
+        globalArchCards.forEach((name, idx) => {
+            const score = 120 - Math.min(idx, 80);
+            registerCandidate(name, score, 1.0);
+        });
+
+        Object.entries(this.staples).forEach(([role, list]) => {
+            (list || []).forEach((item, idx) => {
+                const name = typeof item === 'string' ? item : item.name;
+                const score = 60 - Math.min(idx, 40);
+                registerCandidate(name, score, 0.8);
+            });
         });
 
         const selected = new Set();
-        const buckets = {
-            ramp: [],
-            removal_creature: [],
-            removal_noncreature: [],
-            board_wipe: [],
-            draw: [],
-            engine: []
+        const roleBuckets = {
+            ramp: 0,
+            draw: 0,
+            removal_creature: 0,
+            removal_noncreature: 0,
+            board_wipe: 0
         };
 
-        // 1. Ingest cards from theme list into role buckets
-        for (const cardName of sourceCards) {
-            const roles = this.cardRoles[cardName] || [];
-            let placed = false;
+        const currentTypeCounts = {
+            enchantment: 0,
+            artifact: 0,
+            creature: 0,
+            instant: 0,
+            sorcery: 0,
+            planeswalker: 0
+        };
 
-            for (const r of roles) {
-                if (targets[r] && buckets[r].length < targets[r] && !selected.has(cardName)) {
-                    buckets[r].push(cardName);
-                    selected.add(cardName);
-                    placed = true;
+        const sortedCandidates = Array.from(candidateScores.keys()).sort((a, b) => {
+            let scoreA = candidateScores.get(a);
+            let scoreB = candidateScores.get(b);
+            const tA = getCardType(a);
+            const tB = getCardType(b);
+
+            for (const [pType, targetCount] of Object.entries(targetTypes)) {
+                if (targetCount > 0) {
+                    if (tA.includes(pType)) scoreA += 40;
+                    if (tB.includes(pType)) scoreB += 40;
+                }
+            }
+            return scoreB - scoreA;
+        });
+
+        // Pass 1: Ingest core theme cards satisfying required permanent floors
+        for (const card of sortedCandidates) {
+            if (selected.size >= targetSpellsCount) break;
+
+            const tLine = getCardType(card);
+            let isTypeNeeded = false;
+
+            for (const [pType, targetCount] of Object.entries(targetTypes)) {
+                if (targetCount > 0 && tLine.includes(pType) && currentTypeCounts[pType] < targetCount) {
+                    isTypeNeeded = true;
                     break;
                 }
             }
 
-            if (!placed && !selected.has(cardName)) {
-                buckets.engine.push(cardName);
-                selected.add(cardName);
+            if (isTypeNeeded || candidateScores.get(card) >= 100) {
+                selected.add(card);
+                for (const pType of Object.keys(currentTypeCounts)) {
+                    if (tLine.includes(pType)) currentTypeCounts[pType]++;
+                }
+                const roles = detectCardRoles(card);
+                for (const r of roles) {
+                    if (roleBuckets[r] !== undefined) roleBuckets[r]++;
+                }
             }
         }
 
-        // 2. Backfill empty role quotas using prefire-staples.json prioritizing current theme
-        const backfillRoles = ["ramp", "removal_creature", "removal_noncreature", "board_wipe", "draw"];
-        for (const role of backfillRoles) {
-            const needed = (targets[role] || 0) - buckets[role].length;
+        // Pass 2: Backfill functional role deficits prioritizing theme-matching types
+        for (const [role, quota] of Object.entries(quotas)) {
+            let needed = quota - (roleBuckets[role] || 0);
             if (needed <= 0) continue;
 
-            const candidates = this.staples[role] || [];
-            const onThemeStaples = [];
-            const genericStaples = [];
+            const roleCandidates = sortedCandidates.filter(name =>
+                !selected.has(name) && detectCardRoles(name).includes(role)
+            );
 
-            for (const c of candidates) {
-                if (selected.has(c.name)) continue;
-                if (!this.isColorLegal(c.colors, commanderColors)) continue;
-
-                const hasThemeTag = c.themes && c.themes.includes(themeSlug);
-                const matchesSignature = this.isCardOnTheme(c.name, themeSlug, cardCatalog);
-
-                if (hasThemeTag || matchesSignature) {
-                    onThemeStaples.push(c.name);
-                } else {
-                    genericStaples.push(c.name);
-                }
-            }
-
-            const pool = [...onThemeStaples, ...genericStaples];
-            for (let i = 0; i < needed && i < pool.length; i++) {
-                buckets[role].push(pool[i]);
-                selected.add(pool[i]);
-            }
-        }
-
-        let spellList = [];
-        for (const role of Object.keys(buckets)) {
-            spellList.push(...buckets[role]);
-        }
-
-        // 3. Fallback: fill up to targetSpellsCount from remaining candidates
-        if (spellList.length < targetSpellsCount) {
-            for (const cardName of sourceCards) {
-                if (!selected.has(cardName)) {
-                    spellList.push(cardName);
-                    selected.add(cardName);
-                    if (spellList.length === targetSpellsCount) break;
-                }
-            }
-        }
-
-        // 4. Secondary fallback: fill from general on-color staples
-        if (spellList.length < targetSpellsCount) {
-            const allStaplePool = [];
-            for (const r of backfillRoles) {
-                (this.staples[r] || []).forEach(c => {
-                    if (!selected.has(c.name) && this.isColorLegal(c.colors, commanderColors)) {
-                        allStaplePool.push(c.name);
+            roleCandidates.sort((a, b) => {
+                const tA = getCardType(a);
+                const tB = getCardType(b);
+                let bonusA = 0, bonusB = 0;
+                for (const [pType, targetCount] of Object.entries(targetTypes)) {
+                    if (targetCount > 0) {
+                        if (tA.includes(pType)) bonusA += 50;
+                        if (tB.includes(pType)) bonusB += 50;
                     }
-                });
-            }
-            for (const name of allStaplePool) {
-                if (!selected.has(name)) {
-                    spellList.push(name);
-                    selected.add(name);
-                    if (spellList.length === targetSpellsCount) break;
                 }
+                return (candidateScores.get(b) + bonusB) - (candidateScores.get(a) + bonusA);
+            });
+
+            for (const card of roleCandidates) {
+                if (needed <= 0 || selected.size >= targetSpellsCount) break;
+                selected.add(card);
+                roleBuckets[role]++;
+                const tLine = getCardType(card);
+                for (const pType of Object.keys(currentTypeCounts)) {
+                    if (tLine.includes(pType)) currentTypeCounts[pType]++;
+                }
+                needed--;
             }
         }
 
-        return spellList.slice(0, targetSpellsCount);
+        // Pass 3: Fill remaining open slots with highest-ranked remaining candidates
+        for (const card of sortedCandidates) {
+            if (selected.size >= targetSpellsCount) break;
+            if (!selected.has(card)) {
+                selected.add(card);
+            }
+        }
+
+        return Array.from(selected).slice(0, targetSpellsCount);
     }
 
-    // Step B: Calculate Land Base (Total deck target = 99)
+    // Step B: Calculate Land Base
     assembleLands(commanderColors, themeSlug, nonLandSpells, cardCatalog, commanderCount = 1) {
         const lands = [];
         const colorCount = commanderColors.length;
@@ -458,7 +528,7 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 7. Generic Colorless Utility (Cap at 2 for 3-color, 4 for mono/2-color, 0 for 4-5 color)
+        // 7. Generic Colorless Utility
         const colorlessCaps = { 0: 36, 1: 4, 2: 4, 3: 2, 4: 0, 5: 0 };
         const maxColorless = colorlessCaps[colorCount] ?? 0;
         let colorlessCount = 0;
@@ -473,7 +543,7 @@ class PrefireDeckGenerator {
 
         // 8. Basic Land Allocation Proportional to Pips
         const remainingSlots = Math.max(totalLandTarget - lands.length, 1);
-        
+
         if (colorCount === 0) {
             for (let i = 0; i < remainingSlots; i++) lands.push("Wastes");
             return lands;
@@ -524,7 +594,7 @@ class PrefireDeckGenerator {
             }
 
             let diff = remainingSlots - allocated;
-            const primaryColor = commanderColors.reduce((a, b) => 
+            const primaryColor = commanderColors.reduce((a, b) =>
                 (pipCounts[a] || 0) >= (pipCounts[b] || 0) ? a : b
             );
             basicAllocations[primaryColor] = Math.max(1, basicAllocations[primaryColor] + diff);
@@ -559,10 +629,16 @@ class PrefireDeckGenerator {
         let themeData = null;
         let actualSlug = normalizedTheme || "default";
 
-        // 1. Try commander-specific theme data first
+        // 1. Commander-specific theme check
         if (commanderPayload) {
-            if (normalizedTheme && commanderPayload.themes && commanderPayload.themes[normalizedTheme]) {
-                const candidate = commanderPayload.themes[normalizedTheme].data || commanderPayload.themes[normalizedTheme];
+            const checkTheme = (container) => {
+                if (!container || !normalizedTheme) return null;
+                return container[normalizedTheme] || null;
+            };
+
+            const tMatch = checkTheme(commanderPayload.themes) || checkTheme(commanderPayload.tribes);
+            if (tMatch) {
+                const candidate = tMatch.data || tMatch;
                 if (candidate && Array.isArray(candidate.cards) && candidate.cards.length >= 10) {
                     themeData = candidate;
                 }
@@ -574,7 +650,7 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 2. Fallback to unified theme profile if commander has insufficient data for this theme
+        // 2. Fallback to unified theme profile if commander file has insufficient data
         if (!themeData && normalizedTheme && this.themeFallbacks && this.themeFallbacks[normalizedTheme]) {
             const fallback = this.themeFallbacks[normalizedTheme];
             if (fallback && Array.isArray(fallback.cards) && fallback.cards.length > 0) {
@@ -583,7 +659,7 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 3. Fallback to commander's default theme if available
+        // 3. Fallback to commander default
         if (!themeData && commanderPayload && commanderPayload.default) {
             const defCandidate = commanderPayload.default.data || commanderPayload.default;
             if (defCandidate && Array.isArray(defCandidate.cards)) {
@@ -591,9 +667,9 @@ class PrefireDeckGenerator {
             }
         }
 
-        // 4. Safe fallback if zero data was found
+        // 4. Safe baseline fallback
         if (!themeData) {
-            themeData = { targets: {}, cards: [] };
+            themeData = { targets: {}, cards: [], distribution: {}, roles: {} };
         }
 
         const cmdrCount = commanderB ? 2 : 1;
