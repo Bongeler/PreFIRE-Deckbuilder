@@ -3714,6 +3714,7 @@
       const themeFilterRow = document.getElementById('cmdr-theme-filter-row');
       const cmdrThemeInputsWrap = document.getElementById('cmdr-theme-inputs-wrap');
       const btnToggleCmdrThemes = document.getElementById('btn-toggle-cmdr-themes');
+      const sortGroup = document.querySelector('.sort-left-group');
 
       if (themeFilterRow) {
         themeFilterRow.style.display = active && !isPartnerSearchMode ? 'flex' : 'none';
@@ -3727,6 +3728,7 @@
         clearSearchInputs();
         setStaplesButtonState(false);
         setEdhrecButtonState(false);
+        if (sortGroup) sortGroup.style.display = 'none';
         cmdrToggleGroup.style.display = isPartnerSearchMode ? 'none' : 'flex';
         searchBtn.textContent = isPartnerSearchMode ? 'Search Partners' : 'Search Commanders';
         searchBtn.classList.add('commander-mode');
@@ -3736,6 +3738,7 @@
           ? `Searching for compatible partners (${activePartnerType})...` 
           : 'Searching for commanders... Enter terms or click Search Commanders.';
       } else {
+        if (sortGroup) sortGroup.style.display = 'flex';
         cmdrToggleGroup.style.display = 'none';
         searchBtn.textContent = 'Search Cards';
         searchBtn.classList.remove('commander-mode');
@@ -3821,8 +3824,7 @@ async function loadMoreThemeCommanders() {
       const cards = await fetchCollectionChunk(nextBatch);
       activeThemeQueue.currentIndex += nextBatch.length;
 
-      const sortChoice = searchSortSelect ? searchSortSelect.value : 'cmc';
-      sortCardArray(cards, sortChoice);
+      // Preserve popularity sorting from commander-theme-index.json
 
       cards.forEach(c => {
         const el = createCardElement(c);
@@ -3902,8 +3904,7 @@ async function loadMoreThemeCommanders() {
       const soloCards = await fetchCollectionChunk(firstBatch);
       activeThemeQueue.currentIndex = firstBatch.length;
 
-      const sortChoice = searchSortSelect ? searchSortSelect.value : 'cmc';
-      sortCardArray(soloCards, sortChoice);
+      // Preserve popularity sorting from commander-theme-index.json
 
       soloCards.forEach(c => {
         const el = createCardElement(c);
@@ -4800,7 +4801,8 @@ async function loadMoreThemeCommanders() {
           cards = cards.filter(card => !isGameChangerCard(card));
         }
 
-        if (!isShowingStaples) {
+        javascript
+        if (!isShowingStaples && !isCommanderSearchMode && !isPartnerSearchMode) {
           sortCardArray(cards, sortChoice);
         }
 
@@ -4852,7 +4854,7 @@ async function loadMoreThemeCommanders() {
           }
 
           const sortChoice = searchSortSelect.value || 'cmc';
-          if (!isShowingStaples) {
+          if (!isShowingStaples && !isCommanderSearchMode && !isPartnerSearchMode) {
             sortCardArray(cards, sortChoice);
           }
 
