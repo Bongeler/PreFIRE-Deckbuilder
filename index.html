@@ -275,11 +275,19 @@
     }
 
     .sort-control {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .sort-control .suggestion-buttons-wrap {
+        flex: 1;
+        min-width: 120px;
+      }
 
     .sort-left-group {
       display: flex;
@@ -935,6 +943,27 @@
       background-color: #333333;
       color: #777777;
       cursor: not-allowed;
+    }
+
+    .btn-autobuild-mobile-header {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .btn-autobuild-mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        min-height: 48px;
+        padding: 6px 10px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-radius: 4px;
+        align-self: stretch;
+      }
     }
 
     #deck-count {
@@ -2025,7 +2054,24 @@
         width: 100%;
         flex-direction: column;
         align-items: stretch;
-        gap: 8px;
+        gap: 10px;
+      }
+
+      /* Mobile popout overlay over workspace */
+      #cmdr-theme-inputs-wrap.mobile-popout {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: rgba(24, 24, 24, 0.98);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-bottom: 2px solid #e2f409;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
+        padding: 14px 16px;
+        z-index: 120;
+        box-sizing: border-box;
       }
 
       .cmdr-theme-select-wrap {
@@ -2234,10 +2280,11 @@
             <input type="checkbox" id="no-game-changers">
             <span>No Game Changers</span>
           </label>
-          <div class="suggestion-buttons-wrap">
+          <<div class="suggestion-buttons-wrap">
             <button type="button" class="btn-edhrec-toggle" id="btn-edhrec-toggle">EDHREC Suggestions</button>
             <button type="button" class="btn-staples-toggle" id="btn-staples-toggle">Commander Staples</button>
           </div>
+          <button type="button" class="btn-autobuild-trigger btn-autobuild-mobile-header" id="btn-autobuild-mobile-header">Auto-build deck?</button>
         </div>
       </div>
       <div class="search-btn-wrap">
@@ -3833,6 +3880,18 @@
       }
     }
 
+    function collapseMobileThemePopout() {
+      const cmdrThemeInputsWrap = document.getElementById('cmdr-theme-inputs-wrap');
+      const btnToggleCmdrThemes = document.getElementById('btn-toggle-cmdr-themes');
+      if (cmdrThemeInputsWrap) {
+        cmdrThemeInputsWrap.style.display = 'none';
+        cmdrThemeInputsWrap.classList.remove('mobile-popout');
+      }
+      if (btnToggleCmdrThemes) {
+        btnToggleCmdrThemes.textContent = 'Choose a Theme ▾';
+      }
+    }
+
     const btnToggleCmdrThemes = document.getElementById('btn-toggle-cmdr-themes');
     if (btnToggleCmdrThemes) {
       btnToggleCmdrThemes.addEventListener('click', async () => {
@@ -3840,6 +3899,9 @@
         const isHidden = cmdrThemeInputsWrap.style.display === 'none';
         if (isHidden) {
           cmdrThemeInputsWrap.style.display = 'flex';
+          if (window.innerWidth <= 768) {
+            cmdrThemeInputsWrap.classList.add('mobile-popout');
+          }
           btnToggleCmdrThemes.textContent = 'Hide Themes ▴';
           if (!commanderThemeIndex) {
             await loadCommanderThemeIndex();
@@ -3855,8 +3917,7 @@
 
           populateThemeDatalists();
         } else {
-          cmdrThemeInputsWrap.style.display = 'none';
-          btnToggleCmdrThemes.textContent = 'Choose a Theme ▾';
+          collapseMobileThemePopout();
         }
       });
     }
@@ -4199,10 +4260,11 @@ function matchesColorFilters(card) {
         const tribeSelect = document.getElementById('cmdr-tribe-select');
         if (tribeSelect) tribeSelect.value = '';
         if (themeSelectEl.value) {
-          triggerThemeFilterSelection(themeSelectEl.value, false);
           if (window.innerWidth <= 768) {
+            collapseMobileThemePopout();
             setMobileTab('search');
           }
+          triggerThemeFilterSelection(themeSelectEl.value, false);
         }
       });
     }
@@ -4213,10 +4275,11 @@ function matchesColorFilters(card) {
         const themeSelect = document.getElementById('cmdr-theme-select');
         if (themeSelect) themeSelect.value = '';
         if (tribeSelectEl.value) {
-          triggerThemeFilterSelection(tribeSelectEl.value, true);
           if (window.innerWidth <= 768) {
+            collapseMobileThemePopout();
             setMobileTab('search');
           }
+          triggerThemeFilterSelection(tribeSelectEl.value, true);
         }
       });
     }
@@ -5420,7 +5483,16 @@ function matchesColorFilters(card) {
       const changeBtnAuto = document.getElementById('btn-change-commander-autobuild');
       const labelText = document.getElementById('commander-label-text');
       const autoBuildBtn = document.getElementById('btn-autobuild-trigger');
+      const autoBuildMobileBtn = document.getElementById('btn-autobuild-mobile-header');
       
+      if (autoBuildMobileBtn) {
+        autoBuildMobileBtn.onclick = () => {
+          if (autoBuildBtn && !autoBuildBtn.disabled) {
+            autoBuildBtn.click();
+          }
+        };
+      }
+
       if (!container) return;
 
       container.innerHTML = '';
@@ -5508,6 +5580,7 @@ function matchesColorFilters(card) {
         if (changeBtn) changeBtn.style.display = 'none';
         if (changeBtnAuto) changeBtnAuto.style.display = 'none';
         if (autoBuildBtn) autoBuildBtn.disabled = true;
+        if (autoBuildMobileBtn) autoBuildMobileBtn.disabled = true;
 
         const createChooseBtn = () => {
           const chooseBtn = document.createElement('button');
@@ -5547,6 +5620,7 @@ function matchesColorFilters(card) {
       }
 
       if (autoBuildBtn) autoBuildBtn.disabled = false;
+      if (autoBuildMobileBtn) autoBuildMobileBtn.disabled = false;
 
       if (changeBtn) {
         changeBtn.style.display = 'inline-block';
