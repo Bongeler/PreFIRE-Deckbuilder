@@ -42,7 +42,7 @@ class PrefireDeckGenerator {
                 fallbacksData = await safeFetchJson("theme-fallbacks.json");
             }
 
-           const [roles, staples, lands, archetypes, cardTypes] = await Promise.all([
+            const [roles, staples, lands, archetypes, cardTypes] = await Promise.all([
                 safeFetchJson("card-roles.json"),
                 safeFetchJson("prefire-staples.json"),
                 safeFetchJson("prefire-lands.json"),
@@ -128,7 +128,7 @@ class PrefireDeckGenerator {
         if (!themeSlug || themeSlug === "default") return false;
         const cleanSlug = themeSlug.toLowerCase();
         const meta = cardCatalog[cardName] || {};
-        const tLine = (meta.type_line || meta.type || "").toLowerCase();
+        const tLine = (this.cardTypes && this.cardTypes[cardName]) ? this.cardTypes[cardName].toLowerCase() : (meta.type_line || meta.type || "").toLowerCase();
         const oText = (meta.oracle_text || meta.text || "").toLowerCase();
         const lowerName = cardName.toLowerCase();
 
@@ -150,7 +150,7 @@ class PrefireDeckGenerator {
         return false;
     }
 
-    getArchetypeCards(themeSlug, commanderColors, limit = 60) {
+    getArchetypeCards(themeSlug, commanderColors, limit = 100) {
         if (!this.archetypeIndex || !themeSlug || themeSlug === "default") {
             return [];
         }
@@ -181,33 +181,16 @@ class PrefireDeckGenerator {
         return legal.slice(0, limit).map(c => typeof c === 'string' ? c : c.name);
     }
 
-    // Step A: Assemble Non-Land Spells with Empirical Targets and In-Theme Role Filling
+    // Step A: Assemble Non-Land Spells (Thematic First -> Archetype Second -> Staples Last Resort)
     assembleSpells(themeData, themeSlug, commanderColors, cardCatalog, commanderCount = 1) {
         const dist = (themeData && themeData.distribution) ? themeData.distribution : {};
         const targetLandCount = (typeof dist.lands === 'number') ? dist.lands : ((themeData && themeData.targets && themeData.targets.lands) ? themeData.targets.lands : 36);
         const targetSpellsCount = 100 - commanderCount - targetLandCount;
 
-        // Empirical type floors
-        const targetTypes = {
-            enchantment: dist.enchantments || ((themeSlug.includes("enchant") || themeSlug === "auras") ? 28 : 0),
-            artifact: dist.artifacts || ((themeSlug.includes("artifact") || themeSlug === "equipment") ? 26 : 0),
-            creature: dist.creatures || 0,
-            instant: dist.instants || 0,
-            sorcery: dist.sorceries || 0,
-            planeswalker: dist.planeswalkers || 0
-        };
-
-        // Empirical functional role targets
-        const empRoles = (themeData && themeData.roles) ? themeData.roles : {};
-        const quotas = {
-            ramp: empRoles.ramp || (themeData.targets && themeData.targets.ramp) || 10,
-            draw: empRoles.draw || (themeData.targets && themeData.targets.draw) || 10,
-            removal_creature: empRoles.removal_creature || (themeData.targets && themeData.targets.removal_creature) || 6,
-            removal_noncreature: empRoles.removal_noncreature || (themeData.targets && themeData.targets.removal_noncreature) || 4,
-            board_wipe: empRoles.wipes || (themeData.targets && themeData.targets.board_wipe) || 3
-        };
-
         const isLand = (cName) => {
+            if (this.cardTypes && this.cardTypes[cName]) {
+                return this.cardTypes[cName].toLowerCase().includes("land");
+            }
             const meta = cardCatalog[cName] || {};
             const tLine = (meta.type || meta.type_line || "").toLowerCase();
             return tLine.includes("land") || (this.landsData && this.landsData.baseline_lands && this.landsData.baseline_lands[cName]);
@@ -221,163 +204,74 @@ class PrefireDeckGenerator {
             return (meta.type || meta.type_line || "").toLowerCase();
         };
 
-        // Dynamic functional role detector (Oracle text and explicit tags)
-        const detectCardRoles = (cardName) => {
-            const explicit = this.cardRoles[cardName] || [];
-            if (explicit.length > 0) return explicit;
-            const meta = cardCatalog[cardName] || {};
-            const text = (meta.oracle_text || meta.text || "").toLowerCase();
-            const tLine = (meta.type || meta.type_line || "").toLowerCase();
-            const detected = [];
-
-            if (text.includes("add ") || (text.includes("search your library for a") && text.includes("land")) || tLine.includes("mana rock")) {
-                detected.push("ramp");
-            }
-            if (text.includes("draw a card") || text.includes("draw two") || text.includes("draw cards") || text.includes("draws a card")) {
-                detected.push("draw");
-            }
-            if (text.includes("destroy all") || text.includes("exile all") || text.includes("each player sacrifices all")) {
-                detected.push("board_wipe");
-            } else if (text.includes("destroy target") || text.includes("exile target") || text.includes("deals damage to target")) {
-                if (text.includes("creature")) detected.push("removal_creature");
-                if (text.includes("noncreature") || text.includes("artifact") || text.includes("enchantment") || text.includes("permanent")) {
-                    detected.push("removal_noncreature");
-                }
-            }
-            return detected;
+        const isLegal = (cName) => {
+            if (!cName || isLand(cName)) return false;
+            const meta = cardCatalog[cName];
+            const colors = (meta && meta.color_identity) ? meta.color_identity : this.cardColorMap[cName];
+            if (colors && !this.isColorLegal(colors, commanderColors)) return false;
+            return true;
         };
-
-        // 1. Gather all candidates and score by empirical synergy
-        const cmdrCards = (themeData.cards || []).map(c => typeof c === 'string' ? c : c.name).filter(c => !isLand(c));
-        const globalArchCards = this.getArchetypeCards(themeSlug, commanderColors, 60).filter(c => !isLand(c));
-
-        const candidateScores = new Map();
-        const registerCandidate = (cardName, baseScore, weight = 1.0) => {
-            if (isLand(cardName)) return;
-            const meta = cardCatalog[cardName];
-            const colors = (meta && meta.color_identity) ? meta.color_identity : this.cardColorMap[cardName];
-            if (colors && !this.isColorLegal(colors, commanderColors)) return;
-
-            const current = candidateScores.get(cardName) || 0;
-            candidateScores.set(cardName, Math.max(current, baseScore * weight));
-        };
-
-        cmdrCards.forEach((name, idx) => {
-            const score = 150 - Math.min(idx, 100);
-            registerCandidate(name, score, 1.2);
-        });
-
-        globalArchCards.forEach((name, idx) => {
-            const score = 120 - Math.min(idx, 80);
-            registerCandidate(name, score, 1.0);
-        });
-
-        Object.entries(this.staples).forEach(([role, list]) => {
-            (list || []).forEach((item, idx) => {
-                const name = typeof item === 'string' ? item : item.name;
-                const score = 60 - Math.min(idx, 40);
-                registerCandidate(name, score, 0.8);
-            });
-        });
 
         const selected = new Set();
-        const roleBuckets = {
-            ramp: 0,
-            draw: 0,
-            removal_creature: 0,
-            removal_noncreature: 0,
-            board_wipe: 0
-        };
 
-        const currentTypeCounts = {
-            enchantment: 0,
-            artifact: 0,
-            creature: 0,
-            instant: 0,
-            sorcery: 0,
-            planeswalker: 0
-        };
+        // 1. Gather theme and archetype candidate pools
+        const rawThemeCards = (themeData.cards || []).map(c => typeof c === 'string' ? c : (c.name || "")).filter(isLegal);
+        const globalArchCards = this.getArchetypeCards(themeSlug, commanderColors, 100).filter(isLegal);
 
-        const sortedCandidates = Array.from(candidateScores.keys()).sort((a, b) => {
-            let scoreA = candidateScores.get(a);
-            let scoreB = candidateScores.get(b);
+        const isEnchantTheme = themeSlug.includes("enchant") || themeSlug === "auras";
+        const isArtifactTheme = themeSlug.includes("artifact") || themeSlug === "equipment" || themeSlug === "cheerios";
+
+        const typePrioritySort = (a, b) => {
             const tA = getCardType(a);
             const tB = getCardType(b);
-
-            for (const [pType, targetCount] of Object.entries(targetTypes)) {
-                if (targetCount > 0) {
-                    if (tA.includes(pType)) scoreA += 40;
-                    if (tB.includes(pType)) scoreB += 40;
-                }
+            if (isEnchantTheme) {
+                const aEnc = tA.includes("enchantment") ? 1 : 0;
+                const bEnc = tB.includes("enchantment") ? 1 : 0;
+                if (aEnc !== bEnc) return bEnc - aEnc;
             }
-            return scoreB - scoreA;
-        });
+            if (isArtifactTheme) {
+                const aArt = tA.includes("artifact") ? 1 : 0;
+                const bArt = tB.includes("artifact") ? 1 : 0;
+                if (aArt !== bArt) return bArt - aArt;
+            }
+            return 0;
+        };
 
-        // Pass 1: Ingest core theme cards satisfying required permanent floors
-        for (const card of sortedCandidates) {
+        // 2. FILL THEMATIC SLOTS FIRST
+        // Priority 1: Commander-specific theme cards
+        rawThemeCards.sort(typePrioritySort);
+        for (const name of rawThemeCards) {
             if (selected.size >= targetSpellsCount) break;
-
-            const tLine = getCardType(card);
-            let isTypeNeeded = false;
-
-            for (const [pType, targetCount] of Object.entries(targetTypes)) {
-                if (targetCount > 0 && tLine.includes(pType) && currentTypeCounts[pType] < targetCount) {
-                    isTypeNeeded = true;
-                    break;
-                }
-            }
-
-            if (isTypeNeeded || candidateScores.get(card) >= 100) {
-                selected.add(card);
-                for (const pType of Object.keys(currentTypeCounts)) {
-                    if (tLine.includes(pType)) currentTypeCounts[pType]++;
-                }
-                const roles = detectCardRoles(card);
-                for (const r of roles) {
-                    if (roleBuckets[r] !== undefined) roleBuckets[r]++;
-                }
-            }
+            selected.add(name);
         }
 
-        // Pass 2: Backfill functional role deficits prioritizing theme-matching types
-        for (const [role, quota] of Object.entries(quotas)) {
-            let needed = quota - (roleBuckets[role] || 0);
-            if (needed <= 0) continue;
+        // Priority 2: Global archetype cards
+        globalArchCards.sort(typePrioritySort);
+        for (const name of globalArchCards) {
+            if (selected.size >= targetSpellsCount) break;
+            selected.add(name);
+        }
 
-            const roleCandidates = sortedCandidates.filter(name =>
-                !selected.has(name) && detectCardRoles(name).includes(role)
-            );
+        // 3. STAPLES STRICTLY AS LAST RESORT (Only if slots remain unfilled)
+        if (selected.size < targetSpellsCount) {
+            const roles = ["ramp", "draw", "removal_creature", "removal_noncreature", "board_wipe"];
+            const staplePool = [];
 
-            roleCandidates.sort((a, b) => {
-                const tA = getCardType(a);
-                const tB = getCardType(b);
-                let bonusA = 0, bonusB = 0;
-                for (const [pType, targetCount] of Object.entries(targetTypes)) {
-                    if (targetCount > 0) {
-                        if (tA.includes(pType)) bonusA += 50;
-                        if (tB.includes(pType)) bonusB += 50;
+            for (const r of roles) {
+                const list = this.staples[r] || [];
+                for (const item of list) {
+                    const name = typeof item === 'string' ? item : (item.name || "");
+                    if (isLegal(name) && !selected.has(name)) {
+                        staplePool.push(name);
                     }
                 }
-                return (candidateScores.get(b) + bonusB) - (candidateScores.get(a) + bonusA);
-            });
-
-            for (const card of roleCandidates) {
-                if (needed <= 0 || selected.size >= targetSpellsCount) break;
-                selected.add(card);
-                roleBuckets[role]++;
-                const tLine = getCardType(card);
-                for (const pType of Object.keys(currentTypeCounts)) {
-                    if (tLine.includes(pType)) currentTypeCounts[pType]++;
-                }
-                needed--;
             }
-        }
 
-        // Pass 3: Fill remaining open slots with highest-ranked remaining candidates
-        for (const card of sortedCandidates) {
-            if (selected.size >= targetSpellsCount) break;
-            if (!selected.has(card)) {
-                selected.add(card);
+            staplePool.sort(typePrioritySort);
+
+            for (const name of staplePool) {
+                if (selected.size >= targetSpellsCount) break;
+                selected.add(name);
             }
         }
 
@@ -423,7 +317,7 @@ class PrefireDeckGenerator {
 
         for (const spellName of nonLandSpells) {
             const meta = cardCatalog[spellName];
-            const tLine = (meta && (meta.type || meta.type_line)) ? (meta.type || meta.type_line).toLowerCase() : "";
+            const tLine = (this.cardTypes && this.cardTypes[spellName]) ? this.cardTypes[spellName].toLowerCase() : ((meta && (meta.type || meta.type_line)) ? (meta.type || meta.type_line).toLowerCase() : "");
             const oText = (meta && meta.oracle_text) ? meta.oracle_text.toLowerCase() : "";
             const lowerName = spellName.toLowerCase();
 
