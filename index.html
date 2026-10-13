@@ -275,19 +275,11 @@
     }
 
     .sort-control {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        gap: 8px;
-        flex-wrap: wrap;
-      }
-
-      .sort-control .suggestion-buttons-wrap {
-        flex: 1;
-        min-width: 120px;
-      }
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
     .sort-left-group {
       display: flex;
@@ -2278,8 +2270,8 @@
             <button type="button" class="btn-edhrec-toggle" id="btn-edhrec-toggle">EDHREC Suggestions</button>
             <button type="button" class="btn-staples-toggle" id="btn-staples-toggle">Commander Staples</button>
           </div>
+          <button type="button" class="btn-autobuild-trigger" id="btn-autobuild-trigger">Auto-build deck?</button>
         </div>
-        <button type="button" class="btn-autobuild-trigger" id="btn-autobuild-trigger">Auto-build deck?</button>
       </div>
       <div class="search-btn-wrap">
         <button type="button" class="btn-random-cmdr" id="btn-random-cmdr" style="display: none;">Random Commander?</button>
