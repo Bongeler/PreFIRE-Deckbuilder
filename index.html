@@ -4268,34 +4268,6 @@ function matchesColorFilters(card) {
     }
 
     document.querySelectorAll('.cmdr-pool-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.cmdr-pool-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        commanderPoolMode = btn.dataset.pool;
-        updateModeLabel();
-
-        const themeSelect = document.getElementById('cmdr-theme-select');
-        const tribeSelect = document.getElementById('cmdr-tribe-select');
-        const currentThemeSlug = themeSelect ? themeSelect.value : '';
-        const currentTribeSlug = tribeSelect ? tribeSelect.value : '';
-
-        if (typeof populateThemeDatalists === 'function') {
-          populateThemeDatalists();
-        }
-
-        if (currentThemeSlug && themeSelect) {
-          themeSelect.value = currentThemeSlug;
-        } else if (currentTribeSlug && tribeSelect) {
-          tribeSelect.value = currentTribeSlug;
-        }
-
-        if (activeThemeCache && (currentThemeSlug || currentTribeSlug)) {
-          renderFilteredThemeCards();
-        } else {
-          executeSearch();
-        }
-      });
-    });
 
     document.getElementById('btn-toggle-removed').addEventListener('click', (e) => {
       e.stopPropagation();
