@@ -105,16 +105,58 @@ class PrefireDeckGenerator {
     }
 
     async loadCommanderThemes(slug) {
+        let payload = null;
         try {
             const firstChar = /^[a-z0-9]/.test(slug) ? slug[0] : "_";
             const res = await fetch(`data/themes/${firstChar}/${slug}.json`);
-            if (!res.ok) return null;
-            const text = await res.text();
-            if (!text || text.trim().startsWith("<")) return null;
-            return JSON.parse(text);
-        } catch (e) {
-            return null;
-        }
+            if (res.ok) {
+                const text = await res.text();
+                if (text && !text.trim().startsWith("<")) {
+                    payload = JSON.parse(text);
+                }
+            }
+        } catch (e) {}
+
+        const clean = slug.toLowerCase().trim();
+        const swarmConfigs = {
+            "relentless-rats": {
+                label: "Relentless Rats (Swarm)",
+                commanders: new Set([
+                    "marrow-gnawer", "balthor-the-defiled", "chainer-dementia-master",
+                    "shirei-shizos-caretaker", "sidisi-undead-vizier", "karador-ghost-chieftain",
+                    "jarad-golgari-lich-lord", "geth-lord-of-the-vault", "ayara-first-of-locthwain",
+                    "krrik-son-of-yawgmoth"
+                ])
+            },
+            "shadowborn-apostle": {
+                label: "Shadowborn Apostle (Swarm)",
+                commanders: new Set([
+                    "athreos-god-of-passage", "shirei-shizos-caretaker", "razaketh-the-foulblooded",
+                    "lyzolda-the-blood-witch", "meren-of-clan-nel-toth", "whisper-blood-liturgist",
+                    "chainer-dementia-master", "taborax-hopes-demise"
+                ])
+            },
+            "persistent-petitioners": {
+                label: "Persistent Petitioners (Swarm)",
+                commanders: new Set([
+                    "grand-arbiter-augustin-iv", "phenax-god-of-deception", "oona-queen-of-the-fae",
+                    "the-mimeoplasm", "arcades-the-strategist", "circu-dimir-lobotomist",
+                    "bruvac-the-grandiloquent", "captain-ngathrod"
+                ])
+            }
+        };
+
+        let result = payload || {};
+        if (!result.themes) result.themes = {};
+
+        Object.keys(swarmConfigs).forEach(themeKey => {
+            const cfg = swarmConfigs[themeKey];
+            if (cfg.commanders.has(clean)) {
+                result.themes[themeKey] = { label: cfg.label };
+            }
+        });
+
+        return result;
     }
 
     isColorLegal(cardColors, commanderColors) {
@@ -202,9 +244,15 @@ class PrefireDeckGenerator {
         const targetLandCount = (typeof dist.lands === 'number') ? dist.lands : ((themeData && themeData.targets && themeData.targets.lands) ? themeData.targets.lands : 36);
         const targetSpellsCount = 100 - commanderCount - targetLandCount;
 
+        const SWARM_CARDS = ["Relentless Rats", "Shadowborn Apostle", "Persistent Petitioners"];
+        const isSwarmTheme = ["relentless-rats", "shadowborn-apostle", "persistent-petitioners"].includes(themeSlug);
+
         const isLegalSpell = (cName) => {
             if (!cName) return false;
             if (this.isLandCard(cName, cardCatalog)) return false;
+
+            // Strip swarm cards out of generic themes (like regular Rats or Clerics)
+            if (!isSwarmTheme && SWARM_CARDS.includes(cName.trim())) return false;
 
             const lower = cName.trim().toLowerCase();
             const meta = cardCatalog[cName] || cardCatalog[lower];
@@ -305,6 +353,40 @@ class PrefireDeckGenerator {
         }
 
         const selected = new Set();
+        const swarmPackage = [];
+
+        if (isSwarmTheme) {
+            const swarmSpecs = {
+                "relentless-rats": {
+                    name: "Relentless Rats",
+                    count: 30,
+                    staples: ["Thrumming Stone", "Secret Salvage", "Bontu's Monument", "Phyrexian Arena"]
+                },
+                "shadowborn-apostle": {
+                    name: "Shadowborn Apostle",
+                    count: 32,
+                    staples: ["Thrumming Stone", "Edgewalker", "Razaketh, the Foulblooded", "Rune-Scarred Demon", "Living Death", "Patriarch's Bidding"]
+                },
+                "persistent-petitioners": {
+                    name: "Persistent Petitioners",
+                    count: 28,
+                    staples: ["Thrumming Stone", "Intruder Alarm", "Dramatic Reversal", "Isochron Scepter", "Sphinx's Tutelage"]
+                }
+            };
+
+            const spec = swarmSpecs[themeSlug];
+            if (spec) {
+                for (let i = 0; i < spec.count; i++) {
+                    swarmPackage.push(spec.name);
+                }
+                spec.staples.forEach(stapleName => {
+                    if (isLegalSpell(stapleName)) {
+                        selected.add(stapleName);
+                    }
+                });
+            }
+        }
+
         const roleBuckets = {
             ramp: 0,
             draw: 0,
@@ -386,7 +468,9 @@ class PrefireDeckGenerator {
             addCardToDeck(name);
         }
 
-        return Array.from(selected).slice(0, targetSpellsCount);
+        const remainingCapacity = Math.max(0, targetSpellsCount - swarmPackage.length);
+        const nonSwarmSpells = Array.from(selected).slice(0, remainingCapacity);
+        return [...swarmPackage, ...nonSwarmSpells];
     }
 
     assembleLands(commanderColors, themeSlug, nonLandSpells, cardCatalog, commanderCount = 1) {

@@ -6412,6 +6412,12 @@ function matchesColorFilters(card) {
       "Snow-Covered Mountain", "Snow-Covered Forest"
     ]);
 
+    const SWARM_CARD_NAMES = new Set([
+      "Relentless Rats",
+      "Shadowborn Apostle",
+      "Persistent Petitioners"
+    ]);
+
     function createShingleCardElement(cardName, zIndex, countBadge = null) {
       const item = deck[cardName] || { faces: [getDirectScryfallImageUrl(cardName)] };
       const el = document.createElement('div');
@@ -6478,7 +6484,7 @@ function matchesColorFilters(card) {
         let bucketKey = Math.min(Math.max(0, Math.floor(cardCmc)), 6);
         if (isNaN(bucketKey)) bucketKey = 0;
 
-        if (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(name)) {
+        if ((BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(name)) || SWARM_CARD_NAMES.has(name)) {
           cmcBuckets[bucketKey].push({ name, count: item.count || 1 });
         } else {
           const qty = item.count || 1;
@@ -6503,7 +6509,8 @@ function matchesColorFilters(card) {
         stack.className = 'shingle-stack';
 
        list.forEach((entry, idx) => {
-          const badgeCount = (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(entry.name)) ? entry.count : null;
+          const isStackable = (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(entry.name)) || SWARM_CARD_NAMES.has(entry.name);
+          const badgeCount = isStackable ? entry.count : null;
           stack.appendChild(createShingleCardElement(entry.name, idx + 1, badgeCount));
         });
 
@@ -6532,7 +6539,7 @@ function matchesColorFilters(card) {
         const item = deck[name];
         const cat = getCardPrimaryType(item);
         const targetList = typeBuckets[cat] || typeBuckets['Artifacts'];
-        if (BASIC_LAND_NAMES.has(name)) {
+        if (BASIC_LAND_NAMES.has(name) || SWARM_CARD_NAMES.has(name)) {
           targetList.push({ name, count: item.count, cmc: item.cmc || 0 });
         } else {
           for (let i = 0; i < (item.count || 1); i++) {
@@ -6560,7 +6567,8 @@ function matchesColorFilters(card) {
         stack.className = 'shingle-stack';
 
         list.forEach((entry, idx) => {
-          stack.appendChild(createShingleCardElement(entry.name, idx + 1, BASIC_LAND_NAMES.has(entry.name) ? entry.count : null));
+          const isStackable = BASIC_LAND_NAMES.has(entry.name) || SWARM_CARD_NAMES.has(entry.name);
+          stack.appendChild(createShingleCardElement(entry.name, idx + 1, isStackable ? entry.count : null));
         });
 
         col.appendChild(stack);

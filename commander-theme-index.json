@@ -1,5 +1,58 @@
 {
   "themes": {
+    "relentless-rats": {
+      "label": "Relentless Rats",
+      "prefire_solo": [
+        "Marrow-Gnawer",
+        "Balthor the Defiled",
+        "Chainer, Dementia Master",
+        "Shirei, Shizo's Caretaker",
+        "Sidisi, Undead Vizier",
+        "Karador, Ghost Chieftain",
+        "Jarad, Golgari Lich Lord",
+        "Geth, Lord of the Vault"
+      ],
+      "prefire_partner": [],
+      "postfire_solo": [
+        "Ayara, First of Locthwain",
+        "K'rrik, Son of Yawgmoth"
+      ],
+      "postfire_partner": []
+    },
+    "shadowborn-apostle": {
+      "label": "Shadowborn Apostle",
+      "prefire_solo": [
+        "Athreos, God of Passage",
+        "Shirei, Shizo's Caretaker",
+        "Razaketh, the Foulblooded",
+        "Lyzolda, the Blood Witch",
+        "Meren of Clan Nel Toth",
+        "Whisper, Blood Liturgist",
+        "Chainer, Dementia Master"
+      ],
+      "prefire_partner": [],
+      "postfire_solo": [
+        "Taborax, Hope's Demise"
+      ],
+      "postfire_partner": []
+    },
+    "persistent-petitioners": {
+      "label": "Persistent Petitioners",
+      "prefire_solo": [
+        "Grand Arbiter Augustin IV",
+        "Phenax, God of Deception",
+        "Oona, Queen of the Fae",
+        "The Mimeoplasm",
+        "Arcades, the Strategist",
+        "Circu, Dimir Lobotomist"
+      ],
+      "prefire_partner": [],
+      "postfire_solo": [
+        "Bruvac the Grandiloquent",
+        "Captain Ngathrod"
+      ],
+      "postfire_partner": []
+    },
     "blink": {
       "label": "Blink",
       "prefire_solo": [
