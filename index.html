@@ -922,15 +922,21 @@
 
     .btn-autobuild-trigger {
       background-color: #d48806;
+      border: 1px solid #f1c40f;
       color: #121212;
-      border: none;
-      padding: 4px 10px;
+      padding: 0 16px;
+      min-width: 150px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 4px;
       cursor: pointer;
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.4px;
-      transition: background-color 0.15s ease, filter 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: background-color 0.15s ease, filter 0.15s ease, border-color 0.15s ease;
       white-space: nowrap;
     }
 
@@ -940,29 +946,17 @@
     }
 
     .btn-autobuild-trigger:disabled {
-      background-color: #333333;
-      color: #777777;
+      background-color: #2a2a2a;
+      border-color: #3d3d3d;
+      color: #666666;
       cursor: not-allowed;
     }
 
-    .btn-autobuild-mobile-header {
-      display: none;
-    }
-
     @media (max-width: 768px) {
-      .btn-autobuild-mobile-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
-        min-height: 48px;
-        padding: 6px 10px;
-        font-size: 11px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        border-radius: 4px;
-        align-self: stretch;
+      .btn-autobuild-trigger {
+        width: 100%;
+        min-height: 40px;
+        margin-left: 0;
       }
     }
 
@@ -2280,12 +2274,12 @@
             <input type="checkbox" id="no-game-changers">
             <span>No Game Changers</span>
           </label>
-          <<div class="suggestion-buttons-wrap">
+          <div class="suggestion-buttons-wrap">
             <button type="button" class="btn-edhrec-toggle" id="btn-edhrec-toggle">EDHREC Suggestions</button>
             <button type="button" class="btn-staples-toggle" id="btn-staples-toggle">Commander Staples</button>
           </div>
-          <button type="button" class="btn-autobuild-trigger btn-autobuild-mobile-header" id="btn-autobuild-mobile-header">Auto-build deck?</button>
         </div>
+        <button type="button" class="btn-autobuild-trigger" id="btn-autobuild-trigger">Auto-build deck?</button>
       </div>
       <div class="search-btn-wrap">
         <button type="button" class="btn-random-cmdr" id="btn-random-cmdr" style="display: none;">Random Commander?</button>
@@ -2374,10 +2368,7 @@
       </div>
 
       <div class="deck-header">
-        <div class="deck-header-left">
-          <button type="button" class="btn-clear-list-link" id="btn-clear-list-link">Clear List?</button>
-          <button type="button" class="btn-autobuild-trigger" id="btn-autobuild-trigger">Auto-build deck?</button>
-        </div>
+        <button type="button" class="btn-clear-list-link" id="btn-clear-list-link">Clear List?</button>
         <span id="deck-count">0 Cards</span>
       </div>
       <div class="deck-list" id="deck-list"></div>
@@ -5483,15 +5474,6 @@ function matchesColorFilters(card) {
       const changeBtnAuto = document.getElementById('btn-change-commander-autobuild');
       const labelText = document.getElementById('commander-label-text');
       const autoBuildBtn = document.getElementById('btn-autobuild-trigger');
-      const autoBuildMobileBtn = document.getElementById('btn-autobuild-mobile-header');
-      
-      if (autoBuildMobileBtn) {
-        autoBuildMobileBtn.onclick = () => {
-          if (autoBuildBtn && !autoBuildBtn.disabled) {
-            autoBuildBtn.click();
-          }
-        };
-      }
 
       if (!container) return;
 
@@ -5580,7 +5562,6 @@ function matchesColorFilters(card) {
         if (changeBtn) changeBtn.style.display = 'none';
         if (changeBtnAuto) changeBtnAuto.style.display = 'none';
         if (autoBuildBtn) autoBuildBtn.disabled = true;
-        if (autoBuildMobileBtn) autoBuildMobileBtn.disabled = true;
 
         const createChooseBtn = () => {
           const chooseBtn = document.createElement('button');
@@ -5620,7 +5601,6 @@ function matchesColorFilters(card) {
       }
 
       if (autoBuildBtn) autoBuildBtn.disabled = false;
-      if (autoBuildMobileBtn) autoBuildMobileBtn.disabled = false;
 
       if (changeBtn) {
         changeBtn.style.display = 'inline-block';
