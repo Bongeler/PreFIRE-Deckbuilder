@@ -4228,6 +4228,7 @@ function matchesColorFilters(card) {
       activeThemeCache = {
         label: chosenItem.label,
         slug: selectedSlug,
+        isTribe: isTribe,
         preSoloCards,
         allSoloCards,
         prePartnerPairs,
@@ -4268,7 +4269,7 @@ function matchesColorFilters(card) {
     }
 
     document.querySelectorAll('.cmdr-pool-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', async () => {
         document.querySelectorAll('.cmdr-pool-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         commanderPoolMode = btn.dataset.pool;
@@ -4276,28 +4277,32 @@ function matchesColorFilters(card) {
 
         const themeSelect = document.getElementById('cmdr-theme-select');
         const tribeSelect = document.getElementById('cmdr-tribe-select');
-        const currentThemeSlug = themeSelect ? themeSelect.value : '';
-        const currentTribeSlug = tribeSelect ? tribeSelect.value : '';
+        
+        // Retain the current slug from the select or the existing active cache
+        const savedSlug = (activeThemeCache && activeThemeCache.slug) 
+          ? activeThemeCache.slug 
+          : (themeSelect?.value || tribeSelect?.value || '');
+        const isTribe = activeThemeCache 
+          ? !!activeThemeCache.isTribe 
+          : (Boolean(tribeSelect?.value) && !themeSelect?.value);
 
         if (typeof populateThemeDatalists === 'function') {
           populateThemeDatalists();
         }
 
-        if (currentThemeSlug && themeSelect) {
-          themeSelect.value = currentThemeSlug;
-          if (activeThemeCache && activeThemeCache.slug === currentThemeSlug) {
+        if (savedSlug) {
+          if (isTribe && tribeSelect) {
+            tribeSelect.value = savedSlug;
+          } else if (themeSelect) {
+            themeSelect.value = savedSlug;
+          }
+
+          if (activeThemeCache && activeThemeCache.slug === savedSlug) {
             renderFilteredThemeCards();
           } else {
-            triggerThemeFilterSelection(currentThemeSlug, false);
+            await triggerThemeFilterSelection(savedSlug, isTribe);
           }
-        } else if (currentTribeSlug && tribeSelect) {
-          tribeSelect.value = currentTribeSlug;
-          if (activeThemeCache && activeThemeCache.slug === currentTribeSlug) {
-            renderFilteredThemeCards();
-          } else {
-            triggerThemeFilterSelection(currentTribeSlug, true);
-          }
-        } else {
+        } else if (hasActiveSearch()) {
           executeSearch();
         }
       });
