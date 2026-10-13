@@ -251,10 +251,16 @@ class PrefireDeckGenerator {
             if (!cName) return false;
             if (this.isLandCard(cName, cardCatalog)) return false;
 
-            // Strip swarm cards out of generic themes (like regular Rats or Clerics)
-            if (!isSwarmTheme && SWARM_CARDS.includes(cName.trim())) return false;
+            const cleanName = cName.trim();
+            const lower = cleanName.toLowerCase();
 
-            const lower = cName.trim().toLowerCase();
+            // Strip swarm cards out of generic themes (like regular Rats or Clerics)
+            if (!isSwarmTheme && SWARM_CARDS.includes(cleanName)) return false;
+
+            // Exclude conditional tribal/rider cards when deck is not that tribe
+            if (lower === "dragon's hoard" && themeSlug !== "dragons") return false;
+            if (lower === "pillar of origins" && !themeSlug.includes("trib") && themeSlug !== "slivers" && themeSlug !== "elves" && themeSlug !== "goblins" && themeSlug !== "zombies") return false;
+
             const meta = cardCatalog[cName] || cardCatalog[lower];
             const colors = (meta && meta.color_identity) ? meta.color_identity : this.cardColorMap[lower];
 
@@ -276,7 +282,8 @@ class PrefireDeckGenerator {
             if (text.includes("draw a card") || text.includes("draw two") || text.includes("draw cards") || text.includes("draws a card")) {
                 detected.push("draw");
             }
-            if (text.includes("destroy all") || text.includes("exile all") || text.includes("each player sacrifices all")) {
+            const isNarrowConditionalWipe = cardName.toLowerCase() === "aligned hedron network";
+            if (!isNarrowConditionalWipe && (text.includes("destroy all") || text.includes("exile all") || text.includes("each player sacrifices all"))) {
                 detected.push("board_wipe");
             } else if (text.includes("destroy target") || text.includes("exile target") || text.includes("deals damage to target")) {
                 if (text.includes("creature")) detected.push("removal_creature");
