@@ -239,13 +239,46 @@ class PrefireDeckGenerator {
     }
 
     // Step A: Assemble Non-Land Spells with Balanced Distribution and On-Theme Functional Quotas
-    assembleSpells(themeData, themeSlug, commanderColors, cardCatalog, commanderCount = 1) {
+    assembleSpells(themeData, themeSlug, commanderColors, cardCatalog, commanderCount = 1, powerLevel = "medium") {
         const dist = (themeData && themeData.distribution) ? themeData.distribution : {};
         const targetLandCount = (typeof dist.lands === 'number') ? dist.lands : ((themeData && themeData.targets && themeData.targets.lands) ? themeData.targets.lands : 36);
         const targetSpellsCount = 100 - commanderCount - targetLandCount;
 
         const SWARM_CARDS = ["Relentless Rats", "Shadowborn Apostle", "Persistent Petitioners"];
         const isSwarmTheme = ["relentless-rats", "shadowborn-apostle", "persistent-petitioners"].includes(themeSlug);
+
+        const GAME_CHANGER_NAMES = new Set([
+            "ad nauseam", "ancient tomb", "aura shards", "biorhythm", "bolas's citadel",
+            "braids, cabal minion", "chrome mox", "coalition victory", "consecrated sphinx",
+            "crop rotation", "cyclonic rift", "deflecting swat", "demonic tutor",
+            "drannith magistrate", "enlightened tutor", "expropriate", "farewell",
+            "field of the dead", "fierce guardianship", "food chain", "force of will",
+            "gaea's cradle", "gamble", "gifts ungiven", "glacial chasm",
+            "grand arbiter augustin iv", "grim monolith", "humility", "imperial seal",
+            "intuition", "jeska's will", "jin-gitaxias, core augur", "kinnan, bonder prodigy",
+            "lion's eye diamond", "mana vault", "mishra's workshop", "mox diamond",
+            "mystical tutor", "narset, parter of veils", "natural order", "necropotence",
+            "notion thief", "opposition agent", "orcish bowmasters", "panoptic mirror",
+            "rhystic study", "seedborn muse", "serra's sanctum", "smothering tithe",
+            "survival of the fittest", "sway of the stars", "teferi's protection",
+            "tergrid, god of fright", "tergrid, god of fright // tergrid's lantern",
+            "thassa's oracle", "the one ring", "the tabernacle at pendrell vale",
+            "underworld breach", "urza, lord high artificer", "vampiric tutor",
+            "vorinclex, voice of hunger", "winota, joiner of forces", "worldly tutor",
+            "yuriko, the tiger's shadow"
+        ]);[cite: 3]
+
+        const isGameChanger = (name) => {
+            const clean = name.trim().toLowerCase();
+            const front = clean.split("//")[0].trim();
+            return GAME_CHANGER_NAMES.has(clean) || GAME_CHANGER_NAMES.has(front);
+        };[cite: 3]
+
+        const maxGameChangers = powerLevel === "low" ? 0 : (powerLevel === "medium" ? 3 : Infinity);
+        let currentGameChangerCount = 0;
+
+        const blueprint = (themeData && themeData.blueprint) ? themeData.blueprint : {};
+        const blueprintExclusions = new Set((blueprint.exclusions || []).map(n => n.toLowerCase().trim()));
 
         const isLegalSpell = (cName) => {
             if (!cName) return false;
@@ -254,18 +287,54 @@ class PrefireDeckGenerator {
             const cleanName = cName.trim();
             const lower = cleanName.toLowerCase();
 
-            // Strip swarm cards out of generic themes (like regular Rats or Clerics)
+            if (blueprintExclusions.has(lower)) return false;
             if (!isSwarmTheme && SWARM_CARDS.includes(cleanName)) return false;
 
-            // Exclude conditional tribal/rider cards when deck is not that tribe
             if (lower === "dragon's hoard" && themeSlug !== "dragons") return false;
             if (lower === "pillar of origins" && !themeSlug.includes("trib") && themeSlug !== "slivers" && themeSlug !== "elves" && themeSlug !== "goblins" && themeSlug !== "zombies") return false;
+
+            if (isGameChanger(cleanName) && currentGameChangerCount >= maxGameChangers) {
+                return false;
+            }
 
             const meta = cardCatalog[cName] || cardCatalog[lower];
             const colors = (meta && meta.color_identity) ? meta.color_identity : this.cardColorMap[lower];
 
             if (colors && !this.isColorLegal(colors, commanderColors)) return false;
             return true;
+        };
+
+        // Mechanical Sub-Role Classifiers
+        const isAuraModifier = (cardName) => {
+            const tLine = this.getCardTypeLine(cardName, cardCatalog);
+            const meta = cardCatalog[cardName] || cardCatalog[cardName.toLowerCase()] || {};
+            const text = (meta.oracle_text || meta.text || "").toLowerCase();
+            return tLine.includes("aura") && (text.includes("enchant creature") || text.includes("enchanted creature gets") || text.includes("enchanted creature has"));
+        };
+
+        const isEquipmentCard = (cardName) => {
+            const tLine = this.getCardTypeLine(cardName, cardCatalog);
+            return tLine.includes("equipment");
+        };
+
+        const isProtectionOrEvasion = (cardName) => {
+            const meta = cardCatalog[cardName] || cardCatalog[cardName.toLowerCase()] || {};
+            const text = (meta.oracle_text || meta.text || "").toLowerCase();
+            return text.includes("hexproof") || text.includes("shroud") || text.includes("indestructible") ||
+                   text.includes("protection from") || text.includes("can't be blocked") || text.includes("unblockable") ||
+                   text.includes("double strike") || text.includes("totem armor") || text.includes("umbra");
+        };
+
+        const isSacOutlet = (cardName) => {
+            const meta = cardCatalog[cardName] || cardCatalog[cardName.toLowerCase()] || {};
+            const text = (meta.oracle_text || meta.text || "").toLowerCase();
+            return text.includes("sacrifice a creature:") || text.includes("sacrifice another creature:");
+        };
+
+        const isDeathTrigger = (cardName) => {
+            const meta = cardCatalog[cardName] || cardCatalog[cardName.toLowerCase()] || {};
+            const text = (meta.oracle_text || meta.text || "").toLowerCase();
+            return text.includes("whenever a creature dies") || text.includes("whenever another creature dies") || text.includes("whenever this creature dies");
         };
 
         const detectCardRoles = (cardName) => {
@@ -301,9 +370,22 @@ class PrefireDeckGenerator {
             const text = (meta.oracle_text || meta.text || "").toLowerCase();
             const lowerName = name.toLowerCase();
 
-            if ((clean.includes("enchant") || clean === "auras") && tLine.includes("enchantment")) return true;
-            if ((clean.includes("artifact") || clean === "equipment" || clean === "cheerios") && tLine.includes("artifact")) return true;
-            if (clean.includes("spellslinger") && (tLine.includes("instant") || tLine.includes("sorcery"))) return true;
+            // Strict Disambiguation: Voltron vs Auras vs Enchantress
+            if (clean === "voltron") {
+                return isAuraModifier(name) || isEquipmentCard(name) || isProtectionOrEvasion(name) || text.includes("equipped creature") || text.includes("enchanted creature");
+            }
+            if (clean === "auras") {
+                return isAuraModifier(name) || (tLine.includes("enchantment") && text.includes("aura"));
+            }
+            if (clean === "enchantress") {
+                return tLine.includes("enchantment") || text.includes("whenever you cast an enchantment spell");
+            }
+            if (clean === "aristocrats") {
+                return isSacOutlet(name) || isDeathTrigger(name) || text.includes("sacrifice");
+            }
+            if (clean === "spellslinger") {
+                return (tLine.includes("instant") || tLine.includes("sorcery")) && (text.includes("draw") || text.includes("damage") || text.includes("copy") || text.includes("cost less"));
+            }
 
             const singularTribe = clean.replace(/s$/, "");
             if (tLine.includes(clean) || tLine.includes(singularTribe)) return true;
@@ -314,21 +396,22 @@ class PrefireDeckGenerator {
             return false;
         };
 
-        // Determine target quotas
+        // Determine target quotas (applying blueprint overrides if present)
         const empRoles = (themeData && themeData.roles) ? themeData.roles : {};
         const empTargets = (themeData && themeData.targets) ? themeData.targets : {};
+        const overrides = (blueprint && blueprint.role_overrides) ? blueprint.role_overrides : {};
+
         const quotas = {
-            ramp: empRoles.ramp || empTargets.ramp || 10,
-            draw: empRoles.draw || empTargets.draw || 10,
-            removal_creature: empRoles.removal_creature || empTargets.removal_creature || 5,
-            removal_noncreature: empRoles.removal_noncreature || empTargets.removal_noncreature || 3,
-            board_wipe: empRoles.wipes || empTargets.board_wipe || 3
+            ramp: overrides.ramp ?? (empRoles.ramp || empTargets.ramp || 10),
+            draw: overrides.draw ?? (empRoles.draw || empTargets.draw || 10),
+            removal_creature: overrides.removal_creature ?? (empRoles.removal_creature || empTargets.removal_creature || 5),
+            removal_noncreature: overrides.removal_noncreature ?? (empRoles.removal_noncreature || empTargets.removal_noncreature || 3),
+            board_wipe: overrides.board_wipe ?? (empRoles.wipes || empTargets.board_wipe || 3)
         };
 
-        // Target archetype permanent floor
-        const isEnchantTheme = themeSlug.includes("enchant") || themeSlug === "auras";
-        const isArtifactTheme = themeSlug.includes("artifact") || themeSlug === "equipment" || themeSlug === "cheerios";
-        const targetArchetypeDensity = isEnchantTheme ? 30 : (isArtifactTheme ? 26 : 0);
+        // Enforce engine density floor from blueprint
+        const targetArchetypeDensity = blueprint.engine_floor || 
+            ((themeSlug.includes("enchant") || themeSlug === "auras") ? 30 : ((themeSlug.includes("artifact") || themeSlug === "equipment") ? 26 : 22));
 
         // Gather candidate pools
         let rawThemeList = [];
@@ -412,7 +495,11 @@ class PrefireDeckGenerator {
         };
 
         const addCardToDeck = (name) => {
-            if (selected.has(name) || selected.size >= targetSpellsCount) return false;
+            if (!name || selected.has(name) || selected.size >= targetSpellsCount) return false;
+            if (isGameChanger(name)) {
+                if (currentGameChangerCount >= maxGameChangers) return false;
+                currentGameChangerCount++;
+            }
             selected.add(name);
             if (checkArchetypePermanent(name)) archetypePermanentCount++;
             for (const r of detectCardRoles(name)) {
@@ -421,14 +508,46 @@ class PrefireDeckGenerator {
             return true;
         };
 
+        // Utility: Partition candidates into 3 tiers and sample with power-level weights
+        const sampleCandidatesWithPowerTier = (candidatesList, limit) => {
+            if (!candidatesList || candidatesList.length === 0) return [];
+            const highCut = Math.max(1, Math.floor(candidatesList.length * 0.25));
+            const midCut = Math.max(highCut + 1, Math.floor(candidatesList.length * 0.65));
+
+            const topTier = candidatesList.slice(0, highCut);
+            const midTier = candidatesList.slice(highCut, midCut);
+            const lowTier = candidatesList.slice(midCut);
+
+            const shuffle = (arr) => arr.slice().sort(() => Math.random() - 0.5);
+
+            let primaryPool = [];
+            if (powerLevel === "high") {
+                primaryPool = [...shuffle(topTier), ...shuffle(midTier)];
+            } else if (powerLevel === "low") {
+                primaryPool = [...shuffle(lowTier), ...shuffle(midTier), ...shuffle(topTier)];
+            } else {
+                primaryPool = [...shuffle(midTier), ...shuffle(topTier), ...shuffle(lowTier)];
+            }
+            return primaryPool.slice(0, limit);
+        };
+
+        // PASS 0: Ingest Core Archetype Engine Cards FIRST (Satisfies sub-role targets)
+        const pureThemeCandidates = unifiedThemePool.filter(name => !selected.has(name) && isLegalSpell(name) && isThemeAligned(name));
+        const sampledCoreTheme = sampleCandidatesWithPowerTier(pureThemeCandidates, pureThemeCandidates.length);
+
+        for (const name of sampledCoreTheme) {
+            if (selected.size >= targetArchetypeDensity || selected.size >= targetSpellsCount) break;
+            addCardToDeck(name);
+        }
+
         // PASS 1: Fill functional quotas prioritizing theme-aligned / double-duty cards
         for (const [role, quota] of Object.entries(quotas)) {
             let needed = quota - roleBuckets[role];
             if (needed <= 0) continue;
 
-            // Sort: 1st on-theme + role, 2nd commander file + role, 3rd generic staples + role
+            // Prioritize theme pool cards that perform functional roles before falling back to staples
             const roleCandidates = [...unifiedThemePool, ...staplePool].filter(name =>
-                !selected.has(name) && detectCardRoles(name).includes(role)
+                !selected.has(name) && isLegalSpell(name) && detectCardRoles(name).includes(role)
             );
 
             roleCandidates.sort((a, b) => {
@@ -437,7 +556,9 @@ class PrefireDeckGenerator {
                 return bTheme - aTheme;
             });
 
-            for (const name of roleCandidates) {
+            const sampledRoleList = sampleCandidatesWithPowerTier(roleCandidates, roleCandidates.length);
+
+            for (const name of sampledRoleList) {
                 if (needed <= 0 || selected.size >= targetSpellsCount) break;
                 if (addCardToDeck(name)) {
                     needed--;
@@ -445,32 +566,39 @@ class PrefireDeckGenerator {
             }
         }
 
-        // PASS 2: Ingest core thematic engine cards up to archetype density floor
-        if (targetArchetypeDensity > 0) {
-            const pureArchPermanents = unifiedThemePool.filter(name =>
-                !selected.has(name) && checkArchetypePermanent(name)
+        // PASS 2: Top off any remaining archetype permanent floor if still short
+        if (targetArchetypeDensity > 0 && archetypePermanentCount < targetArchetypeDensity) {
+            const remainingArchPermanents = unifiedThemePool.filter(name =>
+                !selected.has(name) && isLegalSpell(name) && checkArchetypePermanent(name)
             );
+            const sampledPermanents = sampleCandidatesWithPowerTier(remainingArchPermanents, remainingArchPermanents.length);
 
-            for (const name of pureArchPermanents) {
+            for (const name of sampledPermanents) {
                 if (archetypePermanentCount >= targetArchetypeDensity || selected.size >= targetSpellsCount) break;
                 addCardToDeck(name);
             }
         }
 
         // PASS 3: Fill remaining open slots from the commander's synergy pool
-        for (const name of cmdrThemeCards) {
+        const commanderSynergyRemaining = cmdrThemeCards.filter(name => !selected.has(name) && isLegalSpell(name));
+        const sampledCommanderSynergy = sampleCandidatesWithPowerTier(commanderSynergyRemaining, commanderSynergyRemaining.length);
+        for (const name of sampledCommanderSynergy) {
             if (selected.size >= targetSpellsCount) break;
             addCardToDeck(name);
         }
 
         // PASS 4: Fill remaining open slots from global archetype candidates
-        for (const name of globalArchCards) {
+        const globalArchRemaining = globalArchCards.filter(name => !selected.has(name) && isLegalSpell(name));
+        const sampledGlobalArch = sampleCandidatesWithPowerTier(globalArchRemaining, globalArchRemaining.length);
+        for (const name of sampledGlobalArch) {
             if (selected.size >= targetSpellsCount) break;
             addCardToDeck(name);
         }
 
-        // PASS 5: Fill any remaining open slots with highest-ranked generic staples
-        for (const name of staplePool) {
+        // PASS 5: Fill any remaining open slots with format staples as backfill
+        const stapleRemaining = staplePool.filter(name => !selected.has(name) && isLegalSpell(name));
+        const sampledStaples = sampleCandidatesWithPowerTier(stapleRemaining, stapleRemaining.length);
+        for (const name of sampledStaples) {
             if (selected.size >= targetSpellsCount) break;
             addCardToDeck(name);
         }
@@ -706,7 +834,7 @@ class PrefireDeckGenerator {
         return lands;
     }
 
-    async generate(commanderA, commanderB = null, selectedThemeSlug = null, cardCatalog = {}) {
+    async generate(commanderA, commanderB = null, selectedThemeSlug = null, cardCatalog = {}, powerLevel = "medium") {
         await this.init();
 
         const slug = this.getCommanderSlug(commanderA, commanderB);
@@ -758,7 +886,7 @@ class PrefireDeckGenerator {
         }
 
         const cmdrCount = commanderB ? 2 : 1;
-        const spells = this.assembleSpells(themeData, actualSlug, commanderColors, cardCatalog, cmdrCount);
+        const spells = this.assembleSpells(themeData, actualSlug, commanderColors, cardCatalog, cmdrCount, powerLevel);
         const lands = this.assembleLands(commanderColors, actualSlug, spells, cardCatalog, cmdrCount);
 
         return [...spells, ...lands];

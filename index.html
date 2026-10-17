@@ -2368,7 +2368,7 @@
         <button type="button" class="btn-recently-removed" id="btn-toggle-removed">Recently Removed</button>
       </div>
       <div class="deck-footer">
-        <button type="button" class="btn-export" id="btn-export">Copy Decklist</button>
+        <button type="button" class="btn-export" id="btn-export">Export</button>
         <button type="button" class="btn-save-deck" id="btn-save-deck">Save List</button>
       </div>
     </aside>
@@ -2391,6 +2391,23 @@
             <select id="autobuild-theme-select" class="autobuild-select">
               <option value="default">Default / High Synergy</option>
             </select>
+          </div>
+          <div class="autobuild-select-group" style="margin-top: 10px;">
+            <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); font-weight: 700; margin-bottom: 6px; display: block;">Power Level</label>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-main); cursor: pointer; user-select: none;">
+                <input type="radio" name="autobuild-power-level" value="high" style="cursor: pointer; accent-color: var(--commander-accent); width: 16px; height: 16px;">
+                <span>High Power (Optimized, Uncapped Game Changers)</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-main); cursor: pointer; user-select: none;">
+                <input type="radio" name="autobuild-power-level" value="medium" checked style="cursor: pointer; accent-color: var(--commander-accent); width: 16px; height: 16px;">
+                <span>Medium Power (Focused, Max 3 Game Changers)</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-main); cursor: pointer; user-select: none;">
+                <input type="radio" name="autobuild-power-level" value="low" style="cursor: pointer; accent-color: var(--commander-accent); width: 16px; height: 16px;">
+                <span>Low Power (Casual, 0 Game Changers)</span>
+              </label>
+            </div>
           </div>
           <div id="autobuild-status-text" style="font-size: 12px; color: var(--text-muted); min-height: 18px;"></div>
           <button type="button" class="btn-execute-autobuild" id="btn-execute-autobuild">Build Deck</button>
@@ -2436,7 +2453,7 @@
           <button type="button" class="btn-recently-removed" id="btn-toggle-removed-autobuild">Recently Removed</button>
         </div>
         <div class="deck-footer">
-          <button type="button" class="btn-export" id="btn-export-autobuild">Copy Decklist</button>
+          <button type="button" class="btn-export" id="btn-export-autobuild">Export</button>
           <button type="button" class="btn-save-deck" id="btn-save-deck-autobuild">Save Deck</button>
         </div>
       </aside>
@@ -2446,6 +2463,48 @@
   <nav class="mobile-tab-nav" id="mobile-tab-nav">
     <button type="button" class="mobile-view-toggle-btn to-search" id="btn-mobile-view-toggle">To Card Search</button>
   </nav>
+
+  <!-- Modal for Export Options -->
+  <div class="decklists-modal" id="export-modal">
+    <div class="decklists-dialog" style="max-width: 580px;">
+      <div class="decklists-header">
+        <h3>Export Decklist</h3>
+        <button type="button" class="btn-close-modal" id="btn-close-export-modal">&times;</button>
+      </div>
+      <div class="decklists-body" style="gap: 12px; padding: 16px;">
+        <div style="font-size: 12px; color: var(--text-muted);">
+          Select a deckbuilder or format to copy the formatted text directly to your clipboard:
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
+          <button type="button" class="btn-export-option" data-format="mtggoldfish" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+            <strong style="color: #f39c12; font-size: 13px;">MTGGoldfish</strong>
+            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Header-free format compatible with MTGGoldfish bulk deck import.</span>
+          </button>
+          <button type="button" class="btn-export-option" data-format="frogtown" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+            <strong style="color: #2ecc71; font-size: 13px;">Frogtown.me (TTS)</strong>
+            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Standard quant-only list formatted for Tabletop Simulator card spawning.</span>
+          </button>
+          <button type="button" class="btn-export-option" data-format="moxfield" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+            <strong style="color: #3a7bd5; font-size: 13px;">Moxfield</strong>
+            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Tags commanders specifically for Moxfield's import parser.</span>
+          </button>
+          <button type="button" class="btn-export-option" data-format="archidekt" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+            <strong style="color: #e09612; font-size: 13px;">Archidekt</strong>
+            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Uses Archidekt bracketed category tags for automatic section sorting.</span>
+          </button>
+          <button type="button" class="btn-export-option" data-format="cockatrice" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+            <strong style="color: #9b59b6; font-size: 13px;">Cockatrice / Apprentice</strong>
+            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Sideboard prefixed lines (`SB: 1 Commander`) for tabletop clients.</span>
+          </button>
+          <button type="button" class="btn-export-option" data-format="default" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+            <strong style="color: var(--cyan-btn); font-size: 13px;">Plain Text (Default)</strong>
+            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Clean categorized list with comments (`// Commander`, `// Spells`, `// Lands`).</span>
+          </button>
+        </div>
+        <div id="export-status-banner" style="display: none; padding: 8px 12px; background-color: #2e7d32; color: #ffffff; border-radius: 4px; font-size: 12px; font-weight: 700; text-align: center;"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal for Saved Lists (Card Search Screen) -->
   <div class="decklists-modal" id="decklists-modal">
@@ -6083,26 +6142,34 @@ function matchesColorFilters(card) {
       updateMobileViewToggleButton();
     }
 
-    document.getElementById('btn-export').addEventListener('click', () => {
-      exportDeckToClipboard(document.getElementById('btn-export'));
-    });
+    const exportModal = document.getElementById('export-modal');
+    const btnCloseExportModal = document.getElementById('btn-close-export-modal');
+    const exportStatusBanner = document.getElementById('export-status-banner');
 
-    document.getElementById('btn-export-autobuild').addEventListener('click', () => {
-      exportDeckToClipboard(document.getElementById('btn-export-autobuild'));
-    });
-
-    function exportDeckToClipboard(btnElement) {
+    function openExportModal() {
       const cardNames = getSortedCardNames();
-      if (commanders.length === 0 && cardNames.length === 0) return;
-
-      let exportLines = [];
-      if (commanders.length > 0) {
-        exportLines.push(`// Commander${commanders.length > 1 ? 's' : ''}`);
-        commanders.forEach(cmdr => {
-          exportLines.push(`1 ${cmdr.name}`);
-        });
-        exportLines.push('');
+      if (commanders.length === 0 && cardNames.length === 0) {
+        alert('Deck is empty.');
+        return;
       }
+      if (exportStatusBanner) exportStatusBanner.style.display = 'none';
+      exportModal.classList.add('open');
+    }
+
+    document.getElementById('btn-export').addEventListener('click', openExportModal);
+    document.getElementById('btn-export-autobuild').addEventListener('click', openExportModal);
+
+    btnCloseExportModal.addEventListener('click', () => {
+      exportModal.classList.remove('open');
+    });
+
+    exportModal.addEventListener('click', (e) => {
+      if (e.target === exportModal) exportModal.classList.remove('open');
+    });
+
+    function generateFormattedExport(formatKey) {
+      const cardNames = getSortedCardNames();
+      const lines = [];
 
       const spells = [];
       const lands = [];
@@ -6112,32 +6179,71 @@ function matchesColorFilters(card) {
         const isLand = (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(name)) || 
                        (item && item.type_line && item.type_line.toLowerCase().includes('land'));
         if (isLand) {
-          lands.push(`${item.count} ${name}`);
+          lands.push({ count: item.count, name });
         } else {
-          spells.push(`${item.count} ${name}`);
+          spells.push({ count: item.count, name });
         }
       });
 
-      if (spells.length > 0) {
-        exportLines.push(`// Spells (${spells.reduce((acc, s) => acc + parseInt(s, 10), 0)})`);
-        exportLines.push(...spells);
-        exportLines.push('');
+      if (formatKey === 'mtggoldfish' || formatKey === 'frogtown') {
+        // MTGGoldfish & Frogtown: Strict flat lists (no section comments or special tags)
+        commanders.forEach(cmdr => lines.push(`1 ${cmdr.name}`));
+        spells.forEach(s => lines.push(`${s.count} ${s.name}`));
+        lands.forEach(l => lines.push(`${l.count} ${l.name}`));
+      } else if (formatKey === 'moxfield') {
+        // Moxfield: Supports explicit *CMDR* tag for commander lines
+        commanders.forEach(cmdr => lines.push(`1 ${cmdr.name} *CMDR*`));
+        lines.push('');
+        spells.forEach(s => lines.push(`${s.count} ${s.name}`));
+        lands.forEach(l => lines.push(`${l.count} ${l.name}`));
+      } else if (formatKey === 'archidekt') {
+        // Archidekt: Supports [Category] tags
+        commanders.forEach(cmdr => lines.push(`1x ${cmdr.name} [Commander]`));
+        lines.push('');
+        spells.forEach(s => lines.push(`${s.count}x ${s.name}`));
+        lines.push('');
+        lands.forEach(l => lines.push(`${l.count}x ${l.name} [Lands]`));
+      } else if (formatKey === 'cockatrice') {
+        // Cockatrice / Apprentice: Uses SB: prefix for side/command zone
+        commanders.forEach(cmdr => lines.push(`SB: 1 ${cmdr.name}`));
+        spells.forEach(s => lines.push(`${s.count} ${s.name}`));
+        lands.forEach(l => lines.push(`${l.count} ${l.name}`));
+      } else {
+        // Standard Plain Text
+        if (commanders.length > 0) {
+          lines.push(`// Commander${commanders.length > 1 ? 's' : ''}`);
+          commanders.forEach(cmdr => lines.push(`1 ${cmdr.name}`));
+          lines.push('');
+        }
+        if (spells.length > 0) {
+          lines.push(`// Spells (${spells.reduce((acc, s) => acc + s.count, 0)})`);
+          spells.forEach(s => lines.push(`${s.count} ${s.name}`));
+          lines.push('');
+        }
+        if (lands.length > 0) {
+          lines.push(`// Lands (${lands.reduce((acc, l) => acc + l.count, 0)})`);
+          lands.forEach(l => lines.push(`${l.count} ${l.name}`));
+        }
       }
 
-      if (lands.length > 0) {
-        exportLines.push(`// Lands (${lands.reduce((acc, l) => acc + parseInt(l, 10), 0)})`);
-        exportLines.push(...lands);
-      }
-
-      const exportText = exportLines.join('\n');
-      navigator.clipboard.writeText(exportText).then(() => {
-        const originalText = btnElement.textContent;
-        btnElement.textContent = 'Copied to Clipboard!';
-        setTimeout(() => {
-          btnElement.textContent = originalText;
-        }, 1500);
-      });
+      return lines.join('\n');
     }
+
+    document.querySelectorAll('.btn-export-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const fmt = btn.dataset.format;
+        const text = generateFormattedExport(fmt);
+        navigator.clipboard.writeText(text).then(() => {
+          if (exportStatusBanner) {
+            exportStatusBanner.textContent = `Copied ${btn.querySelector('strong').textContent} formatted list to clipboard!`;
+            exportStatusBanner.style.display = 'block';
+            setTimeout(() => {
+              exportModal.classList.remove('open');
+            }, 1000);
+          }
+        });
+      });
+    });
 
     /* -------------------------------------------------------------------------
        DECK BUILDER (SHINGLED CANVAS) & AUTO-BUILD ENGINE
@@ -6349,7 +6455,9 @@ function matchesColorFilters(card) {
           });
         }
 
-        const generatedCards = await gen.generate(primary.name, secondary ? secondary.name : null, selectedTheme, catalog);
+        const selectedPowerRadio = document.querySelector('input[name="autobuild-power-level"]:checked');
+        const powerLevel = selectedPowerRadio ? selectedPowerRadio.value : 'medium';
+        const generatedCards = await gen.generate(primary.name, secondary ? secondary.name : null, selectedTheme, catalog, powerLevel);
 
         autobuildStatusText.textContent = 'Loading card images & types...';
         await fetchCardsBatch(generatedCards, txt => { autobuildStatusText.textContent = txt; });
