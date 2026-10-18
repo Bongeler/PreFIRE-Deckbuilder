@@ -544,14 +544,70 @@ class PrefireDeckGenerator {
         };
 
         // Utility: Partition candidates into 3 tiers and sample with power-level weights
+        // Smart Contextual Synergy Evaluator & Tiered Sampler
+        const evaluateCardFitness = (cardName, slug, level) => {
+            const meta = cardCatalog[cardName] || cardCatalog[cardName.toLowerCase()] || {};
+            const text = (meta.oracle_text || meta.text || "").toLowerCase();
+            const tLine = this.getCardTypeLine(cardName, cardCatalog);
+            const cmc = meta.cmc !== undefined ? meta.cmc : 3;
+
+            let score = meta.score || 1.0;
+            const cleanSlug = slug.toLowerCase();
+
+            // 1. Archetype-Specific Mechanical Intelligence
+            if (cleanSlug === "voltron") {
+                if (tLine.includes("equipment") || tLine.includes("aura") || text.includes("equipped creature") || text.includes("enchanted creature")) {
+                    score *= 3.5;
+                }
+                if (text.includes("hexproof") || text.includes("indestructible") || text.includes("shroud")) {
+                    score *= 2.5;
+                }
+                if (text.includes("sacrifice a creature") || text.includes("tokens you control get")) {
+                    score *= 0.1; // Suppress wide token/sac cards in single-threat Voltron
+                }
+            } else if (cleanSlug.includes("landfall") || cleanSlug.includes("karametra")) {
+                if (text.includes("whenever a land enters") || text.includes("play an additional land") || text.includes("search your library for a land")) {
+                    score *= 4.0;
+                }
+                // Suppress generic low-impact dorks that don't ramp lands or synergize with landfall
+                if (tLine.includes("creature") && cmc <= 2 && !text.includes("land") && !text.includes("search")) {
+                    score *= 0.2; 
+                }
+                // Block off-theme mechanics like Dinosaur Enrage (*Trapjaw Tyrant*)
+                if (text.includes("enrage") || tLine.includes("dinosaur")) {
+                    score *= 0.01;
+                }
+            } else if (cleanSlug === "aristocrats") {
+                if (text.includes("sacrifice a creature") || text.includes("sacrifice another")) score *= 4.0;
+                if (text.includes("whenever a creature dies")) score *= 3.5;
+            }
+
+            // 2. Power Level Curve Weighting
+            if (level === "high") {
+                if (cmc >= 5) score *= 0.4; // Punish clunky high-mana drops
+                if (cmc <= 2) score *= 1.5; // Reward fast setup
+            } else if (level === "low") {
+                if (cmc >= 5) score *= 1.5; // Reward big battlecruiser spells
+            }
+
+            return score;
+        };
+
         const sampleCandidatesWithPowerTier = (candidatesList, limit, level = powerLevel) => {
             if (!candidatesList || candidatesList.length === 0) return [];
-            const highCut = Math.max(1, Math.floor(candidatesList.length * 0.25));
-            const midCut = Math.max(highCut + 1, Math.floor(candidatesList.length * 0.65));
 
-            const topTier = candidatesList.slice(0, highCut);
-            const midTier = candidatesList.slice(highCut, midCut);
-            const lowTier = candidatesList.slice(midCut);
+            // Score and sort candidates intelligently based on deck context
+            const scored = candidatesList.map(name => ({
+                name,
+                fitness: evaluateCardFitness(name, themeSlug, level)
+            })).sort((a, b) => b.fitness - a.fitness);
+
+            const highCut = Math.max(1, Math.floor(scored.length * 0.25));
+            const midCut = Math.max(highCut + 1, Math.floor(scored.length * 0.65));
+
+            const topTier = scored.slice(0, highCut).map(i => i.name);
+            const midTier = scored.slice(highCut, midCut).map(i => i.name);
+            const lowTier = scored.slice(midCut).map(i => i.name);
 
             const shuffle = (arr) => arr.slice().sort(() => Math.random() - 0.5);
 
