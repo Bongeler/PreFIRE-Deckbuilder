@@ -294,6 +294,12 @@ class PrefireDeckGenerator {
             // If a card requires a parasitic mechanic not matched by theme, reject it
             if (lower === "trapjaw tyrant" && !themeSlug.includes("dinosaur")) return false;
 
+           const isColorlessDeck = commanderColors.length === 0 || themeSlug === "eldrazi" || themeSlug === "devoid" || themeSlug === "artifacts";
+            if ((lower === "titan's presence" || lower === "gruesome slaughter") && !isColorlessDeck) return false;
+            if ((lower === "warping wail" || lower === "spatial contortion") && !isColorlessDeck && commanderColors.length > 2) return false;
+            if (lower === "not of this world" && !isColorlessDeck && themeSlug !== "big-mana" && themeSlug !== "voltron") return false;
+            if (lower === "trapjaw tyrant" && !themeSlug.includes("dinosaur") && themeSlug !== "enrage") return false;
+
             if (lower === "dragon's hoard" && themeSlug !== "dragons") return false;
             if (lower === "pillar of origins" && !themeSlug.includes("trib") && themeSlug !== "slivers" && themeSlug !== "elves" && themeSlug !== "goblins" && themeSlug !== "zombies") return false;
 

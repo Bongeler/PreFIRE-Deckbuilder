@@ -2422,6 +2422,7 @@
       <div class="autobuild-header-left">
         <button type="button" class="btn-back-to-manual" id="btn-back-to-manual">← Back to Card Search</button>
         <button type="button" class="btn-saved-decks-toggle" id="btn-saved-decks-toggle">Saved Decks</button>
+        <button type="button" class="btn-autobuild-trigger" id="btn-autobuild-trigger-screen">Auto-build deck?</button>
         <strong id="autobuild-deck-title" style="font-size: 14px; color: var(--commander-accent);">Deck Builder</strong>
         <span id="autobuild-count-badge" style="font-size: 13px; font-weight: 700; color: var(--accent);">0 Cards</span>
       </div>
@@ -2476,29 +2477,23 @@
           Select a deckbuilder or format to copy the formatted text directly to your clipboard:
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
-          <button type="button" class="btn-export-option" data-format="mtggoldfish" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+          <button type="button" class="btn-export-option" data-format="mtggoldfish" style="display: flex; align-items: center; justify-content: center; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 12px 14px; border-radius: 6px; cursor: pointer; text-align: center;">
             <strong style="color: #f39c12; font-size: 13px;">MTGGoldfish</strong>
-            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Header-free format compatible with MTGGoldfish bulk deck import.</span>
           </button>
-          <button type="button" class="btn-export-option" data-format="frogtown" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+          <button type="button" class="btn-export-option" data-format="frogtown" style="display: flex; align-items: center; justify-content: center; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 12px 14px; border-radius: 6px; cursor: pointer; text-align: center;">
             <strong style="color: #2ecc71; font-size: 13px;">Frogtown.me (TTS)</strong>
-            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Standard quant-only list formatted for Tabletop Simulator card spawning.</span>
           </button>
-          <button type="button" class="btn-export-option" data-format="moxfield" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+          <button type="button" class="btn-export-option" data-format="moxfield" style="display: flex; align-items: center; justify-content: center; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 12px 14px; border-radius: 6px; cursor: pointer; text-align: center;">
             <strong style="color: #3a7bd5; font-size: 13px;">Moxfield</strong>
-            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Tags commanders specifically for Moxfield's import parser.</span>
           </button>
-          <button type="button" class="btn-export-option" data-format="archidekt" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+          <button type="button" class="btn-export-option" data-format="archidekt" style="display: flex; align-items: center; justify-content: center; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 12px 14px; border-radius: 6px; cursor: pointer; text-align: center;">
             <strong style="color: #e09612; font-size: 13px;">Archidekt</strong>
-            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Uses Archidekt bracketed category tags for automatic section sorting.</span>
           </button>
-          <button type="button" class="btn-export-option" data-format="cockatrice" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+          <button type="button" class="btn-export-option" data-format="cockatrice" style="display: flex; align-items: center; justify-content: center; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 12px 14px; border-radius: 6px; cursor: pointer; text-align: center;">
             <strong style="color: #9b59b6; font-size: 13px;">Cockatrice / Apprentice</strong>
-            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Sideboard prefixed lines (`SB: 1 Commander`) for tabletop clients.</span>
           </button>
-          <button type="button" class="btn-export-option" data-format="default" style="display: flex; flex-direction: column; align-items: flex-start; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 14px; border-radius: 6px; cursor: pointer; text-align: left;">
+          <button type="button" class="btn-export-option" data-format="default" style="display: flex; align-items: center; justify-content: center; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 12px 14px; border-radius: 6px; cursor: pointer; text-align: center;">
             <strong style="color: var(--cyan-btn); font-size: 13px;">Plain Text (Default)</strong>
-            <span style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Clean categorized list with comments (`// Commander`, `// Spells`, `// Lands`).</span>
           </button>
         </div>
         <div id="export-status-banner" style="display: none; padding: 8px 12px; background-color: #2e7d32; color: #ffffff; border-radius: 4px; font-size: 12px; font-weight: 700; text-align: center;"></div>
@@ -2630,26 +2625,26 @@
       return gameChangerNamesSet.has(full) || gameChangerNamesSet.has(front);
     }
 
-    function getCardPrimaryType(card) {
-      if (!card) return 'Other';
-      const cardName = card.name || '';
+    function getCardPrimaryType(card, explicitName = '') {
+      if (!card && !explicitName) return 'Other';
+      const cardName = explicitName || (card && card.name) || '';
 
       // Check basic lands set
-      if (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(cardName)) return 'Lands';
+      if (cardName && typeof BASIC_LAND_NAMES !== 'undefined' && BASIC_LAND_NAMES.has(cardName)) return 'Lands';
 
-      // Check if generator landsData is available
       const gen = getDeckGenerator();
-      if (gen && gen.landsData) {
-        if (gen.landsData.fixers && Object.values(gen.landsData.fixers).includes(cardName)) return 'Lands';
-        if (gen.landsData.tri_lands && Object.values(gen.landsData.tri_lands).includes(cardName)) return 'Lands';
+      if (gen && cardName) {
+        if (gen.isLandCard(cardName, {})) return 'Lands';
       }
 
-      // Check front-face type line only
+      // Check front-face type line, falling back to local card-types.json via generator
       let frontType = '';
-      if (card.card_faces && card.card_faces.length > 0) {
-        frontType = (card.card_faces[0].type_line || '').toLowerCase();
-      } else {
-        frontType = (card.type_line || '').split('//')[0].toLowerCase();
+      if (card && card.card_faces && card.card_faces.length > 0 && card.card_faces[0].type_line) {
+        frontType = card.card_faces[0].type_line.toLowerCase();
+      } else if (card && card.type_line) {
+        frontType = card.type_line.split('//')[0].toLowerCase();
+      } else if (gen && cardName) {
+        frontType = gen.getCardTypeLine(cardName, {}).split('//')[0].toLowerCase();
       }
 
       // Strict type check order: Land takes top priority (catches artifact lands)
@@ -3802,12 +3797,41 @@
 
     let commanderThemeIndex = null;
 
+    const NON_TRIBE_THEME_SLUGS = new Set([
+      "equipment", "tokens", "auras", "vehicles", "shrines", "curses", "clues", "treasures", "treasure",
+      "food", "lands", "lands-matter", "landfall", "planeswalkers", "superfriends", "historic", "legends",
+      "legendary", "outlaws", "party", "clones", "polymorph", "artifacts", "enchantments", "enchantress",
+      "spellslinger", "voltron", "counters", "plus-1-plus-1-counters", "+1-+1-counters", "-1--1-counters",
+      "charge-counters", "energy", "infect", "proliferate", "reanimator", "aristocrats", "blink", "bounce",
+      "wheels", "mill", "stax", "pillowfort", "group-hug", "group-slug", "chaos", "storm", "cascade", "burn",
+      "lifegain", "sacrifice", "graveyard", "self-mill", "discard", "madness", "cycling", "morph", "manifest",
+      "mutate", "foretell", "suspend", "extra-turns", "extra-combat", "forced-combat", "goad", "aikido",
+      "politics", "monarch", "initiative", "dungeons", "attractions", "contraptions", "snow", "devoid",
+      "affinity", "cheerios", "anthems", "hatebears", "cantrips", "card-draw", "big-mana", "ramp", "control",
+      "aggro", "midrange", "tempo", "combo", "birthing-pod", "ad-nauseam", "doomsday", "coin-flip", "dice-rolling"
+    ]);
+
+    function reclassifyNonTribes(dataObj) {
+      if (!dataObj || !dataObj.tribes) return dataObj;
+      if (!dataObj.themes) dataObj.themes = {};
+      Object.keys(dataObj.tribes).forEach(slug => {
+        const clean = slug.toLowerCase().trim();
+        if (NON_TRIBE_THEME_SLUGS.has(clean)) {
+          if (!dataObj.themes[slug]) {
+            dataObj.themes[slug] = dataObj.tribes[slug];
+          }
+          delete dataObj.tribes[slug];
+        }
+      });
+      return dataObj;
+    }
+
     async function loadCommanderThemeIndex() {
       if (commanderThemeIndex) return;
       try {
         const res = await fetch("commander-theme-index.json");
         if (res.ok) {
-          commanderThemeIndex = await res.json();
+          commanderThemeIndex = reclassifyNonTribes(await res.json());
         }
       } catch (err) {
         console.error("Could not load commander-theme-index.json", err);
@@ -5534,8 +5558,9 @@ function matchesColorFilters(card) {
       const containerAuto = document.getElementById('commander-container-autobuild');
       const changeBtn = document.getElementById('btn-change-commander');
       const changeBtnAuto = document.getElementById('btn-change-commander-autobuild');
-      const labelText = document.getElementById('commander-label-text');
+const labelText = document.getElementById('commander-label-text');
       const autoBuildBtn = document.getElementById('btn-autobuild-trigger');
+      const autoBuildBtnScreen = document.getElementById('btn-autobuild-trigger-screen');
 
       if (!container) return;
 
@@ -5605,13 +5630,39 @@ function matchesColorFilters(card) {
             emptyState.textContent = 'Search closed. Search engine restored to pre-FIRE pool (Ravnica Allegiance & prior).';
           }
         } else {
+          const isBuilderOpen = document.getElementById('autobuild-screen')?.classList.contains('active');
+          if (Object.keys(deck).length > 0) {
+            const wantsToSave = window.confirm(`Would you like to save your current deck "${getActiveDeckTitle()}" before changing commanders and clearing the decklist?`);
+            if (wantsToSave) {
+              if (isBuilderOpen) {
+                saveCurrentDeckInBuilder();
+              } else {
+                saveCurrentDecklist();
+              }
+            }
+            Object.keys(deck).forEach(name => {
+              recordRecentlyRemoved(name, deck[name].faces, deck[name].mana_cost, deck[name].cmc, deck[name].type_line);
+            });
+            deck = {};
+            localStorage.setItem('prefire_deck', JSON.stringify(deck));
+          }
+
+          if (isBuilderOpen) {
+            document.getElementById('autobuild-screen').classList.remove('active');
+          }
+
           clearSearchInputs();
           commanders = [];
           localStorage.removeItem('prefire_commanders');
+          markCurrentStateSaved();
           staplesRawCardsCache = {};
           edhrecRawCardsCache = {};
           setEdhrecButtonState(false);
           setStaplesButtonState(false);
+          hidePreview();
+          saveAndRenderDeck();
+          syncSearchDeckState();
+          renderAutobuildCanvas();
           setCommanderSearchMode(true);
           executeSearch();
           if (window.innerWidth <= 768) {
@@ -5624,6 +5675,7 @@ function matchesColorFilters(card) {
         if (changeBtn) changeBtn.style.display = 'none';
         if (changeBtnAuto) changeBtnAuto.style.display = 'none';
         if (autoBuildBtn) autoBuildBtn.disabled = true;
+        if (autoBuildBtnScreen) autoBuildBtnScreen.disabled = true;
 
         const createChooseBtn = () => {
           const chooseBtn = document.createElement('button');
@@ -5663,6 +5715,7 @@ function matchesColorFilters(card) {
       }
 
       if (autoBuildBtn) autoBuildBtn.disabled = false;
+      if (autoBuildBtnScreen) autoBuildBtnScreen.disabled = false;
 
       if (changeBtn) {
         changeBtn.style.display = 'inline-block';
@@ -6176,8 +6229,7 @@ function matchesColorFilters(card) {
 
       cardNames.forEach(name => {
         const item = deck[name];
-        const isLand = (BASIC_LAND_NAMES && BASIC_LAND_NAMES.has(name)) || 
-                       (item && item.type_line && item.type_line.toLowerCase().includes('land'));
+        const isLand = getCardPrimaryType(item, name) === 'Lands';
         if (isLand) {
           lands.push({ count: item.count, name });
         } else {
@@ -6279,18 +6331,7 @@ function matchesColorFilters(card) {
       autobuildScreen.classList.remove('active');
     });
 
-    const btnChangeCmdrAuto = document.getElementById('btn-change-commander-autobuild');
-    if (btnChangeCmdrAuto) {
-      btnChangeCmdrAuto.addEventListener('click', () => {
-        autobuildScreen.classList.remove('active');
-        const mainChangeBtn = document.getElementById('btn-change-commander');
-        if (mainChangeBtn) {
-          mainChangeBtn.click();
-        }
-      });
-    }
-
-    document.getElementById('btn-autobuild-trigger').addEventListener('click', async () => {
+    async function openAutobuildModal() {
       if (commanders.length === 0) return;
       const gen = getDeckGenerator();
       if (!gen) {
@@ -6310,7 +6351,7 @@ function matchesColorFilters(card) {
       autobuildModal.classList.add('open');
 
       try {
-        loadedCommanderThemesData = await gen.loadCommanderThemes(slug);
+        loadedCommanderThemesData = reclassifyNonTribes(await gen.loadCommanderThemes(slug));
         autobuildThemeSelect.innerHTML = '';
 
         const defaultOption = document.createElement('option');
@@ -6335,7 +6376,6 @@ function matchesColorFilters(card) {
           if (loadedCommanderThemesData.tribes) appendThemeOptions(loadedCommanderThemesData.tribes, "Tribe");
         }
 
-        // Auto-select whatever theme or tribe was already active in the search header
         const activeThemeSearch = document.getElementById('cmdr-theme-select')?.value;
         const activeTribeSearch = document.getElementById('cmdr-tribe-select')?.value;
         const preselected = activeThemeSearch || activeTribeSearch;
@@ -6350,7 +6390,13 @@ function matchesColorFilters(card) {
         autobuildStatusText.textContent = 'Using baseline synergy data.';
         btnExecuteAutobuild.disabled = false;
       }
-    });
+    }
+
+    document.getElementById('btn-autobuild-trigger').addEventListener('click', openAutobuildModal);
+    const btnAutobuildScreen = document.getElementById('btn-autobuild-trigger-screen');
+    if (btnAutobuildScreen) {
+      btnAutobuildScreen.addEventListener('click', openAutobuildModal);
+    }
 
     btnCloseAutobuildModal.addEventListener('click', () => {
       autobuildModal.classList.remove('open');
@@ -6361,59 +6407,103 @@ function matchesColorFilters(card) {
       cardMetadataCache = JSON.parse(localStorage.getItem('prefire_card_metadata_cache') || '{}');
     } catch (e) {}
 
+    let localGameplayEnrichment = null;
+    async function ensureLocalGameplayEnrichment() {
+      if (localGameplayEnrichment) return localGameplayEnrichment;
+      try {
+        const res = await fetch('prefire-gameplay-enrichment.json');
+        if (res.ok) {
+          localGameplayEnrichment = await res.json();
+        }
+      } catch (e) {}
+      return localGameplayEnrichment || {};
+    }
+
+    function lookupCachedCardMeta(cName) {
+      if (!cName) return null;
+      const clean = cName.trim();
+      const lower = clean.toLowerCase();
+      const front = lower.split('//')[0].trim();
+      return cardMetadataCache[clean] || cardMetadataCache[lower] || cardMetadataCache[front] || null;
+    }
+
     async function fetchCardsBatch(namesList, onProgress) {
       const uniqueNames = Array.from(new Set(namesList));
-      const needed = uniqueNames.filter(n => !cardMetadataCache[n]);
-      
+      const needed = uniqueNames.filter(n => {
+        const cached = lookupCachedCardMeta(n);
+        return !cached || !cached.faces || cached.faces.length === 0 || !cached.type_line;
+      });
+
       const chunks = [];
-      for (let i = 0; i < needed.length; i += 75) {
-        chunks.push(needed.slice(i, i + 75));
+      for (let i = 0; i < needed.length; i += 50) {
+        chunks.push(needed.slice(i, i + 50));
       }
 
       for (let i = 0; i < chunks.length; i++) {
         if (onProgress) {
-          onProgress(`Fetching card data (${Math.round((i / chunks.length) * 100)}%)...`);
+          onProgress(`Pre-caching card images & data (${Math.round(((i + 1) / chunks.length) * 100)}%)...`);
         }
-        try {
-          let res = await fetch('https://api.scryfall.com/cards/collection', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ identifiers: chunks[i].map(n => ({ name: n })) })
-          });
 
-          if (res.status === 429) {
-            await new Promise(r => setTimeout(r, 1500));
-            res = await fetch('https://api.scryfall.com/cards/collection', {
+        const identifiers = chunks[i].map(n => ({ name: n.split('//')[0].trim() }));
+        let retries = 0;
+        let success = false;
+
+        while (retries < 3 && !success) {
+          try {
+            const res = await fetch('https://api.scryfall.com/cards/collection', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify({ identifiers: chunks[i].map(n => ({ name: n })) })
+              body: JSON.stringify({ identifiers })
             });
-          }
 
-          if (res.ok) {
-            const data = await res.json();
-            if (data && Array.isArray(data.data)) {
-              data.data.forEach(card => {
-                if (card && card.name) {
-                  const cmc = getCardCmc(card);
-                  const type_line = card.type_line || '';
-                  const mana_cost = card.mana_cost || '';
-                  let faces = [];
-                  if (card.card_faces && card.card_faces.length > 1 && card.card_faces[0].image_uris) {
-                    faces = card.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
-                  } else if (card.image_uris?.normal) {
-                    faces = [card.image_uris.normal];
-                  }
-
-                  cardMetadataCache[card.name] = { cmc, type_line, mana_cost, faces };
-                }
-              });
+            if (res.status === 429) {
+              retries++;
+              await new Promise(r => setTimeout(r, 1600 * retries));
+              continue;
             }
+
+            if (res.ok) {
+              const data = await res.json();
+              if (data && Array.isArray(data.data)) {
+                data.data.forEach(card => {
+                  if (card && card.name) {
+                    const cmc = getCardCmc(card);
+                    const type_line = card.type_line || (card.card_faces ? card.card_faces.map(f => f.type_line).join(' // ') : '');
+                    let mana_cost = card.mana_cost;
+                    if (!mana_cost && card.card_faces && card.card_faces.length > 0) {
+                      mana_cost = card.card_faces.map(f => f.mana_cost).filter(Boolean).join(' // ');
+                    }
+                    mana_cost = mana_cost || '';
+
+                    let faces = [];
+                    if (card.card_faces && card.card_faces.length > 1 && card.card_faces[0].image_uris) {
+                      faces = card.card_faces.map(f => f.image_uris?.normal).filter(Boolean);
+                    } else if (card.image_uris?.normal) {
+                      faces = [card.image_uris.normal];
+                    }
+
+                    const entry = { cmc, type_line, mana_cost, faces };
+                    cardMetadataCache[card.name] = entry;
+                    cardMetadataCache[card.name.toLowerCase()] = entry;
+                    const frontName = card.name.split('//')[0].trim();
+                    cardMetadataCache[frontName] = entry;
+                    cardMetadataCache[frontName.toLowerCase()] = entry;
+                  }
+                });
+              }
+              success = true;
+            } else {
+              retries++;
+              await new Promise(r => setTimeout(r, 600));
+            }
+          } catch (e) {
+            retries++;
+            await new Promise(r => setTimeout(r, 600));
           }
-        } catch (e) {}
+        }
 
         if (i < chunks.length - 1) {
-          await new Promise(r => setTimeout(r, 150));
+          await new Promise(r => setTimeout(r, 350));
         }
       }
 
@@ -6434,6 +6524,7 @@ function matchesColorFilters(card) {
       const secondary = commanders[1] || null;
 
       try {
+        await ensureLocalGameplayEnrichment();
         const catalog = {};
         commanders.forEach(c => {
           catalog[c.name] = { color_identity: c.color_identity, mana_cost: c.mana_cost, cmc: c.cmc, type_line: c.type_line };
@@ -6442,7 +6533,6 @@ function matchesColorFilters(card) {
           catalog[name] = { mana_cost: deck[name].mana_cost, cmc: deck[name].cmc, type_line: deck[name].type_line };
         });
 
-        // Seed catalog with cached metadata for known staples and lands
         if (cardMetadataCache) {
           Object.keys(cardMetadataCache).forEach(k => {
             if (!catalog[k]) {
@@ -6459,19 +6549,27 @@ function matchesColorFilters(card) {
         const powerLevel = selectedPowerRadio ? selectedPowerRadio.value : 'medium';
         const generatedCards = await gen.generate(primary.name, secondary ? secondary.name : null, selectedTheme, catalog, powerLevel);
 
-        autobuildStatusText.textContent = 'Loading card images & types...';
+        autobuildStatusText.textContent = 'Pre-caching card images & types...';
         await fetchCardsBatch(generatedCards, txt => { autobuildStatusText.textContent = txt; });
 
         deck = {};
         for (const cName of generatedCards) {
-          const cached = cardMetadataCache[cName] || {};
+          const cached = lookupCachedCardMeta(cName) || {};
+          const lower = cName.trim().toLowerCase();
+          const front = lower.split('//')[0].trim();
+          const enrich = (localGameplayEnrichment && (localGameplayEnrichment[lower] || localGameplayEnrichment[front])) || {};
+
+          const resolvedType = cached.type_line || gen.getCardTypeLine(cName, {}) || (Array.isArray(enrich.types) ? enrich.types.join(' ') : '');
+          const isLand = gen.isLandCard(cName, {}) || resolvedType.toLowerCase().includes('land');
+          const resolvedCmc = isLand ? 0 : (typeof cached.cmc === 'number' ? cached.cmc : (typeof enrich.manaValue === 'number' ? enrich.manaValue : 0));
+
           if (!deck[cName]) {
             deck[cName] = {
               count: 1,
               faces: cached.faces || [],
               mana_cost: cached.mana_cost || '',
-              cmc: typeof cached.cmc === 'number' ? cached.cmc : 0,
-              type_line: cached.type_line || ''
+              cmc: resolvedCmc,
+              type_line: resolvedType
             };
           } else {
             deck[cName].count += 1;
@@ -6657,7 +6755,7 @@ function matchesColorFilters(card) {
       cardNames.forEach(name => {
         const item = deck[name];
         const cat = getCardPrimaryType(item);
-        const targetList = typeBuckets[cat] || typeBuckets['Artifacts'];
+        const cmc = Math.min(Math.floor(item.cmc || 0), 6);
         if (BASIC_LAND_NAMES.has(name) || SWARM_CARD_NAMES.has(name)) {
           targetList.push({ name, count: item.count, cmc: item.cmc || 0 });
         } else {
@@ -6722,7 +6820,7 @@ function matchesColorFilters(card) {
 
      cardNames.forEach(name => {
         const item = deck[name];
-        const cat = getCardPrimaryType(item);
+        const cat = getCardPrimaryType(item, name);
         const cmc = Math.min(Math.floor(item.cmc || 0), 6);
 
         if (cat === 'Lands' || BASIC_LAND_NAMES.has(name)) {
