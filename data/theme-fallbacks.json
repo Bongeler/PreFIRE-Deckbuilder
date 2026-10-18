@@ -9518,6 +9518,11 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_rock",
+      "disallowed_ramp_types": [
+        "ramp_land",
+        "ramp_dork"
       ]
     }
   },
@@ -12817,6 +12822,10 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_ritual",
+      "disallowed_ramp_types": [
+        "ramp_land"
       ]
     }
   },
@@ -14852,6 +14861,11 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_rock",
+      "disallowed_ramp_types": [
+        "ramp_land",
+        "ramp_dork"
       ]
     }
   },
@@ -19896,6 +19910,10 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_ritual",
+      "disallowed_ramp_types": [
+        "ramp_land"
       ]
     }
   },
@@ -30020,6 +30038,11 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_rock",
+      "disallowed_ramp_types": [
+        "ramp_land",
+        "ramp_dork"
       ]
     }
   },
@@ -40918,6 +40941,11 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_land",
+      "disallowed_ramp_types": [
+        "ramp_dork",
+        "ramp_rock"
       ]
     }
   },
@@ -41251,6 +41279,11 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_land",
+      "disallowed_ramp_types": [
+        "ramp_dork",
+        "ramp_rock"
       ]
     }
   },
@@ -41776,6 +41809,11 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_land",
+      "disallowed_ramp_types": [
+        "ramp_dork",
+        "ramp_rock"
       ]
     }
   },
@@ -42386,6 +42424,11 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_land",
+      "disallowed_ramp_types": [
+        "ramp_dork",
+        "ramp_rock"
       ]
     }
   },
@@ -52975,6 +53018,11 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_land",
+      "disallowed_ramp_types": [
+        "ramp_dork",
+        "ramp_rock"
       ]
     }
   },
@@ -59795,6 +59843,10 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_ritual",
+      "disallowed_ramp_types": [
+        "ramp_land"
       ]
     }
   },
@@ -60863,6 +60915,10 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_ritual",
+      "disallowed_ramp_types": [
+        "ramp_land"
       ]
     }
   },
@@ -62739,6 +62795,10 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_ritual",
+      "disallowed_ramp_types": [
+        "ramp_land"
       ]
     }
   },
@@ -76141,6 +76201,10 @@
       },
       "exclusions": [
         "Aligned Hedron Network"
+      ],
+      "preferred_ramp_type": "ramp_ritual",
+      "disallowed_ramp_types": [
+        "ramp_land"
       ]
     }
   },

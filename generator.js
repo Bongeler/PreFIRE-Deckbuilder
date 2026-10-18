@@ -280,7 +280,7 @@ class PrefireDeckGenerator {
         const blueprint = (themeData && themeData.blueprint) ? themeData.blueprint : {};
         const blueprintExclusions = new Set((blueprint.exclusions || []).map(n => n.toLowerCase().trim()));
 
-        const isLegalSpell = (cName) => {
+       const isLegalSpell = (cName) => {
             if (!cName) return false;
             if (this.isLandCard(cName, cardCatalog)) return false;
 
@@ -289,6 +289,10 @@ class PrefireDeckGenerator {
 
             if (blueprintExclusions.has(lower)) return false;
             if (!isSwarmTheme && SWARM_CARDS.includes(cleanName)) return false;
+
+            // Universal Anti-Synergy & Parasitic Guardrails
+            // If a card requires a parasitic mechanic not matched by theme, reject it
+            if (lower === "trapjaw tyrant" && !themeSlug.includes("dinosaur")) return false;
 
             if (lower === "dragon's hoard" && themeSlug !== "dragons") return false;
             if (lower === "pillar of origins" && !themeSlug.includes("trib") && themeSlug !== "slivers" && themeSlug !== "elves" && themeSlug !== "goblins" && themeSlug !== "zombies") return false;
@@ -651,14 +655,33 @@ class PrefireDeckGenerator {
             addCardToDeck(name);
         }
 
-        // PASS 1: Fill functional quotas prioritizing theme-aligned / double-duty cards
+        // PASS 1: Fill functional quotas prioritizing theme-aligned / vector-matched cards
+        const preferredRamp = blueprint.preferred_ramp_type || null;
+        const disallowedRamp = blueprint.disallowed_ramp_types || [];
+
         for (const [role, quota] of Object.entries(quotas)) {
             let needed = quota - roleBuckets[role];
             if (needed <= 0) continue;
 
-            const roleCandidates = [...unifiedThemePool, ...staplePool].filter(name =>
-                !selected.has(name) && isLegalSpell(name) && detectCardRoles(name).includes(role)
-            );
+            const roleCandidates = [...unifiedThemePool, ...staplePool].filter(name => {
+                if (selected.has(name) || !isLegalSpell(name)) return false;
+                const roles = detectCardRoles(name);
+                if (!roles.includes(role)) return false;
+
+                // Enforce strict ramp vector filtering (e.g. Landfall wants land-ramp, not elf dorks)
+                if (role === 'ramp' && preferredRamp) {
+                    const metaText = ((cardCatalog[name] || {}).oracle_text || "").toLowerCase();
+                    const isLandRamp = metaText.includes("search your library for a land") || metaText.includes("put a land onto the battlefield");
+                    const isDork = metaText.includes("creature") && (metaText.includes("add {") || metaText.includes("add one mana"));
+                    const isRock = metaText.includes("artifact") && (metaText.includes("add {") || metaText.includes("add one mana"));
+
+                    if (preferredRamp === "ramp_land" && !isLandRamp) return false;
+                    if (disallowedRamp.includes("ramp_dork") && isDork) return false;
+                    if (disallowedRamp.includes("ramp_rock") && isRock) return false;
+                }
+
+                return true;
+            });
 
             roleCandidates.sort((a, b) => {
                 const aTheme = isThemeAligned(a) ? 100 : (cmdrThemeCards.includes(a) ? 50 : 0);
