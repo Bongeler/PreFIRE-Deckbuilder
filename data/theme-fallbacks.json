@@ -2,12 +2,39 @@
   "+1-+1-counters": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 2,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 9,
-      "engine": 51
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Inexorable Tide",
@@ -81,12 +108,39 @@
   "ad-nauseam": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 3,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 4,
-      "engine": 50
+      "high": {
+        "ramp": 9,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Dark Ritual",
@@ -225,12 +279,39 @@
   "affinity": {
     "sample_commanders": 4,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 11,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Etherium Sculptor",
@@ -375,12 +456,39 @@
   "aggro": {
     "sample_commanders": 70,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 31
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 38
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 42
+      }
     },
     "cards": [
       "Chaos Warp",
@@ -2049,12 +2157,39 @@
   "aikido": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 7,
-      "removal_noncreature": 3,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 46
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Deflecting Palm",
@@ -2126,12 +2261,39 @@
   "allies": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 2,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 1,
-      "engine": 56
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 40
+      }
     },
     "cards": [
       "Sea Gate Loremaster",
@@ -2203,12 +2365,39 @@
   "angels": {
     "sample_commanders": 8,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 10,
-      "removal_noncreature": 3,
-      "board_wipe": 4,
-      "draw": 2,
-      "engine": 50
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 6,
+        "removal_noncreature": 4,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 7,
+        "removal_noncreature": 3,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 4,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -2396,12 +2585,39 @@
   "anthems": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 4,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 2,
-      "engine": 50
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Regal Caracal",
@@ -2473,12 +2689,39 @@
   "aristocrats": {
     "sample_commanders": 75,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 7,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 29
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 36
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Blood Artist",
@@ -3694,12 +3937,39 @@
   "artifacts": {
     "sample_commanders": 445,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Solemn Simulacrum",
@@ -9254,12 +9524,39 @@
   "atogs": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 9,
-      "removal_creature": 4,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 3,
-      "engine": 50
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 39
+      }
     },
     "cards": [
       "Sarcatog",
@@ -9331,12 +9628,39 @@
   "attack-triggers": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 8,
-      "removal_noncreature": 3,
-      "board_wipe": 1,
-      "draw": 4,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 6,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 7,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Gisela, Blade of Goldnight",
@@ -9447,12 +9771,39 @@
   "auras": {
     "sample_commanders": 17,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 10,
-      "engine": 42
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 31
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 38
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 42
+      }
     },
     "cards": [
       "Kor Spiritdancer",
@@ -9889,12 +10240,39 @@
   "big-mana": {
     "sample_commanders": 18,
     "targets": {
-      "ramp": 9,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 45
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Beast Within",
@@ -10436,12 +10814,39 @@
   "birds": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 9,
-      "removal_noncreature": 2,
-      "board_wipe": 2,
-      "draw": 10,
-      "engine": 40
+      "high": {
+        "ramp": 8,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -10564,12 +10969,39 @@
   "birthing-pod": {
     "sample_commanders": 14,
     "targets": {
-      "ramp": 12,
-      "removal_creature": 2,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 44
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Birds of Paradise",
@@ -10884,12 +11316,39 @@
   "blink": {
     "sample_commanders": 16,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 9,
-      "engine": 46
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Ghostly Flicker",
@@ -11380,12 +11839,39 @@
   "bounce": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 5,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 13,
-      "engine": 41
+      "high": {
+        "ramp": 8,
+        "draw": 14,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Meloku the Clouded Mirror",
@@ -11457,12 +11943,39 @@
   "burn": {
     "sample_commanders": 32,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 3,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 46
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 31
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 38
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 42
+      }
     },
     "cards": [
       "Chaos Warp",
@@ -12310,12 +12823,39 @@
   "cantrips": {
     "sample_commanders": 4,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 4,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 21,
-      "engine": 35
+      "high": {
+        "ramp": 8,
+        "draw": 16,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 14,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Brainstorm",
@@ -12473,12 +13013,39 @@
   "card-draw": {
     "sample_commanders": 23,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 16,
-      "engine": 38
+      "high": {
+        "ramp": 8,
+        "draw": 14,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Counterspell",
@@ -13175,12 +13742,39 @@
   "cascade": {
     "sample_commanders": 7,
     "targets": {
-      "ramp": 12,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 41
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Etali, Primal Storm",
@@ -13443,12 +14037,39 @@
   "cats": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 6,
-      "removal_noncreature": 2,
-      "board_wipe": 1,
-      "draw": 3,
-      "engine": 47
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Regal Caracal",
@@ -13558,12 +14179,39 @@
   "chaos": {
     "sample_commanders": 18,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 5,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 43
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 29
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 36
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Chaos Warp",
@@ -14106,12 +14754,39 @@
   "cheerios": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 3,
-      "removal_creature": 2,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 47
+      "high": {
+        "ramp": 8,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Tormod's Crypt",
@@ -14183,12 +14858,39 @@
   "clerics": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 10,
-      "removal_noncreature": 2,
-      "board_wipe": 2,
-      "draw": 4,
-      "engine": 49
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Edgewalker",
@@ -14287,12 +14989,39 @@
   "clones": {
     "sample_commanders": 10,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 9,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Counterspell",
@@ -14616,12 +15345,39 @@
   "coin-flip": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 12,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Krark's Thumb",
@@ -14693,12 +15449,39 @@
   "combo": {
     "sample_commanders": 139,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 31
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 38
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 42
+      }
     },
     "cards": [
       "Birds of Paradise",
@@ -16986,12 +17769,39 @@
   "commander-matters": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 48
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 29
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 36
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 41
+      }
     },
     "cards": [
       "Axebane Guardian",
@@ -17163,12 +17973,39 @@
   "control": {
     "sample_commanders": 77,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 39
+      }
     },
     "cards": [
       "Counterspell",
@@ -18703,12 +19540,39 @@
   "counters-matter": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 12,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 1,
-      "draw": 5,
-      "engine": 42
+      "high": {
+        "ramp": 16,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 20
+      },
+      "medium": {
+        "ramp": 14,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 27
+      },
+      "low": {
+        "ramp": 12,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Birds of Paradise",
@@ -18820,12 +19684,39 @@
   "counterspells": {
     "sample_commanders": 5,
     "targets": {
-      "ramp": 1,
-      "removal_creature": 5,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 13,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 15,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 13,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 11,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Counterspell",
@@ -19011,12 +19902,39 @@
   "cycling": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 3,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 28,
-      "engine": 31
+      "high": {
+        "ramp": 8,
+        "draw": 16,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 14,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 35
+      }
     },
     "cards": [
       "Astral Slide",
@@ -19115,12 +20033,39 @@
   "deathtouch": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 9,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Poison-Tip Archer",
@@ -19232,12 +20177,39 @@
   "defenders": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 47
+      "high": {
+        "ramp": 8,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Overgrown Battlement",
@@ -19387,12 +20359,39 @@
   "demons": {
     "sample_commanders": 4,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 11,
-      "removal_noncreature": 4,
-      "board_wipe": 2,
-      "draw": 7,
-      "engine": 43
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Razaketh, the Foulblooded",
@@ -19545,12 +20544,39 @@
   "devotion": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 2,
-      "draw": 8,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Kruphix, God of Horizons",
@@ -19672,12 +20698,39 @@
   "dinosaurs": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 14,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 42
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Thrashing Brontodon",
@@ -19794,12 +20847,39 @@
   "discard": {
     "sample_commanders": 15,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 12,
-      "engine": 42
+      "high": {
+        "ramp": 8,
+        "draw": 14,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Dark Ritual",
@@ -20327,12 +21407,39 @@
   "discover": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 12,
-      "removal_creature": 4,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 4,
-      "engine": 44
+      "high": {
+        "ramp": 16,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 14,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 25
+      },
+      "low": {
+        "ramp": 12,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 32
+      }
     },
     "cards": [
       "Zacama, Primal Calamity",
@@ -20404,12 +21511,39 @@
   "donate": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 5,
-      "removal_noncreature": 2,
-      "board_wipe": 2,
-      "draw": 10,
-      "engine": 42
+      "high": {
+        "ramp": 10,
+        "draw": 15,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 21
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 13,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 28
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 11,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Humble Defector",
@@ -20514,12 +21648,39 @@
   "dragons": {
     "sample_commanders": 44,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 47
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Dragonspeaker Shaman",
@@ -21462,12 +22623,39 @@
   "dragons-approach": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 0,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 54
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Ruby Medallion",
@@ -21539,12 +22727,39 @@
   "drakes": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 1,
-      "removal_creature": 8,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 20,
-      "engine": 36
+      "high": {
+        "ramp": 8,
+        "draw": 16,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 14,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 24
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 29
+      }
     },
     "cards": [
       "Counterspell",
@@ -21616,12 +22831,39 @@
   "dredge": {
     "sample_commanders": 8,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 40
+      "high": {
+        "ramp": 12,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 38
+      }
     },
     "cards": [
       "Golgari Grave-Troll",
@@ -21844,12 +23086,39 @@
   "druids": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 23,
-      "removal_creature": 0,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 29
+      "high": {
+        "ramp": 16,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 14,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 24
+      },
+      "low": {
+        "ramp": 12,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 31
+      }
     },
     "cards": [
       "Elvish Mystic",
@@ -21921,12 +23190,39 @@
   "dwarves": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 9,
-      "removal_noncreature": 2,
-      "board_wipe": 4,
-      "draw": 6,
-      "engine": 47
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 21
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 28
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 4,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Veteran Motorist",
@@ -21998,12 +23294,39 @@
   "eldrazi": {
     "sample_commanders": 10,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 44
+      "high": {
+        "ramp": 12,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Artisan of Kozilek",
@@ -22248,12 +23571,39 @@
   "elementals": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 14,
-      "removal_creature": 4,
-      "removal_noncreature": 3,
-      "board_wipe": 1,
-      "draw": 7,
-      "engine": 38
+      "high": {
+        "ramp": 14,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 12,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 10,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Smokebraider",
@@ -22362,12 +23712,39 @@
   "elves": {
     "sample_commanders": 146,
     "targets": {
-      "ramp": 14,
-      "removal_creature": 2,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 41
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 31
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 38
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 42
+      }
     },
     "cards": [
       "Llanowar Elves",
@@ -24452,12 +25829,39 @@
   "enchantress": {
     "sample_commanders": 203,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 7,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -27905,12 +29309,39 @@
   "enrage": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 4,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 3,
-      "engine": 50
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Ripjaw Raptor",
@@ -27982,12 +29413,39 @@
   "equipment": {
     "sample_commanders": 25,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 2,
-      "draw": 6,
-      "engine": 47
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 31
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 38
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 42
+      }
     },
     "cards": [
       "Puresteel Paladin",
@@ -28568,12 +30026,39 @@
   "etb": {
     "sample_commanders": 6,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 4,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 49
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Panharmonicon",
@@ -28829,12 +30314,39 @@
   "exalted": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 45
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 38
+      }
     },
     "cards": [
       "Finest Hour",
@@ -28906,12 +30418,39 @@
   "exile": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 10,
-      "removal_noncreature": 5,
-      "board_wipe": 2,
-      "draw": 8,
-      "engine": 39
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Etali, Primal Storm",
@@ -29016,12 +30555,39 @@
   "experience-counters": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 3,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 12,
-      "engine": 42
+      "high": {
+        "ramp": 11,
+        "draw": 15,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 20
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 13,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 27
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 11,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 33
+      }
     },
     "cards": [
       "Thrummingbird",
@@ -29140,12 +30706,39 @@
   "extra-combats": {
     "sample_commanders": 12,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 4,
-      "engine": 50
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Chaos Warp",
@@ -29516,12 +31109,39 @@
   "extra-turns": {
     "sample_commanders": 10,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 3,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 46
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 40
+      }
     },
     "cards": [
       "Cyclonic Rift",
@@ -29878,12 +31498,39 @@
   "faeries": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 0,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 11,
-      "engine": 47
+      "high": {
+        "ramp": 10,
+        "draw": 14,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 12,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Scion of Oona",
@@ -29955,12 +31602,39 @@
   "fight": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 12,
-      "removal_creature": 1,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 44
+      "high": {
+        "ramp": 13,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 21
+      },
+      "medium": {
+        "ramp": 11,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 28
+      },
+      "low": {
+        "ramp": 9,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Goreclaw, Terror of Qal Sisma",
@@ -30061,12 +31735,39 @@
   "flash": {
     "sample_commanders": 4,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 9,
-      "removal_noncreature": 2,
-      "board_wipe": 2,
-      "draw": 10,
-      "engine": 38
+      "high": {
+        "ramp": 12,
+        "draw": 13,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 7,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 11,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 25
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 9,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      }
     },
     "cards": [
       "Venser, Shaper Savant",
@@ -30241,12 +31942,39 @@
   "fling": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 3,
-      "engine": 54
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Fling",
@@ -30318,12 +32046,39 @@
   "flying": {
     "sample_commanders": 20,
     "targets": {
-      "ramp": 3,
-      "removal_creature": 7,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 9,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -30928,12 +32683,39 @@
   "forced-combat": {
     "sample_commanders": 11,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 5,
-      "removal_noncreature": 3,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Chaos Warp",
@@ -31235,12 +33017,39 @@
   "fungi": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 2,
-      "removal_noncreature": 3,
-      "board_wipe": 0,
-      "draw": 4,
-      "engine": 51
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 40
+      }
     },
     "cards": [
       "Mycoloth",
@@ -31343,12 +33152,39 @@
   "giants": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 3,
-      "removal_creature": 5,
-      "removal_noncreature": 2,
-      "board_wipe": 1,
-      "draw": 4,
-      "engine": 52
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 31
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 38
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 42
+      }
     },
     "cards": [
       "Hamletback Goliath",
@@ -31462,12 +33298,39 @@
   "goblins": {
     "sample_commanders": 27,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 2,
-      "removal_noncreature": 3,
-      "board_wipe": 0,
-      "draw": 4,
-      "engine": 52
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 40
+      }
     },
     "cards": [
       "Chaos Warp",
@@ -32065,12 +33928,39 @@
   "gods": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 2,
-      "draw": 11,
-      "engine": 38
+      "high": {
+        "ramp": 10,
+        "draw": 15,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 20
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 13,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 27
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 11,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 33
+      }
     },
     "cards": [
       "Kruphix, God of Horizons",
@@ -32142,12 +34032,39 @@
   "good-stuff": {
     "sample_commanders": 8,
     "targets": {
-      "ramp": 11,
-      "removal_creature": 3,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 46
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Birds of Paradise",
@@ -32399,12 +34316,39 @@
   "graveyard": {
     "sample_commanders": 234,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 5,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Solemn Simulacrum",
@@ -35950,12 +37894,39 @@
   "group-hug": {
     "sample_commanders": 10,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 14,
-      "engine": 39
+      "high": {
+        "ramp": 9,
+        "draw": 14,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 12,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Psychosis Crawler",
@@ -36292,12 +38263,39 @@
   "group-slug": {
     "sample_commanders": 17,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 4,
-      "removal_noncreature": 3,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Chaos Warp",
@@ -36816,12 +38814,39 @@
   "guildgates": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 3,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 12,
-      "engine": 41
+      "high": {
+        "ramp": 15,
+        "draw": 15,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 13,
+        "draw": 13,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 22
+      },
+      "low": {
+        "ramp": 11,
+        "draw": 11,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 28
+      }
     },
     "cards": [
       "Circuitous Route",
@@ -36893,12 +38918,39 @@
   "haste": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 0,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 2,
-      "engine": 58
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Skirk Prospector",
@@ -36970,12 +39022,39 @@
   "hatebears": {
     "sample_commanders": 9,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 5,
-      "engine": 48
+      "high": {
+        "ramp": 9,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -37262,12 +39341,39 @@
   "historic": {
     "sample_commanders": 6,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 2,
-      "draw": 9,
-      "engine": 42
+      "high": {
+        "ramp": 11,
+        "draw": 13,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 11,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 9,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 38
+      }
     },
     "cards": [
       "Foundry Inspector",
@@ -37514,12 +39620,39 @@
   "humans": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 8,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 5,
-      "engine": 45
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 38
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -37634,12 +39767,39 @@
   "hydras": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 13,
-      "removal_creature": 4,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 4,
-      "engine": 46
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Hydroid Krasis",
@@ -37711,12 +39871,39 @@
   "infect": {
     "sample_commanders": 8,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 48
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 29
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 36
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 40
+      }
     },
     "cards": [
       "Plague Myr",
@@ -38001,12 +40188,39 @@
   "insects": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 1,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 24,
-      "engine": 33
+      "high": {
+        "ramp": 8,
+        "draw": 16,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 21
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 14,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 28
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 32
+      }
     },
     "cards": [
       "Impact Tremors",
@@ -38078,12 +40292,39 @@
   "kaheera-companion": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 11,
-      "removal_creature": 6,
-      "removal_noncreature": 3,
-      "board_wipe": 2,
-      "draw": 5,
-      "engine": 42
+      "high": {
+        "ramp": 9,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -38231,12 +40472,39 @@
   "keywords": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 10,
-      "removal_noncreature": 2,
-      "board_wipe": 6,
-      "draw": 4,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 4,
+        "recursion": 2,
+        "engine": 35
+      }
     },
     "cards": [
       "Swiftfoot Boots",
@@ -38308,12 +40576,39 @@
   "kicker": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 1,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 3,
-      "engine": 47
+      "high": {
+        "ramp": 14,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 21
+      },
+      "medium": {
+        "ramp": 12,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 28
+      },
+      "low": {
+        "ramp": 10,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Grow from the Ashes",
@@ -38385,12 +40680,39 @@
   "knights": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 7,
-      "removal_noncreature": 4,
-      "board_wipe": 4,
-      "draw": 5,
-      "engine": 48
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Valiant Knight",
@@ -38498,12 +40820,39 @@
   "land-animation": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 7,
-      "removal_noncreature": 0,
-      "board_wipe": 1,
-      "draw": 16,
-      "engine": 36
+      "high": {
+        "ramp": 10,
+        "draw": 14,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 12,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 23
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 31
+      }
     },
     "cards": [
       "Planar Outburst",
@@ -38575,12 +40924,39 @@
   "land-destruction": {
     "sample_commanders": 8,
     "targets": {
-      "ramp": 11,
-      "removal_creature": 3,
-      "removal_noncreature": 2,
-      "board_wipe": 1,
-      "draw": 4,
-      "engine": 46
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Birds of Paradise",
@@ -38881,12 +41257,39 @@
   "landfall": {
     "sample_commanders": 21,
     "targets": {
-      "ramp": 14,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 40
+      "high": {
+        "ramp": 12,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 38
+      }
     },
     "cards": [
       "Tireless Tracker",
@@ -39379,12 +41782,39 @@
   "lands-matter": {
     "sample_commanders": 27,
     "targets": {
-      "ramp": 15,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 39
+      "high": {
+        "ramp": 12,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 38
+      }
     },
     "cards": [
       "Beast Within",
@@ -39962,12 +42392,39 @@
   "legends": {
     "sample_commanders": 6,
     "targets": {
-      "ramp": 13,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 5,
-      "engine": 42
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Heroic Intervention",
@@ -40194,12 +42651,39 @@
   "lifedrain": {
     "sample_commanders": 9,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 8,
-      "removal_noncreature": 2,
-      "board_wipe": 2,
-      "draw": 6,
-      "engine": 47
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 39
+      }
     },
     "cards": [
       "Blood Artist",
@@ -40474,12 +42958,39 @@
   "lifegain": {
     "sample_commanders": 124,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 7,
-      "removal_noncreature": 2,
-      "board_wipe": 1,
-      "draw": 5,
-      "engine": 46
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -42493,12 +45004,39 @@
   "madness": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 0,
-      "removal_creature": 7,
-      "removal_noncreature": 3,
-      "board_wipe": 1,
-      "draw": 9,
-      "engine": 45
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 21
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Stensia Masquerade",
@@ -42570,12 +45108,39 @@
   "merfolk": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 12,
-      "engine": 43
+      "high": {
+        "ramp": 8,
+        "draw": 13,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 11,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 9,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Merrow Reejerey",
@@ -42692,12 +45257,39 @@
   "midrange": {
     "sample_commanders": 38,
     "targets": {
-      "ramp": 9,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Birds of Paradise",
@@ -43630,12 +46222,39 @@
   "mill": {
     "sample_commanders": 20,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 39
+      }
     },
     "cards": [
       "Counterspell",
@@ -44130,12 +46749,39 @@
   "minotaurs": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 1,
-      "removal_creature": 8,
-      "removal_noncreature": 5,
-      "board_wipe": 0,
-      "draw": 2,
-      "engine": 50
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 5,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 6,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Ragemonger",
@@ -44207,12 +46853,39 @@
   "minus-1-minus-1-counters": {
     "sample_commanders": 6,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 4,
-      "engine": 50
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 40
+      }
     },
     "cards": [
       "Necroskitter",
@@ -44456,12 +47129,39 @@
   "modular": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 5,
-      "removal_noncreature": 4,
-      "board_wipe": 1,
-      "draw": 8,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Arcbound Worker",
@@ -44533,12 +47233,39 @@
   "monarch": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 8,
-      "removal_noncreature": 3,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 47
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -44610,12 +47337,39 @@
   "morph": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 8,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 42
+      "high": {
+        "ramp": 8,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Willbender",
@@ -44717,12 +47471,39 @@
   "multicolor-matters": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 11,
-      "removal_noncreature": 5,
-      "board_wipe": 0,
-      "draw": 11,
-      "engine": 39
+      "high": {
+        "ramp": 10,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 5,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 5,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 24
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 4,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 32
+      }
     },
     "cards": [
       "Abzan Charm",
@@ -44794,12 +47575,39 @@
   "mutate": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 13,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 9,
-      "engine": 39
+      "high": {
+        "ramp": 13,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 11,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 24
+      },
+      "low": {
+        "ramp": 9,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      }
     },
     "cards": [
       "Beast Whisperer",
@@ -44900,12 +47708,39 @@
   "ninjas": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 0,
-      "removal_creature": 10,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 46
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 21
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 28
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Mistblade Shinobi",
@@ -44977,12 +47812,39 @@
   "ninjutsu": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 0,
-      "removal_creature": 7,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 50
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 20
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 27
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Mistblade Shinobi",
@@ -45054,12 +47916,39 @@
   "oozes": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 5,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 49
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 5,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 6,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Biogenic Ooze",
@@ -45131,12 +48020,39 @@
   "orcs": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 11,
-      "removal_noncreature": 4,
-      "board_wipe": 4,
-      "draw": 8,
-      "engine": 42
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 5,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Brutal Hordechief",
@@ -45208,12 +48124,39 @@
   "persistent-petitioners": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 1,
-      "removal_creature": 4,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 16,
-      "engine": 43
+      "high": {
+        "ramp": 8,
+        "draw": 16,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 21
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 14,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 28
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 32
+      }
     },
     "cards": [
       "Persistent Petitioners",
@@ -45285,12 +48228,39 @@
   "phyrexians": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 6,
-      "removal_noncreature": 2,
-      "board_wipe": 1,
-      "draw": 4,
-      "engine": 48
+      "high": {
+        "ramp": 9,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 4,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Ichor Rats",
@@ -45403,12 +48373,39 @@
   "pillow-fort": {
     "sample_commanders": 15,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 4,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 45
+      "high": {
+        "ramp": 9,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 39
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -45809,12 +48806,39 @@
   "pingers": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 1,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 28,
-      "engine": 30
+      "high": {
+        "ramp": 8,
+        "draw": 16,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 14,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 33
+      }
     },
     "cards": [
       "Windfall",
@@ -45886,12 +48910,39 @@
   "pirates": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 7,
-      "removal_noncreature": 3,
-      "board_wipe": 0,
-      "draw": 9,
-      "engine": 41
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 5,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 4,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 3,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Hostage Taker",
@@ -45963,12 +49014,39 @@
   "planeswalkers": {
     "sample_commanders": 7,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 8,
-      "removal_noncreature": 2,
-      "board_wipe": 3,
-      "draw": 7,
-      "engine": 38
+      "high": {
+        "ramp": 13,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 11,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 9,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 35
+      }
     },
     "cards": [
       "Deepglow Skate",
@@ -46226,12 +49304,39 @@
   "plus-1-plus-1-counters": {
     "sample_commanders": 71,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 1,
-      "draw": 6,
-      "engine": 43
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 31
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 38
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 42
+      }
     },
     "cards": [
       "Beast Within",
@@ -47604,12 +50709,39 @@
   "politics": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 12,
-      "removal_noncreature": 4,
-      "board_wipe": 2,
-      "draw": 6,
-      "engine": 41
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 37
+      }
     },
     "cards": [
       "Humble Defector",
@@ -47703,12 +50835,39 @@
   "polymorph": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 10,
-      "removal_noncreature": 0,
-      "board_wipe": 2,
-      "draw": 11,
-      "engine": 40
+      "high": {
+        "ramp": 8,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Brainstorm",
@@ -47780,12 +50939,39 @@
   "populate": {
     "sample_commanders": 5,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 4,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 47
+      "high": {
+        "ramp": 9,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 40
+      }
     },
     "cards": [
       "Trostani Discordant",
@@ -48013,12 +51199,39 @@
   "power-matters": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 14,
-      "removal_creature": 2,
-      "removal_noncreature": 0,
-      "board_wipe": 1,
-      "draw": 6,
-      "engine": 42
+      "high": {
+        "ramp": 16,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 20
+      },
+      "medium": {
+        "ramp": 14,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 27
+      },
+      "low": {
+        "ramp": 12,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Llanowar Elves",
@@ -48090,12 +51303,39 @@
   "primal-surge": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 14,
-      "removal_creature": 2,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 9,
-      "engine": 38
+      "high": {
+        "ramp": 15,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 21
+      },
+      "medium": {
+        "ramp": 13,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 28
+      },
+      "low": {
+        "ramp": 11,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Primal Surge",
@@ -48220,12 +51460,39 @@
   "prison": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 4,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 51
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 29
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 36
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Rhystic Study",
@@ -48326,12 +51593,39 @@
   "proliferate": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 1,
-      "draw": 6,
-      "engine": 43
+      "high": {
+        "ramp": 14,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 12,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 10,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Birds of Paradise",
@@ -48480,12 +51774,39 @@
   "prowess": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 1,
-      "removal_creature": 3,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 14,
-      "engine": 46
+      "high": {
+        "ramp": 8,
+        "draw": 15,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 13,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 11,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -48557,12 +51878,39 @@
   "ramp": {
     "sample_commanders": 56,
     "targets": {
-      "ramp": 15,
-      "removal_creature": 2,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 41
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Birds of Paradise",
@@ -49633,12 +52981,39 @@
   "rat-colony": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 0,
-      "removal_creature": 7,
-      "removal_noncreature": 2,
-      "board_wipe": 3,
-      "draw": 4,
-      "engine": 52
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Rat Colony",
@@ -49710,12 +53085,39 @@
   "rats": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 0,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 2,
-      "draw": 6,
-      "engine": 52
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Pack Rat",
@@ -49790,12 +53192,39 @@
   "reanimator": {
     "sample_commanders": 237,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 9,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Solemn Simulacrum",
@@ -53255,12 +56684,39 @@
   "rebels": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 9,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 2,
-      "engine": 51
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 36
+      }
     },
     "cards": [
       "Defiant Vanguard",
@@ -53332,12 +56788,39 @@
   "relentless-rats": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 0,
-      "removal_creature": 6,
-      "removal_noncreature": 2,
-      "board_wipe": 3,
-      "draw": 5,
-      "engine": 52
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Relentless Rats",
@@ -53409,12 +56892,39 @@
   "rogues": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 0,
-      "removal_creature": 9,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 11,
-      "engine": 43
+      "high": {
+        "ramp": 10,
+        "draw": 15,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 5,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 13,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 6,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 25
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 11,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 31
+      }
     },
     "cards": [
       "Invisible Stalker",
@@ -53486,12 +56996,39 @@
   "sacrifice": {
     "sample_commanders": 32,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 7,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 43
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 39
+      }
     },
     "cards": [
       "Pitiless Plunderer",
@@ -54235,12 +57772,39 @@
   "samurai": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 49
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Konda, Lord of Eiganjo",
@@ -54312,12 +57876,39 @@
   "saprolings": {
     "sample_commanders": 4,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 2,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 4,
-      "engine": 50
+      "high": {
+        "ramp": 9,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Mycoloth",
@@ -54437,12 +58028,39 @@
   "scarecrows": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 9,
-      "removal_creature": 3,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 47
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Scuttlemutt",
@@ -54514,12 +58132,39 @@
   "sea-creatures": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 9,
-      "removal_creature": 8,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 38
+      "high": {
+        "ramp": 14,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 12,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 25
+      },
+      "low": {
+        "ramp": 10,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 32
+      }
     },
     "cards": [
       "Whelming Wave",
@@ -54591,12 +58236,39 @@
   "self-damage": {
     "sample_commanders": 5,
     "targets": {
-      "ramp": 3,
-      "removal_creature": 7,
-      "removal_noncreature": 2,
-      "board_wipe": 2,
-      "draw": 5,
-      "engine": 49
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 29
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 36
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -54795,12 +58467,39 @@
   "self-mill": {
     "sample_commanders": 13,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 4,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 43
+      "high": {
+        "ramp": 9,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Stitcher's Supplier",
@@ -55147,12 +58846,39 @@
   "shadowborn-apostles": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 12,
-      "removal_noncreature": 2,
-      "board_wipe": 2,
-      "draw": 8,
-      "engine": 43
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Shadowborn Apostle",
@@ -55244,12 +58970,39 @@
   "shapeshifters": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 6,
-      "removal_noncreature": 0,
-      "board_wipe": 1,
-      "draw": 4,
-      "engine": 44
+      "high": {
+        "ramp": 12,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Mirror Entity",
@@ -55350,12 +59103,39 @@
   "slivers": {
     "sample_commanders": 4,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 4,
-      "removal_noncreature": 0,
-      "board_wipe": 1,
-      "draw": 3,
-      "engine": 52
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 1,
+        "board_wipe": 4,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Gemhide Sliver",
@@ -55462,12 +59242,39 @@
   "snakes": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 43
+      "high": {
+        "ramp": 12,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Sakura-Tribe Elder",
@@ -55602,12 +59409,39 @@
   "soldiers": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 3,
-      "removal_creature": 9,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 3,
-      "engine": 49
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 38
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -55735,12 +59569,39 @@
   "spell-copy": {
     "sample_commanders": 5,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 2,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 45
+      "high": {
+        "ramp": 12,
+        "draw": 14,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 20
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 12,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 27
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Guttersnipe",
@@ -55940,12 +59801,39 @@
   "spellslinger": {
     "sample_commanders": 52,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 13,
-      "engine": 42
+      "high": {
+        "ramp": 8,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 29
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 36
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Counterspell",
@@ -56981,12 +60869,39 @@
   "sphinxes": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 12,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 15,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 6,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 21
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 13,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 7,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 11,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      }
     },
     "cards": [
       "Sphinx of Foresight",
@@ -57091,12 +61006,39 @@
   "spiders": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 7,
-      "removal_noncreature": 4,
-      "board_wipe": 1,
-      "draw": 4,
-      "engine": 43
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 6,
+        "removal_noncreature": 5,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 7,
+        "removal_noncreature": 4,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 3,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 34
+      }
     },
     "cards": [
       "Arachnogenesis",
@@ -57190,12 +61132,39 @@
   "spirits": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 5,
-      "removal_noncreature": 3,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 49
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 39
+      }
     },
     "cards": [
       "Selfless Spirit",
@@ -57351,12 +61320,39 @@
   "spore-counters": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 2,
-      "removal_noncreature": 3,
-      "board_wipe": 0,
-      "draw": 4,
-      "engine": 52
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 40
+      }
     },
     "cards": [
       "Mycoloth",
@@ -57458,12 +61454,39 @@
   "stax": {
     "sample_commanders": 23,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 4,
-      "removal_noncreature": 1,
-      "board_wipe": 1,
-      "draw": 6,
-      "engine": 48
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -58039,12 +62062,39 @@
   "stompy": {
     "sample_commanders": 11,
     "targets": {
-      "ramp": 13,
-      "removal_creature": 2,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 44
+      "high": {
+        "ramp": 12,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Llanowar Elves",
@@ -58353,12 +62403,39 @@
   "storm": {
     "sample_commanders": 9,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 2,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 9,
-      "engine": 45
+      "high": {
+        "ramp": 9,
+        "draw": 14,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 12,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Simian Spirit Guide",
@@ -58668,12 +62745,39 @@
   "sunforger": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 4,
-      "engine": 51
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Sunforger",
@@ -58783,12 +62887,39 @@
   "suspend": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 1,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 11,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Jhoira's Timebug",
@@ -58860,12 +62991,39 @@
   "tap-untap": {
     "sample_commanders": 5,
     "targets": {
-      "ramp": 9,
-      "removal_creature": 4,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 9,
-      "engine": 43
+      "high": {
+        "ramp": 12,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 38
+      }
     },
     "cards": [
       "Swords to Plowshares",
@@ -59087,12 +63245,39 @@
   "tempo": {
     "sample_commanders": 4,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 4,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 4,
-      "engine": 50
+      "high": {
+        "ramp": 9,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 3,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Cyclonic Rift",
@@ -59267,12 +63452,39 @@
   "theft": {
     "sample_commanders": 16,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 5,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 47
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 29
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 36
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Solemn Simulacrum",
@@ -59819,12 +64031,39 @@
   "thopters": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 4,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 14,
-      "engine": 42
+      "high": {
+        "ramp": 8,
+        "draw": 14,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 10,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 33
+      }
     },
     "cards": [
       "Thopter Spy Network",
@@ -59923,12 +64162,39 @@
   "time-counters": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 0,
-      "removal_creature": 7,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 45
+      "high": {
+        "ramp": 10,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "Jhoira's Timebug",
@@ -60000,12 +64266,39 @@
   "tokens": {
     "sample_commanders": 263,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 5,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 45
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 31
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 38
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 42
+      }
     },
     "cards": [
       "Solemn Simulacrum",
@@ -63645,12 +67938,39 @@
   "toolbox": {
     "sample_commanders": 12,
     "targets": {
-      "ramp": 11,
-      "removal_creature": 4,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 5,
-      "engine": 44
+      "high": {
+        "ramp": 11,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Birds of Paradise",
@@ -64083,12 +68403,39 @@
   "topdeck": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 7,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 11,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 38
+      }
     },
     "cards": [
       "Brainstorm",
@@ -64241,12 +68588,39 @@
   "toughness-matters": {
     "sample_commanders": 4,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 7,
-      "removal_noncreature": 2,
-      "board_wipe": 1,
-      "draw": 8,
-      "engine": 44
+      "high": {
+        "ramp": 8,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Tower Defense",
@@ -64424,12 +68798,39 @@
   "treasure": {
     "sample_commanders": 5,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 3,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 46
+      "high": {
+        "ramp": 10,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 26
+      },
+      "medium": {
+        "ramp": 8,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 33
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Chaos Warp",
@@ -64664,12 +69065,39 @@
   "treefolk": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 7,
-      "removal_creature": 5,
-      "removal_noncreature": 3,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 46
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 5,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 6,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 36
+      }
     },
     "cards": [
       "Bosk Banneret",
@@ -64741,12 +69169,39 @@
   "triggered-abilities": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 8,
-      "removal_noncreature": 2,
-      "board_wipe": 2,
-      "draw": 7,
-      "engine": 44
+      "high": {
+        "ramp": 12,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 7,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 20
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 8,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 27
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 2,
+        "engine": 35
+      }
     },
     "cards": [
       "Skullclamp",
@@ -64818,12 +69273,39 @@
   "tron": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 9,
-      "removal_creature": 3,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 47
+      "high": {
+        "ramp": 12,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 23
+      },
+      "medium": {
+        "ramp": 10,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 30
+      },
+      "low": {
+        "ramp": 8,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 37
+      }
     },
     "cards": [
       "All Is Dust",
@@ -64900,12 +69382,39 @@
   "unblockable": {
     "sample_commanders": 3,
     "targets": {
-      "ramp": 2,
-      "removal_creature": 8,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 10,
-      "engine": 43
+      "high": {
+        "ramp": 8,
+        "draw": 13,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 6,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 22
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 11,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 7,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 29
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 9,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 8,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 33
+      }
     },
     "cards": [
       "Siren Stormtamer",
@@ -65052,12 +69561,39 @@
   "vampires": {
     "sample_commanders": 50,
     "targets": {
-      "ramp": 3,
-      "removal_creature": 8,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 6,
-      "engine": 46
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 39
+      }
     },
     "cards": [
       "Dark Ritual",
@@ -65983,12 +70519,39 @@
   "vehicles": {
     "sample_commanders": 4,
     "targets": {
-      "ramp": 8,
-      "removal_creature": 6,
-      "removal_noncreature": 1,
-      "board_wipe": 2,
-      "draw": 7,
-      "engine": 44
+      "high": {
+        "ramp": 9,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 4,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 27
+      },
+      "medium": {
+        "ramp": 7,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 5,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 34
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 39
+      }
     },
     "cards": [
       "Foundry Inspector",
@@ -66191,12 +70754,39 @@
   "voltron": {
     "sample_commanders": 140,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 5,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 7,
-      "engine": 46
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 30
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 37
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 41
+      }
     },
     "cards": [
       "Solemn Simulacrum",
@@ -68730,12 +73320,39 @@
   "warriors": {
     "sample_commanders": 2,
     "targets": {
-      "ramp": 6,
-      "removal_creature": 2,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 4,
-      "engine": 50
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 40
+      }
     },
     "cards": [
       "Archetype of Aggression",
@@ -68852,12 +73469,39 @@
   "wheels": {
     "sample_commanders": 16,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 4,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 20,
-      "engine": 36
+      "high": {
+        "ramp": 8,
+        "draw": 16,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 24
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 14,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 31
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 12,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 35
+      }
     },
     "cards": [
       "Psychosis Crawler",
@@ -69253,12 +73897,39 @@
   "wizards": {
     "sample_commanders": 110,
     "targets": {
-      "ramp": 5,
-      "removal_creature": 5,
-      "removal_noncreature": 0,
-      "board_wipe": 0,
-      "draw": 13,
-      "engine": 42
+      "high": {
+        "ramp": 8,
+        "draw": 11,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 3,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 29
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 9,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 4,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 36
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 7,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 5,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 40
+      }
     },
     "cards": [
       "Counterspell",
@@ -71216,12 +75887,39 @@
   "x-spells": {
     "sample_commanders": 6,
     "targets": {
-      "ramp": 10,
-      "removal_creature": 2,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 9,
-      "engine": 43
+      "high": {
+        "ramp": 11,
+        "draw": 12,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 2,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 3,
+        "engine": 25
+      },
+      "medium": {
+        "ramp": 9,
+        "draw": 10,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 3,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 32
+      },
+      "low": {
+        "ramp": 7,
+        "draw": 8,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 4,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 38
+      }
     },
     "cards": [
       "Chaos Warp",
@@ -71449,12 +76147,39 @@
   "zombies": {
     "sample_commanders": 52,
     "targets": {
-      "ramp": 4,
-      "removal_creature": 8,
-      "removal_noncreature": 1,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 46
+      "high": {
+        "ramp": 8,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 4,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 0,
+        "recursion": 2,
+        "engine": 28
+      },
+      "medium": {
+        "ramp": 6,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 2,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 1,
+        "recursion": 2,
+        "engine": 35
+      },
+      "low": {
+        "ramp": 6,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 7,
+        "removal_noncreature": 1,
+        "board_wipe": 2,
+        "recursion": 2,
+        "engine": 39
+      }
     },
     "cards": [
       "Gray Merchant of Asphodel",
@@ -72465,12 +77190,39 @@
   "zoo": {
     "sample_commanders": 1,
     "targets": {
-      "ramp": 16,
-      "removal_creature": 0,
-      "removal_noncreature": 2,
-      "board_wipe": 0,
-      "draw": 8,
-      "engine": 38
+      "high": {
+        "ramp": 16,
+        "draw": 10,
+        "tutors": 4,
+        "protection": 5,
+        "removal_creature": 4,
+        "removal_noncreature": 4,
+        "board_wipe": 1,
+        "recursion": 3,
+        "engine": 18
+      },
+      "medium": {
+        "ramp": 14,
+        "draw": 8,
+        "tutors": 2,
+        "protection": 3,
+        "removal_creature": 5,
+        "removal_noncreature": 3,
+        "board_wipe": 2,
+        "recursion": 3,
+        "engine": 24
+      },
+      "low": {
+        "ramp": 12,
+        "draw": 6,
+        "tutors": 0,
+        "protection": 1,
+        "removal_creature": 6,
+        "removal_noncreature": 2,
+        "board_wipe": 3,
+        "recursion": 3,
+        "engine": 31
+      }
     },
     "cards": [
       "Beast Whisperer",

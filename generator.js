@@ -266,13 +266,13 @@ class PrefireDeckGenerator {
             "underworld breach", "urza, lord high artificer", "vampiric tutor",
             "vorinclex, voice of hunger", "winota, joiner of forces", "worldly tutor",
             "yuriko, the tiger's shadow"
-        ]);[cite: 3]
+        ]);
 
         const isGameChanger = (name) => {
             const clean = name.trim().toLowerCase();
             const front = clean.split("//")[0].trim();
             return GAME_CHANGER_NAMES.has(clean) || GAME_CHANGER_NAMES.has(front);
-        };[cite: 3]
+        };
 
         const maxGameChangers = powerLevel === "low" ? 0 : (powerLevel === "medium" ? 3 : Infinity);
         let currentGameChangerCount = 0;
@@ -348,7 +348,9 @@ class PrefireDeckGenerator {
             if (text.includes("add ") || (text.includes("search your library for a") && text.includes("land")) || tLine.includes("mana rock")) {
                 detected.push("ramp");
             }
-            if (text.includes("draw a card") || text.includes("draw two") || text.includes("draw cards") || text.includes("draws a card")) {
+            if (text.includes("draw a card") || text.includes("draw two") || text.includes("draw cards") || text.includes("draws a card") ||
+                text.includes("whenever this creature deals combat damage to a player, draw") ||
+                text.includes("whenever a creature you control deals combat damage to a player, draw")) {
                 detected.push("draw");
             }
             const isNarrowConditionalWipe = cardName.toLowerCase() === "aligned hedron network";
@@ -360,6 +362,18 @@ class PrefireDeckGenerator {
                     detected.push("removal_noncreature");
                 }
             }
+
+            if (text.includes("hexproof") || text.includes("shroud") || text.includes("indestructible") ||
+                text.includes("counter target") || text.includes("prevent all damage") || text.includes("phase out")) {
+                detected.push("protection");
+            }
+            if (text.includes("return target") && (text.includes("from your graveyard") || text.includes("from a graveyard"))) {
+                detected.push("recursion");
+            }
+            if (text.includes("search your library for a card") || text.includes("search your library for a creature")) {
+                detected.push("tutors");
+            }
+
             return detected;
         };
 
@@ -396,22 +410,40 @@ class PrefireDeckGenerator {
             return false;
         };
 
-        // Determine target quotas (applying blueprint overrides if present)
-        const empRoles = (themeData && themeData.roles) ? themeData.roles : {};
-        const empTargets = (themeData && themeData.targets) ? themeData.targets : {};
-        const overrides = (blueprint && blueprint.role_overrides) ? blueprint.role_overrides : {};
+        // Resolve Tiered Power Targets: check themeData.targets[powerLevel] first
+        const allTargets = (themeData && themeData.targets) ? themeData.targets : {};
+        const activeTargets = (allTargets[powerLevel] && typeof allTargets[powerLevel] === 'object')
+            ? allTargets[powerLevel]
+            : (allTargets.medium || allTargets);
 
-        const quotas = {
-            ramp: overrides.ramp ?? (empRoles.ramp || empTargets.ramp || 10),
-            draw: overrides.draw ?? (empRoles.draw || empTargets.draw || 10),
-            removal_creature: overrides.removal_creature ?? (empRoles.removal_creature || empTargets.removal_creature || 5),
-            removal_noncreature: overrides.removal_noncreature ?? (empRoles.removal_noncreature || empTargets.removal_noncreature || 3),
-            board_wipe: overrides.board_wipe ?? (empRoles.wipes || empTargets.board_wipe || 3)
+        const empRoles = (themeData && themeData.roles) ? themeData.roles : {};
+        const overrides = blueprint.role_overrides || {};
+
+        const resolveQuota = (overrideVal, targetVal, roleVal, baseline) => {
+            if (typeof overrideVal === 'number') return overrideVal;
+            if (typeof targetVal === 'number') return targetVal;
+            if (typeof roleVal === 'number' && roleVal > 0) return roleVal;
+            return baseline;
         };
 
-        // Enforce engine density floor from blueprint
-        const targetArchetypeDensity = blueprint.engine_floor || 
-            ((themeSlug.includes("enchant") || themeSlug === "auras") ? 30 : ((themeSlug.includes("artifact") || themeSlug === "equipment") ? 26 : 22));
+        const quotas = {
+            ramp: resolveQuota(overrides.ramp, activeTargets.ramp, empRoles.ramp, 8),
+            draw: resolveQuota(overrides.draw, activeTargets.draw, empRoles.draw, 10),
+            protection: resolveQuota(overrides.protection, activeTargets.protection, null, 3),
+            recursion: resolveQuota(overrides.recursion, activeTargets.recursion, null, 3),
+            tutors: resolveQuota(overrides.tutors, activeTargets.tutors, null, powerLevel === 'low' ? 0 : 2),
+            removal_creature: resolveQuota(overrides.removal_creature, activeTargets.removal_creature, empRoles.removal_creature, 5),
+            removal_noncreature: resolveQuota(overrides.removal_noncreature, activeTargets.removal_noncreature, empRoles.removal_noncreature, 2),
+            board_wipe: resolveQuota(overrides.board_wipe, activeTargets.board_wipe, empRoles.wipes, powerLevel === 'high' ? 1 : 2)
+        };
+
+        const isEnchantTheme = themeSlug.includes("enchant") || themeSlug === "auras";
+        const isArtifactTheme = themeSlug.includes("artifact") || themeSlug === "equipment" || themeSlug === "cheerios";
+
+        // Enforce engine density floor from active targets or blueprint
+        const targetArchetypeDensity = (typeof activeTargets.engine === 'number')
+            ? activeTargets.engine
+            : (blueprint.engine_floor || (isEnchantTheme ? 30 : (isArtifactTheme ? 26 : 22)));
 
         // Gather candidate pools
         let rawThemeList = [];
@@ -480,6 +512,9 @@ class PrefireDeckGenerator {
         const roleBuckets = {
             ramp: 0,
             draw: 0,
+            protection: 0,
+            recursion: 0,
+            tutors: 0,
             removal_creature: 0,
             removal_noncreature: 0,
             board_wipe: 0
@@ -509,7 +544,7 @@ class PrefireDeckGenerator {
         };
 
         // Utility: Partition candidates into 3 tiers and sample with power-level weights
-        const sampleCandidatesWithPowerTier = (candidatesList, limit) => {
+        const sampleCandidatesWithPowerTier = (candidatesList, limit, level = powerLevel) => {
             if (!candidatesList || candidatesList.length === 0) return [];
             const highCut = Math.max(1, Math.floor(candidatesList.length * 0.25));
             const midCut = Math.max(highCut + 1, Math.floor(candidatesList.length * 0.65));
@@ -521,9 +556,9 @@ class PrefireDeckGenerator {
             const shuffle = (arr) => arr.slice().sort(() => Math.random() - 0.5);
 
             let primaryPool = [];
-            if (powerLevel === "high") {
+            if (level === "high") {
                 primaryPool = [...shuffle(topTier), ...shuffle(midTier)];
-            } else if (powerLevel === "low") {
+            } else if (level === "low") {
                 primaryPool = [...shuffle(lowTier), ...shuffle(midTier), ...shuffle(topTier)];
             } else {
                 primaryPool = [...shuffle(midTier), ...shuffle(topTier), ...shuffle(lowTier)];
@@ -531,9 +566,29 @@ class PrefireDeckGenerator {
             return primaryPool.slice(0, limit);
         };
 
-        // PASS 0: Ingest Core Archetype Engine Cards FIRST (Satisfies sub-role targets)
+        // PASS 0: Ingest Core Archetype Sub-Roles First (Modifiers, Sac Outlets, Protection, etc.)
+        const subRoles = (blueprint && blueprint.sub_roles) ? blueprint.sub_roles : {};
+
+        for (const [subRole, quota] of Object.entries(subRoles)) {
+            let needed = quota;
+            const subRoleCandidates = unifiedThemePool.filter(name => {
+                if (selected.has(name) || !isLegalSpell(name)) return false;
+                const r = this.cardRoles[name] || this.cardRoles[name.toLowerCase()] || [];
+                return r.includes(subRole);
+            });
+
+            const sampledList = sampleCandidatesWithPowerTier(subRoleCandidates, subRoleCandidates.length, powerLevel);
+            for (const name of sampledList) {
+                if (needed <= 0 || selected.size >= targetSpellsCount) break;
+                if (addCardToDeck(name)) {
+                    needed--;
+                }
+            }
+        }
+
+        // Top off core archetype density if sub-roles did not reach target floor
         const pureThemeCandidates = unifiedThemePool.filter(name => !selected.has(name) && isLegalSpell(name) && isThemeAligned(name));
-        const sampledCoreTheme = sampleCandidatesWithPowerTier(pureThemeCandidates, pureThemeCandidates.length);
+        const sampledCoreTheme = sampleCandidatesWithPowerTier(pureThemeCandidates, pureThemeCandidates.length, powerLevel);
 
         for (const name of sampledCoreTheme) {
             if (selected.size >= targetArchetypeDensity || selected.size >= targetSpellsCount) break;
@@ -545,7 +600,6 @@ class PrefireDeckGenerator {
             let needed = quota - roleBuckets[role];
             if (needed <= 0) continue;
 
-            // Prioritize theme pool cards that perform functional roles before falling back to staples
             const roleCandidates = [...unifiedThemePool, ...staplePool].filter(name =>
                 !selected.has(name) && isLegalSpell(name) && detectCardRoles(name).includes(role)
             );
@@ -556,7 +610,7 @@ class PrefireDeckGenerator {
                 return bTheme - aTheme;
             });
 
-            const sampledRoleList = sampleCandidatesWithPowerTier(roleCandidates, roleCandidates.length);
+            const sampledRoleList = sampleCandidatesWithPowerTier(roleCandidates, roleCandidates.length, powerLevel);
 
             for (const name of sampledRoleList) {
                 if (needed <= 0 || selected.size >= targetSpellsCount) break;
@@ -571,7 +625,7 @@ class PrefireDeckGenerator {
             const remainingArchPermanents = unifiedThemePool.filter(name =>
                 !selected.has(name) && isLegalSpell(name) && checkArchetypePermanent(name)
             );
-            const sampledPermanents = sampleCandidatesWithPowerTier(remainingArchPermanents, remainingArchPermanents.length);
+            const sampledPermanents = sampleCandidatesWithPowerTier(remainingArchPermanents, remainingArchPermanents.length, powerLevel);
 
             for (const name of sampledPermanents) {
                 if (archetypePermanentCount >= targetArchetypeDensity || selected.size >= targetSpellsCount) break;
@@ -581,7 +635,7 @@ class PrefireDeckGenerator {
 
         // PASS 3: Fill remaining open slots from the commander's synergy pool
         const commanderSynergyRemaining = cmdrThemeCards.filter(name => !selected.has(name) && isLegalSpell(name));
-        const sampledCommanderSynergy = sampleCandidatesWithPowerTier(commanderSynergyRemaining, commanderSynergyRemaining.length);
+        const sampledCommanderSynergy = sampleCandidatesWithPowerTier(commanderSynergyRemaining, commanderSynergyRemaining.length, powerLevel);
         for (const name of sampledCommanderSynergy) {
             if (selected.size >= targetSpellsCount) break;
             addCardToDeck(name);
@@ -589,7 +643,7 @@ class PrefireDeckGenerator {
 
         // PASS 4: Fill remaining open slots from global archetype candidates
         const globalArchRemaining = globalArchCards.filter(name => !selected.has(name) && isLegalSpell(name));
-        const sampledGlobalArch = sampleCandidatesWithPowerTier(globalArchRemaining, globalArchRemaining.length);
+        const sampledGlobalArch = sampleCandidatesWithPowerTier(globalArchRemaining, globalArchRemaining.length, powerLevel);
         for (const name of sampledGlobalArch) {
             if (selected.size >= targetSpellsCount) break;
             addCardToDeck(name);
@@ -597,7 +651,7 @@ class PrefireDeckGenerator {
 
         // PASS 5: Fill any remaining open slots with format staples as backfill
         const stapleRemaining = staplePool.filter(name => !selected.has(name) && isLegalSpell(name));
-        const sampledStaples = sampleCandidatesWithPowerTier(stapleRemaining, stapleRemaining.length);
+        const sampledStaples = sampleCandidatesWithPowerTier(stapleRemaining, stapleRemaining.length, powerLevel);
         for (const name of sampledStaples) {
             if (selected.size >= targetSpellsCount) break;
             addCardToDeck(name);
@@ -893,4 +947,9 @@ class PrefireDeckGenerator {
     }
 }
 
-window.PrefireDeckGenerator = PrefireDeckGenerator;
+if (typeof window !== 'undefined') {
+    window.PrefireDeckGenerator = PrefireDeckGenerator;
+}
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { PrefireDeckGenerator };
+}
